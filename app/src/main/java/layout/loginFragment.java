@@ -136,7 +136,7 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
             return;
         }
         try{
-            URL url = new URL("webdev.dibris.unige.it/~S3928202/Progetto");
+            URL url = new URL("webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/login.php");
             String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
             data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
@@ -148,9 +148,9 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
 
             String response = reader.readLine();
 
-            if(response.equals("success")){
+            Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+            if(response.contains("success")){
 
-                Toast.makeText(getContext(), "Loggato con successo", Toast.LENGTH_LONG).show();
                 //codice da login (decidere come fare)
             }
         }
