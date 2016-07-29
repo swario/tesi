@@ -4,11 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.cristian.everysale.R;
 
@@ -20,7 +22,7 @@ import com.example.cristian.everysale.R;
  * Use the {@link loginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class loginFragment extends Fragment {
+public class loginFragment extends Fragment implements TextView.OnEditorActionListener, View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -108,6 +110,23 @@ public class loginFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        String name = userEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        if(name == "" || password ==""){
+            return;
+        }
     }
 
     /**
