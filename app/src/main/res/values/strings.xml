@@ -25,16 +25,13 @@
 
     <!-- Stringhe fragment di registrazione -->
     <string name="fregister1_item1">Email</string>
-    <string name="fregister1_item2">Password</string>
-    <string name="fregister1_item3">Conferma Password</string>
-    <string name="fregister1_item4">Nome</string>
-    <string name="fregister1_item5">Cognome</string>
-    <!--added by swario-->
+    <string name="fregister1_item2">Username</string>
+    <string name="fregister1_item3">Password</string>
+    <string name="fregister1_item4">Conferma Password</string>
+
     <string name="fregister2_item1">Nome</string>
     <string name="fregister2_item2">Cognome</string>
     <string name="fregister2_item3">Regione</string>
     <string name="fregister2_item4">Città</string>
     <string name="fregister2_item5">Cellulare</string>
-
 </resources>
-
