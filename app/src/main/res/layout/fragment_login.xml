@@ -20,7 +20,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/userEditText"
         android:layout_gravity="center"
-        android:text="@string/flogin_item1"
         android:layout_marginTop="156dp"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/passwordEditText"
@@ -34,9 +33,26 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passwordEditText"
-        android:text="@string/flogin_item2"
         android:layout_marginTop="73dp"
         android:layout_below="@+id/userEditText"
+        android:layout_centerHorizontal="true"
+        android:password="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flogin_item1"
+        android:id="@+id/textView2"
+        android:layout_alignBottom="@+id/userEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flogin_item2"
+        android:id="@+id/textView3"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

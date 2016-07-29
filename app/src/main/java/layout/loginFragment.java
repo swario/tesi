@@ -4,13 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.example.cristian.everysale.R;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +27,7 @@ import com.example.cristian.everysale.R;
  * Use the {@link loginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class loginFragment extends Fragment {
+public class loginFragment extends Fragment implements TextView.OnEditorActionListener, View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -108,6 +115,44 @@ public class loginFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        String name = userEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        if(name.equals("") || password.equals("")){
+            return;
+        }
+        try{
+            URL url = new URL("webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/login.php");
+            String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+
+            URLConnection connection = url.openConnection();
+
+            OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
+            streamWriter.write(data);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            String response = reader.readLine();
+
+            Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+            if(response.contains("success")){
+
+                //codice da login (decidere come fare)
+            }
+        }
+        catch (Exception e){
+        }
     }
 
     /**
