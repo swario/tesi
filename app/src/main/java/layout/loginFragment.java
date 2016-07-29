@@ -124,7 +124,7 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
         String name = userEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if(name == "" || password ==""){
+        if(name.equals("") || password.equals("")){
             return;
         }
     }
