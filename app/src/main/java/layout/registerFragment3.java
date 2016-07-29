@@ -1,21 +1,25 @@
 package layout;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.example.cristian.everysale.R;
 
-public class registerFragment3 extends Fragment {
+public class registerFragment3 extends Fragment implements OnClickListener {
 
     private OnFragmentInteractionListener mListener;
+    private SharedPreferences savedValues;
+
 
     public registerFragment3() {
-        // Prova
     }
 
     @Override
@@ -27,6 +31,7 @@ public class registerFragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        savedValues = getActivity().getSharedPreferences("SavedValues", getActivity().MODE_PRIVATE);
         return inflater.inflate(R.layout.fragment_register_3, container, false);
     }
 
@@ -52,6 +57,16 @@ public class registerFragment3 extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        //istruzioni per la registrazione (prelievo di dati ed invio al server)
+        String email = savedValues.getString("email", "");
+        String userName = savedValues.getString("username", "");
+        String name = savedValues.getString("name", "");
+        String surname = savedValues.getString("surname", "");
     }
 
     /**
