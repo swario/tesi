@@ -2,9 +2,11 @@ package com.example.cristian.everysale;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     private Button loginButton;
     private Button registerButton;
@@ -33,6 +35,4 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
-
 }
