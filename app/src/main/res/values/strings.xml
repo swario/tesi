@@ -23,4 +23,11 @@
     <string name="flogin_item2">Password</string>
     <string name="flogin_button">Accedi</string>
 
+    <!-- Stringhe fragment di registrazione -->
+    <string name="fregister1_item1">Email</string>
+    <string name="fregister1_item2">Password</string>
+    <string name="fregister1_item3">Conferma Password</string>
+    <string name="fregister1_item4">Nome</string>
+    <string name="fregister1_item5">Cognome</string>
+
 </resources>
