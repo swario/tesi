@@ -35,8 +35,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fregister1_item2"
-        android:id="@+id/passwordTextView"
+        android:id="@+id/usernameTextView"
         android:layout_below="@+id/emailEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/usernameEditText"
+        android:layout_below="@+id/usernameTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fregister1_item3"
+        android:id="@+id/passwordTextView"
+        android:layout_below="@+id/usernameEditText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
@@ -58,7 +82,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fregister1_item3"
+        android:text="@string/fregister1_item4"
         android:id="@+id/confirmPasswordTextView"
         android:layout_below="@+id/passwordEditText"
         android:layout_alignParentLeft="true"
@@ -79,52 +103,5 @@
         android:textSize="@dimen/text_size"
         android:textColor="@color/colorText"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fregister1_item4"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/confirmPasswordEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fregister1_item5"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
 
 </RelativeLayout>
