@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import com.example.cristian.everysale.R;
+import com.example.cristian.everysale.asincRegister;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 
@@ -76,7 +77,11 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment3()).addToBackStack(null).commit();
                 break;
 
-            case 14:
+            case R.id.registerSubmitButton:
+
+
+
+                new asincRegister(getContext()).execute();
                 break;
         }
     }

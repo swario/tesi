@@ -1,105 +1,56 @@
 package layout;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
 
 import com.example.cristian.everysale.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link registerFragment2.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link registerFragment2#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class registerFragment2 extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class registerFragment2 extends Fragment implements OnClickListener, AdapterView.OnItemSelectedListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private SharedPreferences savedValues;
 
-    private OnFragmentInteractionListener mListener;
-
-    public registerFragment2() {
-        // Prova
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment registerFragment2.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static registerFragment2 newInstance(String param1, String param2) {
-        registerFragment2 fragment = new registerFragment2();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private EditText nameEditText;
+    private EditText surnameEditText;
+    private Spinner regionSpinner;
+    private Spinner citySpinner;
+    private EditText mobileEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        savedValues = getActivity().getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_register_2, container, false);
+
+        nameEditText = (EditText) view.findViewById(R.id.nomeEditText);
+        surnameEditText = (EditText) view.findViewById(R.id.cognomeEditText);
+        regionSpinner = (Spinner) view.findViewById(R.id.regioneEditText);
+        citySpinner = (Spinner) view.findViewById(R.id.cittaEditText);
+        mobileEditText = (EditText) view.findViewById(R.id.cellulareEditText);
 
         view.findViewById(R.id.forwardButton).setOnClickListener(this);
         view.findViewById(R.id.backButton).setOnClickListener(this);
 
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     @Override
@@ -113,5 +64,53 @@ public class registerFragment2 extends Fragment implements View.OnClickListener 
                 getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1()).addToBackStack(null).commit();
                 break;
         }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        //per prima cosa, setto l'adapter per lo spinner delle regioni
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.fregister2_region_spinner, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regionSpinner.setAdapter(adapter);
+        regionSpinner.setOnItemSelectedListener(this);
+
+        //poi, prelevo i dati per riempire eventuali campi già compilati
+        nameEditText.setText(savedValues.getString("name", ""));
+        surnameEditText.setText(savedValues.getString("surname", ""));
+        regionSpinner.setSelection(savedValues.getInt("regionPosition", 0));
+
+
+
+        citySpinner.setSelection(savedValues.getInt("cityPosition", 0));
+        mobileEditText.setText(savedValues.getString("mobilePhone", ""));
+    }
+
+    @Override
+    public void onPause(){
+
+        Editor editor = savedValues.edit();
+
+        editor.putString("name", nameEditText.getText().toString());
+        editor.putString("surname", surnameEditText.getText().toString());
+        editor.putInt("regionPosition", regionSpinner.getSelectedItemPosition());
+        editor.putInt("cityPosition", citySpinner.getSelectedItemPosition());
+        editor.putString("mobilePhone", mobileEditText.getText().toString());
+
+        editor.commit();
+
+        super.onPause();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
