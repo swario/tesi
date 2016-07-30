@@ -107,8 +107,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="< Indietro"
-        android:id="@+id/indietroButton"
+        android:text="@string/fregister_backButton"
+        android:id="@+id/backButton"
         android:ems="5"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -118,8 +118,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Avanti >"
-        android:id="@+id/button2"
+        android:text="@string/fregister_forwardButton"
+        android:id="@+id/forwardButton"
         android:ems="5"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
