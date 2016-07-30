@@ -43,8 +43,8 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
 
         nameEditText = (EditText) view.findViewById(R.id.nomeEditText);
         surnameEditText = (EditText) view.findViewById(R.id.cognomeEditText);
-        regionSpinner = (Spinner) view.findViewById(R.id.regioneEditText);
-        citySpinner = (Spinner) view.findViewById(R.id.cittaEditText);
+        regionSpinner = (Spinner) view.findViewById(R.id.regioneSpinner);
+        citySpinner = (Spinner) view.findViewById(R.id.cittaSpinner);
         mobileEditText = (EditText) view.findViewById(R.id.cellulareEditText);
 
         view.findViewById(R.id.forwardButton).setOnClickListener(this);
