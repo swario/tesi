@@ -49,7 +49,6 @@ public class asincLogin extends AsyncTask<String, Void, String> {
             String response = null;
 
             while((response = reader.readLine())!= null){
-                Log.e("Debug", response);
                 stringBuilder.append(response);
                 break;
             }
