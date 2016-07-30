@@ -1,130 +1,160 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     tools:context="layout.registerFragment2">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
+        <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fregister2_item1"
-        android:id="@+id/nomeTextView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item1"
+            android:id="@+id/nomeTextView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nomeEditText"
-        android:ems="10"
-        android:layout_below="@+id/nomeTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"
-        android:inputType="textPersonName" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nomeEditText"
+            android:ems="10"
+            android:layout_below="@+id/nomeTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:inputType="textPersonName" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fregister2_item2"
-        android:id="@+id/cognomeTextView"
-        android:layout_below="@+id/nomeEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item2"
+            android:id="@+id/cognomeTextView"
+            android:layout_below="@+id/nomeEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cognomeEditText"
-        android:ems="10"
-        android:layout_below="@+id/cognomeTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"
-        android:inputType="textPersonName" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cognomeEditText"
+            android:ems="10"
+            android:layout_below="@+id/cognomeTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:inputType="textPersonName" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fregister2_item3"
-        android:id="@+id/regioneTextView"
-        android:layout_below="@+id/cognomeEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item3"
+            android:id="@+id/regioneTextView"
+            android:layout_below="@+id/cognomeEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/regioneEditText"
-        android:ems="10"
-        android:layout_below="@+id/regioneTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"
-        android:text="saranno spinner" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regioneEditText"
+            android:ems="10"
+            android:layout_below="@+id/regioneTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:text="saranno spinner" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fregister2_item4"
-        android:id="@+id/cittaTextView"
-        android:layout_below="@+id/regioneEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item4"
+            android:id="@+id/cittaTextView"
+            android:layout_below="@+id/regioneEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cittaEditText"
-        android:ems="10"
-        android:layout_below="@+id/cittaTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"
-        android:text="saranno spinner" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cittaEditText"
+            android:ems="10"
+            android:layout_below="@+id/cittaTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:text="saranno spinner" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fregister2_item5"
-        android:id="@+id/cellulareTextView"
-        android:layout_below="@+id/cittaEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item5"
+            android:id="@+id/cellulareTextView"
+            android:layout_below="@+id/cittaEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cellulareEditText"
-        android:ems="10"
-        android:layout_below="@+id/cellulareTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/text_size"
-        android:textColor="@color/colorText"
-        android:inputType="phone" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cellulareEditText"
+            android:ems="10"
+            android:layout_below="@+id/cellulareTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:inputType="phone" />
 
-</RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="< Indietro"
+            android:id="@+id/indietroButton"
+            android:ems="5"
+            android:layout_below="@+id/cellulareEditText"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            style="@style/Button"  />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avanti >"
+            android:id="@+id/button2"
+            android:ems="5"
+            android:layout_below="@+id/cellulareEditText"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="@style/Button" />
+
+    </RelativeLayout>
+</ScrollView>
