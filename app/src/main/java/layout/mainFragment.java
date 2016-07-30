@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.cristian.everysale.R;
 
@@ -51,7 +52,7 @@ public class mainFragment extends Fragment implements OnClickListener {
         }
     }
 
-    @Override
+    /*@Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -60,7 +61,7 @@ public class mainFragment extends Fragment implements OnClickListener {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
+    }*/
 
     @Override
     public void onDetach() {
@@ -87,10 +88,10 @@ public class mainFragment extends Fragment implements OnClickListener {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.loginButton:
-                getFragmentManager().beginTransaction().replace(android.R.id.content, new loginFragment());
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, new loginFragment()).addToBackStack(null).commit();
                 break;
             case R.id.registerButton:
-                getFragmentManager().beginTransaction().replace(android.R.id.content, new registerFragment1());
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1()).addToBackStack(null).commit();
                 break;
         }
     }
