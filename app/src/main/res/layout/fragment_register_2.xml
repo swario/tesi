@@ -80,7 +80,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            android:text="saranno spinner" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,7 +104,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            android:text="@string-array/fregister2_region_spinner" />
 
         <TextView
             android:layout_width="wrap_content"
