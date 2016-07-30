@@ -73,15 +73,14 @@
 
         <Spinner
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/regioneEditText"
             android:ems="10"
             android:layout_below="@+id/regioneTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"
-            android:text="@string-array/fregister2_regions_spinner" />
+            android:textColor="@color/colorText"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,8 +103,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"
-            android:text="" />
+            android:textColor="@color/colorText"/>
 
         <TextView
             android:layout_width="wrap_content"
