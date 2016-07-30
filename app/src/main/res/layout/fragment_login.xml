@@ -3,8 +3,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="layout.loginFragment">
+    android:layout_height="match_parent">
 
     <Button
         android:layout_width="match_parent"
@@ -15,18 +14,38 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flogin_item1"
+        android:id="@+id/userTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/userEditText"
-        android:layout_gravity="center"
-        android:layout_marginTop="156dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/passwordEditText"
-        android:layout_alignStart="@+id/passwordEditText"
-        android:layout_alignRight="@+id/passwordEditText"
-        android:layout_alignEnd="@+id/passwordEditText"
-        android:textSize="@dimen/text_size" />
+        android:ems="10"
+        android:layout_below="@+id/userTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flogin_item2"
+        android:id="@+id/passwordTextView"
+        android:layout_below="@+id/userEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -34,29 +53,10 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passwordEditText"
-        android:layout_marginTop="73dp"
-        android:layout_below="@+id/userEditText"
+        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        android:password="false"
-        android:textSize="@dimen/text_size" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/flogin_item1"
-        android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/userEditText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp"
-        android:textSize="@dimen/text_size" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/flogin_item2"
-        android:id="@+id/textView3"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/text_size" />
+        android:layout_below="@+id/passwordTextView"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText" />
 
 </RelativeLayout>

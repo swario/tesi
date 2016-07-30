@@ -9,10 +9,15 @@
     tools:context="com.example.cristian.everysale.MainActivity"
     android:clickable="false">
 
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <!--
     <fragment android:name="layout.mainFragment"
               android:id="@+id/mainFragment"
               android:layout_weight="1"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"/>
+              android:layout_height="match_parent"/>-->
 
 </RelativeLayout>

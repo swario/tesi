@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.R;
+import com.example.cristian.everysale.asincLogin;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -56,7 +58,6 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment loginFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static loginFragment newInstance(String param1, String param2) {
@@ -86,12 +87,13 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
         //get references to the widgets
         userEditText = (EditText) view.findViewById(R.id.userEditText);
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
-        loginButton = (Button) view.findViewById(R.id.loginButton);
+        loginButton = (Button) view.findViewById(R.id.login_button);
 
         //set listener
         userEditText.setOnEditorActionListener(this);
         passwordEditText.setOnEditorActionListener(this);
         loginButton.setOnClickListener(this);
+        Log.e("Listener", "Listener Settato");
 
         return view;
     }
@@ -103,7 +105,7 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
         }
     }
 
-    @Override
+    /*@Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -112,7 +114,7 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
+    }*/
 
     @Override
     public void onDetach() {
@@ -129,33 +131,13 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
     @Override
     public void onClick(View v) {
 
-        String name = userEditText.getText().toString();
+        String username = userEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-
-        if(name.equals("") || password.equals("")){
-            return;
+        if(username.equals("") || password.equals("")){
+            Toast.makeText(getContext(), "Input invalido", Toast.LENGTH_LONG).show();
         }
-        try{
-            URL url = new URL("webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/login.php");
-            String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
-            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
-            URLConnection connection = url.openConnection();
-
-            OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-            streamWriter.write(data);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            String response = reader.readLine();
-
-            Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
-            if(response.contains("success")){
-
-                //codice da login (decidere come fare)
-            }
-        }
-        catch (Exception e){
-        }
+        new asincLogin(getContext()).execute(username, password);
     }
 
     /**
