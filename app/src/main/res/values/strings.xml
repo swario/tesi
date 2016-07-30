@@ -35,6 +35,6 @@
     <string name="fregister2_item4">Città</string>
     <string name="fregister2_item5">Cellulare</string>
 
-    <string name="fregister_backButton">lt Indietro</string>
-    <string name="fregister_forwardButton">Avanti &gt</string>
+    <string name="fregister_backButton">&lt; Indietro</string>
+    <string name="fregister_forwardButton">Avanti &gt;</string>
 </resources>
