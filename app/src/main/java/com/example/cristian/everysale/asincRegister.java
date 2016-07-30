@@ -60,7 +60,6 @@ public class asincRegister extends AsyncTask<String, Void, String> {
             String response = null;
 
             while((response = reader.readLine()) != null){
-
                 stringBuilder.append(response);
                 break;
             }
