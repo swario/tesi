@@ -72,7 +72,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
 
         //per prima cosa, setto l'adapter per lo spinner delle regioni
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.fregister2_region_spinner, android.R.layout.simple_spinner_item);
+                R.array.fregister2_regions_spinner, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
@@ -82,7 +82,10 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
         surnameEditText.setText(savedValues.getString("surname", ""));
         regionSpinner.setSelection(savedValues.getInt("regionPosition", 0));
 
-
+        adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.fregister2_region0_spinner, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(adapter);
 
         citySpinner.setSelection(savedValues.getInt("cityPosition", 0));
         mobileEditText.setText(savedValues.getString("mobilePhone", ""));
