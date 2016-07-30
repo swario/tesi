@@ -75,11 +75,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/regioneSpinner"
+            android:spinnerMode="dialog"
             android:ems="10"
             android:layout_below="@+id/regioneTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/spinner_text_size"
             android:textColor="@color/colorText" />
 
 
@@ -99,13 +100,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cittaSpinner"
+            android:spinnerMode="dialog"
             android:ems="10"
             android:layout_below="@+id/cittaTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"
-            android:text="" />
+            android:textSize="@dimen/spinner_text_size"
+            android:textColor="@color/colorText" />
 
         <TextView
             android:layout_width="wrap_content"
