@@ -19,6 +19,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
     private SharedPreferences savedValues;
 
+    private CheckBox dataAllowCheckbox;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         savedValues = getActivity().getSharedPreferences("SavedValues", getActivity().MODE_PRIVATE);
 
         view.findViewById(R.id.backButton).setOnClickListener(this);
+        view.findViewById(R.id.registerSubmitButton).setOnClickListener(this);
+        dataAllowCheckbox = (CheckBox) view.findViewById(R.id.dataAllowCheckBox);
 
         return view;
     }
@@ -49,9 +53,31 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
             case R.id.registerSubmitButton:
 
+                String email = savedValues.getString("email", "");
+                String username = savedValues.getString("username", "");
+                String password = savedValues.getString("password", "");
+                String confirmPassword = savedValues.getString("confirmPassword", "");
+                if(!password.equals(confirmPassword) ){
+                    Toast.makeText(getContext(), "Password non coincidenti" + password + " " + confirmPassword, Toast.LENGTH_LONG).show();
+                    getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1()).addToBackStack(null).commit();
+                    return;
+                }
+                String name = savedValues.getString("name", "");
+                String surname = savedValues.getString("surname", "");
+                String region = getResources().getStringArray(R.array.fregister2_regions_spinner)
+                        [savedValues.getInt("regionPosition",0)];
+                String city = getResources().getStringArray(R.array.fregister2_region0_spinner)
+                        [savedValues.getInt("cityPosition",0)];
+                String mobilePhone = savedValues.getString("mobilePhone", "");
+                String dataAllow = null;
+                if(dataAllowCheckbox.isChecked()){
+                    dataAllow += "1";
+                }
+                else{
+                    dataAllow += "0";
+                }
 
-
-                new asincRegister(getContext()).execute();
+                new asincRegister(getContext()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
                 break;
         }
     }

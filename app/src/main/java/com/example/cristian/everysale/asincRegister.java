@@ -31,8 +31,7 @@ public class asincRegister extends AsyncTask<String, Void, String> {
         String region = params[5];
         String city = params[6];
         String mobile = params[7];
-        String fbUrl = params[8];
-        String dataAllow = params[9];
+        String dataAllow = params[8];
 
         try{
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/registerMobile.php");
@@ -45,7 +44,6 @@ public class asincRegister extends AsyncTask<String, Void, String> {
             data += URLEncoder.encode("regione", "UTF-8") + "=" + URLEncoder.encode(region, "UTF-8");
             data += URLEncoder.encode("citta", "UTF-8") + "=" + URLEncoder.encode(city, "UTF-8");
             data += URLEncoder.encode("mobile_phone", "UTF-8") + "=" + URLEncoder.encode(mobile, "UTF-8");
-            data += URLEncoder.encode("urlFb", "UTF-8") + "=" + URLEncoder.encode(fbUrl, "UTF-8");
             data += URLEncoder.encode("dataAllow", "UTF-8") + "=" + URLEncoder.encode(dataAllow, "UTF-8");
 
             URLConnection connection = url.openConnection();
@@ -70,7 +68,7 @@ public class asincRegister extends AsyncTask<String, Void, String> {
 
         }
         catch (Exception e){
-            return e.getMessage();
+            return e.getMessage() + "eccezione di qualche tipo";
         }
     }
 
