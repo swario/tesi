@@ -73,21 +73,22 @@
 
         <Spinner
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/regioneEditText"
+            android:layout_height="wrap_content"
+            android:id="@+id/regioneSpinner"
             android:ems="10"
             android:layout_below="@+id/regioneTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fregister2_item4"
             android:id="@+id/cittaTextView"
-            android:layout_below="@+id/regioneEditText"
+            android:layout_below="@+id/regioneSpinner"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
@@ -97,20 +98,21 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cittaEditText"
+            android:id="@+id/cittaSpinner"
             android:ems="10"
             android:layout_below="@+id/cittaTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            android:text="" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fregister2_item5"
             android:id="@+id/cellulareTextView"
-            android:layout_below="@+id/cittaEditText"
+            android:layout_below="@+id/cittaSpinner"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
