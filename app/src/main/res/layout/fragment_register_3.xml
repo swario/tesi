@@ -27,7 +27,8 @@
             android:layout_below="@+id/imageView2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            style="@style/Button" />
 
         <CheckBox
             android:layout_width="match_parent"
