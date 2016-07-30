@@ -135,9 +135,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="< Indietro"
-            android:id="@+id/indietroButton"
-            android:ems="5"
+            android:text="@string/fregister_backButton"
+            android:id="@+id/backButton"
             android:layout_below="@+id/cellulareEditText"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -147,9 +146,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Avanti >"
-            android:id="@+id/button2"
-            android:ems="5"
+            android:text="@string/fregister_forwardButton"
+            android:id="@+id/forwardButton"
             android:layout_below="@+id/cellulareEditText"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"

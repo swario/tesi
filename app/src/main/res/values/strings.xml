@@ -34,4 +34,11 @@
     <string name="fregister2_item3">Regione</string>
     <string name="fregister2_item4">Città</string>
     <string name="fregister2_item5">Cellulare</string>
+
+    <string name="fregister3_imgButton">Carica immagine</string>
+    <string name="fregister3_registerSubmitButton">Registrati!</string>
+    <string name="fregister3_dataAllowCheckBox">cose a vcadoooo</string>
+
+    <string name="fregister_backButton">&lt;</string>
+    <string name="fregister_forwardButton">&gt;</string>
 </resources>
