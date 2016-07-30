@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     tools:context="layout.registerFragment1">
 
     <!-- TODO: Update blank fragment layout -->
@@ -102,6 +103,28 @@
         android:layout_alignParentStart="true"
         android:textSize="@dimen/text_size"
         android:textColor="@color/colorText"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="< Indietro"
+        android:id="@+id/indietroButton"
+        android:ems="5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="@style/Button"  />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avanti >"
+        android:id="@+id/button2"
+        android:ems="5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        style="@style/Button" />
 
 
 </RelativeLayout>
