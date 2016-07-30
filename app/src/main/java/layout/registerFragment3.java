@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.*;
 
 import com.example.cristian.everysale.R;
 
@@ -17,7 +18,6 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private SharedPreferences savedValues;
-
 
     public registerFragment3() {
     }
@@ -31,8 +31,13 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_register_3, container, false);
+
         savedValues = getActivity().getSharedPreferences("SavedValues", getActivity().MODE_PRIVATE);
-        return inflater.inflate(R.layout.fragment_register_3, container, false);
+
+        view.findViewById(R.id.backButton).setOnClickListener(this);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -43,30 +48,9 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        //istruzioni per la registrazione (prelievo di dati ed invio al server)
-        String email = savedValues.getString("email", "");
-        String userName = savedValues.getString("username", "");
-        String name = savedValues.getString("name", "");
-        String surname = savedValues.getString("surname", "");
     }
 
     /**
@@ -82,5 +66,18 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+
+            case R.id.backButton:
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment3()).addToBackStack(null).commit();
+                break;
+
+            case 14:
+                break;
+        }
     }
 }
