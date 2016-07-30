@@ -103,6 +103,7 @@
             android:layout_below="@+id/confirmPasswordTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_marginBottom="20dp"
             android:textSize="@dimen/text_size"
             android:layout_marginBottom="20dp"
             android:textColor="@color/colorText"/>
