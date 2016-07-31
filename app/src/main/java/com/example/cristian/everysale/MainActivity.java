@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             this.finish();
             return true;
         }
-
         return super.onKeyDown(keyCode, event);
     }
 

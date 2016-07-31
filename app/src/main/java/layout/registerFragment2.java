@@ -6,6 +6,7 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,11 +58,11 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.forwardButton:
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment3()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment3()).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 break;
 
             case R.id.backButton:
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1()).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 break;
         }
     }
