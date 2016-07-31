@@ -207,7 +207,7 @@
 
     <string name="fregister3_imgButton">Carica immagine</string>
     <string name="fregister3_registerSubmitButton">Registrati!</string>
-    <string name="fregister3_dataAllowCheckBox">cose a vcadoooo</string>
+    <string name="fregister3_dataAllowCheckBox">Vuoi che i tuoi dati siano visibili?</string>
 
     <string name="fregister_backButton">&lt;</string>
     <string name="fregister_forwardButton">&gt;</string>

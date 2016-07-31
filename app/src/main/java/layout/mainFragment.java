@@ -88,10 +88,10 @@ public class mainFragment extends Fragment implements OnClickListener {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.loginButton:
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, new loginFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, new loginFragment(), "loginFragment").addToBackStack(null).commit();
                 break;
             case R.id.registerButton:
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1(), "registerFragment1").addToBackStack(null).commit();
                 break;
         }
     }

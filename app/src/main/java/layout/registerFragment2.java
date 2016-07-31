@@ -58,11 +58,11 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.forwardButton:
-                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment3()).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment3(), "registerFragment3").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 break;
 
             case R.id.backButton:
-                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1()).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 break;
         }
     }

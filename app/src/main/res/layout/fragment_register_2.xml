@@ -7,7 +7,8 @@
     tools:context="layout.registerFragment2">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
 
         <!-- TODO: Update blank fragment layout -->
 
@@ -139,6 +140,7 @@
             android:text="@string/fregister_backButton"
             android:id="@+id/backButton"
             android:layout_below="@+id/cellulareEditText"
+            android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -150,10 +152,12 @@
             android:text="@string/fregister_forwardButton"
             android:id="@+id/forwardButton"
             android:layout_below="@+id/cellulareEditText"
+            android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             style="@style/Button" />
 
     </RelativeLayout>
+
 </ScrollView>

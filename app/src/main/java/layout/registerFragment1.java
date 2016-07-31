@@ -58,7 +58,7 @@ public class registerFragment1 extends Fragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.forwardButton:
-                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2()).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 break;
         }
     }
