@@ -18,6 +18,7 @@ import java.net.URLEncoder;
 public class asincLogin extends AsyncTask<String, Void, String> {
 
     private Context context;
+    public Boolean logged;
 
     public asincLogin(Context context){
 
@@ -63,9 +64,11 @@ public class asincLogin extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result){
         if(result.contains("No address associated with hostname")) {
             Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
+            logged= false;
         }
         else{
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            logged= true;
         }
     }
 }

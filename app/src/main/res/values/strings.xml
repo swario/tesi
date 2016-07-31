@@ -211,4 +211,13 @@
 
     <string name="fregister_backButton">&lt;</string>
     <string name="fregister_forwardButton">&gt;</string>
+
+    <!-- stringhe three tabs layout e sottocomponenti-->
+
+    <string name="body1">one</string>
+    <string name="body2">two</string>
+    <string name="body3">three</string>
+    <string name="label1">Vicini</string>
+    <string name="label2">Offerte Recenti</string>
+    <string name="label3">Preferiti</string>
 </resources>

@@ -9,6 +9,7 @@
     tools:context="com.example.cristian.everysale.MainActivity"
     android:clickable="false">
 
+
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
