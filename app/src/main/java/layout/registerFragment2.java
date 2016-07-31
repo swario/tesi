@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -19,7 +20,7 @@ import android.view.View.OnClickListener;
 
 import com.example.cristian.everysale.R;
 
-public class registerFragment2 extends Fragment implements OnClickListener, AdapterView.OnItemSelectedListener {
+public class registerFragment2 extends Fragment implements OnClickListener, OnItemSelectedListener {
 
     private SharedPreferences savedValues;
 
@@ -48,6 +49,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
         citySpinner = (Spinner) view.findViewById(R.id.cittaSpinner);
         mobileEditText = (EditText) view.findViewById(R.id.cellulareEditText);
 
+        regionSpinner.setOnItemSelectedListener(this);
         view.findViewById(R.id.forwardButton).setOnClickListener(this);
         view.findViewById(R.id.backButton).setOnClickListener(this);
 
@@ -77,18 +79,12 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
-
+        setCitySpinner();
         //poi, prelevo i dati per riempire eventuali campi già compilati
         nameEditText.setText(savedValues.getString("name", ""));
         surnameEditText.setText(savedValues.getString("surname", ""));
         regionSpinner.setSelection(savedValues.getInt("regionPosition", 0));
 
-        adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.fregister2_region0_spinner, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(adapter);
-
-        citySpinner.setSelection(savedValues.getInt("cityPosition", 0));
         mobileEditText.setText(savedValues.getString("mobilePhone", ""));
     }
 
@@ -110,11 +106,78 @@ public class registerFragment2 extends Fragment implements OnClickListener, Adap
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        setCitySpinner();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    private void setCitySpinner(){
+        ArrayAdapter<CharSequence> adapter=null;
+        int region=regionSpinner.getSelectedItemPosition();
+        if(region==0) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region0_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==1) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region1_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==2) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region2_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==3) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region3_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==4) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region4_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==5) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region5_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==6) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region6_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==7) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region7_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==8) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region8_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==9) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region9_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==10) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region10_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==11) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region11_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==12) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region12_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==13) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region13_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==14) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region14_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==15) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region15_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==16) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region16_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==17) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region17_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==18) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region18_spinner, android.R.layout.simple_spinner_item);
+        }
+        else if(region==19) {
+            adapter = ArrayAdapter.createFromResource(getContext(), R.array.fregister2_region19_spinner, android.R.layout.simple_spinner_item);
+        }
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(adapter);
     }
 }
