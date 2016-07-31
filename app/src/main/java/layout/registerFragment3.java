@@ -6,7 +6,6 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,7 +48,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         switch (v.getId()){
 
             case R.id.backButton:
-                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2()).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment2()).addToBackStack(null).commit();
                 break;
 
             case R.id.registerSubmitButton:

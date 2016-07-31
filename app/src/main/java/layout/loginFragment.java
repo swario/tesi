@@ -1,6 +1,7 @@
 package layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cristian.everysale.Main2Activity;
+import com.example.cristian.everysale.MainActivity;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.asincLogin;
 
@@ -137,7 +140,11 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
             Toast.makeText(getContext(), "Input invalido", Toast.LENGTH_LONG).show();
         }
 
-        new asincLogin(getContext()).execute(username, password);
+        //new asincLogin(getContext()).execute(username, password);
+        // definisco l'intenzione
+        Intent openPage1 = new Intent(getActivity() , Main2Activity.class);
+        // passo all'attivazione dell'activity Pagina.java
+        startActivity(openPage1);
     }
 
     /**

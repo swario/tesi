@@ -37,14 +37,14 @@ public class asincRegister extends AsyncTask<String, Void, String> {
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/registerMobile.php");
 
             String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
-            data += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
-            data += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
-            data += URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
-            data += URLEncoder.encode("cognome", "UTF-8") + "=" + URLEncoder.encode(surname, "UTF-8");
-            data += URLEncoder.encode("regione", "UTF-8") + "=" + URLEncoder.encode(region, "UTF-8");
-            data += URLEncoder.encode("citta", "UTF-8") + "=" + URLEncoder.encode(city, "UTF-8");
-            data += URLEncoder.encode("mobile_phone", "UTF-8") + "=" + URLEncoder.encode(mobile, "UTF-8");
-            data += URLEncoder.encode("dataAllow", "UTF-8") + "=" + URLEncoder.encode(dataAllow, "UTF-8");
+            data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+            data += "&" + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+            data += "&" + URLEncoder.encode("cognome", "UTF-8") + "=" + URLEncoder.encode(surname, "UTF-8");
+            data += "&" + URLEncoder.encode("regione", "UTF-8") + "=" + URLEncoder.encode(region, "UTF-8");
+            data += "&" + URLEncoder.encode("citta", "UTF-8") + "=" + URLEncoder.encode(city, "UTF-8");
+            data += "&" + URLEncoder.encode("mobile_phone", "UTF-8") + "=" + URLEncoder.encode(mobile, "UTF-8");
+            data += "&" + URLEncoder.encode("dataAllow", "UTF-8") + "=" + URLEncoder.encode(dataAllow, "UTF-8");
 
             URLConnection connection = url.openConnection();
 
