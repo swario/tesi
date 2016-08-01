@@ -8,11 +8,13 @@ import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class searchResponseHandler extends DefaultHandler {
+/**
+ * Created by Giorgiboy on 01/08/2016.
+ */
+public class insertionParser extends DefaultHandler {
 
     private Feedback feedback;
-    private InsertionPreview insertion;
-    private SearchResponse searchResponse;
+    private Insertion insertion;
 
     private boolean isSearchKey = false;
     private boolean isInsertionCount = false;
@@ -32,13 +34,10 @@ public class searchResponseHandler extends DefaultHandler {
     private boolean isRatingUserName = false;
     private boolean isFeedBackText = false;
 
-    public SearchResponse getSearchResponse(){ return this.searchResponse; }
-
     public void startDocument(){
 
         feedback = new Feedback();
-        insertion = new InsertionPreview();
-        searchResponse = new SearchResponse();
+        insertion = new Insertion();
     }
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes att){
@@ -52,7 +51,7 @@ public class searchResponseHandler extends DefaultHandler {
             return;
         }
         if(qName.equals("insertion")){
-            insertion = new InsertionPreview();
+            insertion = new Insertion();
             return;
         }
         if(qName.equals("insertion_id")){
@@ -123,10 +122,6 @@ public class searchResponseHandler extends DefaultHandler {
 
     public void endElement(String namespaceURI, String localName, String qName){
 
-        if(qName.equals("insertion")){
-            searchResponse.addInsertion(insertion);
-            return;
-        }
         if(qName.equals("feedback")){
             //insertion.addFeedback(feedback);
             return;
@@ -136,14 +131,6 @@ public class searchResponseHandler extends DefaultHandler {
     public void characters(char ch[], int start, int lenght ){
 
         String s = new String(ch, start, lenght);
-        if(isSearchKey){
-            isSearchKey = false;
-            searchResponse.setSearchKey(s);
-        }
-        if(isInsertionCount){
-            isInsertionCount = false;
-            searchResponse.setInsertionCount(Integer.parseInt(s));
-        }
         if(isInsertionId){
             isInsertionId = false;
             insertion.setInsertion_id(Integer.parseInt(s));
@@ -162,35 +149,35 @@ public class searchResponseHandler extends DefaultHandler {
         }
         if(isAddress){
             isAddress = false;
-            //insertion.setAddress(s);
+            insertion.setAddress(s);
         }
         if(isInsertionistId){
             isInsertionistId = false;
-            //insertion.setInsertionist_id(Integer.parseInt(s));
+            insertion.setInsertionist_id(Integer.parseInt(s));
         }
         if(isInsertionistName){
             isInsertionistName = false;
-            //insertion.setInsertionist_name(s);
+            insertion.setInsertionist_name(s);
         }
         if(isRate){
             isRate = false;
-            //insertion.setInsertionist_rate(Float.parseFloat(s));
+            insertion.setInsertionist_rate(Float.parseFloat(s));
         }
         if(isInsertionDate){
             isInsertionDate = false;
-            //insertion.setInsertion_date(s);
+            insertion.setInsertion_date(s);
         }
         if(isExpirationDate){
             isExpirationDate = false;
-            //insertion.setExpiration_date(s);
+            insertion.setExpiration_date(s);
         }
         if(isDescription){
             isDescription = false;
-            //insertion.setDescription(s);
+            insertion.setDescription(s);
         }
         if(isPhoto){
             isPhoto = false;
-            //insertion.setPhoto_url(s);
+            insertion.setPhoto_url(s);
         }
         if(isRatingUserId){
             isRatingUserId = false;
