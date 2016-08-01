@@ -39,12 +39,12 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        //get references to the widgets
+        // Get references to the widgets
         userEditText = (EditText) view.findViewById(R.id.userEditText);
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
         loginButton = (Button) view.findViewById(R.id.login_button);
 
-        //set listener
+        // Set listener
         userEditText.setOnEditorActionListener(this);
         passwordEditText.setOnEditorActionListener(this);
         loginButton.setOnClickListener(this);

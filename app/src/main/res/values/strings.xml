@@ -220,4 +220,12 @@
     <string name="label1">Vicini</string>
     <string name="label2">Offerte Recenti</string>
     <string name="label3">Preferiti</string>
+
+    <!-- stringhe listview item -->
+    <string name="item_title">Titolo</string>
+    <string name="item_price">Prezzo</string>
+    <string name="item_city">Città</string>
+    <string name="item_rating">Rating</string>
+
+
 </resources>
