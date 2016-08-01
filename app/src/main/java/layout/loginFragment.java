@@ -138,13 +138,12 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
         String password = passwordEditText.getText().toString();
         if(username.equals("") || password.equals("")){
             Toast.makeText(getContext(), "Input invalido", Toast.LENGTH_LONG).show();
+            return;
         }
 
-        //new asincLogin(getContext()).execute(username, password);
+        new asincLogin(getContext(), getActivity()).execute(username, password);
         // definisco l'intenzione
-        Intent openPage1 = new Intent(getActivity() , Main2Activity.class);
-        // passo all'attivazione dell'activity Pagina.java
-        startActivity(openPage1);
+
     }
 
     /**
