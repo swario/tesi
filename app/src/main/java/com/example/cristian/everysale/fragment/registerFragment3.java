@@ -1,4 +1,4 @@
-package layout;
+package com.example.cristian.everysale.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -85,6 +85,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 }
 
                 if(email.equals("")){//da aggiungere il controllo dell'email
+                    Toast.makeText(getContext(), "Email non valida",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = savedValues.edit();
                     editor.putString("message", "wrong_email").commit();
                     getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(),
@@ -92,7 +93,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     return;
                 }
                 if(password.equals("")){//da aggiungere il controllo dell'email
-                    Toast.makeText(getContext(), "Email non valida",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Password non valida",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = savedValues.edit();
                     editor.putString("message", "wrong_password").commit();
                     getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(),

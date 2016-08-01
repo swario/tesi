@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
-import layout.mainFragment.OnFragmentInteractionListener;
-import layout.mainFragment;
+import com.example.cristian.everysale.fragment.mainFragment.OnFragmentInteractionListener;
+import com.example.cristian.everysale.fragment.mainFragment;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener{
 

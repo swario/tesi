@@ -1,4 +1,4 @@
-package layout;
+package com.example.cristian.everysale.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

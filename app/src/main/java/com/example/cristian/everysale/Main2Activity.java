@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import layout.viewPagerAdapter;
+import com.example.cristian.everysale.fragment.viewPagerAdapter;
 
 
 public class Main2Activity extends ActionBarActivity {
@@ -35,7 +35,6 @@ public class Main2Activity extends ActionBarActivity {
             this.finish();
             return;
         }
-        savedValues.edit().clear().commit();
         setContentView(R.layout.activity_main2);
 
         // Creating The Toolbar and setting it as the Toolbar for the activity

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <!--
-    <fragment android:name="layout.mainFragment"
+    <fragment android:name="com.example.cristian.everysale.fragment.mainFragment"
               android:id="@+id/mainFragment"
               android:layout_weight="1"
               android:layout_width="match_parent"
