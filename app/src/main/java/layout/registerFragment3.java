@@ -74,8 +74,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 String region = getResources().getStringArray(R.array.fregister2_regions_spinner)
                         [regionPosition];
                 String city = getResources().getStringArray(getCitySpinner(regionPosition))
-                        [savedValues.getInt("cityPosition",0)];
-                String mobilePhone = savedValues.getString("mobilePhone", "");
+                        [savedValues.getInt("registerCityPosition",0)];
+                String mobilePhone = savedValues.getString("registerMobilePhone", "");
                 String dataAllow = null;
                 if(dataAllowCheckbox.isChecked()){
                     dataAllow += "1";
@@ -83,6 +83,32 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 else{
                     dataAllow += "0";
                 }
+
+                if(email.equals("")){//da aggiungere il controllo dell'email
+                    Toast.makeText(getContext(), "Email non valida",Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = savedValues.edit();
+                    editor.putString("message", "wrong_password");
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                }
+                if(username.equals("")){
+                    Toast.makeText(getContext(), "Username non valido",Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = savedValues.edit();
+                    editor.putString("message", "wrong_username");
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                }
+                if(name.equals("")){
+                    Toast.makeText(getContext(), "Nome non valido",Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = savedValues.edit();
+                    editor.putString("message", "wrong_name");
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                }
+                if(surname.equals("")){
+                    Toast.makeText(getContext(), "Cognome non valida",Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = savedValues.edit();
+                    editor.putString("message", "wrong_surname");
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                }
+
 
                 new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
                 break;

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
@@ -85,6 +86,22 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         regionSpinner.setSelection(savedValues.getInt("regionPosition", 0));
 
         mobileEditText.setText(savedValues.getString("mobilePhone", ""));
+
+        String message = savedValues.getString("message", "");
+        if(message.contains("email")) {
+            nameEditText.requestFocus();
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(nameEditText, InputMethodManager.SHOW_IMPLICIT);
+            return;
+        }
+        if(message.contains("username")) {
+            surnameEditText.requestFocus();
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(surnameEditText, InputMethodManager.SHOW_IMPLICIT);
+            return;
+        }
     }
 
     @Override

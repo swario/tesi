@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -68,9 +69,32 @@ public class registerFragment1 extends Fragment implements OnClickListener {
         super.onResume();
 
         emailText.setText(savedValues.getString("email", ""));
-        usernameText.setText(savedValues.getString("username", ""));
-        password.setText(savedValues.getString("password", ""));
+        usernameText.setText(savedValues.getString("registerUsername", ""));
+        password.setText(savedValues.getString("registerPassword", ""));
         confirmPassword.setText(savedValues.getString("confirmPassword", ""));
+
+        String message = savedValues.getString("message", "");
+        if(message.contains("email")) {
+            emailText.requestFocus();
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(emailText, InputMethodManager.SHOW_IMPLICIT);
+            return;
+        }
+        if(message.contains("username")) {
+            usernameText.requestFocus();
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(usernameText, InputMethodManager.SHOW_IMPLICIT);
+            return;
+        }
+        if(message.contains("password")) {
+            password.requestFocus();
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(password, InputMethodManager.SHOW_IMPLICIT);
+            return;
+        }
 
     }
 
