@@ -52,8 +52,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             case R.id.registerSubmitButton:
 
                 String email = savedValues.getString("email", "");
-                String username = savedValues.getString("username", "");
-                String password = savedValues.getString("password", "");
+                String username = savedValues.getString("registerUsername", "");
+                String password = savedValues.getString("registerPassword", "");
                 String confirmPassword = savedValues.getString("confirmPassword", "");
                 if(!password.equals(confirmPassword) ){
                     Toast.makeText(getContext(), "Password non coincidenti" + password + " " + confirmPassword, Toast.LENGTH_LONG).show();
@@ -75,7 +75,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     dataAllow += "0";
                 }
 
-                new asincRegister(getContext()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
+                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
                 break;
         }
     }
