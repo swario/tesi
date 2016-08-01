@@ -66,11 +66,14 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1()).addToBackStack(null).commit();
                     return;
                 }
+
+                int regionPosition = savedValues.getInt("regionPosition",0);
+
                 String name = savedValues.getString("name", "");
                 String surname = savedValues.getString("surname", "");
                 String region = getResources().getStringArray(R.array.fregister2_regions_spinner)
-                        [savedValues.getInt("regionPosition",0)];
-                String city = getResources().getStringArray(R.array.fregister2_region0_spinner)
+                        [regionPosition];
+                String city = getResources().getStringArray(getCitySpinner(regionPosition))
                         [savedValues.getInt("cityPosition",0)];
                 String mobilePhone = savedValues.getString("mobilePhone", "");
                 String dataAllow = null;
@@ -83,6 +86,54 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
                 new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
                 break;
+        }
+    }
+
+    private int getCitySpinner(int region){
+
+        switch(region){
+            case 0:
+                return R.array.fregister2_region0_spinner;
+            case 1:
+                return R.array.fregister2_region1_spinner;
+            case 2:
+                return R.array.fregister2_region2_spinner;
+            case 3:
+                return R.array.fregister2_region3_spinner;
+            case 4:
+                return R.array.fregister2_region4_spinner;
+            case 5:
+                return R.array.fregister2_region5_spinner;
+            case 6:
+                return R.array.fregister2_region6_spinner;
+            case 7:
+                return R.array.fregister2_region7_spinner;
+            case 8:
+                return R.array.fregister2_region8_spinner;
+            case 9:
+                return R.array.fregister2_region9_spinner;
+            case 10:
+                return R.array.fregister2_region10_spinner;
+            case 11:
+                return R.array.fregister2_region11_spinner;
+            case 12:
+                return R.array.fregister2_region12_spinner;
+            case 13:
+                return R.array.fregister2_region13_spinner;
+            case 14:
+                return R.array.fregister2_region14_spinner;
+            case 15:
+                return R.array.fregister2_region15_spinner;
+            case 16:
+                return R.array.fregister2_region16_spinner;
+            case 17:
+                return R.array.fregister2_region17_spinner;
+            case 18:
+                return R.array.fregister2_region18_spinner;
+            case 19:
+                return R.array.fregister2_region19_spinner;
+            default:
+                return R.array.fregister2_region0_spinner;
         }
     }
 }

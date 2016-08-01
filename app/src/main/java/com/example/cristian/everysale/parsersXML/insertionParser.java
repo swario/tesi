@@ -11,7 +11,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  * Created by Giorgiboy on 01/08/2016.
  */
-public class insertionParser extends DefaultHandler {
+public class InsertionParser extends DefaultHandler {
 
     private Feedback feedback;
     private Insertion insertion;

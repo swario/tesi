@@ -58,6 +58,19 @@ public class Insertion {
     public void setDescription (String description) { this.description = description; }
     public void setPhoto_url (String photo_url) { this.photo_url = photo_url; }
 
+    public int getInsertion_id() { return  insertion_id; }
+    public String getName() { return  name; }
+    public float getPrice(){ return  price; }
+    public String getCity(){ return city; }
+    public String getAddress() { return address; }
+    public int getInsertionist_id() { return insertionist_id; }
+    public String getInsertionist_name() { return  insertionist_name; }
+    public float getInsertionist_rate() { return  insertionist_rate; }
+    public String getInsertion_date() { return  insertion_date; }
+    public String getExpiration_date() { return expiration_date; }
+    public String getDescription(){ return  expiration_date; }
+    public String getPhoto_url(){ return photo_url; }
+
     public void addFeedback(Feedback feedback){
         feedbacks.add(feedback);
     }

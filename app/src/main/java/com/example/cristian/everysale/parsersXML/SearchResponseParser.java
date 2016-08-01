@@ -8,7 +8,7 @@ import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class searchResponseHandler extends DefaultHandler {
+public class SearchResponseParser extends DefaultHandler {
 
     private InsertionPreview insertion;
     private SearchResponse searchResponse;
