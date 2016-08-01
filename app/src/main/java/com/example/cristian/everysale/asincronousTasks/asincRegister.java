@@ -99,7 +99,6 @@ public class asincRegister extends AsyncTask<String, Void, String> {
             editor.commit();
 
             Intent openPage1 = new Intent(activity , Main2Activity.class);
-            // passo all'attivazione dell'activity Pagina.java
             activity.startActivity(openPage1);
             activity.finish();
         }
