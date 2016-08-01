@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SearchResponse {
 
     private String searchKey;
-    private ArrayList<Insertion> insertions;
+    private ArrayList<InsertionPreview> insertions;
     private int insertionCount;
 
     public SearchResponse(){
@@ -16,9 +16,9 @@ public class SearchResponse {
     public void setInsertionCount(int count) { this.insertionCount = count; }
 
     public int getInsertionCount(){ return insertionCount; }
-    public Insertion getInsertion( int pos){ return insertions.get(pos); }
+    public InsertionPreview getInsertion( int pos){ return insertions.get(pos); }
 
-    public void addInsertion(Insertion insertion){
+    public void addInsertion(InsertionPreview insertion){
 
         insertions.add(insertion);
     }
