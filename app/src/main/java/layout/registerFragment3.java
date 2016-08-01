@@ -1,9 +1,6 @@
 package layout;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.asincRegister;
+import com.example.cristian.everysale.asincronousTasks.asincRegister;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 

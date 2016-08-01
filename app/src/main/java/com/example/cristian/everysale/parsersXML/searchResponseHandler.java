@@ -1,4 +1,8 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.parsersXML;
+
+import com.example.cristian.everysale.BaseClasses.Feedback;
+import com.example.cristian.everysale.BaseClasses.Insertion;
+import com.example.cristian.everysale.BaseClasses.SearchResponse;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;

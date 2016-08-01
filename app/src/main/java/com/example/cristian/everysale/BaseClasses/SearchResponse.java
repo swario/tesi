@@ -1,4 +1,4 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.BaseClasses;
 
 import java.util.ArrayList;
 

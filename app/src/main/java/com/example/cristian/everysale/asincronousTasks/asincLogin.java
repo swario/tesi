@@ -1,4 +1,4 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.asincronousTasks;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.cristian.everysale.Main2Activity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

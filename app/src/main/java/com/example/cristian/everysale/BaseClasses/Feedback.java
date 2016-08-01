@@ -1,4 +1,4 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.BaseClasses;
 
 /**
  * Created by Giorgiboy on 29/07/2016.
