@@ -17,9 +17,9 @@ public class User {
 
     public User(){
 
-        name = null;
-        surname = null;
-        mobile = null;
+        name = "not available";
+        surname = "not available";
+        mobile = "not available";
     }
 
     public void setUser_id(int id){this.user_id=id;}
