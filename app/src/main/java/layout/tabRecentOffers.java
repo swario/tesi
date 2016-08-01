@@ -37,16 +37,16 @@ public class tabRecentOffers extends ListFragment {
         ArrayList<HashMap<String, String>> data = new ArrayList<>();
         for(int i=0; i<10; i++){
             HashMap<String, String> map = new HashMap<>();
-            map.put("icon", "@mipmap/ic_launcher");
-            map.put("title", "Titolo");
-            map.put("price", "Prezzo");
-            map.put("city", "Città");
-            map.put("rating", "Rating");
+            map.put("icon", "http://webdev.dibris.unige.it/~S3928202/Progetto/img/favicon.jpg");
+            map.put("title", "Titolo1");
+            map.put("price", "Prezzo1");
+            map.put("city", "Città1");
+            map.put("rating", "2");
             data.add(map);
         }
         int resource = R.layout.listview_item_layout;
-        String[] from = {"icon", "title", "price", "city", "rating"};
-        int[] to = {R.id.item_icon, R.id.item_title, R.id.item_price, R.id.item_city, R.id.item_ratingBar};
+        String[] from = {"icon", "title", "price", "city"/*, "rating"*/};
+        int[] to = {R.id.item_icon, R.id.item_title, R.id.item_price, R.id.item_city/*, R.id.item_ratingBar*/};
         SimpleAdapter adapter= new SimpleAdapter(getContext(), data, resource, from, to);
         setListAdapter(adapter);
     }
