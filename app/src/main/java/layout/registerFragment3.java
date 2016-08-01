@@ -23,7 +23,6 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     private Button imageButton;
     private CheckBox dataAllowCheckbox;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +46,12 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         return view;
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
 
             case R.id.imageButton:
-                
+
                 break;
 
             case R.id.backButton:
