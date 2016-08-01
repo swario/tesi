@@ -1,4 +1,6 @@
 package com.example.cristian.everysale;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,7 +13,7 @@ import layout.viewPagerAdapter;
 
 public class Main2Activity extends ActionBarActivity {
 
-    // Declaring Your View and Variables
+    private SharedPreferences savedValues;
 
     Toolbar toolbar;
     ViewPager pager;
@@ -24,6 +26,15 @@ public class Main2Activity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+        if(savedValues.getString("username", "").equals("")){
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            this.finish();
+            return;
+        }
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
 
@@ -53,8 +64,8 @@ public class Main2Activity extends ActionBarActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
-
-
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+        savedValues.edit().clear();
     }
 
 
