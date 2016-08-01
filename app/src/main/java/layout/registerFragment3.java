@@ -1,9 +1,6 @@
 package layout;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.asincRegister;
+import com.example.cristian.everysale.asincronousTasks.asincRegister;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 
@@ -61,8 +58,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             case R.id.registerSubmitButton:
 
                 String email = savedValues.getString("email", "");
-                String username = savedValues.getString("username", "");
-                String password = savedValues.getString("password", "");
+                String username = savedValues.getString("registerUsername", "");
+                String password = savedValues.getString("registerPassword", "");
                 String confirmPassword = savedValues.getString("confirmPassword", "");
                 if(!password.equals(confirmPassword) ){
                     Toast.makeText(getContext(), "Password non coincidenti" + password + " " + confirmPassword, Toast.LENGTH_LONG).show();
@@ -84,7 +81,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     dataAllow += "0";
                 }
 
-                new asincRegister(getContext()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
+                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
                 break;
         }
     }

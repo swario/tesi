@@ -1,4 +1,8 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.parsersXML;
+
+import com.example.cristian.everysale.BaseClasses.Feedback;
+import com.example.cristian.everysale.BaseClasses.Insertion;
+import com.example.cristian.everysale.BaseClasses.SearchResponse;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -10,6 +14,7 @@ public class searchResponseHandler extends DefaultHandler {
     private SearchResponse searchResponse;
 
     private boolean isSearchKey = false;
+    private boolean isInsertionCount = false;
     private boolean isInsertion = false;
     private boolean isInsertionId = false;
     private boolean isName = false;
@@ -41,6 +46,10 @@ public class searchResponseHandler extends DefaultHandler {
 
         if(qName.equals("searchKey")){
             isSearchKey = true;
+            return;
+        }
+        if(qName.equals("insertionsCount")){
+            isInsertionCount = true;
             return;
         }
         if(qName.equals("insertion")){
@@ -131,6 +140,10 @@ public class searchResponseHandler extends DefaultHandler {
         if(isSearchKey){
             isSearchKey = false;
             searchResponse.setSearchKey(s);
+        }
+        if(isInsertionCount){
+            isInsertionCount = false;
+            searchResponse.setInsertionCount(Integer.parseInt(s));
         }
         if(isInsertionId){
             isInsertionId = false;
