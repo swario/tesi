@@ -1,4 +1,4 @@
-package layout;
+package com.example.cristian.everysale.fragment;
 
 /**
  * Created by ulisse on 31/07/2016.

@@ -1,4 +1,4 @@
-package layout;
+package com.example.cristian.everysale.fragment;
 
 /**
  * Created by ulisse on 31/07/2016.
@@ -15,11 +15,10 @@ import com.example.cristian.everysale.R;
 /**
  * Created by hp1 on 21-01-2015.
  */
-public class tabNearBy extends Fragment {
-
+public class tabFavorite extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab_near_by,container,false);
+        View v = inflater.inflate(R.layout.tab_favorite,container,false);
         return v;
     }
 }

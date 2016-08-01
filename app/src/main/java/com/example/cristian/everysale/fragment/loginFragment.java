@@ -1,4 +1,4 @@
-package layout;
+package com.example.cristian.everysale.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;

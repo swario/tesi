@@ -1,7 +1,6 @@
-package layout;
+package com.example.cristian.everysale.fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,10 +14,7 @@ import android.widget.Button;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.cristian.everysale.MainActivity;
 import com.example.cristian.everysale.R;
 
 public class registerFragment1 extends Fragment implements OnClickListener {
