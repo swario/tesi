@@ -2,7 +2,9 @@ package layout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.input.InputManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -136,15 +139,29 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
 
         String username = userEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-        if(username.equals("") || password.equals("")){
-            Toast.makeText(getContext(), "Input invalido", Toast.LENGTH_LONG).show();
+        if(username.equals("")){
+
+            Toast.makeText(getContext(),"Inserisci uno username/email", Toast.LENGTH_LONG).show();
+            userEditText.requestFocus();
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(userEditText, InputMethodManager.SHOW_IMPLICIT);
+            return;
+        }
+        else if(password.equals("")){
+            Toast.makeText(getContext(),"Inserisci la password", Toast.LENGTH_LONG).show();
+            passwordEditText.requestFocus();
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(passwordEditText, InputMethodManager.SHOW_IMPLICIT);
+            return;
         }
 
-        //new asincLogin(getContext()).execute(username, password);
+        new asincLogin(getContext(), getActivity()).execute(username, password);
+
+
         // definisco l'intenzione
-        Intent openPage1 = new Intent(getActivity() , Main2Activity.class);
-        // passo all'attivazione dell'activity Pagina.java
-        startActivity(openPage1);
+
     }
 
     /**

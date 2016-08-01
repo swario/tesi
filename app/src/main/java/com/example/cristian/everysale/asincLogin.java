@@ -1,6 +1,8 @@
 package com.example.cristian.everysale;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -19,10 +21,12 @@ public class asincLogin extends AsyncTask<String, Void, String> {
 
     private Context context;
     public Boolean logged;
+    private Activity activity;
 
-    public asincLogin(Context context){
+    public asincLogin(Context context, Activity activity){
 
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class asincLogin extends AsyncTask<String, Void, String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             StringBuilder stringBuilder = new StringBuilder("");
-            String response = null;
+            String response = "";
 
             while((response = reader.readLine())!= null){
                 stringBuilder.append(response);
@@ -68,7 +72,11 @@ public class asincLogin extends AsyncTask<String, Void, String> {
         }
         else{
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-            logged= true;
+            Intent openPage1 = new Intent(activity , Main2Activity.class);
+            // passo all'attivazione dell'activity Pagina.java
+            activity.startActivity(openPage1);
+            activity.finish();
+
         }
     }
 }
