@@ -1,9 +1,6 @@
 package layout;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.asincRegister;
+import com.example.cristian.everysale.asincronousTasks.asincRegister;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 
     private SharedPreferences savedValues;
 
+    private Button imageButton;
     private CheckBox dataAllowCheckbox;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,17 +33,23 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
         savedValues = getActivity().getSharedPreferences("SavedValues", getActivity().MODE_PRIVATE);
 
+        imageButton = (Button) view.findViewById(R.id.imageButton);
+        dataAllowCheckbox = (CheckBox) view.findViewById(R.id.dataAllowCheckBox);
+
+        imageButton.setOnClickListener(this);
         view.findViewById(R.id.backButton).setOnClickListener(this);
         view.findViewById(R.id.registerSubmitButton).setOnClickListener(this);
-        dataAllowCheckbox = (CheckBox) view.findViewById(R.id.dataAllowCheckBox);
 
         return view;
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+
+            case R.id.imageButton:
+
+                break;
 
             case R.id.backButton:
                 getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
@@ -55,8 +58,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             case R.id.registerSubmitButton:
 
                 String email = savedValues.getString("email", "");
-                String username = savedValues.getString("username", "");
-                String password = savedValues.getString("password", "");
+                String username = savedValues.getString("registerUsername", "");
+                String password = savedValues.getString("registerPassword", "");
                 String confirmPassword = savedValues.getString("confirmPassword", "");
                 if(!password.equals(confirmPassword) ){
                     Toast.makeText(getContext(), "Password non coincidenti" + password + " " + confirmPassword, Toast.LENGTH_LONG).show();
@@ -78,7 +81,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     dataAllow += "0";
                 }
 
-                new asincRegister(getContext()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
+                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
                 break;
         }
     }

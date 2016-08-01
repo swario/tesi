@@ -1,9 +1,15 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.asincronousTasks;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.cristian.everysale.Main2Activity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,19 +23,26 @@ import java.net.URLEncoder;
  */
 public class asincLogin extends AsyncTask<String, Void, String> {
 
+    SharedPreferences savedValues;
+
     private Context context;
-    public Boolean logged;
+    private Activity activity;
 
-    public asincLogin(Context context){
+    private String username;
+    private String password;
 
+    public asincLogin(Context context, Activity activity){
+
+        savedValues = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
     protected String doInBackground(String... params) {
 
-        String username =  params[0];
-        String password =  params[1];
+        this.username =  params[0];
+        this.password =  params[1];
 
         try{
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/login.php");
@@ -47,7 +60,7 @@ public class asincLogin extends AsyncTask<String, Void, String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             StringBuilder stringBuilder = new StringBuilder("");
-            String response = null;
+            String response = "";
 
             while((response = reader.readLine())!= null){
                 stringBuilder.append(response);
@@ -64,11 +77,25 @@ public class asincLogin extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result){
         if(result.contains("No address associated with hostname")) {
             Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
-            logged= false;
         }
-        else{
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-            logged= true;
+        else if(result.contains("success")){
+            Editor editor = savedValues.edit();
+
+            editor.putString("username", this.username);
+            editor.putString("password", this.username);
+            editor.putInt("userId", Integer.parseInt(result.substring(8)));
+
+            editor.commit();
+
+            Intent openPage1 = new Intent(activity , Main2Activity.class);
+            activity.startActivity(openPage1);
+            activity.finish();
+
+        }
+        else if(result.contains("wrong input")){
+
+            Toast.makeText(context, "Username o password\nnon corretti", Toast.LENGTH_LONG).show();
+
         }
     }
 }

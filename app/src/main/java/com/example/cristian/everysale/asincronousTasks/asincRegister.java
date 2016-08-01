@@ -1,9 +1,14 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.asincronousTasks;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.cristian.everysale.Main2Activity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,18 +19,27 @@ import java.net.URLEncoder;
 
 public class asincRegister extends AsyncTask<String, Void, String> {
 
-    private Context context;
+    SharedPreferences savedValues;
 
-    public asincRegister(Context context){
+    private Context context;
+    private Activity activity;
+
+    private String username;
+    private String password;
+
+    public asincRegister(Context context, Activity activity){
+
+        savedValues = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
     protected String doInBackground(String... params) {
 
         String email = params[0];
-        String username = params[1];
-        String password = params[2];
+        this.username = params[1];
+        this.password = params[2];
         String name = params[3];
         String surname = params[4];
         String region = params[5];
@@ -74,6 +88,19 @@ public class asincRegister extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result){
 
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        if(result.contains("success")){
+
+            SharedPreferences.Editor editor = savedValues.edit();
+
+            editor.putString("username", this.username);
+            editor.putString("password", this.username);
+            editor.putInt("userId", Integer.parseInt(result.substring(8)));
+
+            editor.commit();
+
+            Intent openPage1 = new Intent(activity , Main2Activity.class);
+            activity.startActivity(openPage1);
+            activity.finish();
+        }
     }
 }

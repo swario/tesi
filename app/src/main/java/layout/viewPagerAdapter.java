@@ -29,22 +29,18 @@ public class viewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if(position == 0) // if the position is 0 we are returning the First tab
-        {
+        if(position == 0){ // if the position is 0 we are returning the First tab
             tabNearBy tab1 = new tabNearBy();
             return tab1;
         }
-        else if(position == 1)            // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {
+        else if(position == 1){ // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
             tabRecentOffers tab2 = new tabRecentOffers();
             return tab2;
-        }else
-        {
+        }
+        else{
             tabFavorite tab3 = new tabFavorite();
             return tab3;
         }
-
-
     }
 
     // This method return the titles for the Tabs in the Tab Strip
