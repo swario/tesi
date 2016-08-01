@@ -19,10 +19,21 @@ import java.util.HashMap;
 public class tabRecentOffers extends ListFragment {
 
     private ListView itemsListView;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.recent_listview,container,false);
+        view = inflater.inflate(R.layout.recent_listview,container,false);
+        return view;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setListView();
+    }
+
+    private void setListView(){
         ArrayList<HashMap<String, String>> data = new ArrayList<>();
         for(int i=0; i<10; i++){
             HashMap<String, String> map = new HashMap<>();
@@ -37,9 +48,6 @@ public class tabRecentOffers extends ListFragment {
         String[] from = {"icon", "title", "price", "city", "rating"};
         int[] to = {R.id.item_icon, R.id.item_title, R.id.item_price, R.id.item_city, R.id.item_ratingBar};
         SimpleAdapter adapter= new SimpleAdapter(getContext(), data, resource, from, to);
-        itemsListView = (ListView) getListView().findViewById(R.id.recent_listView);
-        itemsListView.setAdapter(adapter);
-
-        return v;
+        setListAdapter(adapter);
     }
 }
