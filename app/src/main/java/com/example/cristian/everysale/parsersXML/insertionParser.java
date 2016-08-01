@@ -16,8 +16,6 @@ public class insertionParser extends DefaultHandler {
     private Feedback feedback;
     private Insertion insertion;
 
-    private boolean isSearchKey = false;
-    private boolean isInsertionCount = false;
     private boolean isInsertionId = false;
     private boolean isName = false;
     private boolean isPrice = false;
@@ -42,14 +40,6 @@ public class insertionParser extends DefaultHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes att){
 
-        if(qName.equals("searchKey")){
-            isSearchKey = true;
-            return;
-        }
-        if(qName.equals("insertionsCount")){
-            isInsertionCount = true;
-            return;
-        }
         if(qName.equals("insertion")){
             insertion = new Insertion();
             return;
@@ -123,7 +113,7 @@ public class insertionParser extends DefaultHandler {
     public void endElement(String namespaceURI, String localName, String qName){
 
         if(qName.equals("feedback")){
-            //insertion.addFeedback(feedback);
+            insertion.addFeedback(feedback);
             return;
         }
     }
