@@ -20,6 +20,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
     private SharedPreferences savedValues;
 
+    private Button imageButton;
     private CheckBox dataAllowCheckbox;
 
 
@@ -36,9 +37,12 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
         savedValues = getActivity().getSharedPreferences("SavedValues", getActivity().MODE_PRIVATE);
 
+        imageButton = (Button) view.findViewById(R.id.imageButton);
+        dataAllowCheckbox = (CheckBox) view.findViewById(R.id.dataAllowCheckBox);
+
+        imageButton.setOnClickListener(this);
         view.findViewById(R.id.backButton).setOnClickListener(this);
         view.findViewById(R.id.registerSubmitButton).setOnClickListener(this);
-        dataAllowCheckbox = (CheckBox) view.findViewById(R.id.dataAllowCheckBox);
 
         return view;
     }
@@ -47,6 +51,10 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+
+            case R.id.imageButton:
+                
+                break;
 
             case R.id.backButton:
                 getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
