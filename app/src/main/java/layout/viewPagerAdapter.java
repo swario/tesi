@@ -33,7 +33,7 @@ public class viewPagerAdapter extends FragmentStatePagerAdapter {
             tabNearBy tab1 = new tabNearBy();
             return tab1;
         }
-        else if(position == 1){            // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position == 1){ // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
             tabRecentOffers tab2 = new tabRecentOffers();
             return tab2;
         }
@@ -41,8 +41,6 @@ public class viewPagerAdapter extends FragmentStatePagerAdapter {
             tabFavorite tab3 = new tabFavorite();
             return tab3;
         }
-
-
     }
 
     // This method return the titles for the Tabs in the Tab Strip
