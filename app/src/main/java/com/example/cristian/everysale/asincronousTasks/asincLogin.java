@@ -26,7 +26,6 @@ public class asincLogin extends AsyncTask<String, Void, String> {
     SharedPreferences savedValues;
 
     private Context context;
-    public Boolean logged;
     private Activity activity;
 
     private String username;
@@ -78,7 +77,6 @@ public class asincLogin extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result){
         if(result.contains("No address associated with hostname")) {
             Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
-            logged= false;
         }
         else if(result.contains("success")){
             Editor editor = savedValues.edit();
@@ -90,9 +88,13 @@ public class asincLogin extends AsyncTask<String, Void, String> {
             editor.commit();
 
             Intent openPage1 = new Intent(activity , Main2Activity.class);
-            // passo all'attivazione dell'activity Pagina.java
             activity.startActivity(openPage1);
             activity.finish();
+
+        }
+        else if(result.contains("wrong input")){
+
+            Toast.makeText(context, "Username o password\nnon corretti", Toast.LENGTH_LONG).show();
 
         }
     }
