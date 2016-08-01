@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -74,6 +75,7 @@ public class registerFragment1 extends Fragment implements OnClickListener {
         confirmPassword.setText(savedValues.getString("confirmPassword", ""));
 
         String message = savedValues.getString("message", "");
+        Log.e("Debug",  "Messaggio: " + message);
         if(message.contains("email")) {
             emailText.requestFocus();
             InputMethodManager inputMethodManager =

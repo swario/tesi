@@ -85,30 +85,44 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 }
 
                 if(email.equals("")){//da aggiungere il controllo dell'email
+                    SharedPreferences.Editor editor = savedValues.edit();
+                    editor.putString("message", "wrong_email").commit();
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(),
+                            "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    return;
+                }
+                if(password.equals("")){//da aggiungere il controllo dell'email
                     Toast.makeText(getContext(), "Email non valida",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = savedValues.edit();
-                    editor.putString("message", "wrong_password");
-                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    editor.putString("message", "wrong_password").commit();
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(),
+                            "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    return;
                 }
                 if(username.equals("")){
                     Toast.makeText(getContext(), "Username non valido",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = savedValues.edit();
-                    editor.putString("message", "wrong_username");
-                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    editor.putString("message", "wrong_username").commit();
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(),
+                            "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    return;
                 }
                 if(name.equals("")){
                     Toast.makeText(getContext(), "Nome non valido",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = savedValues.edit();
-                    editor.putString("message", "wrong_name");
-                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    editor.putString("message", "wrong_name").commit();
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(),
+                            "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    return;
                 }
                 if(surname.equals("")){
-                    Toast.makeText(getContext(), "Cognome non valida",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Cognome non valido",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = savedValues.edit();
-                    editor.putString("message", "wrong_surname");
-                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(), "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    editor.putString("message", "wrong_surname").commit();
+                    getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment2(),
+                            "registerFragment2").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    return;
                 }
-
 
                 new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
                 break;

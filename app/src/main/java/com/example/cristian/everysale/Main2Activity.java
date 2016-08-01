@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,16 +26,17 @@ public class Main2Activity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
         if(savedValues.getString("username", "").equals("")){
+            Log.e("debug", "Username: " + savedValues.getString("username", ""));
 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             this.finish();
             return;
         }
+        savedValues.edit().clear().commit();
+        setContentView(R.layout.activity_main2);
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
 
@@ -63,9 +65,6 @@ public class Main2Activity extends ActionBarActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
-        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
-        savedValues.edit().clear();
     }
 
 
