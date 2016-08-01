@@ -6,9 +6,17 @@
     <color name="colorText">#000000</color>
 
     <!--added by swario1-->
+    <!--tab bar-->
     <color name="ColorPrimary">#e62117</color>
     <color name="ColorPrimaryDark">#c31c13</color>
     <color name="tabsScrollColor">#71B2CF</color>
+
+    <!--image picker-->
+    <color name="view_background">#e8ecfa</color>
+    <color name="btn_bg">#277bec</color>
+    <color name="white">#ffffff</color>
+    <color name="txt_font">#4e5572</color>
+    <color name="action_bar">#1f2649</color>
 
 </resources>
 
