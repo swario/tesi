@@ -5,7 +5,7 @@ package com.example.cristian.everysale.BaseClasses;
  */
 public class User {
 
-    private int user_id;
+    private long user_id;
     private String userName;
     private String name;
     private String surname;
@@ -22,7 +22,7 @@ public class User {
         mobile = "not available";
     }
 
-    public void setUser_id(int id){this.user_id=id;}
+    public void setUser_id(long id){this.user_id=id;}
     public void setUserName(String username) {this.userName=username;}
     public void setName(String name){this.name=name;}
     public void setSurname(String surname){this.surname=surname;}
@@ -32,7 +32,7 @@ public class User {
     public void setRegion(String region){this.region=region;}
     public void setMobile(String mobile){this.mobile=mobile;}
 
-    public int getUser_id(){return user_id;}
+    public long getUser_id(){return user_id;}
     public String getUserName(){return userName;}
     public String getName(){return name;}
     public String getSurname(){return surname;}

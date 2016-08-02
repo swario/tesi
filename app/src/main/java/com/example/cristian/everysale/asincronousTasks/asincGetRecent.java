@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public class asincGetRecent extends AsyncTask<Integer, Void, Void> {
+public class asincGetRecent extends AsyncTask<Long, Void, Void> {
 
     private tabRecentOffers tabRecentOffers;
     private SearchResponse searchResponse;
@@ -45,9 +45,9 @@ public class asincGetRecent extends AsyncTask<Integer, Void, Void> {
 
 
     @Override
-    protected Void doInBackground(Integer... params) {
+    protected Void doInBackground(Long... params) {
 
-        int upperLimit = Integer.MAX_VALUE;
+        Long upperLimit = Long.MAX_VALUE;
         if(params.length > 0){
             upperLimit = params[0];
         }
