@@ -13,12 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".MainActivity"
-            android:logo="@mipmap/ic_launcher">
+            android:logo="@mipmap/ic_launcher"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Main2Activity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:logo="@mipmap/ic_launcher">
+            android:logo="@mipmap/ic_launcher"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

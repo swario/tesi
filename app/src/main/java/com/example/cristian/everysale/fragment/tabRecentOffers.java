@@ -34,9 +34,9 @@ public class tabRecentOffers extends ListFragment {
     }
 
     private void setListView(){
-        ArrayList<HashMap<String, String>> data = new ArrayList<>();
+        ArrayList<HashMap<String, Object>> data = new ArrayList<>();
         for(int i=0; i<10; i++){
-            HashMap<String, String> map = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
             map.put("icon", "http://webdev.dibris.unige.it/~S3928202/Progetto/img/favicon.jpg");
             map.put("title", "Titolo1");
             map.put("price", "Prezzo1");
