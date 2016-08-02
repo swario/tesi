@@ -1,5 +1,7 @@
 package com.example.cristian.everysale.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -63,22 +65,30 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
     }
 
     private void setListView(){
-        ArrayList<HashMap<String, String>> data = new ArrayList<>();
-        for(int i=0; i < searchResponse.getInsertionCount(); i++){
 
+        ArrayList<String> images;
+        ArrayList<String> titles;
+        ArrayList<String> prices;
+        ArrayList<String> cities;
+        ArrayList<Float> rating;
+
+        String icon = "http://webdev.dibris.unige.it/~S3928202/Progetto/img/favicon.jpg";
+        String title = "Titolo1";
+        String price = "25 €";
+        String city = "Città1"
+        float rate = (float) 2.5;
+
+        for(int i=0; i < searchResponse.getInsertionCount(); i++){
             InsertionPreview preview = searchResponse.getInsertion(i);
             HashMap<String, String> map = new HashMap<>();
-            map.put("icon", "http://webdev.dibris.unige.it/~S3928202/Progetto/img/favicon.jpg");
-            map.put("title", "Titolo1");
-            map.put("price", "Prezzo1");
-            map.put("city", "Città1");
-            map.put("rating", "2");
+            images.add(icon);
+            titles.add(title);
+            price.add(price);
+            city.add(city);
+            rating.add(rate);
             data.add(map);
         }
-        int resource = R.layout.listview_item_layout;
-        String[] from = {"icon", "title", "price", "city"/*, "rating"*/};
-        int[] to = {R.id.item_icon, R.id.item_title, R.id.item_price, R.id.item_city/*, R.id.item_ratingBar*/};
-        SimpleAdapter adapter= new SimpleAdapter(getContext(), data, resource, from, to);
+        CustomAdapter adapter= new CustomAdapter(context, activity, images, titles, prices, cities, rating);
         setListAdapter(adapter);
     }
 
