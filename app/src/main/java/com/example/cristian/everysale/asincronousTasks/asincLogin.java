@@ -19,9 +19,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-/**
- * Created by Giorgiboy on 29/07/2016.
- */
 public class asincLogin extends AsyncTask<String, Void, String> {
 
     SharedPreferences savedValues;

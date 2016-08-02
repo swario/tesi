@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         final String TAG="EverySale";
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             Fragment fragment0 = getSupportFragmentManager().findFragmentByTag("loginFragment");
