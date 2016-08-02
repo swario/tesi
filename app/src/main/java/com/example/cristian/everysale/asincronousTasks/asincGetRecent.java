@@ -59,7 +59,7 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/recentInsertion.php?userId=" +
             String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
 
-            InputStream inputStream = url.openStream();
+               InputStream inputStream = url.openStream();
 
             FileOutputStream outputStream = tabRecentOffers.getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
 
