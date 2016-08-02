@@ -23,4 +23,5 @@ public class InsertionPreview {
     public String getName(){ return this.name;}
     public String getCity(){ return this.city;}
     public float getPrice(){ return this.price;}
+    public float getRate(){ return this.rate;}
 }

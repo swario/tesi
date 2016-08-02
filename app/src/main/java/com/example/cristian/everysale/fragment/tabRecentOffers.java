@@ -73,7 +73,6 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         ArrayList<Float> rating = new ArrayList<>();
 
         String icon = "http://webdev.dibris.unige.it/~S3928202/Progetto/img/wrongIcon.jpg";
-        float rate= (float) 2.5;
         
         for(int i=0; i<searchResponse.getInsertionCount(); i++){
 
@@ -83,7 +82,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
             titles.add(preview.getName());
             prices.add(String.valueOf(preview.getPrice()));
             cities.add(preview.getCity());
-            rating.add(rate);
+            rating.add(preview.getRate());
         }
         CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating);
         setListAdapter(adapter);
