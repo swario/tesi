@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Insertion {
 
-    private int insertion_id;
+    private long insertion_id;
     private String name;
     private float price;
     private String city;
@@ -45,7 +45,7 @@ public class Insertion {
         feedbacks = new ArrayList<>();
     }
 
-    public void setInsertion_id(int insertion_id){ this.insertion_id = insertion_id; }
+    public void setInsertion_id(long insertion_id){ this.insertion_id = insertion_id; }
     public void setName(String name) { this.name = name;}
     public void setPrice(float price) { this.price = price;}
     public void setCity(String city) { this.city = city; }
@@ -58,7 +58,7 @@ public class Insertion {
     public void setDescription (String description) { this.description = description; }
     public void setPhoto_url (String photo_url) { this.photo_url = photo_url; }
 
-    public int getInsertion_id() { return  insertion_id; }
+    public long getInsertion_id() { return  insertion_id; }
     public String getName() { return  name; }
     public float getPrice(){ return  price; }
     public String getCity(){ return city; }

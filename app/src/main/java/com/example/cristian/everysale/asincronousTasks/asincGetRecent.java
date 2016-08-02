@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public class asincGetRecent extends AsyncTask<Integer, Void, Void> {
+public class asincGetRecent extends AsyncTask<Long, Void, Void> {
 
     private tabRecentOffers tabRecentOffers;
     private SearchResponse searchResponse;
@@ -45,9 +45,9 @@ public class asincGetRecent extends AsyncTask<Integer, Void, Void> {
 
 
     @Override
-    protected Void doInBackground(Integer... params) {
+    protected Void doInBackground(Long... params) {
 
-        int upperLimit = Integer.MAX_VALUE;
+        Long upperLimit = Long.MAX_VALUE;
         if(params.length > 0){
             upperLimit = params[0];
         }
@@ -59,7 +59,7 @@ public class asincGetRecent extends AsyncTask<Integer, Void, Void> {
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/recentInsertion.php?userId=" +
             String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
 
-            InputStream inputStream = url.openStream();
+               InputStream inputStream = url.openStream();
 
             FileOutputStream outputStream = tabRecentOffers.getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
 

@@ -114,6 +114,17 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
+        if(firstVisibleItem > previousFirstVisibleItem){//sto scrollando verso il basso
 
+            if((firstVisibleItem + visibleItemCount) > totalItemCount){// sono  giunto alla fine della lista
+
+                int upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertion_id();
+                new asincGetRecent(this).execute(upperLimit);
+            }
+        }
+        else if(previousFirstVisibleItem > firstVisibleItem){//sto scrollando verso l'alto
+
+        }
+        previousFirstVisibleItem = firstVisibleItem;
     }
 }
