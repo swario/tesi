@@ -2,6 +2,7 @@ package com.example.cristian.everysale.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,14 +17,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.BaseClasses.imagePicker.Utility;
+import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.asincronousTasks.asincRegister;
 
 import java.io.ByteArrayOutputStream;
@@ -43,12 +43,18 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     private Button imageButton;
     private CheckBox dataAllowCheckbox;
     private SharedPreferences savedValues;
-    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;//image picker
-    private ImageView ivImage;
+    private ImageView ivImage=null;
     private String userChoosenTask;
+
+    //image picker
+    private String imgPath;
+    private Bitmap bitimg;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    //image picker
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        savedValues = getActivity().getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
 
     }
@@ -75,22 +81,34 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     @Override
     public void onResume(){
         super.onResume();
-        dataAllowCheckbox.setActivated(savedValues.getBoolean("dataAllowCheckBox",false));
-        //per prima cosa, setto l'adapter per lo spinner delle regioni
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.fregister2_regions_spinner, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if(savedValues.getInt("dataAllowCheckBox",0)==0){
+            dataAllowCheckbox.setChecked(false);
+        }else if (savedValues.getInt("dataAllowCheckBox", 0) == 1){
+            dataAllowCheckbox.setChecked(true);
+        }
 
+        if(imgPath==null) imgPath=savedValues.getString("imgPath",null);
+
+        //voglio caricare nella ImageView (ivImage) l'immagine con il path salvato in imgPath
+        //il path lo prende dalle funzioni onSelectFromGalleryResult e onCaptureImageResult
+
+        Toast.makeText(getContext(),"onresume  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
+        //ivImage.setImageBitmap(BitmapFactory.decodeFile(imgPath));
+        //per prima cosa, setto l'adapter per lo spinner delle regioni
     }
 
     @Override
     public void onPause(){
 
         SharedPreferences.Editor editor = savedValues.edit();
-        editor.putBoolean("dataAllowCheckBox", dataAllowCheckbox.isChecked());
-
+        if(dataAllowCheckbox.isChecked()){
+            editor.putInt("dataAllowCheckBox",1);
+        }else {
+            editor.putInt("dataAllowCheckBox",0);
+        }
+        editor.putString("imgPath", imgPath);
         editor.commit();
-
+        Toast.makeText(getContext(),"onpause saved  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
         super.onPause();
     }
 
@@ -206,20 +224,20 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 "Annulla" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add Photo!");
+        builder.setTitle("Aggiungi foto!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result=Utility.checkPermission(getActivity());
+                boolean result = Utility.checkPermission(getActivity());
 
                 if (items[item].equals("Scatta foto")) {
-                    userChoosenTask ="Scatta foto";
-                    if(result)
+                    userChoosenTask = "Scatta foto";
+                    if (result)
                         cameraIntent();
 
                 } else if (items[item].equals("Scegli dalla Galleria")) {
-                    userChoosenTask ="Scegli dalla Galleria";
-                    if(result)
+                    userChoosenTask = "Scegli dalla Galleria";
+                    if (result)
                         galleryIntent();
 
                 } else if (items[item].equals("Annulla")) {
@@ -230,16 +248,14 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         builder.show();
     }
 
-    private void galleryIntent()
-    {
+    private void galleryIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Seleziona File"),SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, "Seleziona File"), SELECT_FILE);
     }
 
-    private void cameraIntent()
-    {
+    private void cameraIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
@@ -277,6 +293,10 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         }
 
         ivImage.setImageBitmap(thumbnail);
+        bitimg=thumbnail;
+        imgPath = destination.getPath();
+        Toast.makeText(getContext(), "oncaptureimgres  " +imgPath , Toast.LENGTH_LONG).show();
+
     }
 
     @SuppressWarnings("deprecation")
@@ -291,8 +311,12 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             }
         }
 
+        imgPath=data.getData().getPath();
+        Toast.makeText(getContext(),"ongallery" + imgPath , Toast.LENGTH_LONG).show();
         ivImage.setImageBitmap(bm);
+        bitimg=bm;
     }
+
 
     //end image picke2
 
