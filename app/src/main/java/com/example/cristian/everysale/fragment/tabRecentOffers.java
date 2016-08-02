@@ -1,32 +1,22 @@
 package com.example.cristian.everysale.fragment;
 
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
-import com.example.cristian.everysale.BaseClasses.InsertionPreview;
-import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.OnRefreshListener {
-
-    private SearchResponse searchResponse;
-    private SwipeRefreshLayout swipeRefreshLayout;
+public class tabRecentOffers extends ListFragment {
 
     private ListView itemsListView;
     private View view;
@@ -34,29 +24,23 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.recent_listview,container,false);
-
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(this);
-
-        searchResponse = null;
-        new asincGetRecent(this).execute();
         return view;
     }
 
     @Override
     public void onResume(){
         super.onResume();
+        setListView();
     }
 
     private void setListView(){
         ArrayList<HashMap<String, String>> data = new ArrayList<>();
-        for(int i=0; i<searchResponse.getInsertionCount(); i++){
-            InsertionPreview preview = searchResponse.getInsertion(i);
+        for(int i=0; i<10; i++){
             HashMap<String, String> map = new HashMap<>();
             map.put("icon", "http://webdev.dibris.unige.it/~S3928202/Progetto/img/favicon.jpg");
-            map.put("title", preview.getName());
-            map.put("price", String.valueOf(preview.getPrice()));
-            map.put("city", preview.getCity());
+            map.put("title", "Titolo1");
+            map.put("price", "Prezzo1");
+            map.put("city", "Città1");
             map.put("rating", "2");
             data.add(map);
         }
@@ -65,25 +49,5 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         int[] to = {R.id.item_icon, R.id.item_title, R.id.item_price, R.id.item_city/*, R.id.item_ratingBar*/};
         SimpleAdapter adapter= new SimpleAdapter(getContext(), data, resource, from, to);
         setListAdapter(adapter);
-    }
-
-    public void setSearchResponse(SearchResponse searchResponse){
-
-        if (this.searchResponse == null){
-            this.searchResponse = searchResponse;
-        }
-        else {
-            this.searchResponse.merge(searchResponse);
-        }
-        setListView();
-        Toast.makeText(getContext(), "Totale Inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
-        swipeRefreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void onRefresh() {
-
-        this.searchResponse = null;
-        new asincGetRecent(this).execute();
     }
 }

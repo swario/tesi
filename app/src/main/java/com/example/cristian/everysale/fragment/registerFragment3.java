@@ -1,28 +1,56 @@
 package com.example.cristian.everysale.fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.cristian.everysale.R;
+import com.example.cristian.everysale.BaseClasses.imagePicker.Utility;
 import com.example.cristian.everysale.asincronousTasks.asincRegister;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 
-    private SharedPreferences savedValues;
+    /*//image picker
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    private Uri fileUri; // file url to store image/video
+    */
 
     private Button imageButton;
     private CheckBox dataAllowCheckbox;
+    private SharedPreferences savedValues;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;//image picker
+    private ImageView ivImage;
+    private String userChoosenTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -32,7 +60,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         View view = inflater.inflate(R.layout.fragment_register_3, container, false);
 
         savedValues = getActivity().getSharedPreferences("SavedValues", getActivity().MODE_PRIVATE);
-
+        ivImage = (ImageView) view.findViewById(R.id.imageView1);
         imageButton = (Button) view.findViewById(R.id.imageButton);
         dataAllowCheckbox = (CheckBox) view.findViewById(R.id.dataAllowCheckBox);
 
@@ -43,11 +71,36 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         return view;
     }
 
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        dataAllowCheckbox.setActivated(savedValues.getBoolean("dataAllowCheckBox",false));
+        //per prima cosa, setto l'adapter per lo spinner delle regioni
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.fregister2_regions_spinner, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    }
+
+    @Override
+    public void onPause(){
+
+        SharedPreferences.Editor editor = savedValues.edit();
+        editor.putBoolean("dataAllowCheckBox", dataAllowCheckbox.isChecked());
+
+        editor.commit();
+
+        super.onPause();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
 
             case R.id.imageButton:
+                // capture picture
+                selectImage();
 
                 break;
 
@@ -130,6 +183,120 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         }
     }
 
+    //image picker2
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if(userChoosenTask.equals("Scatta foto"))
+                        cameraIntent();
+                    else if(userChoosenTask.equals("Scegli dalla Galleria"))
+                        galleryIntent();
+                } else {
+                    //code for deny
+                }
+                break;
+        }
+    }
+
+    private void selectImage() {
+        final CharSequence[] items = { "Scatta foto", "Scegli dalla Galleria",
+                "Annulla" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                boolean result=Utility.checkPermission(getActivity());
+
+                if (items[item].equals("Scatta foto")) {
+                    userChoosenTask ="Scatta foto";
+                    if(result)
+                        cameraIntent();
+
+                } else if (items[item].equals("Scegli dalla Galleria")) {
+                    userChoosenTask ="Scegli dalla Galleria";
+                    if(result)
+                        galleryIntent();
+
+                } else if (items[item].equals("Annulla")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void galleryIntent()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Seleziona File"),SELECT_FILE);
+    }
+
+    private void cameraIntent()
+    {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ivImage.setImageBitmap(thumbnail);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+
+        Bitmap bm=null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ivImage.setImageBitmap(bm);
+    }
+
+    //end image picke2
+
+
     private int getCitySpinner(int region){
 
         switch(region){
@@ -177,4 +344,5 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 return R.array.fregister2_region0_spinner;
         }
     }
+
 }

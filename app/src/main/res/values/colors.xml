@@ -6,8 +6,10 @@
     <color name="colorText">#000000</color>
 
     <!--added by swario1-->
-    <color name="ColorPrimary">#ff0000</color>
-    <color name="ColorPrimaryDark">#ff0000</color>
+    <color name="ColorPrimary">#e62117</color>
+    <color name="ColorPrimaryDark">#c31c13</color>
     <color name="tabsScrollColor">#71B2CF</color>
 
 </resources>
+
+
