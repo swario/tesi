@@ -8,6 +8,6 @@
     <!--added by swario1-->
     <color name="ColorPrimary">#ff0000</color>
     <color name="ColorPrimaryDark">#ff0000</color>
-    <color name="tabsScrollColor">#CACACA</color>
+    <color name="tabsScrollColor">#71B2CF</color>
 
 </resources>
