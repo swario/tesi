@@ -21,7 +21,7 @@ import com.example.cristian.everysale.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class tabRecentOffers extends ListFragment implements OnRefreshListener{
     
     private SearchResponse searchResponse;
     private SwipeRefreshLayout refreshLayout;
@@ -63,9 +63,6 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
             cities.add(city);
             rating.add(rate);
         }
-        int resource = R.layout.listview_item_layout;
-        String[] from = {"icon", "title", "price", "city"/*, "rating"*/};
-        int[] to = {R.id.item_icon, R.id.item_title, R.id.item_price, R.id.item_city/*, R.id.item_ratingBar*/};
         CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating);
         setListAdapter(adapter);
     }
