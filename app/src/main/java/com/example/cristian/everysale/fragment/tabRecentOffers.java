@@ -66,29 +66,26 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
 
     private void setListView(){
 
-        ArrayList<String> images;
-        ArrayList<String> titles;
-        ArrayList<String> prices;
-        ArrayList<String> cities;
-        ArrayList<Float> rating;
+        ArrayList<String> images = new ArrayList<>();
+        ArrayList<String> titles = new ArrayList<>();
+        ArrayList<String> prices = new ArrayList<>();
+        ArrayList<String> cities = new ArrayList<>();
+        ArrayList<Float> rating = new ArrayList<>();
 
-        String icon = "http://webdev.dibris.unige.it/~S3928202/Progetto/img/favicon.jpg";
-        String title = "Titolo1";
+        String icon = "http://webdev.dibris.unige.it/~S3928202/Progetto/img/wrongIcon.jpg";
+        String title = "Titolo";
+        String city = "Città";
         String price = "25 €";
-        String city = "Città1"
-        float rate = (float) 2.5;
-
-        for(int i=0; i < searchResponse.getInsertionCount(); i++){
-            InsertionPreview preview = searchResponse.getInsertion(i);
-            HashMap<String, String> map = new HashMap<>();
+        float rate= (float) 2.5;
+        
+        for(int i=0; i<10; i++){
             images.add(icon);
             titles.add(title);
-            price.add(price);
-            city.add(city);
+            prices.add(price);
+            cities.add(city);
             rating.add(rate);
-            data.add(map);
         }
-        CustomAdapter adapter= new CustomAdapter(context, activity, images, titles, prices, cities, rating);
+        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating);
         setListAdapter(adapter);
     }
 
