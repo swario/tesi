@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.Utility;
+import com.example.cristian.everysale.BaseClasses.imagePicker.Utility;
 import com.example.cristian.everysale.asincronousTasks.asincRegister;
 
 import java.io.ByteArrayOutputStream;
@@ -101,6 +101,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             case R.id.imageButton:
                 // capture picture
                 selectImage();
+
                 break;
 
             case R.id.backButton:

@@ -1,4 +1,4 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.BaseClasses.imagePicker;
 
 /**
  * Created by ulisse on 02/08/2016.
