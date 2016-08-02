@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +12,30 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 import com.example.cristian.everysale.BaseClasses.CustomAdapter;
+import com.example.cristian.everysale.BaseClasses.InsertionPreview;
+import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class tabRecentOffers extends ListFragment {
-
+public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.OnRefreshListener{
+    
+    private SearchResponse searchResponse;
+    private SwipeRefreshLayout refreshLayout;
     private ListView itemsListView;
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.recent_listview, container, false);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
+        refreshLayout.setOnRefreshListener(this);
+
+        searchResponse = null;
+        new asincGetRecent(this).execute();
         return view;
     }
 
@@ -57,5 +68,21 @@ public class tabRecentOffers extends ListFragment {
         int[] to = {R.id.item_icon, R.id.item_title, R.id.item_price, R.id.item_city/*, R.id.item_ratingBar*/};
         CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating);
         setListAdapter(adapter);
+    }
+
+    public void setSearchResponse(SearchResponse searchResponse){
+        if(this.searchResponse == null){
+            this.searchResponse = searchResponse;
+            refreshLayout.setRefreshing(false);
+        } else {
+            this.searchResponse.merge(searchResponse);
+        }
+        setListView();
+    }
+
+    @Override
+    public void onRefresh() {
+        searchResponse = null;
+        new asincGetRecent(this).execute();
     }
 }
