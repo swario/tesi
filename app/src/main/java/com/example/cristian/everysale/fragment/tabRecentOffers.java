@@ -15,6 +15,7 @@ import android.widget.SimpleAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.R;
+import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         refreshLayout.setOnRefreshListener(this);
 
         searchResponse = null;
+        new asincGetRecent(this).execute();
         return view;
     }
 
@@ -64,11 +66,10 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
-
         if(this.searchResponse == null){
             this.searchResponse = searchResponse;
-        }
-        else{
+            refreshLayout.setRefreshing(false);
+        } else {
             this.searchResponse.merge(searchResponse);
         }
         setListView();
@@ -76,8 +77,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
 
     @Override
     public void onRefresh() {
-
         searchResponse = null;
-
+        new asincGetRecent(this).execute();
     }
 }
