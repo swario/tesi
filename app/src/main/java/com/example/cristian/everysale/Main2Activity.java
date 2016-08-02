@@ -64,6 +64,8 @@ public class Main2Activity extends ActionBarActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+        // Faccio vedere per prima la tab centrale
+        pager.setCurrentItem(1);
     }
 
 
