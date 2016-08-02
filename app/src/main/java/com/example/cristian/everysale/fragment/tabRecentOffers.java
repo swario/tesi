@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
@@ -18,12 +19,15 @@ import java.util.HashMap;
 
 public class tabRecentOffers extends ListFragment {
 
+    private SearchResponse searchResponse;
+
     private ListView itemsListView;
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.recent_listview,container,false);
+        searchResponse = null;
         return view;
     }
 
@@ -50,4 +54,15 @@ public class tabRecentOffers extends ListFragment {
         SimpleAdapter adapter= new SimpleAdapter(getContext(), data, resource, from, to);
         setListAdapter(adapter);
     }
+
+    public void setSearchResponse(SearchResponse searchResponse){
+
+        if(this.searchResponse == null){
+            this.searchResponse = searchResponse;
+        }
+        else{
+            this.searchResponse.merge(searchResponse);
+        }
+    }
+
 }
