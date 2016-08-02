@@ -90,7 +90,7 @@ public class CustomAdapter extends BaseAdapter{
             holder.rating.setMax(5);
             holder.rating.setNumStars(5);
             holder.rating.setStepSize((float) 0.1);
-            holder.rating.setProgressTintList();
+            //holder.rating.setProgressTintList();
             holder.rating.setRating(rate.next());
             new asincImageDownload(context, activity).execute(image.next(), holder.img);
             rowView.setOnClickListener(new OnClickListener() {

@@ -27,7 +27,7 @@ import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener{
 
     private int previousFirstVisibleItem;
     
@@ -43,10 +43,10 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         view = inflater.inflate(R.layout.recent_listview,container,false);
         Log.e("Debug", "Inizio");
 
-        //itemsListView = (ListView) inflater.inflate(R.layout.recent_listview,container,false);
+        itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
-        view.setOnScrollChangeListener(this);
+        itemsListView.setOnScrollListener(this);
 
         refreshLayout.setOnRefreshListener(this);
         Log.e("Debug", "Listener settato");
@@ -106,11 +106,15 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         searchResponse = null;
         new asincGetRecent(this).execute();
     }
-    
+
     @Override
-    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        if(scrollY > oldScrollY){
-            Toast.makeText(getContext(), "Scrolla verso il basso", Toast.LENGTH_LONG).show();
-        }
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+
     }
 }
