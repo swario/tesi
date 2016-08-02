@@ -13,6 +13,7 @@ public class InsertionParser extends DefaultHandler {
     private Feedback feedback;
     private Insertion insertion;
 
+    private boolean isInsertion = false;
     private boolean isInsertionId = false;
     private boolean isName = false;
     private boolean isPrice = false;
@@ -38,7 +39,7 @@ public class InsertionParser extends DefaultHandler {
     public void startElement(String namespaceURI, String localName, String qName, Attributes att){
 
         if(qName.equals("insertion")){
-            insertion = new Insertion();
+            isInsertion = true;
             return;
         }
         if(qName.equals("insertion_id")){
@@ -118,6 +119,12 @@ public class InsertionParser extends DefaultHandler {
     public void characters(char ch[], int start, int lenght ){
 
         String s = new String(ch, start, lenght);
+        if(isInsertion){
+            isInsertion = false;
+            if(s.equals("no such insertion")){
+                insertion = null;
+            }
+        }
         if(isInsertionId){
             isInsertionId = false;
             insertion.setInsertion_id(Integer.parseInt(s));
