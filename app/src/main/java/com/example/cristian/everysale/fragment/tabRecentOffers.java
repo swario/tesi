@@ -85,7 +85,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
             rating.add(preview.getRate());
         }
         CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating);
-        setListAdapter(adapter);
+        itemsListView.setAdapter(adapter);
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
@@ -95,8 +95,8 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         } else {
             this.searchResponse.merge(searchResponse);
         }
-        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
-                //Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
+                Toast.LENGTH_LONG).show();
         setListView();
     }
 

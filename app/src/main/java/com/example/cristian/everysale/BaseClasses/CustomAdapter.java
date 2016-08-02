@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ public class CustomAdapter extends BaseAdapter{
     private Iterator<String> price;
     private Iterator<String> city;
     private Iterator<Float> rate;
+    private ArrayList<String> items;
     private static LayoutInflater inflater=null;
 
     public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating) {
@@ -45,18 +48,19 @@ public class CustomAdapter extends BaseAdapter{
         price = prices.iterator();
         city = cities.iterator();
         rate = rating.iterator();
+        items = titles;
 
         inflater = ( LayoutInflater ) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return 1;
+        return items.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return position;
+        return items.get(position);
     }
 
     @Override
@@ -92,6 +96,8 @@ public class CustomAdapter extends BaseAdapter{
             holder.rating.setMax(5);
             holder.rating.setNumStars(5);
             holder.rating.setStepSize((float) 0.1);
+            //Drawable drawable = holder.rating.getProgressDrawable();
+            //drawable.setColorFilter(Color.parseColor("#FEF429"), PorterDuff.Mode.SRC_IN);
             //holder.rating.setProgressTintList();
             holder.rating.setRating(rate.next());
             new asincImageDownload(context, activity).execute(image.next(), holder.img);
