@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.Main2Activity;
@@ -60,9 +61,10 @@ public class asincLogin extends AsyncTask<String, Void, String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             StringBuilder stringBuilder = new StringBuilder("");
-            String response = "";
+            String response = null;
 
             while((response = reader.readLine())!= null){
+                Log.d("Debug", "Risposta: " + response);
                 stringBuilder.append(response);
                 break;
             }
@@ -75,7 +77,10 @@ public class asincLogin extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result){
-        if(result.contains("No address associated with hostname")) {
+        if (result == null){
+            Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
+        }
+        else if(result.contains("No address associated with hostname")) {
             Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
         }
         else if(result.contains("success")){
@@ -83,7 +88,9 @@ public class asincLogin extends AsyncTask<String, Void, String> {
 
             editor.putString("username", this.username);
             editor.putString("password", this.username);
-            editor.putInt("userId", Integer.parseInt(result.substring(8)));
+            String[] array = result.split("-");
+            int id = Integer.parseInt(array[1]);
+            editor.putInt("userId", id);
 
             editor.commit();
 
