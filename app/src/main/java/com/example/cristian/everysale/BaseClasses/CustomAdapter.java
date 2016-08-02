@@ -77,12 +77,14 @@ public class CustomAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         Holder holder=new Holder();
         View rowView;
+
         rowView = inflater.inflate(R.layout.listview_item_layout, null);
         holder.img = (ImageView) rowView.findViewById(R.id.item_icon);
         holder.title = (TextView) rowView.findViewById(R.id.item_title);
         holder.price = (TextView) rowView.findViewById(R.id.item_price);
         holder.city = (TextView) rowView.findViewById(R.id.item_city);
         holder.rating = (RatingBar) rowView.findViewById(R.id.item_ratingBar);
+
         if(title.hasNext()) {
             holder.title.setText(title.next());
             holder.price.setText(price.next());

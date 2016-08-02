@@ -73,16 +73,16 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         ArrayList<Float> rating = new ArrayList<>();
 
         String icon = "http://webdev.dibris.unige.it/~S3928202/Progetto/img/wrongIcon.jpg";
-        String title = "Titolo";
-        String city = "Città";
-        String price = "25 €";
         float rate= (float) 2.5;
         
-        for(int i=0; i<10; i++){
+        for(int i=0; i<searchResponse.getInsertionCount(); i++){
+
+            InsertionPreview preview = searchResponse.getInsertion(i);
+
             images.add(icon);
-            titles.add(title);
-            prices.add(price);
-            cities.add(city);
+            titles.add(preview.getName());
+            prices.add(String.valueOf(preview.getPrice()));
+            cities.add(preview.getCity());
             rating.add(rate);
         }
         CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating);
@@ -96,8 +96,8 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         } else {
             this.searchResponse.merge(searchResponse);
         }
-        Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
+                //Toast.LENGTH_LONG).show();
         setListView();
     }
 
