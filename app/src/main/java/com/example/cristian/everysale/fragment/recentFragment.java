@@ -2,6 +2,7 @@ package com.example.cristian.everysale.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +10,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.app.ListFragment;
 
+import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.R;
+import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 
 public class recentFragment extends ListFragment{
+
+    private SearchResponse searchResponse;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        //Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.recent_listview, container, false);
         return view;
     }
@@ -34,5 +39,10 @@ public class recentFragment extends ListFragment{
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         // TODO implement some logic
+    }
+
+    public void setSearchResponse(SearchResponse searchResponse){
+
+        this.searchResponse = searchResponse;
     }
 }
