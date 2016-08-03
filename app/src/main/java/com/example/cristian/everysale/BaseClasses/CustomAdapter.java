@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Iterator;
 
 public class CustomAdapter extends BaseAdapter{
@@ -91,7 +92,7 @@ public class CustomAdapter extends BaseAdapter{
 
         if(title.hasNext()) {
             holder.title.setText(title.next());
-            holder.price.setText(price.next());
+            holder.price.setText(price.next() + "€");
             holder.city.setText(city.next());
             holder.rating.setMax(5);
             holder.rating.setNumStars(5);
