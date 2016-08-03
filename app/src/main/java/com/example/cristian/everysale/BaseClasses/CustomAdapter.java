@@ -99,7 +99,9 @@ public class CustomAdapter extends BaseAdapter{
         holder.rating = (RatingBar) rowView.findViewById(R.id.item_ratingBar);
 
         if(title.hasNext()) {
+            holder.title.setEnabled(false);
             holder.title.setText(title.next());
+            holder.title.setEnabled(true);
             holder.price.setText(price.next() + "€");
             holder.city.setText(city.next());
             holder.rating.setMax(5);
