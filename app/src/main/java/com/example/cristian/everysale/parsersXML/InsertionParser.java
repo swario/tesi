@@ -49,7 +49,7 @@ public class InsertionParser extends DefaultHandler {
             isInsertionId = true;
             return;
         }
-        if(qName.equals("name")){
+        if(qName.equals("insertionName")){
             isName = true;
             return;
         }

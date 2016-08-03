@@ -267,7 +267,7 @@
             android:id="@+id/listView"
             android:layout_below="@+id/item_feedback"
             android:layout_alignParentLeft="true"
-            tools:listitem="@android:layout/simple_list_item_2" />
+            tools:listitem="@layout/feedback_list_item" />
 
     </RelativeLayout>
 
