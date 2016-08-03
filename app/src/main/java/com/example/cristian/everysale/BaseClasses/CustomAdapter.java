@@ -102,7 +102,7 @@ public class CustomAdapter extends BaseAdapter{
             holder.title.setEnabled(false);
             holder.title.setText(title.next());
             holder.title.setEnabled(true);
-            holder.price.setText(price.next() + "€");
+            holder.price.setText(price.next() + " €");
             holder.city.setText(city.next());
             holder.rating.setMax(5);
             holder.rating.setNumStars(5);
