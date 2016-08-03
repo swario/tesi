@@ -25,9 +25,5 @@
             android:title="@string/menu_disconnect" />
     </group>
 
-    <item
-        android:id="@+id/menu_refresh"
-        android:title="Refresh">
-    </item>
 
 </menu>
