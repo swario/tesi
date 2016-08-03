@@ -105,7 +105,6 @@ public class CustomAdapter extends BaseAdapter{
             rowView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Debug", String.valueOf(currentId));
                     tab.goToInsertion(currentId);
                 }
             });
