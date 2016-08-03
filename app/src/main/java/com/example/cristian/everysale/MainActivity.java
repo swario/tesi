@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+
+import com.example.cristian.everysale.fragment.loginFragment;
 import com.example.cristian.everysale.fragment.mainFragment.OnFragmentInteractionListener;
 import com.example.cristian.everysale.fragment.mainFragment;
 
@@ -23,7 +25,18 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         actionBar.setLogo(R.drawable.ic_menu_camera);
         actionBar.setDisplayUseLogoEnabled(true);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new mainFragment()).commit();
+        Intent intent = getIntent();
+        if(intent != null){
+            if(intent.getBooleanExtra("goToLogin", false)) {
+                getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new loginFragment()).commit();
+            }
+            else{
+                getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new mainFragment()).commit();
+            }
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new mainFragment()).commit();
+        }
     }
 
     @Override
