@@ -1,22 +1,31 @@
 package com.example.cristian.everysale.fragment;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.example.cristian.everysale.BaseClasses.Insertion;
+import com.example.cristian.everysale.InsertionActivity;
+import com.example.cristian.everysale.StartActivity;
 import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 import com.example.cristian.everysale.BaseClasses.CustomAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
@@ -27,7 +36,7 @@ import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener{
+public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener{
 
     private int previousFirstVisibleItem;
     
@@ -39,9 +48,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.e("Debug", "inflato");
         view = inflater.inflate(R.layout.recent_listview,container,false);
-        Log.e("Debug", "Inizio");
 
         itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
@@ -50,7 +57,6 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
-        Log.e("Debug", "Listener settato");
 
         previousFirstVisibleItem = 0;
 
@@ -85,7 +91,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
             rating.add(preview.getRate());
             insertionsId.add(preview.getInsertionId());
         }
-        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId);
+        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId, this);
         itemsListView.setAdapter(adapter);
     }
 
@@ -96,8 +102,8 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         } else {
             this.searchResponse.merge(searchResponse);
         }
-        Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
+          //      Toast.LENGTH_LONG).show();
         setListView();
     }
 
@@ -128,4 +134,12 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         }
         previousFirstVisibleItem = firstVisibleItem;
     }
+
+    public void goToInsertion(long pos){
+
+        Intent intent = new Intent(getActivity(), InsertionActivity.class);
+        intent.putExtra("insertionId", pos);
+        startActivity(intent);
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.example.cristian.everysale.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,15 +29,14 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
 
     private SearchResponse searchResponse;
     private SwipeRefreshLayout refreshLayout;
+    private SharedPreferences savedValues;
 
     private ListView itemsListView;
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.e("Debug", "inflato");
         view = inflater.inflate(R.layout.favorite_listview,container,false);
-        Log.e("Debug", "Inizio");
 
         itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
@@ -48,9 +49,10 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
 
         previousFirstVisibleItem = 0;
 
+        savedValues = getActivity().getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
 
         searchResponse = null;
-        new asincGetRecent(this).execute();
+        //new asincGetRecent(this).execute();
         return view;
     }
 
@@ -79,8 +81,8 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
             rating.add(preview.getRate());
             insertionsId.add(preview.getInsertionId());
         }
-        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId);
-        itemsListView.setAdapter(adapter);
+        //CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId);
+        //itemsListView.setAdapter(adapter);
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
@@ -98,7 +100,7 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onRefresh() {
         searchResponse = null;
-        new asincGetRecent(this).execute();
+        //new asincGetRecent(this).execute();
     }
 
     @Override
@@ -114,7 +116,7 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
             if((firstVisibleItem + visibleItemCount) >= totalItemCount){// sono  giunto alla fine della lista
 
                 long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
-                new asincGetRecent(this).execute(upperLimit);
+                //new asincGetRecent(this).execute(upperLimit);
             }
         }
         else if(previousFirstVisibleItem > firstVisibleItem){//sto scrollando verso l'alto

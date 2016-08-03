@@ -48,7 +48,6 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
         userEditText.setOnEditorActionListener(this);
         passwordEditText.setOnEditorActionListener(this);
         loginButton.setOnClickListener(this);
-        Log.e("Listener", "Listener Settato");
 
         return view;
     }

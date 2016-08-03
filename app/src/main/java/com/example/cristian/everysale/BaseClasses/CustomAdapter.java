@@ -1,15 +1,7 @@
 package com.example.cristian.everysale.BaseClasses;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,20 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.cristian.everysale.MainActivity;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
-import com.example.cristian.everysale.fragment.InsertionFragment;
-import com.example.cristian.everysale.fragment.loginFragment;
-import com.example.cristian.everysale.fragment.registerFragment2;
+import com.example.cristian.everysale.fragment.tabRecentOffers;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Iterator;
 
 public class CustomAdapter extends BaseAdapter{
@@ -47,8 +31,10 @@ public class CustomAdapter extends BaseAdapter{
     private Iterator<Long> id;
     private ArrayList<String> items;
     private static LayoutInflater inflater=null;
+    private tabRecentOffers offers;
 
-    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId) {
+    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId, tabRecentOffers tabRecentOffers) {
+
         this.context = context;
         this.activity = activity;
         image = images.iterator();
@@ -58,6 +44,7 @@ public class CustomAdapter extends BaseAdapter{
         rate = rating.iterator();
         id = insertionsId.iterator();
         items = titles;
+        this.offers = tabRecentOffers;
 
         inflater = ( LayoutInflater ) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -112,17 +99,12 @@ public class CustomAdapter extends BaseAdapter{
             //holder.rating.setProgressTintList();
             holder.rating.setRating(rate.next());
             new asincImageDownload(context, activity).execute(image.next(), holder.img);
+            final long currentId = id.next();
             rowView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    long currentId = id.next();
                     Log.e("Debug", String.valueOf(currentId));
-                    Bundle bundle = new Bundle();
-                    bundle.putLong("insertionId", currentId);
-                    InsertionFragment insertionFragment = new InsertionFragment();
-                    insertionFragment.setArguments(bundle);
-                    insertionFragment.getFragmentManager().beginTransaction().add(R.id.frame_container, insertionFragment,
-                            "insertionFragment").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    offers.goToInsertion(currentId);
                 }
             });
         }

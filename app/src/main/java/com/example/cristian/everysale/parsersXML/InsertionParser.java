@@ -30,6 +30,8 @@ public class InsertionParser extends DefaultHandler {
     private boolean isRatingUserName = false;
     private boolean isFeedBackText = false;
 
+    public Insertion getInsertion(){ return this.insertion;}
+
     public void startDocument(){
 
         feedback = new Feedback();

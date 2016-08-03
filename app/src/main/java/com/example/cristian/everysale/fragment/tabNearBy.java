@@ -50,7 +50,7 @@ public class tabNearBy extends ListFragment implements SwipeRefreshLayout.OnRefr
 
 
         searchResponse = null;
-        new asincGetRecent(this).execute();
+        //new asincGetRecent(this).execute();
         return view;
     }
 
@@ -79,8 +79,8 @@ public class tabNearBy extends ListFragment implements SwipeRefreshLayout.OnRefr
             rating.add(preview.getRate());
             insertionsId.add(preview.getInsertionId());
         }
-        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId);
-        itemsListView.setAdapter(adapter);
+        //CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId);
+        //itemsListView.setAdapter(adapter);
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
@@ -98,7 +98,7 @@ public class tabNearBy extends ListFragment implements SwipeRefreshLayout.OnRefr
     @Override
     public void onRefresh() {
         searchResponse = null;
-        new asincGetRecent(this).execute();
+        //new asincGetRecent(this).execute();
     }
 
     @Override
@@ -114,7 +114,7 @@ public class tabNearBy extends ListFragment implements SwipeRefreshLayout.OnRefr
             if((firstVisibleItem + visibleItemCount) >= totalItemCount){// sono  giunto alla fine della lista
 
                 long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
-                new asincGetRecent(this).execute(upperLimit);
+                //new asincGetRecent(this).execute(upperLimit);
             }
         }
         else if(previousFirstVisibleItem > firstVisibleItem){//sto scrollando verso l'alto
