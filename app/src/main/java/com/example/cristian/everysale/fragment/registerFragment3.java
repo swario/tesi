@@ -38,6 +38,12 @@ import static com.example.cristian.everysale.getFilePath.getFilePath;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 
+    /*//image picker
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    private Uri fileUri; // file url to store image/video
+    */
+
     private Button imageButton;
     private CheckBox dataAllowCheckbox;
     private SharedPreferences savedValues;
