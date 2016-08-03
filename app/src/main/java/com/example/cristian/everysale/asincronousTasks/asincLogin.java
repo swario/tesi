@@ -7,10 +7,17 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.Main2Activity;
+import com.example.cristian.everysale.MainActivity;
+import com.example.cristian.everysale.R;
+import com.example.cristian.everysale.StartActivity;
+import com.example.cristian.everysale.fragment.loginFragment;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -25,14 +32,24 @@ public class asincLogin extends AsyncTask<String, Void, String> {
 
     private Context context;
     private Activity activity;
+    private ProgressBar loadingBar;
 
     private String username;
     private String password;
 
-    public asincLogin(Context context, Activity activity){
+    public asincLogin( Activity activity){
 
+        loadingBar = null;
         savedValues = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        this.context = context;
+        this.context = activity.getApplicationContext();
+        this.activity = activity;
+    }
+
+    public asincLogin( Activity activity, ProgressBar progressBar){
+
+        this.loadingBar = progressBar;
+        savedValues = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
+        this.context = activity.getApplicationContext();
         this.activity = activity;
     }
 
@@ -74,17 +91,32 @@ public class asincLogin extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result){
+
+        if(loadingBar != null){
+            loadingBar.setVisibility(View.GONE);
+        }
         if (result == null){
-            Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
+
+            if(loadingBar != null) {
+                ((TextView) activity.findViewById(R.id.loading_text_view)).setText("Connessione Internet Assente");
+            }
+            else{
+                Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
+            }
         }
         else if(result.contains("No address associated with hostname")) {
-            Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
+            if(loadingBar != null) {
+                ((TextView) activity.findViewById(R.id.loading_text_view)).setText("Connessione Internet Assente");
+            }
+            else {
+                Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
+            }
         }
         else if(result.contains("success")){
             Editor editor = savedValues.edit();
 
             editor.putString("username", this.username);
-            editor.putString("password", this.username);
+            editor.putString("password", this.password);
             String[] array = result.split("-");
             int id = Integer.parseInt(array[1]);
             editor.putInt("userId", id);
@@ -98,8 +130,12 @@ public class asincLogin extends AsyncTask<String, Void, String> {
         }
         else if(result.contains("wrong input")){
 
-            Toast.makeText(context, "Username o password\nnon corretti", Toast.LENGTH_LONG).show();
-
+            if(loadingBar != null){
+                Intent intent = new Intent(activity, MainActivity.class);
+                intent.putExtra("goToLogin", true);
+                activity.startActivity(intent);
+                activity.finish();
+            }
         }
     }
 }

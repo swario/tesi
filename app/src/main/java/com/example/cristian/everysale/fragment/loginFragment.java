@@ -82,10 +82,7 @@ public class loginFragment extends Fragment implements TextView.OnEditorActionLi
             return;
         }
 
-        new asincLogin(getContext(), getActivity()).execute(username, password);
-
-
-        // definisco l'intenzione
+        new asincLogin(getActivity()).execute(username, password);
 
     }
 }
