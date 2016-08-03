@@ -1,9 +1,9 @@
 package com.example.cristian.everysale;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -85,8 +85,15 @@ public class Main2Activity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.nav_home) {
+            Intent intent = new Intent(this, Main2Activity.class);
+            startActivity(intent);
+            this.finish();
+        }else if (id == R.id.nav_disconnect) {
+            getSharedPreferences("SavedValues", MODE_PRIVATE).edit().clear().commit();
+            Intent intent = new Intent(this, StartActivity.class);
+            startActivity(intent);
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);
