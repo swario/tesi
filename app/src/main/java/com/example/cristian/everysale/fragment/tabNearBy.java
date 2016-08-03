@@ -1,27 +1,29 @@
 package com.example.cristian.everysale.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.cristian.everysale.BaseClasses.CustomAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
+import com.example.cristian.everysale.InsertionActivity;
+import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 
 import java.util.ArrayList;
 
-public class tabNearBy extends ListFragment implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+public class tabNearBy extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab {
 
     private int previousFirstVisibleItem;
 
@@ -121,5 +123,13 @@ public class tabNearBy extends ListFragment implements SwipeRefreshLayout.OnRefr
 
         }
         previousFirstVisibleItem = firstVisibleItem;
+    }
+
+    @Override
+    public void goToInsertion(long pos) {
+
+        Intent intent = new Intent(getActivity(), InsertionActivity.class);
+        intent.putExtra("insertionId", pos);
+        startActivity(intent);
     }
 }
