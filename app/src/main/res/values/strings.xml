@@ -224,10 +224,19 @@
     <string name="label3">Preferiti</string>
 
     <!-- stringhe listview item -->
+    <string name="item_image">Immagine</string>
     <string name="item_title">Titolo</string>
     <string name="item_price">Prezzo</string>
     <string name="item_city">Città</string>
     <string name="item_rating">Rating</string>
+    <!-- stringhe aggiuntive per l'inserzione generica -->
+    <string name="item_address">Indirizzo</string>
+    <string name="item_shop">Negozio</string>
+    <string name="item_insertionist">Inserzionista</string>
+    <string name="item_date1">Data di inserimento</string>
+    <string name="item_date2">Data di scadenza</string>
+    <string name="item_description">Descrizione</string>
+    <string name="item_feedback">Feedback</string>
 
     <string name="start_activity">Login in corso</string>
 
