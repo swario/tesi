@@ -34,8 +34,7 @@ public class asincImageDownload extends AsyncTask<Object, Void, Bitmap> {
     private ImageView holder;
 
     public final String TAG="EverySale";
-    //public  String file="img.jpg";
-
+    
     public asincImageDownload (Context context, Activity activity){
 
         this.context = context;
@@ -57,34 +56,6 @@ public class asincImageDownload extends AsyncTask<Object, Void, Bitmap> {
             e.printStackTrace();
         }
         return bitmap;
-
-    /*    try{
-            //InputStream in = new java.net.URL(image).openStream();
-            //img = BitmapFactory.decodeStream(in);
-            URL url = new URL(image);
-
-            URLConnection connection = url.openConnection();
-
-
-            connection.setDoOutput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            FileOutputStream output = context.openFileOutput(file, Context.MODE_PRIVATE);
-            byte[] buffer = new byte[1024];
-            int bytesRead = input.read(buffer);
-            while(bytesRead!=-1){
-                output.write(buffer, 0, bytesRead);
-                bytesRead = input.read(buffer);
-            }
-            output.close();
-            input.close();
-            Log.d(TAG, "Image downloaded");
-            return file;
-        }
-        catch (Exception e){
-            Log.d(TAG, "Image download failed");
-            return null;
-        }*/
     }
 
     @Override
@@ -95,13 +66,5 @@ public class asincImageDownload extends AsyncTask<Object, Void, Bitmap> {
         else{
             Log.d(TAG, "Image Does Not exist or Network Error");
         }
-        /*if (file == null){
-            Log.d(TAG, "Immagine NON elaborata");
-        }
-        else{
-            Log.d(TAG, "Immagine elaborata");
-            OpenFile
-            holder.setImageBitmap(file);
-        }*/
     }
 }
