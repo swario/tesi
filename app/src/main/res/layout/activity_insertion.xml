@@ -232,7 +232,8 @@
             android:id="@+id/listView"
             android:layout_below="@+id/item_feedback"
             android:layout_alignParentLeft="true"
-            android:scrollIndicators="none" />
+            tools:listitem="@android:layout/simple_list_item_2" />
 
     </RelativeLayout>
+
 </ScrollView>
