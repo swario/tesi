@@ -96,16 +96,20 @@ public class asincLogin extends AsyncTask<String, Void, String> {
             loadingBar.setVisibility(View.GONE);
         }
         if (result == null){
-            Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
 
             if(loadingBar != null) {
                 ((TextView) activity.findViewById(R.id.loading_text_view)).setText("Connessione Internet Assente");
             }
+            else{
+                Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
+            }
         }
         else if(result.contains("No address associated with hostname")) {
-            Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
             if(loadingBar != null) {
                 ((TextView) activity.findViewById(R.id.loading_text_view)).setText("Connessione Internet Assente");
+            }
+            else {
+                Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
             }
         }
         else if(result.contains("success")){
