@@ -106,6 +106,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
         }
         //Toast.makeText(getContext(),"onresume  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
+        //a noi piace
     }
 
     @Override
