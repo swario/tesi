@@ -118,7 +118,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
 
             if((firstVisibleItem + visibleItemCount) > totalItemCount){// sono  giunto alla fine della lista
 
-                int upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertion_id();
+                long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() - 1).getInsertion_id();
                 new asincGetRecent(this).execute(upperLimit);
             }
         }

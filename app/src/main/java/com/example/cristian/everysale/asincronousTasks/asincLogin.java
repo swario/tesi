@@ -29,10 +29,10 @@ public class asincLogin extends AsyncTask<String, Void, String> {
     private String username;
     private String password;
 
-    public asincLogin(Context context, Activity activity){
+    public asincLogin( Activity activity){
 
         savedValues = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        this.context = context;
+        this.context = activity.getApplicationContext();
         this.activity = activity;
     }
 

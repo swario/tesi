@@ -227,4 +227,6 @@
     <string name="item_city">Città</string>
     <string name="item_rating">Rating</string>
 
+    <string name="start_activity">Caricamento in corso</string>
+
 </resources>
