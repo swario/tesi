@@ -22,6 +22,7 @@ public class InsertionPreview {
     public long getInsertion_id(){ return this.insertion_id;}
     public String getName(){ return this.name;}
     public String getCity(){ return this.city;}
+    public String getImage(){ return this.photo;}
     public float getPrice(){ return this.price;}
     public float getRate(){ return this.rate;}
 }

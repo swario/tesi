@@ -11,10 +11,12 @@
     <string name="registrati">Registrati</string>
     <string name="login">Accedi</string>
 
-    <string name="menu_item1">Item1</string>
-    <string name="menu_item2">Item2</string>
-    <string name="menu_item3">Item3</string>
-    <string name="menu_item4">Item4</string>
+    <!--menu laterale-->
+    <string name="menu_home">Home</string>
+    <string name="menu_my_account">Il mio account</string>
+    <string name="menu_my_insertions">Le mie inserzioni</string>
+    <string name="menu_new_insertion">Nuova inserzione</string>
+    <string name="menu_disconnect">Disconnettiti</string>
 
     <!-- Stringhe fragment di login -->
     <string name="flogin_item1">Username/email</string>
@@ -227,6 +229,6 @@
     <string name="item_city">Città</string>
     <string name="item_rating">Rating</string>
 
-    <string name="start_activity">Caricamento in corso</string>
+    <string name="start_activity">Login in corso</string>
 
 </resources>

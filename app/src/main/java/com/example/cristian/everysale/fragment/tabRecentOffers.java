@@ -49,6 +49,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         itemsListView.setOnScrollListener(this);
 
         refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
         Log.e("Debug", "Listener settato");
 
         previousFirstVisibleItem = 0;
@@ -89,9 +90,9 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
+        refreshLayout.setRefreshing(false);
         if(this.searchResponse == null){
             this.searchResponse = searchResponse;
-            refreshLayout.setRefreshing(false);
         } else {
             this.searchResponse.merge(searchResponse);
         }

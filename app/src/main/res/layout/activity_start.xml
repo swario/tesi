@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:src="@drawable/everysale"
-        android:id="@+id/imageView2"
+        android:id="@+id/loading_image_view"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -23,12 +23,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_activity"
-        android:id="@+id/textView2"
+        android:id="@+id/loading_text_view"
         android:textSize="35sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/loading_image_view"
+        android:layout_centerHorizontal="true" />
 
-</RelativeLayout>
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/drawable_cricular_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/loading_text_view"/>
+
+
+
+    </RelativeLayout>

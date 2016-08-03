@@ -55,7 +55,6 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
         int userId = savedValues.getInt("userId", 0);
 
         try{
-            Log.e("Debug", "Creo l'Url");
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/recentInsertion.php?userId=" +
             String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
 
@@ -63,7 +62,6 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
 
             FileOutputStream outputStream = tabRecentOffers.getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
 
-            Log.e("Debug", "Inizio il trasferimento del file");
             byte[] buffer = new byte[1024];
             int bytesRead = inputStream.read(buffer);
             while(bytesRead != -1){
@@ -74,8 +72,6 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
             outputStream.close();
             inputStream.close();
 
-
-            Log.e("Debug", "Inizio il parsing file XML");
             //Inizio parsing file XML
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
             SAXParser parser = parserFactory.newSAXParser();
@@ -87,7 +83,6 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
             FileInputStream fileInputStream = tabRecentOffers.getContext().openFileInput(fileName);
             InputSource inputSource = new InputSource(fileInputStream);
             reader.parse(inputSource);
-            Log.e("Debug", "Fine parsing");
             searchResponse = responseParser.getSearchResponse();
         }
         catch(Exception e){
