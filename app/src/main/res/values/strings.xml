@@ -233,8 +233,8 @@
     <string name="item_address">Indirizzo</string>
     <string name="item_shop">Negozio</string>
     <string name="item_insertionist">Inserzionista</string>
-    <string name="item_date1">Data di inserimento</string>
-    <string name="item_date2">Data di scadenza</string>
+    <string name="item_date1">Data inserimento</string>
+    <string name="item_date2">Data scadenza</string>
     <string name="item_description">Descrizione</string>
     <string name="item_feedback">Feedback</string>
 
