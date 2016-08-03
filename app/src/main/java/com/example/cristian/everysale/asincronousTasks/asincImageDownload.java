@@ -34,7 +34,7 @@ public class asincImageDownload extends AsyncTask<Object, Void, Bitmap> {
     private ImageView holder;
 
     public final String TAG="EverySale";
-    
+
     public asincImageDownload (Context context, Activity activity){
 
         this.context = context;

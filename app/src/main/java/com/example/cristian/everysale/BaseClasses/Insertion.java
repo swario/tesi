@@ -71,8 +71,9 @@ public class Insertion {
     public float getInsertionist_rate() { return  insertionist_rate; }
     public String getInsertion_date() { return  insertion_date; }
     public String getExpiration_date() { return expiration_date; }
-    public String getDescription(){ return  expiration_date; }
+    public String getDescription(){ return  description; }
     public String getPhoto_url(){ return photo_url; }
+    public ArrayList<Feedback> getFeedbacks(){ return feedbacks; }
 
     public void addFeedback(Feedback feedback){
         feedbacks.add(feedback);
