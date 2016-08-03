@@ -19,6 +19,7 @@ public class InsertionParser extends DefaultHandler {
     private boolean isPrice = false;
     private boolean isCity = false;
     private boolean isAddress = false;
+    private boolean isShopName = false;
     private boolean isInsertionistId = false;
     private boolean isInsertionistName = false;
     private boolean isRate = false;
@@ -29,6 +30,8 @@ public class InsertionParser extends DefaultHandler {
     private boolean isRatingUserId = false;
     private boolean isRatingUserName = false;
     private boolean isFeedBackText = false;
+
+    public Insertion getInsertion(){ return this.insertion;}
 
     public void startDocument(){
 
@@ -60,6 +63,10 @@ public class InsertionParser extends DefaultHandler {
         }
         if(qName.equals("address")) {
             isAddress = true;
+            return;
+        }
+        if(qName.equals("shop")){
+            isShopName = true;
             return;
         }
         if(qName.equals("insertionist_id")){
@@ -144,6 +151,10 @@ public class InsertionParser extends DefaultHandler {
         if(isAddress){
             isAddress = false;
             insertion.setAddress(s);
+        }
+        if(isShopName){
+            isShopName = false;
+            insertion.setShopName(s);
         }
         if(isInsertionistId){
             isInsertionistId = false;

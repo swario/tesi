@@ -18,14 +18,13 @@
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:logo="@mipmap/ic_launcher"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Main2Activity"
             android:configChanges="orientation"
             android:logo="@mipmap/ic_launcher"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".InsertionActivity"></activity>
     </application>
 
 </manifest>

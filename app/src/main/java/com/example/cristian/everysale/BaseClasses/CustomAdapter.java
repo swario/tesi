@@ -2,11 +2,6 @@ package com.example.cristian.everysale.BaseClasses;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.cristian.everysale.MainActivity;
+import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -37,10 +28,15 @@ public class CustomAdapter extends BaseAdapter{
     private Iterator<String> price;
     private Iterator<String> city;
     private Iterator<Float> rate;
+    private Iterator<Long> id;
     private ArrayList<String> items;
     private static LayoutInflater inflater=null;
+    private ListTab tab;
 
-    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating) {
+    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles,
+                         ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId,
+                         ListTab listTab) {
+
         this.context = context;
         this.activity = activity;
         image = images.iterator();
@@ -48,7 +44,9 @@ public class CustomAdapter extends BaseAdapter{
         price = prices.iterator();
         city = cities.iterator();
         rate = rating.iterator();
+        id = insertionsId.iterator();
         items = titles;
+        this.tab = listTab;
 
         inflater = ( LayoutInflater ) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -90,8 +88,10 @@ public class CustomAdapter extends BaseAdapter{
         holder.rating = (RatingBar) rowView.findViewById(R.id.item_ratingBar);
 
         if(title.hasNext()) {
+            holder.title.setEnabled(false);
             holder.title.setText(title.next());
-            holder.price.setText(price.next());
+            holder.title.setEnabled(true);
+            holder.price.setText(price.next() + " €");
             holder.city.setText(city.next());
             holder.rating.setMax(5);
             holder.rating.setNumStars(5);
@@ -101,10 +101,12 @@ public class CustomAdapter extends BaseAdapter{
             //holder.rating.setProgressTintList();
             holder.rating.setRating(rate.next());
             new asincImageDownload(context, activity).execute(image.next(), holder.img);
+            final long currentId = id.next();
             rowView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "You Clicked Titolo", Toast.LENGTH_LONG).show();
+                    Log.e("Debug", String.valueOf(currentId));
+                    tab.goToInsertion(currentId);
                 }
             });
         }
