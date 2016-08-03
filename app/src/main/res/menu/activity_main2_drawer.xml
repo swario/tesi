@@ -5,25 +5,25 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_24dp"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_my_account"
+            android:icon="@drawable/ic_timer_auto_24dp"
             android:title="@string/menu_my_account" />
         <item
             android:id="@+id/nav_my_insertions"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_storage_24dp"
             android:title="@string/menu_my_insertions" />
         <item
             android:id="@+id/nav_new_insertion"
+            android:icon="@drawable/ic_my_library_add_24dp"
             android:title="@string/menu_new_insertion" />
         <item
             android:id="@+id/nav_disconnect"
+            android:icon="@drawable/ic_dnd_on_24dp"
             android:title="@string/menu_disconnect" />
     </group>
 
-    <item
-        android:id="@+id/menu_refresh"
-        android:title="Refresh">
-    </item>
 
 </menu>
