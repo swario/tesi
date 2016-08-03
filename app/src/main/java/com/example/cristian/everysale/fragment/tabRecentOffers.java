@@ -73,8 +73,6 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
         ArrayList<String> cities = new ArrayList<>();
         ArrayList<Float> rating = new ArrayList<>();
         ArrayList<Long> insertionsId = new ArrayList<>();
-
-        String icon = "http://webdev.dibris.unige.it/~S3928202/Progetto/img/wrongIcon.jpg";
         
         for(int i=0; i<searchResponse.getInsertionCount(); i++){
 
