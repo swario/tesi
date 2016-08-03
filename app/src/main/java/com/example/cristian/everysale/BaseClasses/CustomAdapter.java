@@ -1,12 +1,15 @@
 package com.example.cristian.everysale.BaseClasses;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,9 @@ import android.widget.Toast;
 import com.example.cristian.everysale.MainActivity;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
+import com.example.cristian.everysale.fragment.InsertionFragment;
+import com.example.cristian.everysale.fragment.loginFragment;
+import com.example.cristian.everysale.fragment.registerFragment2;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -107,7 +113,14 @@ public class CustomAdapter extends BaseAdapter{
             rowView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "You Clicked " + id.next(), Toast.LENGTH_LONG).show();
+                    long currentId = id.next();
+                    Log.e("Debug", String.valueOf(currentId));
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("insertionId", currentId);
+                    InsertionFragment insertionFragment = new InsertionFragment();
+                    insertionFragment.setArguments(bundle);
+                    insertionFragment.getFragmentManager().beginTransaction().add(R.id.frame_container, insertionFragment,
+                            "insertionFragment").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 }
             });
         }
