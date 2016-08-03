@@ -31,12 +31,15 @@
         android:layout_height="wrap_content"
         android:text="@string/item_price"
         android:textSize="20sp"
+        android:ems="5"
         android:paddingRight="5dp"
         android:layout_below="@+id/item_title"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:singleLine="true"
-        android:ellipsize="end">
+        android:ellipsize="end"
+        android:textAlignment="textEnd"
+        android:gravity="end">
     </TextView>
 
     <TextView
@@ -45,6 +48,7 @@
         android:layout_height="wrap_content"
         android:text="@string/item_city"
         android:textSize="20sp"
+        android:ems="8"
         android:layout_toRightOf="@+id/item_icon"
         android:layout_toEndOf="@+id/item_icon"
         android:layout_below="@+id/item_title"
