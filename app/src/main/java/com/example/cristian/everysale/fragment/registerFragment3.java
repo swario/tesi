@@ -7,7 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -31,6 +34,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static com.example.cristian.everysale.getFilePath.getFilePath;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 
@@ -89,12 +95,17 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
         if(imgPath==null) imgPath=savedValues.getString("imgPath",null);
 
-        //voglio caricare nella ImageView (ivImage) l'immagine con il path salvato in imgPath
-        //il path lo prende dalle funzioni onSelectFromGalleryResult e onCaptureImageResult
 
-        Toast.makeText(getContext(),"onresume  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
-        //ivImage.setImageBitmap(BitmapFactory.decodeFile(imgPath));
-        //per prima cosa, setto l'adapter per lo spinner delle regioni
+        File imgFile = new  File(imgPath);
+
+        if(imgFile.exists()){
+
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+            ivImage.setImageBitmap(myBitmap);
+
+        }
+        //Toast.makeText(getContext(),"onresume  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -108,7 +119,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         }
         editor.putString("imgPath", imgPath);
         editor.commit();
-        Toast.makeText(getContext(),"onpause saved  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"onpause saved  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
         super.onPause();
     }
 
@@ -277,7 +288,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        File destination = new File(Environment.getExternalStorageDirectory(),
+        File destination = new File(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DCIM+"/",
                 System.currentTimeMillis() + ".jpg");
 
         FileOutputStream fo;
@@ -294,8 +305,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
         ivImage.setImageBitmap(thumbnail);
         bitimg=thumbnail;
-        imgPath = destination.getPath();
-        Toast.makeText(getContext(), "oncaptureimgres  " +imgPath , Toast.LENGTH_LONG).show();
+        imgPath = destination.getAbsolutePath();
+        //Toast.makeText(getContext(), "oncaptureimgres  " +imgPath , Toast.LENGTH_LONG).show();
 
     }
 
@@ -311,8 +322,13 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             }
         }
 
-        imgPath=data.getData().getPath();
-        Toast.makeText(getContext(),"ongallery" + imgPath , Toast.LENGTH_LONG).show();
+        try {
+            imgPath=getFilePath(getContext(),data.getData());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        //Toast.makeText(getContext(),"ongallery  " + imgPath , Toast.LENGTH_LONG).show();
+
         ivImage.setImageBitmap(bm);
         bitimg=bm;
     }
