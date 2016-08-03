@@ -38,10 +38,11 @@ public class CustomAdapter extends BaseAdapter{
     private Iterator<String> price;
     private Iterator<String> city;
     private Iterator<Float> rate;
+    private Iterator<Long> id;
     private ArrayList<String> items;
     private static LayoutInflater inflater=null;
 
-    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating) {
+    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId) {
         this.context = context;
         this.activity = activity;
         image = images.iterator();
@@ -49,6 +50,7 @@ public class CustomAdapter extends BaseAdapter{
         price = prices.iterator();
         city = cities.iterator();
         rate = rating.iterator();
+        id = insertionsId.iterator();
         items = titles;
 
         inflater = ( LayoutInflater ) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -105,7 +107,7 @@ public class CustomAdapter extends BaseAdapter{
             rowView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "You Clicked Titolo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "You Clicked " + id.next(), Toast.LENGTH_LONG).show();
                 }
             });
         }
