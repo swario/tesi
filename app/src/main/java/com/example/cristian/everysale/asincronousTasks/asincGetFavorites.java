@@ -58,7 +58,7 @@ public class asincGetFavorites extends AsyncTask<Long, Void, Void> {
         int userId = savedValues.getInt("userId", 0);
 
         try{
-            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getFavorite.php?userId=" +
+            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getFavorites.php?userId=" +
                     String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
 
             InputStream inputStream = url.openStream();

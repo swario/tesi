@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
-import com.example.cristian.everysale.fragment.tabRecentOffers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,9 +31,11 @@ public class CustomAdapter extends BaseAdapter{
     private Iterator<Long> id;
     private ArrayList<String> items;
     private static LayoutInflater inflater=null;
-    private tabRecentOffers offers;
+    private ListTab tab;
 
-    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId, tabRecentOffers tabRecentOffers) {
+    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles,
+                         ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId,
+                         ListTab listTab) {
 
         this.context = context;
         this.activity = activity;
@@ -44,7 +46,7 @@ public class CustomAdapter extends BaseAdapter{
         rate = rating.iterator();
         id = insertionsId.iterator();
         items = titles;
-        this.offers = tabRecentOffers;
+        this.tab = listTab;
 
         inflater = ( LayoutInflater ) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -104,7 +106,7 @@ public class CustomAdapter extends BaseAdapter{
                 @Override
                 public void onClick(View v) {
                     Log.e("Debug", String.valueOf(currentId));
-                    offers.goToInsertion(currentId);
+                    tab.goToInsertion(currentId);
                 }
             });
         }

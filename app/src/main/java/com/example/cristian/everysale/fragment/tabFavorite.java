@@ -1,29 +1,32 @@
 package com.example.cristian.everysale.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.BaseClasses.CustomAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
+import com.example.cristian.everysale.InsertionActivity;
+import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
+import com.example.cristian.everysale.asincronousTasks.asincGetFavorites;
 
 import java.util.ArrayList;
 
-public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+public class tabFavorite extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab {
 
     private int previousFirstVisibleItem;
 
@@ -45,14 +48,14 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
-        Log.e("Debug", "Listener settato");
 
         previousFirstVisibleItem = 0;
 
         savedValues = getActivity().getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
 
         searchResponse = null;
-        //new asincGetRecent(this).execute();
+
+        new asincGetFavorites(this).execute();
         return view;
     }
 
@@ -81,8 +84,8 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
             rating.add(preview.getRate());
             insertionsId.add(preview.getInsertionId());
         }
-        //CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId);
-        //itemsListView.setAdapter(adapter);
+        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId, this);
+        itemsListView.setAdapter(adapter);
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
@@ -92,15 +95,14 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
         } else {
             this.searchResponse.merge(searchResponse);
         }
-        Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
         setListView();
     }
 
     @Override
     public void onRefresh() {
         searchResponse = null;
-        //new asincGetRecent(this).execute();
+        new asincGetFavorites(this).execute();
     }
 
     @Override
@@ -123,5 +125,12 @@ public class tabFavorite extends ListFragment implements SwipeRefreshLayout.OnRe
 
         }
         previousFirstVisibleItem = firstVisibleItem;
+    }
+
+    @Override
+    public void goToInsertion(long pos) {
+        Intent intent = new Intent(getActivity(), InsertionActivity.class);
+        intent.putExtra("insertionId", pos);
+        startActivity(intent);
     }
 }
