@@ -79,7 +79,7 @@ public class tabRecentOffers extends ListFragment implements SwipeRefreshLayout.
 
             InsertionPreview preview = searchResponse.getInsertion(i);
 
-            images.add(icon);
+            images.add("http://webdev.dibris.unige.it/~S3928202/Progetto/itemPics/" + preview.getImage());
             titles.add(preview.getName());
             prices.add(String.valueOf(preview.getPrice()));
             cities.add(preview.getCity());
