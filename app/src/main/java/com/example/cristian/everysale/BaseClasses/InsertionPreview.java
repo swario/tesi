@@ -19,7 +19,7 @@ public class InsertionPreview {
     public void setPrice(float price){ this.price = price; }
     public void setRate(float rate){ this.rate = rate; }
 
-    public long getInsertion_id(){ return this.insertion_id;}
+    public long getInsertionId(){ return this.insertion_id;}
     public String getName(){ return this.name;}
     public String getCity(){ return this.city;}
     public String getImage(){ return this.photo;}
