@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 public class tabFavorite extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab {
 
+    private boolean thereIsMore = true;
     private int previousFirstVisibleItem;
 
     private SearchResponse searchResponse;
@@ -86,14 +87,23 @@ public class tabFavorite extends ListFragment implements OnRefreshListener, OnSc
         }
         CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId, this);
         itemsListView.setAdapter(adapter);
+        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
+            long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
+            new asincGetFavorites(this).execute(upperLimit);
+        }
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
+        int oldItemCount = 0;
         refreshLayout.setRefreshing(false);
         if(this.searchResponse == null){
             this.searchResponse = searchResponse;
         } else {
+            oldItemCount = searchResponse.getInsertionCount();
             this.searchResponse.merge(searchResponse);
+        }
+        if(oldItemCount == searchResponse.getInsertionCount()){
+            thereIsMore = false;
         }
         //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
         setListView();

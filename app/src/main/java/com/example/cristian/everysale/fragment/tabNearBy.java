@@ -35,9 +35,7 @@ public class tabNearBy extends ListFragment implements OnRefreshListener, OnScro
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.e("Debug", "inflato");
         view = inflater.inflate(R.layout.nearby_listview,container,false);
-        Log.e("Debug", "Inizio");
 
         itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
@@ -46,7 +44,6 @@ public class tabNearBy extends ListFragment implements OnRefreshListener, OnScro
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
-        Log.e("Debug", "Listener settato");
 
         previousFirstVisibleItem = 0;
 

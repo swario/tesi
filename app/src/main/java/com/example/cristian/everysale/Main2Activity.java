@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +18,8 @@ import com.example.cristian.everysale.fragment.viewPagerAdapter;
 public class Main2Activity extends AppCompatActivity {
 
     private SharedPreferences savedValues;
+
+    DrawerLayout drawerLayout;
 
     Toolbar toolbar;
     ViewPager pager;
@@ -67,6 +71,9 @@ public class Main2Activity extends AppCompatActivity {
         tabs.setViewPager(pager);
         // Faccio vedere per prima la tab centrale
         pager.setCurrentItem(1);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //drawerLayout.addDrawerListener();
     }
 
 

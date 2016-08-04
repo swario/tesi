@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,13 +21,10 @@ import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.asincronousTasks.asincDownloadInsertion;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class InsertionActivity extends AppCompatActivity implements OnClickListener {
+public class InsertionActivity extends AppCompatActivity implements OnClickListener, OnItemClickListener {
 
     private Insertion insertion;
     private long insertionId;
@@ -74,7 +73,12 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     public void setUpInsertion(Insertion insertion){
 
         this.insertion = insertion;
-        setUpLayout();
+        if(this.insertion != null){
+            setUpLayout();
+        }
+        else{
+
+        }
     }
 
     private void setUpLayout(){
@@ -107,6 +111,7 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
             HashMap<String, String> map = new HashMap<String, String>();
             Feedback feedback = feedbacks.get(i);
 
+            Log.e("Debug", feedback.getDescription());
             map.put("user", feedback.getUserName());
             map.put("comment", feedback.getDescription());
             data.add(map);
@@ -117,11 +122,18 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         int[] to = {R.id.feedback_item_username, R.id.feedback_item_comment};
         SimpleAdapter adapter = new SimpleAdapter(this, data, resource, from, to);
         listView.setAdapter(adapter);
-
+        listView.setOnItemClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Toast.makeText(this, "Utente n° " + String.valueOf(insertion.getInsertionist_id()), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        long userId = insertion.getFeedbacks().get(position).getUserId();
+        Log.e("Debug", String.valueOf(listView.getChildCount()));
     }
 }

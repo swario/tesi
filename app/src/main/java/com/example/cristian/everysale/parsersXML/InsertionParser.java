@@ -1,5 +1,7 @@
 package com.example.cristian.everysale.parsersXML;
 
+import android.util.Log;
+
 import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;

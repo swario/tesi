@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.cristian.everysale.InsertionActivity;
 import com.example.cristian.everysale.Interfaces.ListTab;
+import com.example.cristian.everysale.asincronousTasks.asincGetFavorites;
 import com.example.cristian.everysale.asincronousTasks.asincGetRecent;
 import com.example.cristian.everysale.BaseClasses.CustomAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
@@ -24,6 +25,8 @@ import com.example.cristian.everysale.R;
 import java.util.ArrayList;
 
 public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab{
+
+    private boolean thereIsMore = true;
 
     private int previousFirstVisibleItem;
     
@@ -82,15 +85,23 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
+        int oldItemCount = 0;
         refreshLayout.setRefreshing(false);
         if(this.searchResponse == null){
             this.searchResponse = searchResponse;
         } else {
+            oldItemCount = searchResponse.getInsertionCount();
             this.searchResponse.merge(searchResponse);
         }
-        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
-          //      Toast.LENGTH_LONG).show();
+        if(oldItemCount == searchResponse.getInsertionCount()){
+            thereIsMore = false;
+        }
+        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
         setListView();
+        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
+            long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
+            new asincGetRecent(this).execute(upperLimit);
+        }
     }
 
     @Override
