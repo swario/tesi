@@ -1,6 +1,8 @@
 package com.example.cristian.everysale;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
+import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.asincronousTasks.asincDownloadInsertion;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
 
@@ -110,8 +113,6 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         for(int i = 0; i < feedbacks.size(); i++){
             HashMap<String, String> map = new HashMap<String, String>();
             Feedback feedback = feedbacks.get(i);
-
-            Log.e("Debug", feedback.getDescription());
             map.put("user", feedback.getUserName());
             map.put("comment", feedback.getDescription());
             data.add(map);
@@ -134,6 +135,5 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         long userId = insertion.getFeedbacks().get(position).getUserId();
-        Log.e("Debug", String.valueOf(listView.getChildCount()));
     }
 }

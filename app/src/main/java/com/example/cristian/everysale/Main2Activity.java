@@ -82,7 +82,7 @@ public class Main2Activity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         MenuListener menuListener = new MenuListener(this, navigationView, drawerLayout);
         drawerLayout.addDrawerListener(menuListener);
-         navigationView.setNavigationItemSelectedListener(menuListener);
+        navigationView.setNavigationItemSelectedListener(menuListener);
     }
 
 
