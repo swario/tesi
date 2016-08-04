@@ -32,7 +32,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar"

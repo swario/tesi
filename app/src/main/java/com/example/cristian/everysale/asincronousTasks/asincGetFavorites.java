@@ -55,7 +55,7 @@ public class asincGetFavorites extends AsyncTask<Long, Void, Void> {
             upperLimit = params[0];
         }
         SharedPreferences savedValues = this.context.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        int userId = savedValues.getInt("userId", 0);
+        long userId = savedValues.getLong("userId", 1);
 
         try{
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getFavorites.php?userId=" +

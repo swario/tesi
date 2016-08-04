@@ -49,11 +49,12 @@ public class asincDownloadInsertion extends AsyncTask<Long, Void, Insertion> {
     protected Insertion doInBackground(Long... params) {
 
         long insertionId = params[0];
+        long userId = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE).getLong("userId", 1);
 
         try{
 
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getInsertion.php?insertionId="
-            + String.valueOf(insertionId));
+            + String.valueOf(insertionId) + "&userId=" + String.valueOf(userId));
 
             InputStream inputStream = url.openStream();
 
