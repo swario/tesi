@@ -190,6 +190,7 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     public void setFavorite(boolean isFavorite){
         this.isFavorite = isFavorite;
         if(isFavorite){
+            menu.getItem(0).setTitle("Remove Favorite");
         }
         else{
             menu.getItem(0).setTitle("Add to Favorite");
