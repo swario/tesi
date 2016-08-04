@@ -48,7 +48,6 @@ public class asincAddFavorite extends AsyncTask<Long, Void, String> {
             String response = null;
 
             while((response = reader.readLine())!= null){
-                Log.d("Debug", "Risposta: " + response);
                 stringBuilder.append(response);
                 break;
             }
@@ -61,9 +60,9 @@ public class asincAddFavorite extends AsyncTask<Long, Void, String> {
 
     @Override
     protected void onPostExecute(String result){
-
+        Log.e("Debug", "add" + result);
         if(result.contains("success")){
-
+            activity.setFavorite(true);
         }
         else if(result.contains("fail")){
 

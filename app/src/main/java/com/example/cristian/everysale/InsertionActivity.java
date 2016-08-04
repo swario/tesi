@@ -1,8 +1,10 @@
 package com.example.cristian.everysale;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,14 +19,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.Listeners.MenuListener;
+import com.example.cristian.everysale.asincronousTasks.asincAddFavorite;
 import com.example.cristian.everysale.asincronousTasks.asincDownloadInsertion;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
+import com.example.cristian.everysale.asincronousTasks.asincRemoveFavorite;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +39,11 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
 
     private Insertion insertion;
     private long insertionId;
+    private SharedPreferences savedValues;
+    private boolean isFavorite;
+
+    private Toolbar toolbar;
+    private Menu menu;
 
     private TextView titleTextView;
     private ImageView imageView;
@@ -73,6 +84,10 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         expirationDate = (TextView) findViewById(R.id.item_date2_value);
         description = (TextView) findViewById(R.id.item_description_value);
         listView = (ListView) findViewById(R.id.listView);
+
+        //toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        //setActionBar(toolbar);
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
 
     //favorite
@@ -101,10 +116,14 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
 
         this.insertion = insertion;
         if(this.insertion != null){
+            if (this.insertion.isFavorite()){
+                this.isFavorite = true;
+                menu.getItem(0).setTitle("Remove Favorite");
+            }
             setUpLayout();
         }
         else{
-
+            this.finish();
         }
     }
 
@@ -159,5 +178,44 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         long userId = insertion.getFeedbacks().get(position).getUserId();
+    }
+    //Favorite
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.main_activity_action_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id){
+            case R.id.add_to_favorite_button:
+
+                long userId = savedValues.getLong("userId", 1);
+                if(this.isFavorite){
+                    new asincRemoveFavorite(this).execute(userId, this.insertionId);
+                    break;
+                }
+                else{
+                    new asincAddFavorite(this).execute(userId ,this.insertionId);
+                }
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void setFavorite(boolean isFavorite){
+        this.isFavorite = isFavorite;
+        if(isFavorite){
+            menu.getItem(0).setTitle("Remove Favorite");
+        }
+        else{
+            menu.getItem(0).setTitle("Add to Favorite");
+        }
     }
 }

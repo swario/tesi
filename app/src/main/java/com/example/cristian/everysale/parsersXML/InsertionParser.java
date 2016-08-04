@@ -15,6 +15,7 @@ public class InsertionParser extends DefaultHandler {
     private Feedback feedback;
     private Insertion insertion;
 
+    private boolean isFavorite = false;
     private boolean isInsertion = false;
     private boolean isInsertionId = false;
     private boolean isName = false;
@@ -43,6 +44,10 @@ public class InsertionParser extends DefaultHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes att){
 
+        if(qName.equals("favorite")){
+            isFavorite = true;
+            return;
+        }
         if(qName.equals("insertion")){
             isInsertion = true;
             return;
@@ -128,6 +133,15 @@ public class InsertionParser extends DefaultHandler {
     public void characters(char ch[], int start, int lenght ){
 
         String s = new String(ch, start, lenght);
+        if(isFavorite){
+            isFavorite = false;
+            if(s.equals("yes")){
+                insertion.setFavorite(true);
+            }
+            else{
+                insertion.setFavorite(false);
+            }
+        }
         if(isInsertion){
             isInsertion = false;
             if(s.equals("no such insertion")){

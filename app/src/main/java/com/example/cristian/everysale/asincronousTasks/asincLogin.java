@@ -118,8 +118,8 @@ public class asincLogin extends AsyncTask<String, Void, String> {
             editor.putString("username", this.username);
             editor.putString("password", this.password);
             String[] array = result.split("-");
-            int id = Integer.parseInt(array[1]);
-            editor.putInt("userId", id);
+            long id = Long.parseLong(array[1]);
+            editor.putLong("userId", id);
 
             editor.commit();
 

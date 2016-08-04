@@ -63,7 +63,7 @@ public class asincRemoveFavorite extends AsyncTask<Long, Void, String>{
     protected void onPostExecute(String result){
 
         if(result.contains("success")){
-
+            this.activity.setFavorite(false);
         }
         else if(result.contains("fail")){
 

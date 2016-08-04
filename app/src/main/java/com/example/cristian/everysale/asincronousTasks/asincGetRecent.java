@@ -52,7 +52,7 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
             upperLimit = params[0];
         }
         SharedPreferences savedValues = tabRecentOffers.getContext().getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        int userId = savedValues.getInt("userId", 0);
+        long userId = savedValues.getLong("userId", 0);
 
         try{
             URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/recentInsertion.php?userId=" +
