@@ -3,6 +3,8 @@ package com.example.cristian.everysale;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
@@ -11,7 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
+import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.fragment.viewPagerAdapter;
 
 
@@ -19,7 +24,8 @@ public class Main2Activity extends AppCompatActivity {
 
     private SharedPreferences savedValues;
 
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     Toolbar toolbar;
     ViewPager pager;
@@ -44,8 +50,8 @@ public class Main2Activity extends AppCompatActivity {
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
+        //toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        //setSupportActionBar(toolbar);
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
@@ -73,7 +79,10 @@ public class Main2Activity extends AppCompatActivity {
         pager.setCurrentItem(1);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //drawerLayout.addDrawerListener();
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        MenuListener menuListener = new MenuListener(this, navigationView, drawerLayout);
+        drawerLayout.addDrawerListener(menuListener);
+         navigationView.setNavigationItemSelectedListener(menuListener);
     }
 
 
