@@ -2,12 +2,8 @@ package com.example.cristian.everysale;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,14 +15,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
-import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.asincronousTasks.asincAddFavorite;
 import com.example.cristian.everysale.asincronousTasks.asincDownloadInsertion;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
@@ -90,28 +84,6 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
 
-    //favorite
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.favorite_menu, menu);
-        if (true){
-
-            menu.findItem(R.id.favorite_menu).setIcon(R.drawable.ic_star_outline_24dp);
-        }
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.favorite_menu:
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public void setUpInsertion(Insertion insertion){
 
         this.insertion = insertion;
@@ -119,6 +91,7 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
             if (this.insertion.isFavorite()){
                 this.isFavorite = true;
                 menu.getItem(0).setTitle("Remove Favorite");
+                menu.getItem(0).setIcon(R.drawable.ic_star_24dp);
             }
             setUpLayout();
         }
@@ -179,11 +152,13 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
 
         long userId = insertion.getFeedbacks().get(position).getUserId();
     }
+
+
     //Favorite
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
-        getMenuInflater().inflate(R.menu.main_activity_action_bar, menu);
+        getMenuInflater().inflate(R.menu.set_favorite_action_bar, menu);
         return true;
     }
 
@@ -213,9 +188,11 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         this.isFavorite = isFavorite;
         if(isFavorite){
             menu.getItem(0).setTitle("Remove Favorite");
+            menu.getItem(0).setIcon(R.drawable.ic_star_24dp);
         }
         else{
             menu.getItem(0).setTitle("Add to Favorite");
+            menu.getItem(0).setIcon(R.drawable.ic_star_outline_24dp);
         }
     }
 }
