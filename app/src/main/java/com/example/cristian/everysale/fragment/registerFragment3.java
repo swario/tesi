@@ -51,7 +51,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     private String userChoosenTask;
 
     //image picker
-    private String imgPath;
+    private String imgPath=null;
     private Bitmap bitimg;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     //image picker
@@ -93,10 +93,11 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
         if(imgPath==null) imgPath=savedValues.getString("imgPath",null);
 
+        File imgFile=null;
 
-        File imgFile = new  File(imgPath);
+        if(imgPath!=null)  imgFile = new  File(imgPath);
 
-        if(imgFile.exists()){
+        if(imgFile!=null && imgFile.exists()){
 
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
