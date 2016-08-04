@@ -34,6 +34,11 @@
     <string name="fregister2_item3">Regione</string>
     <string name="fregister2_item4">Città</string>
     <string name="fregister2_item5">Cellulare</string>
+
+    <string name="favorite_menu">add to favorite</string>
+    <string name="defavorite_menu">remove from favorite</string>
+
+
     <string-array name="fregister2_regions_spinner">
         <item>Abruzzo</item>
         <item>Basilicata</item>

@@ -6,6 +6,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -71,6 +73,28 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         expirationDate = (TextView) findViewById(R.id.item_date2_value);
         description = (TextView) findViewById(R.id.item_description_value);
         listView = (ListView) findViewById(R.id.listView);
+    }
+
+    //favorite
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.favorite_menu, menu);
+        if (true){
+
+            menu.findItem(R.id.favorite_menu).setIcon(R.drawable.ic_star_outline_24dp);
+        }
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.favorite_menu:
+                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void setUpInsertion(Insertion insertion){
