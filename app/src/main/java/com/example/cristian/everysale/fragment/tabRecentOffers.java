@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.cristian.everysale.InsertionActivity;
 import com.example.cristian.everysale.Interfaces.ListTab;
@@ -85,6 +86,9 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
+        if(searchResponse == null){
+            Toast.makeText(getContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
+        }
         int oldItemCount = 0;
         refreshLayout.setRefreshing(false);
         if(this.searchResponse == null){

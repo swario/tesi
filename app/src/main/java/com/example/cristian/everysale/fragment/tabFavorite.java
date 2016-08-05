@@ -94,6 +94,9 @@ public class tabFavorite extends ListFragment implements OnRefreshListener, OnSc
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
+        if(searchResponse == null){
+            Toast.makeText(getContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
+        }
         int oldItemCount = 0;
         refreshLayout.setRefreshing(false);
         if(this.searchResponse == null){
