@@ -38,9 +38,20 @@
     <string name="favorite_menu">add to favorite</string>
     <string name="defavorite_menu">remove from favorite</string>
 
-    <!-- Stringhe fragment modifica profilo -->
+    <!-- Stringhe layout modifica profilo -->
     <string name="profile_layout_cancelButton">Annulla</string>
     <string name="profile_layout_submitButton">Aggiorna</string>
+
+    <!-- Stringhe layout crea inserzione  -->
+    <string name="new_insertion_page_name">Nuova inserzione</string>
+    <string name="new_insertion_title">Titolo</string>
+    <string name="new_insertion_price">Prezzo</string>
+    <string name="new_insertion_shop">Negozio</string>
+    <string name="new_insertion_city">Città</string>
+    <string name="new_insertion_address">Indirizzo</string>
+    <string name="new_insertion_expiration_date">Data scadenza</string>
+    <string name="new_insertion_description">Descrizione</string>
+    <string name="new_insertion_submit_button">Carica!</string>
 
 
     <string-array name="fregister2_regions_spinner">
