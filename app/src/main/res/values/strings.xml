@@ -18,6 +18,9 @@
     <string name="menu_new_insertion">Nuova inserzione</string>
     <string name="menu_disconnect">Disconnettiti</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
     <!-- Stringhe fragment di login -->
     <string name="flogin_item1">Username/email</string>
     <string name="flogin_item2">Password</string>
