@@ -38,6 +38,10 @@
     <string name="favorite_menu">add to favorite</string>
     <string name="defavorite_menu">remove from favorite</string>
 
+    <!-- Stringhe fragment modifica profilo -->
+    <string name="profile_layout_cancelButton">Annulla</string>
+    <string name="profile_layout_submitButton">Aggiorna</string>
+
 
     <string-array name="fregister2_regions_spinner">
         <item>Abruzzo</item>
