@@ -4,7 +4,6 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,74 +22,31 @@
                 android:textSize="40dp"
                 android:textColor="@color/colorText"/>
 
-            <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/userRating_RatingBar"
-                android:layout_below="@+id/usernameTextView"
-                android:layout_alignParentLeft="true"
-                android:paddingBottom="20dp"
-                android:numStars="5" />
 
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/profileImage_mageView"
-                android:layout_below="@+id/userRating_RatingBar"
+                android:layout_below="@+id/usernameTextView"
                 android:layout_centerHorizontal="true"
                 android:paddingBottom="20dp"
                 android:background="#d42626" />
 
-            <TextView
+            <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fregister2_item1"
-                android:id="@+id/nomeTextView"
+                android:id="@+id/userRating_RatingBar"
                 android:layout_below="@+id/profileImage_mageView"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/colorText"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/showNameTextView"
-                android:layout_below="@+id/nomeTextView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/colorText"
-                android:paddingBottom="20dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fregister2_item2"
-                android:id="@+id/cognomeTextView"
-                android:layout_below="@+id/showNameTextView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/colorText"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/showSurnameTextView"
-                android:layout_below="@+id/cognomeTextView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/colorText"
-                android:paddingBottom="20dp" />
+                android:paddingBottom="20dp"
+                android:numStars="5" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fregister2_item3"
                 android:id="@+id/regioneTextView"
-                android:layout_below="@+id/showSurnameTextView"
+                android:layout_below="@+id/userRating_RatingBar"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textSize="@dimen/text_size"
@@ -132,9 +88,53 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/fregister2_item1"
+                android:id="@+id/nomeTextView"
+                android:layout_below="@+id/showCityTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/colorText"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/showNameTextView"
+                android:layout_below="@+id/nomeTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/colorText"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fregister2_item2"
+                android:id="@+id/cognomeTextView"
+                android:layout_below="@+id/showNameTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/colorText"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/showSurnameTextView"
+                android:layout_below="@+id/cognomeTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/colorText"
+                android:paddingBottom="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/fregister2_item5"
                 android:id="@+id/cellulareTextView"
-                android:layout_below="@+id/showCityTextView"
+                android:layout_below="@+id/showSurnameTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textSize="@dimen/text_size"
@@ -162,6 +162,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 style="@style/Button"  />
+
+
 
         </RelativeLayout>
 
