@@ -1,17 +1,9 @@
 package com.example.cristian.everysale.Fragments;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -23,18 +15,10 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.cristian.everysale.AsyncronousTasks.asincRegister;
+import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
 import com.example.cristian.everysale.BaseClasses.imagePicker.Utility;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.AsyncronousTasks.asincRegister;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import static com.example.cristian.everysale.BaseClasses.getFilePath.getFilePath;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
 
@@ -48,15 +32,12 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     private CheckBox dataAllowCheckbox;
     private SharedPreferences savedValues;
     private ImageView ivImage=null;
-    private String userChoosenTask;
 
     //image picker
     private String imgPath=null;
-    private Bitmap bitimg;
-    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     //image picker
 
-    //private ImagePicker prova;
+    private Utility bitmapConverter=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,6 +61,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         view.findViewById(R.id.backButton).setOnClickListener(this);
         view.findViewById(R.id.registerSubmitButton).setOnClickListener(this);
 
+
+
         return view;
     }
 
@@ -87,25 +70,14 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     @Override
     public void onResume(){
         super.onResume();
-        if(savedValues.getInt("dataAllowCheckBox",0)==0){
+        if(savedValues.getInt("dataAllowCheckBox", 0)==0){
             dataAllowCheckbox.setChecked(false);
         }else if (savedValues.getInt("dataAllowCheckBox", 0) == 1){
             dataAllowCheckbox.setChecked(true);
         }
-
-        if(imgPath==null) imgPath=savedValues.getString("imgPath",null);
-
-        File imgFile=null;
-
-        if(imgPath!=null)  imgFile = new  File(imgPath);
-
-        if(imgFile!=null && imgFile.exists()){
-
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-            ivImage.setImageBitmap(myBitmap);
-
-        }
+        imgPath=savedValues.getString("imgPath",null);
+        Utility utility=new Utility();
+        ivImage.setImageBitmap(utility.getBitmap(imgPath));
         //Toast.makeText(getContext(),"onresume  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
         //a noi piace
     }
@@ -131,8 +103,12 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
             case R.id.imageButton:
                 // capture picture
-                selectImage();
-
+                Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
+                startActivity(intent);
+                //Toast.makeText(getContext(),"ongallery  " + imgPath , Toast.LENGTH_LONG).show();
+                bitmapConverter=new Utility();
+                imgPath=savedValues.getString("imgPath",null);
+                ivImage.setImageBitmap(bitmapConverter.getBitmap(imgPath));
                 break;
 
             case R.id.backButton:
@@ -213,131 +189,6 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 break;
         }
     }
-
-    //image picker2
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(userChoosenTask.equals("Scatta foto"))
-                        cameraIntent();
-                    else if(userChoosenTask.equals("Scegli dalla Galleria"))
-                        galleryIntent();
-                } else {
-                    //code for deny
-                }
-                break;
-        }
-    }
-
-    private void selectImage() {
-        final CharSequence[] items = { "Scatta foto", "Scegli dalla Galleria",
-                "Annulla" };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Aggiungi foto!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(getActivity());
-
-                if (items[item].equals("Scatta foto")) {
-                    userChoosenTask = "Scatta foto";
-                    if (result)
-                        cameraIntent();
-
-                } else if (items[item].equals("Scegli dalla Galleria")) {
-                    userChoosenTask = "Scegli dalla Galleria";
-                    if (result)
-                        galleryIntent();
-
-                } else if (items[item].equals("Annulla")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
-
-    private void galleryIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Seleziona File"), SELECT_FILE);
-    }
-
-    private void cameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
-        }
-    }
-
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-
-        File destination = new File(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DCIM+"/",
-                System.currentTimeMillis() + ".jpg");
-
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        ivImage.setImageBitmap(thumbnail);
-        bitimg=thumbnail;
-        imgPath = destination.getAbsolutePath();
-        //Toast.makeText(getContext(), "oncaptureimgres  " +imgPath , Toast.LENGTH_LONG).show();
-
-    }
-
-    @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
-
-        Bitmap bm=null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        try {
-            imgPath=getFilePath(getContext(),data.getData());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        //Toast.makeText(getContext(),"ongallery  " + imgPath , Toast.LENGTH_LONG).show();
-
-        ivImage.setImageBitmap(bm);
-        bitimg=bm;
-    }
-
-
-    //end image picke2
-
 
     private int getCitySpinner(int region){
 

@@ -12,13 +12,15 @@
         android:paddingBottom="20dp">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/item_image"
             android:id="@+id/imageView1"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="42dp"
-            android:background="#7d2e2e" />
+            android:layout_marginTop="42dp" />
 
         <Button
             android:layout_width="wrap_content"

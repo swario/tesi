@@ -2,12 +2,9 @@ package com.example.cristian.everysale.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -16,12 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.cristian.everysale.Activity.Main2Activity;
-import com.example.cristian.everysale.Fragments.registerFragment1;
-import com.example.cristian.everysale.Fragments.registerFragment3;
 import com.example.cristian.everysale.R;
 
 public class ModifyProfileActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {

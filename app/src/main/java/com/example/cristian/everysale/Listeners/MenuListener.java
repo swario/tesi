@@ -12,8 +12,8 @@ import android.view.View;
 
 import com.example.cristian.everysale.Activity.Main2Activity;
 import com.example.cristian.everysale.Activity.ModifyProfileActivity;
-import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.Activity.StartActivity;
+import com.example.cristian.everysale.R;
 
 public class MenuListener implements DrawerListener, OnNavigationItemSelectedListener {
 
