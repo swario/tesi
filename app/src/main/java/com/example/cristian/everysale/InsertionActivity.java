@@ -35,6 +35,7 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     private long insertionId;
     private SharedPreferences savedValues;
     private boolean isFavorite;
+    private boolean isEvaluated;
 
     private Toolbar toolbar;
     private Menu menu;
@@ -92,6 +93,16 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
                 this.isFavorite = true;
                 menu.getItem(1).setTitle("Remove Favorite");
                 menu.getItem(1).setIcon(R.drawable.ic_star_24dp);
+            }
+            long id = getSharedPreferences("SavedValues", MODE_PRIVATE).getLong("userId", 1);
+
+            if(this.insertion.getInsertionist_id() == id) {
+                menu.getItem(0).setTitle("Cancella");
+                menu.getItem(0).setIcon(R.drawable.ic_delete_24dp);
+            }
+            else if (this.insertion.isEvaluated()){
+                    this.isEvaluated = true;
+                    menu.getItem(0).setVisible(false);
             }
             setUpLayout();
         }
