@@ -96,20 +96,20 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         if(this.searchResponse == null){
             this.searchResponse = searchResponse;
         } else {
-            oldItemCount = searchResponse.getInsertionCount();
+            oldItemCount = this.searchResponse.getInsertionCount();
             this.searchResponse.merge(searchResponse);
         }
-        if(oldItemCount == searchResponse.getInsertionCount()){
+        if(oldItemCount == this.searchResponse.getInsertionCount()){
             thereIsMore = false;
         }
-        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
         setListView();
-        if( (itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1))
-                && thereIsMore){
-            long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
+        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
+            long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
             new asincGetRecent(this).execute(upperLimit);
         }
+        Log.e("Debug", String.valueOf(oldItemCount));
         if(oldItemCount != 0){
+
             itemsListView.smoothScrollToPosition(oldItemCount - 1);
         }
     }
