@@ -262,5 +262,6 @@
     <string name="item_feedback">Feedback</string>
 
     <string name="start_activity">Login in corso</string>
+    <string name="menu_search">search</string>
 
 </resources>
