@@ -38,6 +38,9 @@
         <activity android:name=".Activity.ModifyProfileActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
+        <activity android:name=".BaseClasses.imagePicker.ImagePickerActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
