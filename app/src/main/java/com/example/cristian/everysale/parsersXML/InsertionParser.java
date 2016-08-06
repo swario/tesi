@@ -19,6 +19,7 @@ public class InsertionParser extends DefaultHandler {
     private boolean isInsertion = false;
     private boolean isInsertionId = false;
     private boolean isName = false;
+    private boolean isEvaluated = false;
     private boolean isPrice = false;
     private boolean isCity = false;
     private boolean isAddress = false;
@@ -58,6 +59,10 @@ public class InsertionParser extends DefaultHandler {
         }
         if(qName.equals("insertionName")){
             isName = true;
+            return;
+        }
+        if(qName.equals("evaluated")){
+            isEvaluated = true;
             return;
         }
         if(qName.equals("price")){
@@ -179,6 +184,14 @@ public class InsertionParser extends DefaultHandler {
         if(isInsertionistName){
             isInsertionistName = false;
             insertion.setInsertionist_name(s);
+        }
+        if(isEvaluated){
+            isEvaluated = false;
+            if(s.equals("yes")){
+                insertion.setEvaluated(true);
+            }else {
+                insertion.setEvaluated(false);
+            }
         }
         if(isRate){
             isRate = false;
