@@ -112,7 +112,7 @@ public class tabFavorite extends ListFragment implements OnRefreshListener, OnSc
         } else {//altrimenti, significa che c'è già della roba, quindi faccio il merge
             oldItemCount = this.searchResponse.getInsertionCount();
             this.searchResponse.merge(searchResponse);
-            if(oldItemCount == searchResponse.getInsertionCount()) {// se non è cambiato nulla, significa che non cè nulla da scaricare
+            if(oldItemCount == this.searchResponse.getInsertionCount()) {// se non è cambiato nulla, significa che non cè nulla da scaricare
                 thereIsMore = false;
             }
         }

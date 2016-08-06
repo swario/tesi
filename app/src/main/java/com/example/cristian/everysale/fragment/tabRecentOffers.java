@@ -109,7 +109,6 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         }
         Log.e("Debug", String.valueOf(oldItemCount));
         if(oldItemCount != 0){
-
             itemsListView.smoothScrollToPosition(oldItemCount - 1);
         }
     }
