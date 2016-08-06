@@ -1,13 +1,19 @@
 package com.example.cristian.everysale.BaseClasses.imagePicker;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.cristian.everysale.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,30 +24,29 @@ import java.net.URISyntaxException;
 
 import static com.example.cristian.everysale.BaseClasses.getFilePath.getFilePath;
 
-/**
- * Created by Cristian on 06/08/2016.
- */
-public class ImagePicker {
-    //image picker
-    private String imgPath=null;
-    private Bitmap bitimg;
+public class ImagePickerActivity extends AppCompatActivity {
+
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    private Activity activity=null;
     private String userChoosenTask;
-    //image picker
+    private SharedPreferences savedValues;
+    private String imgPath=null;
 
-    ImagePicker(Activity activityPassed){
-        activity = activityPassed;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_image_picker);
+        savedValues = this.getSharedPreferences("SavedValues", this.MODE_PRIVATE);
+        selectImage();
     }
-    //image picker2
 
+    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(userChoosenTask.equals("Scatta foto"))
+                    if(userChoosenTask.equals("Take Photo"))
                         cameraIntent();
-                    else if(userChoosenTask.equals("Scegli dalla Galleria"))
+                    else if(userChoosenTask.equals("Choose from Library"))
                         galleryIntent();
                 } else {
                     //code for deny
@@ -54,12 +59,12 @@ public class ImagePicker {
         final CharSequence[] items = { "Scatta foto", "Scegli dalla Galleria",
                 "Annulla" };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ImagePickerActivity.this);
         builder.setTitle("Aggiungi foto!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(activity);
+                boolean result = Utility.checkPermission(ImagePickerActivity.this);
 
                 if (items[item].equals("Scatta foto")) {
                     userChoosenTask = "Scatta foto";
@@ -79,20 +84,23 @@ public class ImagePicker {
         builder.show();
     }
 
-    private void galleryIntent() {
+    private void galleryIntent()
+    {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        activity.startActivityForResult(Intent.createChooser(intent, "Seleziona File"), SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, "seleziona file"),SELECT_FILE);
     }
 
-    private void cameraIntent() {
+    private void cameraIntent()
+    {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        activity.startActivityForResult(intent, REQUEST_CAMERA);
+        startActivityForResult(intent, REQUEST_CAMERA);
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE)
@@ -100,6 +108,7 @@ public class ImagePicker {
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
         }
+        this.finish();
     }
 
     private void onCaptureImageResult(Intent data) {
@@ -122,10 +131,10 @@ public class ImagePicker {
             e.printStackTrace();
         }
 
-        bitimg=thumbnail;
         imgPath = destination.getAbsolutePath();
-        //Toast.makeText(getContext(), "oncaptureimgres  " +imgPath , Toast.LENGTH_LONG).show();
-
+        savedValues.edit().putString("imgPath", imgPath).commit();
+        //Toast.makeText(this, "capture  " + imgPath, Toast.LENGTH_LONG).show();
+        this.finish();
     }
 
     @SuppressWarnings("deprecation")
@@ -134,23 +143,23 @@ public class ImagePicker {
         Bitmap bm=null;
         if (data != null) {
             try {
-                bm = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), data.getData());
+                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
         try {
-            imgPath=getFilePath(activity,data.getData());
+            imgPath=getFilePath(getApplicationContext(),data.getData());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        //Toast.makeText(getContext(),"ongallery  " + imgPath , Toast.LENGTH_LONG).show();
 
-        bitimg=bm;
+        savedValues.edit().putString("imgPath", imgPath).commit();
+        //Toast.makeText(this, "ongallery  " + imgPath, Toast.LENGTH_LONG).show();
+        this.finish();
+
     }
 
-
-    //end image picke2
-
 }
+
+
