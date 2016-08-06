@@ -89,7 +89,7 @@ public class CustomAdapter extends BaseAdapter{
             holder.title.setEnabled(false);
             holder.title.setText(title.next());
             holder.title.setEnabled(true);
-            String number = new DecimalFormat("#.##").format(Double.parseDouble(price.next()));
+            String number = new DecimalFormat("0.00").format(Double.parseDouble(price.next()));
             holder.price.setText(number + " €");
             holder.city.setText(city.next());
             holder.rating.setMax(5);

@@ -100,6 +100,7 @@ public class InsertionDisplayFragment extends Fragment implements View.OnClickLi
         if(this.insertion != null){
             if (this.insertion.isFavorite()){
                 this.isFavorite = true;
+                this.activity.setFavorite(true);
                 menu.getItem(1).setTitle("Remove Favorite");
                 menu.getItem(1).setIcon(R.drawable.ic_star_24dp);
             }

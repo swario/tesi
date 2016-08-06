@@ -38,25 +38,6 @@
     <string name="fregister2_item4">Città</string>
     <string name="fregister2_item5">Cellulare</string>
 
-    <string name="favorite_menu">add to favorite</string>
-    <string name="defavorite_menu">remove from favorite</string>
-
-    <!-- Stringhe layout modifica profilo -->
-    <string name="profile_layout_cancelButton">Annulla</string>
-    <string name="profile_layout_submitButton">Aggiorna</string>
-
-    <!-- Stringhe layout crea inserzione  -->
-    <string name="new_insertion_page_name">Nuova inserzione</string>
-    <string name="new_insertion_title">Titolo</string>
-    <string name="new_insertion_price">Prezzo</string>
-    <string name="new_insertion_shop">Negozio</string>
-    <string name="new_insertion_city">Città</string>
-    <string name="new_insertion_address">Indirizzo</string>
-    <string name="new_insertion_expiration_date">Data scadenza</string>
-    <string name="new_insertion_description">Descrizione</string>
-    <string name="new_insertion_submit_button">Carica!</string>
-
-
     <string-array name="fregister2_regions_spinner">
         <item>Abruzzo</item>
         <item>Basilicata</item>
@@ -79,12 +60,14 @@
         <item>Valle d\'Aosta</item>
         <item>Veneto</item>
     </string-array>
+
     <string-array name="fregister2_region0_spinner">
         <item>Chieti</item>
         <item>L\'Aquila</item>
         <item>Pescara</item>
         <item>Teramo</item>
     </string-array>
+
     <string-array name="fregister2_region1_spinner">
         <item>Matera</item>
         <item>Potenza</item>
@@ -96,6 +79,7 @@
         <item>Reggio di Calabria</item>
         <item>Vibo Valentia</item>
     </string-array>
+
     <string-array name="fregister2_region3_spinner">
         <item>Avellino</item>
         <item>Benevento</item>
@@ -103,6 +87,7 @@
         <item>Napoli</item>
         <item>Salerno</item>
     </string-array>
+
     <string-array name="fregister2_region4_spinner">
         <item>Bologna</item>
         <item>Ferrara</item>
@@ -114,12 +99,14 @@
         <item>Reggio nell\'Emilia</item>
         <item>Rimini</item>
     </string-array>
+
     <string-array name="fregister2_region5_spinner">
         <item>Gorizia</item>
         <item>Pordenone</item>
         <item>Trieste</item>
         <item>Udine</item>
     </string-array>
+
     <string-array name="fregister2_region6_spinner">
         <item>Frosinone</item>
         <item>Latina</item>
@@ -127,12 +114,14 @@
         <item>Roma</item>
         <item>Viterbo</item>
     </string-array>
+
     <string-array name="fregister2_region7_spinner">
         <item>Genova</item>
         <item>Imperia</item>
         <item>La Spezia</item>
         <item>Savona</item>
     </string-array>
+
     <string-array name="fregister2_region8_spinner">
         <item>Bergamo</item>
         <item>Brescia</item>
@@ -147,6 +136,7 @@
         <item>Sondrio</item>
         <item>Varese</item>
     </string-array>
+
     <string-array name="fregister2_region9_spinner">
         <item>Ancona</item>
         <item>Ascoli Piceno</item>
@@ -154,10 +144,12 @@
         <item>Macerata</item>
         <item>Pesaro e Urbino</item>
     </string-array>
+
     <string-array name="fregister2_region10_spinner">
         <item>Campobasso</item>
         <item>Isernia</item>
     </string-array>
+
     <string-array name="fregister2_region11_spinner">
         <item>Alessandria</item>
         <item>Asti</item>
@@ -168,6 +160,7 @@
         <item>Verbano-Cusio-Ossola</item>
         <item>Vercelli</item>
     </string-array>
+
     <string-array name="fregister2_region12_spinner">
         <item>Bari</item>
         <item>Barletta-Andria-Trani</item>
@@ -176,6 +169,7 @@
         <item>Lecce</item>
         <item>Taranto</item>
     </string-array>
+
     <string-array name="fregister2_region13_spinner">
         <item>Cagliari</item>
         <item>Carbonia-Iglesias</item>
@@ -186,6 +180,7 @@
         <item>Oristano</item>
         <item>Sassari</item>
     </string-array>
+
     <string-array name="fregister2_region14_spinner">
         <item>Agrigento</item>
         <item>Caltanissetta</item>
@@ -197,6 +192,7 @@
         <item>Siracusa</item>
         <item>Trapani</item>
     </string-array>
+
     <string-array name="fregister2_region15_spinner">
         <item>Arezzo</item>
         <item>Firenze</item>
@@ -209,17 +205,21 @@
         <item>Prato</item>
         <item>Siena</item>
     </string-array>
+
     <string-array name="fregister2_region16_spinner">
         <item>Bolzano</item>
         <item>Trento</item>
     </string-array>
+
     <string-array name="fregister2_region17_spinner">
         <item>Perugia</item>
         <item>Terni</item>
     </string-array>
+
     <string-array name="fregister2_region18_spinner">
         <item>Valle d\'Aosta</item>
     </string-array>
+
     <string-array name="fregister2_region19_spinner">
         <item>Belluno</item>
         <item>Padova</item>
@@ -266,5 +266,23 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="favorite_menu">add to favorite</string>
+    <string name="defavorite_menu">remove from favorite</string>
+
+    <!-- Stringhe layout modifica profilo -->
+    <string name="profile_layout_cancelButton">Annulla</string>
+    <string name="profile_layout_submitButton">Aggiorna</string>
+
+    <!-- Stringhe layout crea inserzione  -->
+    <string name="new_insertion_page_name">Nuova inserzione</string>
+    <string name="new_insertion_title">Titolo</string>
+    <string name="new_insertion_price">Prezzo</string>
+    <string name="new_insertion_shop">Negozio</string>
+    <string name="new_insertion_city">Città</string>
+    <string name="new_insertion_address">Indirizzo</string>
+    <string name="new_insertion_expiration_date">Data scadenza</string>
+    <string name="new_insertion_description">Descrizione</string>
+    <string name="new_insertion_submit_button">Crea</string>
 
 </resources>

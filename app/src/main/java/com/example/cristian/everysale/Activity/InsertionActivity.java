@@ -22,6 +22,7 @@ import android.widget.Toolbar;
 import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.Fragments.InsertionDisplayFragment;
+import com.example.cristian.everysale.Fragments.evaluateInsertionFragment;
 import com.example.cristian.everysale.Fragments.loginFragment;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.AsyncronousTasks.asincAddFavorite;
@@ -40,6 +41,7 @@ public class InsertionActivity extends AppCompatActivity  {
     public Menu menu;
     private SharedPreferences savedValues;
     private Boolean isFavorite = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,8 @@ public class InsertionActivity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
         getMenuInflater().inflate(R.menu.insertion_menu_action_bar, menu);
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new InsertionDisplayFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new InsertionDisplayFragment(), "displayFragment")
+                .commit();
         return true;
     }
 
@@ -79,9 +82,9 @@ public class InsertionActivity extends AppCompatActivity  {
                     new asincAddFavorite(this).execute(userId ,this.insertionId);
                 }
                 break;
-
             case R.id.rate_insertion_button:
-                Toast.makeText(this, "cazzi", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag("displayFragment"))
+                        .add(R.id.frame_container, new evaluateInsertionFragment()).addToBackStack(null).commit();
                 break;
 
             default:
