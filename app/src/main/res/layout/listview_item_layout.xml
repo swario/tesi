@@ -67,6 +67,7 @@
         android:progressTintMode="src_in"
         android:layout_alignBottom="@+id/item_icon"
         android:layout_toRightOf="@+id/item_icon"
-        android:layout_toEndOf="@+id/item_icon" />
+        android:layout_toEndOf="@+id/item_icon"
+        android:clickable="false" />
 
 </RelativeLayout>
