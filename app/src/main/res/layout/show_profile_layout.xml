@@ -18,8 +18,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:paddingBottom="10dp"
-                android:textSize="40dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="40sp"
                 android:textColor="@color/colorText"/>
 
 
@@ -27,19 +27,23 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/profileImage_mageView"
+                android:contentDescription="@string/item_image"
                 android:layout_below="@+id/usernameTextView"
                 android:layout_centerHorizontal="true"
-                android:paddingBottom="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="#d42626" />
 
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/userRating_RatingBar"
+                android:numStars="5"
+                android:stepSize="0.1"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_below="@+id/profileImage_mageView"
                 android:layout_alignParentLeft="true"
                 android:paddingBottom="20dp"
-                android:numStars="5" />
+                android:clickable="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -150,20 +154,6 @@
                 android:textSize="@dimen/text_size"
                 android:textColor="@color/colorText"
                 android:paddingBottom="20dp"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fregister_backButton"
-                android:id="@+id/backButton"
-                android:layout_below="@+id/showPhonenumberTextView"
-                android:layout_marginBottom="20dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                style="@style/Button"  />
-
-
 
         </RelativeLayout>
 
