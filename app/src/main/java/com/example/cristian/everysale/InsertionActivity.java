@@ -90,8 +90,8 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         if(this.insertion != null){
             if (this.insertion.isFavorite()){
                 this.isFavorite = true;
-                menu.getItem(0).setTitle("Remove Favorite");
-                menu.getItem(0).setIcon(R.drawable.ic_star_24dp);
+                menu.getItem(1).setTitle("Remove Favorite");
+                menu.getItem(1).setIcon(R.drawable.ic_star_24dp);
             }
             setUpLayout();
         }
@@ -167,7 +167,6 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
         int id = item.getItemId();
         switch(id){
             case R.id.add_to_favorite_button:
-
                 long userId = savedValues.getLong("userId", 1);
                 if(this.isFavorite){
                     new asincRemoveFavorite(this).execute(userId, this.insertionId);
@@ -176,6 +175,11 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
                 else{
                     new asincAddFavorite(this).execute(userId ,this.insertionId);
                 }
+                break;
+
+            case R.id.rate_insertion_button:
+                Toast.makeText(this, "cazzi", Toast.LENGTH_LONG).show();
+                break;
 
             default:
                 break;
@@ -187,12 +191,12 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     public void setFavorite(boolean isFavorite){
         this.isFavorite = isFavorite;
         if(isFavorite){
-            menu.getItem(0).setTitle("Remove Favorite");
-            menu.getItem(0).setIcon(R.drawable.ic_star_24dp);
+            menu.getItem(1).setTitle("Remove Favorite");
+            menu.getItem(1).setIcon(R.drawable.ic_star_24dp);
         }
         else{
-            menu.getItem(0).setTitle("Add to Favorite");
-            menu.getItem(0).setIcon(R.drawable.ic_star_outline_24dp);
+            menu.getItem(1).setTitle("Add to Favorite");
+            menu.getItem(1).setIcon(R.drawable.ic_star_outline_24dp);
         }
     }
 }
