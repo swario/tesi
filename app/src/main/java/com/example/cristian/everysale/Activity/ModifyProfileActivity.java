@@ -1,4 +1,4 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.cristian.everysale.Activity.Main2Activity;
 import com.example.cristian.everysale.Fragments.registerFragment1;
 import com.example.cristian.everysale.Fragments.registerFragment3;
+import com.example.cristian.everysale.R;
 
 public class ModifyProfileActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
 
@@ -82,7 +83,7 @@ public class ModifyProfileActivity extends AppCompatActivity implements OnClickL
                 break;
 
             case R.id.modifyUpdateButton:
-                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                //getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 break;
             case R.id.modifyImageButton:
 

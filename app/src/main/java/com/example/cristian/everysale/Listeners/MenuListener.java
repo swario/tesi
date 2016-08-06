@@ -15,9 +15,6 @@ import com.example.cristian.everysale.Activity.ModifyProfileActivity;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.Activity.StartActivity;
 
-/**
- * Created by Giorgiboy on 04/08/2016.
- */
 public class MenuListener implements DrawerListener, OnNavigationItemSelectedListener {
 
     private Activity activity;

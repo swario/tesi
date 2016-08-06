@@ -56,7 +56,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     //image picker
 
-    private ImagePicker prova;
+    //private ImagePicker prova;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -104,7 +104,7 @@ public class InsertionDisplayFragment extends Fragment implements View.OnClickLi
                 menu.getItem(1).setTitle("Remove Favorite");
                 menu.getItem(1).setIcon(R.drawable.ic_star_24dp);
             }
-            long id = getActivity().getSharedPreferences("SavedValues", getContext().MODE_PRIVATE).getLong("userId", 1);
+            long id = savedValues.getLong("userId", 1);
 
             if(this.insertion.getInsertionist_id() == id) {
                 menu.getItem(0).setTitle("Cancella");
