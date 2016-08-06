@@ -94,6 +94,7 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
 
     protected void onPostExecute(Void result){
 
+        Log.e("Debug", String.valueOf(this.searchResponse.getInsertionCount()));
         tabRecentOffers.setSearchResponse(searchResponse);
     }
 }

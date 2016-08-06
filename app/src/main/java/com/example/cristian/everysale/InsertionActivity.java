@@ -158,7 +158,7 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
-        getMenuInflater().inflate(R.menu.set_favorite_action_bar, menu);
+        getMenuInflater().inflate(R.menu.insertion_menu_action_bar, menu);
         return true;
     }
 
