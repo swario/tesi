@@ -135,6 +135,10 @@ public class InsertionActivity extends AppCompatActivity implements OnClickListe
     private void FeedBackSetUp(){
 
         ArrayList<Feedback> feedbacks = insertion.getFeedbacks();
+        if(feedbacks.size() == 0){
+            ((TextView) findViewById(R.id.item_feedback)).setText("Non ci sono feedback");
+            return;
+        }
         ArrayList<HashMap<String, String>> data = new ArrayList<>();
 
         for(int i = 0; i < feedbacks.size(); i++){
