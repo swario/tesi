@@ -18,7 +18,8 @@
         android:textSize="25sp" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/feedbackEditText"
         android:layout_below="@+id/feedbackTextView"
@@ -33,6 +34,7 @@
         android:numStars="5"
         android:stepSize="0.1"
         android:max="5"
+        android:progressTint="@color/ratingBarColor"
         android:layout_below="@+id/feedbackEditText"
         android:layout_alignRight="@+id/feedbackTextView"
         android:layout_alignEnd="@+id/feedbackTextView"
@@ -42,7 +44,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5"
         android:id="@+id/feedbackRateTextView"
         android:layout_alignTop="@+id/feedbackRatingBar"
         android:layout_alignLeft="@+id/feedbackTextView"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,11 +49,12 @@ public class InsertionActivity extends AppCompatActivity  {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bundle = savedInstanceState;
         setContentView(R.layout.activity_insertion);
         Intent intent = getIntent();
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
@@ -95,8 +98,13 @@ public class InsertionActivity extends AppCompatActivity  {
                 }
                 break;
             case R.id.rate_insertion_button:
-                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag("displayFragment"))
-                        .add(R.id.frame_container, new evaluateInsertionFragment()).addToBackStack(null).commit();
+                View box=getSupportFragmentManager().findFragmentByTag("displayFragment").getView().findViewById(R.id.feedback_box);
+                if(box.getVisibility()==View.GONE){
+                    box.setVisibility(View.VISIBLE);
+                }
+                else if(box.getVisibility()==View.VISIBLE){
+                    box.setVisibility(View.GONE);
+                }
                 break;
 
             default:

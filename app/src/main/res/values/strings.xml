@@ -284,7 +284,7 @@
     <string name="new_insertion_description">Descrizione</string>
     <string name="new_insertion_submit_button">Crea</string>
 
-    <string name="feedback">Lascia un commento di feedback ed una valutazione</string>
+    <string name="feedback">Lascia un commento di feedback ed una valutazione da 1 a 5</string>
     <string name="feedback_button">Invia</string>
 
 </resources>
