@@ -96,7 +96,8 @@ public class Main2Activity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main2_drawer, menu);
+        // Non bisogna fare l'inflate di questo menu perchè altrimenti
+        //getMenuInflater().inflate(R.menu.activity_main2_drawer, menu);
         return true;
     }
 
@@ -142,10 +143,5 @@ public class Main2Activity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return false;
     }
 }

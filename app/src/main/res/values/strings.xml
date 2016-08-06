@@ -5,8 +5,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="search_icon">Cerca</string>
-    <string name="action_settings">Settings</string>
 
     <string name="registrati">Registrati</string>
     <string name="login">Accedi</string>
@@ -252,6 +250,7 @@
     <string name="item_price">Prezzo</string>
     <string name="item_city">Città</string>
     <string name="item_rating">Rating</string>
+
     <!-- stringhe aggiuntive per l'inserzione generica -->
     <string name="item_address">Indirizzo</string>
     <string name="item_shop">Negozio</string>
