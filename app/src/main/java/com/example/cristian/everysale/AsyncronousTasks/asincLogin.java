@@ -8,6 +8,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,6 +105,7 @@ public class asincLogin extends AsyncTask<String, Void, String> {
         else if(result.contains("No address associated with hostname")) {
             if(loadingBar != null) {
                 ((TextView) activity.findViewById(R.id.loading_text_view)).setText("Connessione Internet Assente");
+                ((Button) activity.findViewById(R.id.retry_button)).setVisibility(View.VISIBLE);
             }
             else {
                 Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
