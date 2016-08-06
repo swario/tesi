@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.fragment.viewPagerAdapter;
@@ -131,6 +132,8 @@ public class Main2Activity extends AppCompatActivity {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                TextView name = (TextView) findViewById(R.id.nav_header_username);
+                name.setText(savedValues.getString("username", "ulisse rimane comunque il piu bello"));
             }
 
             /**
@@ -143,6 +146,7 @@ public class Main2Activity extends AppCompatActivity {
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
     }
 
     @Override
