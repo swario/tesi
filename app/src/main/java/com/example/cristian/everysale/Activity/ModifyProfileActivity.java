@@ -1,9 +1,13 @@
-package com.example.cristian.everysale.Activity;
+package com.example.cristian.everysale;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -15,7 +19,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cristian.everysale.R;
+import com.example.cristian.everysale.Activity.Main2Activity;
+import com.example.cristian.everysale.Fragments.registerFragment1;
+import com.example.cristian.everysale.Fragments.registerFragment3;
 
 public class ModifyProfileActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
 
@@ -30,6 +36,7 @@ public class ModifyProfileActivity extends AppCompatActivity implements OnClickL
     private EditText mobileEditText;
     private CheckBox dataAllowCheckbox;
     private ImageView insertionImageView;
+    private Button imageButton;
     private Button cancelButton;
     private Button updateButton;
 
@@ -51,14 +58,38 @@ public class ModifyProfileActivity extends AppCompatActivity implements OnClickL
         mobileEditText = (EditText) findViewById(R.id.modifyMobileEditText);
         dataAllowCheckbox = (CheckBox) findViewById(R.id.modifyDataAllowCheckBox);
         insertionImageView = (ImageView) findViewById(R.id.modifyInsertionImageView);
+        imageButton = (Button) findViewById(R.id.imageButton);
         cancelButton = (Button) findViewById(R.id.modifyCancelButton);
         updateButton = (Button) findViewById(R.id.modifyUpdateButton);
+
+        //setto listener
+        regionSpinner.setOnItemSelectedListener(this);
+        citySpinner.setOnItemSelectedListener(this);
+        findViewById(R.id.modifyImageButton).setOnClickListener(this);
+        findViewById(R.id.modifyCancelButton).setOnClickListener(this);
+        findViewById(R.id.modifyUpdateButton).setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()){
+            case R.id.modifyCancelButton:
+                Intent backHome = new Intent(this, Main2Activity.class);
+                startActivity(backHome);
+                this.finish();
+                break;
+
+            case R.id.modifyUpdateButton:
+                getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                break;
+            case R.id.modifyImageButton:
+
+        }
+
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         setCitySpinner();
