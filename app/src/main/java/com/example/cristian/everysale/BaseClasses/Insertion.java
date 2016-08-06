@@ -7,6 +7,7 @@ public class Insertion {
     private boolean isFavorite;
     private long insertion_id;
     private String name;
+    private boolean evaluated;
     private float price;
     private String city;
     private String address;
@@ -50,6 +51,7 @@ public class Insertion {
     public void setFavorite(boolean isFavorite){this.isFavorite = isFavorite;}
     public void setInsertion_id(long insertion_id){ this.insertion_id = insertion_id; }
     public void setName(String name) { this.name = name;}
+    public void setEvaluated(boolean evaluated){ this.evaluated = evaluated;}
     public void setPrice(float price) { this.price = price;}
     public void setCity(String city) { this.city = city; }
     public void setAddress(String address) { this.address = address; }
@@ -65,6 +67,7 @@ public class Insertion {
     public boolean isFavorite(){ return isFavorite;}
     public long getInsertion_id() { return  insertion_id; }
     public String getName() { return  name; }
+    public boolean isEvaluated(){return evaluated;}
     public float getPrice(){ return  price; }
     public String getCity(){ return city; }
     public String getAddress() { return address; }

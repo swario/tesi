@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:nestedScrollingEnabled="true">
+    android:nestedScrollingEnabled="true"
+    android:fillViewport="false">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,7 +46,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
@@ -59,6 +59,7 @@
             android:layout_alignTop="@+id/insertion_price"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:singleLine="false"
             android:textAlignment="textEnd"
             android:gravity="end"/>
@@ -68,10 +69,9 @@
             android:layout_height="wrap_content"
             android:text="@string/item_city"
             android:id="@+id/insertion_city"
-            android:layout_below="@+id/insertion_price"
+            android:layout_below="@+id/insertion_price_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
@@ -81,9 +81,10 @@
             android:text="@string/item_city"
             android:ems="8"
             android:id="@+id/insertion_city_value"
-            android:layout_below="@+id/insertion_price"
+            android:layout_below="@+id/insertion_price_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false"
             android:textAlignment="textEnd"
@@ -94,10 +95,9 @@
             android:layout_height="wrap_content"
             android:text="@string/item_address"
             android:id="@+id/insertion_address"
-            android:layout_below="@+id/insertion_city"
+            android:layout_below="@+id/insertion_city_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
@@ -107,9 +107,10 @@
             android:text="@string/item_address"
             android:ems="8"
             android:id="@+id/insertion_address_value"
-            android:layout_below="@+id/insertion_city"
+            android:layout_below="@+id/insertion_city_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false"
             android:textAlignment="textEnd"
@@ -118,11 +119,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_shop"
-            android:layout_below="@+id/insertion_address"
+            android:text="@string/item_shop"
+            android:id="@+id/insertion_shop"
+            android:layout_below="@+id/insertion_address_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
@@ -132,9 +133,10 @@
             android:text="@string/item_shop"
             android:ems="8"
             android:id="@+id/insertion_shop_value"
-            android:layout_below="@+id/insertion_address"
+            android:layout_below="@+id/insertion_address_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false"
             android:textAlignment="textEnd"
@@ -145,10 +147,9 @@
             android:layout_height="wrap_content"
             android:text="@string/item_insertionist"
             android:id="@+id/item_insertionist"
-            android:layout_below="@+id/item_shop"
+            android:layout_below="@+id/insertion_shop_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
@@ -159,7 +160,7 @@
             android:ems="8"
             android:id="@+id/item_insertionist_value"
             style="@style/Button"
-            android:layout_below="@+id/item_shop"
+            android:layout_below="@+id/insertion_shop_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="0dp"
@@ -170,10 +171,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ratingBar"
+            android:numStars="5"
+            android:stepSize="0.1"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:progressTint="@color/ratingBarColor"
+            android:progressTintMode="src_in"
             android:layout_below="@+id/item_insertionist_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/insertion_margin_bottom" />
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:clickable="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -183,7 +190,6 @@
             android:layout_below="@+id/ratingBar"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
@@ -196,6 +202,7 @@
             android:layout_below="@+id/ratingBar"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false"
             android:textAlignment="textEnd"
@@ -206,10 +213,9 @@
             android:layout_height="wrap_content"
             android:text="@string/item_date2"
             android:id="@+id/item_date2"
-            android:layout_below="@+id/item_date1"
+            android:layout_below="@+id/item_date1_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
@@ -219,9 +225,10 @@
             android:text="@string/item_date2"
             android:ems="6"
             android:id="@+id/item_date2_value"
-            android:layout_below="@+id/item_date1"
+            android:layout_below="@+id/item_date1_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
             android:textSize="@dimen/text_size"
             android:singleLine="false"
             android:textAlignment="textEnd"
@@ -232,7 +239,7 @@
             android:layout_height="wrap_content"
             android:text="@string/item_description"
             android:id="@+id/item_description"
-            android:layout_below="@+id/item_date2"
+            android:layout_below="@+id/item_date2_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="30dp"
@@ -247,7 +254,7 @@
             android:layout_below="@+id/item_description"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingLeft="20dp"
+            android:paddingLeft="10dp"
             android:textSize="@dimen/text_size"
             android:singleLine="false"
             android:textAlignment="center"
@@ -262,6 +269,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="12dp"
             android:textSize="@dimen/insertion_title" />
 
         <com.example.cristian.everysale.BaseClasses.NestedListView
@@ -270,6 +278,7 @@
             android:id="@+id/listView"
             android:layout_below="@+id/item_feedback"
             android:layout_alignParentLeft="true"
+            android:paddingLeft="10dp"
             tools:listitem="@layout/feedback_list_item" />
 
     </RelativeLayout>

@@ -86,7 +86,6 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
             searchResponse = responseParser.getSearchResponse();
         }
         catch(Exception e){
-
             Log.e("Debug", "Response: " + e.getMessage());
         }
         return null;
@@ -94,7 +93,7 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
 
     protected void onPostExecute(Void result){
 
-        Log.e("Debug", String.valueOf(this.searchResponse.getInsertionCount()));
+        //Log.e("Debug", String.valueOf(this.searchResponse.getInsertionCount()));
         tabRecentOffers.setSearchResponse(searchResponse);
     }
 }
