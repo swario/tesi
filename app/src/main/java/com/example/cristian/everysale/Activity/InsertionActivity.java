@@ -3,6 +3,8 @@ package com.example.cristian.everysale.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.Fragments.InsertionDisplayFragment;
 import com.example.cristian.everysale.Fragments.evaluateInsertionFragment;
 import com.example.cristian.everysale.Fragments.loginFragment;
+import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.AsyncronousTasks.asincAddFavorite;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadInsertion;
@@ -42,6 +45,9 @@ public class InsertionActivity extends AppCompatActivity  {
     private SharedPreferences savedValues;
     private Boolean isFavorite = false;
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,12 @@ public class InsertionActivity extends AppCompatActivity  {
         if(intent != null){
             this.insertionId = intent.getLongExtra("insertionId", 0);
         }
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        MenuListener menuListener = new MenuListener(this, navigationView, drawerLayout);
+        drawerLayout.addDrawerListener(menuListener);
+        navigationView.setNavigationItemSelectedListener(menuListener);
     }
 
     public long getInsertionId(){

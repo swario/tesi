@@ -24,7 +24,7 @@
             android:configChanges="orientation"
             android:logo="@mipmap/ic_launcher"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.InsertionActivity"></activity>
+        <activity android:name=".Activity.InsertionActivity"/>
+        <activity android:name=".Activity.ModifyProfileActivity"/>
     </application>
 
 </manifest>

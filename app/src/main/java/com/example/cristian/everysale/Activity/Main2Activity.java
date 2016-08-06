@@ -38,7 +38,6 @@ public class Main2Activity extends AppCompatActivity {
 
     //icona toolbar
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
     private String mActivityTitle;
 
     @Override
@@ -91,7 +90,6 @@ public class Main2Activity extends AppCompatActivity {
         //icona toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         setupDrawer();
     }
@@ -115,7 +113,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
     private void setupDrawer() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerOpened(View drawerView) {
@@ -131,7 +129,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        drawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     @Override
