@@ -14,11 +14,5 @@
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <!--
-    <fragment android:name="com.example.cristian.everysale.Fragments.mainFragment"
-              android:id="@+id/mainFragment"
-              android:layout_weight="1"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"/>-->
 
 </RelativeLayout>
