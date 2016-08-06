@@ -19,6 +19,8 @@ import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -33,12 +35,10 @@ public class CustomAdapter extends BaseAdapter{
     private Iterator<Float> rate;
     private Iterator<Long> id;
     private ArrayList<String> items;
-    private static LayoutInflater inflater=null;
-    private ListTab tab;
+    private static LayoutInflater inflater = null;
+    private ListTab tab = null;
 
-    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles,
-                         ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId,
-                         ListTab listTab) {
+    public CustomAdapter(Context context, Activity activity, ArrayList<String> images, ArrayList<String> titles, ArrayList<String> prices, ArrayList<String> cities, ArrayList<Float> rating, ArrayList<Long> insertionsId, ListTab listTab) {
 
         this.context = context;
         this.activity = activity;
@@ -51,7 +51,7 @@ public class CustomAdapter extends BaseAdapter{
         items = titles;
         this.tab = listTab;
 
-        inflater = ( LayoutInflater ) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -94,16 +94,12 @@ public class CustomAdapter extends BaseAdapter{
             holder.title.setEnabled(false);
             holder.title.setText(title.next());
             holder.title.setEnabled(true);
-            holder.price.setText(price.next() + " €");
+            String number = new DecimalFormat("#.##").format(Double.parseDouble(price.next()));
+            holder.price.setText(number + " €");
             holder.city.setText(city.next());
             holder.rating.setMax(5);
             holder.rating.setNumStars(5);
             holder.rating.setStepSize((float) 0.1);
-            Drawable progress = holder.rating.getProgressDrawable();
-            DrawableCompat.setTint(progress, Color.YELLOW);
-            //Drawable drawable = holder.rating.getProgressDrawable();
-            //drawable.setColorFilter(Color.parseColor("#FEF429"), PorterDuff.Mode.SRC_IN);
-            //holder.rating.setProgressTintList();
             holder.rating.setRating(rate.next());
             new asincImageDownload(context, activity).execute(image.next(), holder.img);
             final long currentId = id.next();
