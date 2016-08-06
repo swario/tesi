@@ -14,6 +14,9 @@ public class User {
     private String city;
     private String region;
     private String mobile;
+    private boolean emailSend;
+    private float ratingThreshold;
+    private boolean dataAllow;
 
     public User(){
 
@@ -31,6 +34,9 @@ public class User {
     public void setCity(String city){this.city=city;}
     public void setRegion(String region){this.region=region;}
     public void setMobile(String mobile){this.mobile=mobile;}
+    public void setEmailSend(boolean emailSend){this.emailSend=emailSend;}
+    public void setRatingThreshold(float threshold){this.ratingThreshold=threshold;}
+    public void setDataAllow(boolean dataAllow){this.dataAllow=dataAllow;}
 
     public long getUser_id(){return user_id;}
     public String getUserName(){return userName;}
@@ -41,5 +47,7 @@ public class User {
     public String getCity(){return  city;}
     public String getRegion(){return region;}
     public String getMobile(){return mobile;}
-
+    public boolean getEmailSend(){return emailSend;}
+    public float getRatingThreshold(){return ratingThreshold;}
+    public boolean getDataAllow(){return dataAllow;}
 }

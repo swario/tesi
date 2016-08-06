@@ -20,6 +20,9 @@ public class UserParser extends DefaultHandler {
     private boolean isRegion = false;
     private boolean isCity = false;
     private boolean isMobile = false;
+    private boolean isEmailSend = false;
+    private boolean isThreshold = false;
+    private boolean isDataAllow = false;
 
     private User user;
 
@@ -70,6 +73,18 @@ public class UserParser extends DefaultHandler {
             isMobile = true;
             return;
         }
+        if(qName.equals("send")){
+            isEmailSend = true;
+            return;
+        }
+        if(qName.equals("threshold")){
+            isThreshold = true;
+            return;
+        }
+        if(qName.equals("dataAllow")){
+            isDataAllow = true;
+            return;
+        }
     }
 
     public void characters(char ch[], int start, int lenght ){
@@ -116,6 +131,22 @@ public class UserParser extends DefaultHandler {
         if(isMobile){
             isMobile = false;
             user.setMobile(s);
+        }
+        if(isEmailSend){
+            if(s.equals("yes")) {
+                user.setEmailSend(true);
+            }
+            else{
+                user.setEmailSend(false);
+            }
+            isEmailSend = false;
+        }
+        if(isThreshold){
+            user.setRatingThreshold(Float.parseFloat(s));
+        }
+        if(isDataAllow){
+            user.setDataAllow(s.equals("yes"));
+            isDataAllow = false;
         }
     }
 
