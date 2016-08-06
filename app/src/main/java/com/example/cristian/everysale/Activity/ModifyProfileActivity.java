@@ -1,4 +1,4 @@
-package com.example.cristian.everysale;
+package com.example.cristian.everysale.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.cristian.everysale.R;
 
 public class ModifyProfileActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
 

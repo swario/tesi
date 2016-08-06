@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.cristian.everysale.Activity.Main2Activity;
+import com.example.cristian.everysale.Activity.ModifyProfileActivity;
 import com.example.cristian.everysale.R;
 import com.example.cristian.everysale.Activity.StartActivity;
 
@@ -70,6 +71,13 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 activity.startActivity(intent);
                 this.activity.finish();
                 break;
+
+
+            case R.id.nav_my_account:
+                intent = new Intent(this.activity, ModifyProfileActivity.class);
+                activity.startActivity(intent);
+                break;
+
 
             default:
                 Log.e("Debug", "default");
