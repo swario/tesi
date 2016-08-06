@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,36 +88,42 @@ public class tabFavorite extends ListFragment implements OnRefreshListener, OnSc
         }
         CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId, this);
         itemsListView.setAdapter(adapter);
-        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
+        //l'idea è che, se l'ultima posizione visibile è anche l'ultimo oggetto, posso ricaricare (se c'è ancora roba da caricare)
+        if((itemsListView.getLastVisiblePosition() == (itemsListView.getChildCount() - 1)) && thereIsMore){
             long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
             new asincGetFavorites(this).execute(upperLimit);
         }
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
-        if(searchResponse == null){
+
+        if(searchResponse == null){ //significa che non è stato fatto il parsing di una risposta (ergo non ha scaricato)
             Toast.makeText(getContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
             return;
         }
+
         int oldItemCount = 0;
         refreshLayout.setRefreshing(false);
-        if(this.searchResponse == null){
+
+        if(this.searchResponse == null){ // se searchResponse è null ho appena caricato la pagina (quindi assegno direttamente)
             this.searchResponse = searchResponse;
-        } else {
-            oldItemCount = searchResponse.getInsertionCount();
+        } else {//altrimenti, significa che c'è già della roba, quindi faccio il merge
+            oldItemCount = this.searchResponse.getInsertionCount();
             this.searchResponse.merge(searchResponse);
+            if(oldItemCount == searchResponse.getInsertionCount()) {// se non è cambiato nulla, significa che non cè nulla da scaricare
+                thereIsMore = false;
+            }
         }
-        if(oldItemCount == searchResponse.getInsertionCount()){
-            thereIsMore = false;
-        }
-        //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
         setListView();
-        itemsListView.setSelection(oldItemCount);
+        if(oldItemCount != 0){
+            itemsListView.smoothScrollToPosition(oldItemCount - 1);
+        }
     }
 
     @Override
     public void onRefresh() {
         searchResponse = null;
+        thereIsMore = true;
         new asincGetFavorites(this).execute();
     }
 
