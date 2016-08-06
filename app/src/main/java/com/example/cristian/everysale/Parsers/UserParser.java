@@ -143,11 +143,16 @@ public class UserParser extends DefaultHandler {
         }
         if(isThreshold){
             user.setRatingThreshold(Float.parseFloat(s));
+            isThreshold = false;
         }
         if(isDataAllow){
             user.setDataAllow(s.equals("yes"));
             isDataAllow = false;
         }
+    }
+
+    public User getUser(){
+        return this.user;
     }
 
 
