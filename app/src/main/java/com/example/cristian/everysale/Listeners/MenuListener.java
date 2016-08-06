@@ -10,9 +10,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.cristian.everysale.Main2Activity;
+import com.example.cristian.everysale.Activity.Main2Activity;
+import com.example.cristian.everysale.Activity.ModifyProfileActivity;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.StartActivity;
+import com.example.cristian.everysale.Activity.StartActivity;
 
 /**
  * Created by Giorgiboy on 04/08/2016.
@@ -70,6 +71,13 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 activity.startActivity(intent);
                 this.activity.finish();
                 break;
+
+
+            case R.id.nav_my_account:
+                intent = new Intent(this.activity, ModifyProfileActivity.class);
+                activity.startActivity(intent);
+                break;
+
 
             default:
                 Log.e("Debug", "default");

@@ -15,24 +15,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:configChanges="orientation"
             android:logo="@mipmap/ic_launcher"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Main2Activity"
+            android:name=".Activity.Main2Activity"
             android:configChanges="orientation"
             android:logo="@mipmap/ic_launcher"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".StartActivity">
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InsertionActivity"></activity>
+        <activity android:name=".Activity.InsertionActivity"/>
+        <activity android:name=".Activity.ModifyProfileActivity"/>
     </application>
 
 </manifest>

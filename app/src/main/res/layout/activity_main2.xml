@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".Activity.MainActivity">
 
         <include
             android:id="@+id/tool_bar"
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             />
 
-        <com.example.cristian.everysale.SlidingTabLayout
+        <com.example.cristian.everysale.Layouts.SlidingTabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

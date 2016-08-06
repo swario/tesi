@@ -2,10 +2,6 @@ package com.example.cristian.everysale.BaseClasses;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,10 +13,9 @@ import android.widget.TextView;
 
 import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.asincronousTasks.asincImageDownload;
+import com.example.cristian.everysale.AsyncronousTasks.asincImageDownload;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
