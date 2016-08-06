@@ -90,8 +90,10 @@ public class tabFavorite extends ListFragment implements OnRefreshListener, OnSc
         itemsListView.setAdapter(adapter);
         //l'idea è che, se l'ultima posizione visibile è anche l'ultimo oggetto, posso ricaricare (se c'è ancora roba da caricare)
         if((itemsListView.getLastVisiblePosition() == (itemsListView.getChildCount() - 1)) && thereIsMore){
-            long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
-            new asincGetFavorites(this).execute(upperLimit);
+            if(this.searchResponse.getInsertionCount() > 0){
+                long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
+                new asincGetFavorites(this).execute(upperLimit);
+            }
         }
     }
 

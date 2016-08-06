@@ -144,7 +144,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 String password = savedValues.getString("registerPassword", "");
                 String confirmPassword = savedValues.getString("confirmPassword", "");
                 if(!password.equals(confirmPassword) ){
-                    Toast.makeText(getContext(), "Password non coincidenti" + password + " " + confirmPassword, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Password: " + password + " Confirm: " + confirmPassword, Toast.LENGTH_LONG).show();
                     getFragmentManager().beginTransaction().replace(R.id.frame_container, new registerFragment1()).addToBackStack(null).commit();
                     return;
                 }
