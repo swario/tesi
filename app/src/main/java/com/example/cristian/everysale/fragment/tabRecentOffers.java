@@ -107,7 +107,6 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
             long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
             new asincGetRecent(this).execute(upperLimit);
         }
-        Log.e("Debug", String.valueOf(oldItemCount));
         if(oldItemCount != 0){
             itemsListView.smoothScrollToPosition(oldItemCount - 1);
         }
