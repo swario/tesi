@@ -63,8 +63,6 @@
         android:numStars="5"
         android:stepSize="0.1"
         style="@style/Widget.AppCompat.RatingBar.Indicator"
-        android:progressTint="@color/ratingBarColor"
-        android:progressTintMode="src_in"
         android:layout_alignBottom="@+id/item_icon"
         android:layout_toRightOf="@+id/item_icon"
         android:layout_toEndOf="@+id/item_icon"
