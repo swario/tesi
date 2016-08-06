@@ -53,8 +53,6 @@ public class Main2Activity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main2);
 
-        // Creating The Toolbar and setting it as the Toolbar for the activity
-
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
@@ -96,10 +94,8 @@ public class Main2Activity extends AppCompatActivity {
         setupDrawer();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_main2_drawer, menu);
         return true;
     }
@@ -107,18 +103,12 @@ public class Main2Activity extends AppCompatActivity {
     //funzionamento menu laterale
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        // Handle your other action bar items...
-
         return super.onOptionsItemSelected(item);
-
     }
 
 
@@ -126,9 +116,6 @@ public class Main2Activity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
 
-            /**
-             * Called when a drawer has settled in a completely open state.
-             */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -136,9 +123,6 @@ public class Main2Activity extends AppCompatActivity {
                 name.setText(savedValues.getString("username", "ulisse rimane comunque il piu bello"));
             }
 
-            /**
-             * Called when a drawer has settled in a completely closed state.
-             */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -146,7 +130,6 @@ public class Main2Activity extends AppCompatActivity {
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
     }
 
     @Override
@@ -161,5 +144,8 @@ public class Main2Activity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return false;
+    }
 }

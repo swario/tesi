@@ -18,7 +18,7 @@
         android:paddingBottom="0dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="0dp"
         android:src="@drawable/everysale"
         android:id="@+id/imageView"
         android:contentDescription="logo" />
@@ -30,7 +30,7 @@
         android:textColor="#ffffff"
         android:text=""
         android:textSize="20sp"
-        android:paddingBottom="15dp"
+        android:paddingBottom="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/imageView"
