@@ -1,13 +1,64 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     tools:context="com.example.cristian.everysale.Fragments.evaluateInsertionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/feedback"
+        android:id="@+id/feedbackTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="25sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedbackEditText"
+        android:layout_below="@+id/feedbackTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedbackRatingBar"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:max="5"
+        android:layout_below="@+id/feedbackEditText"
+        android:layout_alignRight="@+id/feedbackTextView"
+        android:layout_alignEnd="@+id/feedbackTextView"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:id="@+id/feedbackRateTextView"
+        android:layout_alignTop="@+id/feedbackRatingBar"
+        android:layout_alignLeft="@+id/feedbackTextView"
+        android:layout_alignStart="@+id/feedbackTextView"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20sp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/feedback_button"
+        android:id="@+id/feedbackSubmitButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        style="@style/Button"/>
+
+</RelativeLayout>
