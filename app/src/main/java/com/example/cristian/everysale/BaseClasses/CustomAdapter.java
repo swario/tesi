@@ -2,6 +2,9 @@ package com.example.cristian.everysale.BaseClasses;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,6 +99,8 @@ public class CustomAdapter extends BaseAdapter{
             holder.rating.setMax(5);
             holder.rating.setNumStars(5);
             holder.rating.setStepSize((float) 0.1);
+            Drawable progress = holder.rating.getProgressDrawable();
+            DrawableCompat.setTint(progress, Color.YELLOW);
             //Drawable drawable = holder.rating.getProgressDrawable();
             //drawable.setColorFilter(Color.parseColor("#FEF429"), PorterDuff.Mode.SRC_IN);
             //holder.rating.setProgressTintList();
