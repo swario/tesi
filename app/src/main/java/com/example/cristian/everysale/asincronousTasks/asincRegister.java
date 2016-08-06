@@ -94,7 +94,7 @@ public class asincRegister extends AsyncTask<String, Void, String> {
 
             editor.putString("username", this.username);
             editor.putString("password", this.username);
-            editor.putInt("userId", Integer.parseInt(result.substring(8)));
+            editor.putLong("userId", Long.parseLong(result.substring(8)));
 
             editor.commit();
 

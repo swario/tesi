@@ -103,7 +103,7 @@ public class registerFragment1 extends Fragment implements OnClickListener {
 
         editor.putString("email", emailText.getText().toString());
         editor.putString("registerUsername", usernameText.getText().toString());
-        editor.putString("resisterPassword", password.getText().toString());
+        editor.putString("registerPassword", password.getText().toString());
         editor.putString("confirmPassword", confirmPassword.getText().toString());
 
         editor.commit();

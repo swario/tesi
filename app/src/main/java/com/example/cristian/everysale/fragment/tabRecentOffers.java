@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,15 +104,20 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         }
         //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
         setListView();
-        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
+        if( (itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1))
+                && thereIsMore){
             long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
             new asincGetRecent(this).execute(upperLimit);
+        }
+        if(oldItemCount != 0){
+            itemsListView.smoothScrollToPosition(oldItemCount - 1);
         }
     }
 
     @Override
     public void onRefresh() {
         searchResponse = null;
+        this.thereIsMore = true;
         new asincGetRecent(this).execute();
     }
 
