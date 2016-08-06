@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.cristian.everysale.Main2Activity;
+import com.example.cristian.everysale.Activity.Main2Activity;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.StartActivity;
+import com.example.cristian.everysale.Activity.StartActivity;
 
 /**
  * Created by Giorgiboy on 04/08/2016.
