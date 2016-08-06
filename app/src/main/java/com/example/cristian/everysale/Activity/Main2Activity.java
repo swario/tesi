@@ -16,10 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.Layouts.SlidingTabLayout;
 import com.example.cristian.everysale.Fragments.viewPagerAdapter;
+import com.example.cristian.everysale.Layouts.SlidingTabLayout;
 import com.example.cristian.everysale.Listeners.MenuListener;
+import com.example.cristian.everysale.R;
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -96,7 +96,7 @@ public class Main2Activity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Non bisogna fare l'inflate di questo menu perchè altrimenti
+        // Non bisogna fare l'inflate di questo menu perchè altrimenti compare il pulsante in alto a destra
         //getMenuInflater().inflate(R.menu.activity_main2_drawer, menu);
         return true;
     }
