@@ -111,6 +111,7 @@ public class tabFavorite extends ListFragment implements OnRefreshListener, OnSc
         }
         //Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()), Toast.LENGTH_LONG).show();
         setListView();
+        itemsListView.setSelection(oldItemCount);
     }
 
     @Override
