@@ -12,5 +12,5 @@ public interface SpinnerSetup {
 
     public void setupRegions(ArrayList<Region> result);
     public void setupProvinces(ArrayList<Province> result);
-    public void setupMunicipalities();
+    public void setupMunicipalities(ArrayList<String> result);
 }

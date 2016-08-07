@@ -30,7 +30,7 @@ public class ProvincesParser extends DefaultHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes att){
 
-        if(qName.equals("region")){
+        if(qName.equals("province")){
             isProvince = true;
             return;
         }
@@ -46,7 +46,7 @@ public class ProvincesParser extends DefaultHandler {
 
     public void endElement(String namespaceURI, String localName, String qName){
 
-        if(qName.equals("region")){
+        if(qName.equals("province")){
             provinces.add(province);
             return;
         }

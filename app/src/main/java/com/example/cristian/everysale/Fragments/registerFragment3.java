@@ -129,10 +129,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
 
                 String name = savedValues.getString("name", "");
                 String surname = savedValues.getString("surname", "");
-                String region = getResources().getStringArray(R.array.fregister2_regions_spinner)
-                        [regionPosition];
-                String city = getResources().getStringArray(getCitySpinner(regionPosition))
-                        [savedValues.getInt("registerCityPosition",0)];
+                //String region = getResources().getStringArray(R.array.fregister2_regions_spinner)[regionPosition];
+                //String city = getResources().getStringArray(getCitySpinner(regionPosition))[savedValues.getInt("registerCityPosition",0)];
                 String mobilePhone = savedValues.getString("registerMobilePhone", "");
                 String dataAllow = null;
                 if(dataAllowCheckbox.isChecked()){
@@ -183,13 +181,13 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     return;
                 }
 
-                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region,
-                        city, mobilePhone, dataAllow, imgPath);
+                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, "region",
+                        "city", mobilePhone, dataAllow, imgPath);
                 break;
         }
     }
 
-    private int getCitySpinner(int region){
+    /*private int getCitySpinner(int region){
 
         switch(region){
             case 0:
@@ -235,5 +233,5 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             default:
                 return R.array.fregister2_region0_spinner;
         }
-    }
+    }*/
 }

@@ -51,7 +51,6 @@ public class asincDownloadRegions extends AsyncTask<Void, Void, ArrayList<Region
             byte[] buffer = new byte[1024];
             int bytesRead = inputStream.read(buffer);
             while (bytesRead != -1) {
-
                 outputStream.write(buffer, 0, bytesRead);
                 bytesRead = inputStream.read(buffer);
             }
