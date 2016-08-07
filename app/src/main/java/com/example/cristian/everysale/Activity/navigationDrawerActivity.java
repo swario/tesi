@@ -47,6 +47,8 @@ public class navigationDrawerActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         mActivityTitle = getTitle().toString();
         setupDrawer();
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+
 
     }
 
@@ -77,9 +79,7 @@ public class navigationDrawerActivity extends AppCompatActivity {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 
-                TextView name = (TextView) findViewById(R.id.nav_header_username);
-                String sname = savedValues.getString("username", "ulisse rimane comunque il piu bello");
-                name.setText(sname);
+                setNavigationViewPreferences();
 
                 EasterEgg++;
                 if(EasterEgg>7)Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
@@ -89,13 +89,20 @@ public class navigationDrawerActivity extends AppCompatActivity {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
+                EasterEgg++;
                 if(EasterEgg>7)Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
             }
+
+
+
 
 
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(mDrawerToggle);
+
+
     }
 
     @Override
@@ -110,4 +117,32 @@ public class navigationDrawerActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+    }
+
+    public void setNavigationViewPreferences(){
+        TextView username = (TextView) findViewById(R.id.nav_header_username);
+        String sname = savedValues.getString("username", "ulisse rimane comunque il piu bello");
+        username.setText(sname);
+
+        /* devo ancora impostare alteza dinamica header
+        RelativeLayout relativeLayout= (RelativeLayout) findViewById(R.id.layout_nav_header_drawer);
+
+
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.JELLY_BEAN){
+            //relativeLayout.setMinimumHeight(235);
+            params.height = 100;
+        } else{
+            //relativeLayout.setMinimumHeight(180);
+            // do something for phones running an SDK before lollipop
+            params.height = 100;
+        }
+        relativeLayout.setLayoutParams(params);
+        */
+    }
+
 }

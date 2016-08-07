@@ -36,6 +36,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     private Button updateButton;
 
     private String imgPath=null;
+    private imageUtility bitmapConverter=null;
 
     private final String imageAddress = "http://webdev.dibris.unige.it/~S3928202/Progetto/profilePics/";
 
@@ -68,6 +69,10 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         findViewById(R.id.modifyCancelButton).setOnClickListener(this);
         findViewById(R.id.modifyUpdateButton).setOnClickListener(this);
 
+        //inizializzo gestore immagine
+        bitmapConverter=new imageUtility();
+        savedValues.edit().putString("imgPath", null).commit();
+
     }
 
     @Override
@@ -86,20 +91,19 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
             case R.id.modifyImageButton:
                 Intent intent = new Intent(this, ImagePickerActivity.class);
                 startActivity(intent);
-                imageUtility bitmapConverter=null;
-                bitmapConverter=new imageUtility();
-                imgPath=savedValues.getString("imgPath",null);
-                savedValues.edit().putString("imgPath", imgPath).commit();
-                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
-                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
-                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
-                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
                 break;
-
 
             default:
                 break;
         }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        imgPath=savedValues.getString("imgPath", null);
+        profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
 
     }
 
