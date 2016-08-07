@@ -108,7 +108,7 @@ public class ImagePickerActivity extends AppCompatActivity {
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
         }
-        this.finish();
+        //this.finish();
     }
 
     private void onCaptureImageResult(Intent data) {

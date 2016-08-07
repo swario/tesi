@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -90,11 +89,15 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
                 imageUtility bitmapConverter=null;
                 bitmapConverter=new imageUtility();
                 imgPath=savedValues.getString("imgPath",null);
+                savedValues.edit().putString("imgPath", imgPath).commit();
+                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
+                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
+                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
                 profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
                 break;
 
 
-
+            default:
                 break;
         }
 
