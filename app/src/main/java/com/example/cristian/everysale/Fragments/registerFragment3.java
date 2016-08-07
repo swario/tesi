@@ -183,7 +183,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     return;
                 }
 
-                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow, imgPath);
+                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region,
+                        city, mobilePhone, dataAllow, imgPath);
                 break;
         }
     }
