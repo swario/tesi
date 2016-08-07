@@ -61,8 +61,6 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         view.findViewById(R.id.backButton).setOnClickListener(this);
         view.findViewById(R.id.registerSubmitButton).setOnClickListener(this);
 
-
-
         return view;
     }
 
@@ -185,7 +183,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     return;
                 }
 
-                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
+                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow, imgPath);
                 break;
         }
     }
