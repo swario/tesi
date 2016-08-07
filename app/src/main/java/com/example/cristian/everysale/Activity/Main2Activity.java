@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 
 import com.example.cristian.everysale.Fragments.viewPagerAdapter;
@@ -67,13 +66,6 @@ public class Main2Activity extends navigationDrawerActivity {
         // Faccio vedere per prima la tab centrale
         pager.setCurrentItem(1);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Non bisogna fare l'inflate di questo menu perchè altrimenti compare il pulsante in alto a destra
-        //getMenuInflater().inflate(R.menu.activity_main2_drawer, menu);
-        return true;
     }
 
 }

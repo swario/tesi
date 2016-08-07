@@ -74,16 +74,20 @@ public class navigationDrawerActivity extends AppCompatActivity {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
                 TextView name = (TextView) findViewById(R.id.nav_header_username);
                 String sname = savedValues.getString("username", "ulisse rimane comunque il piu bello");
                 Toast.makeText(getApplication(), sname , Toast.LENGTH_LONG).show();
                 name.setText(sname);
+
             }
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
+
+
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(mDrawerToggle);
@@ -99,5 +103,6 @@ public class navigationDrawerActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+
     }
 }

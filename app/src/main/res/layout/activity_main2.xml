@@ -1,48 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:orientation="vertical"
+    tools:context=".Activity.MainActivity">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:layout_marginTop="80dp"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_navigation_drawer"
-        app:menu="@menu/activity_main2_drawer" />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <com.example.cristian.everysale.Layouts.SlidingTabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:background="@color/ColorPrimary"/>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".Activity.MainActivity">
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        >
 
-        <com.example.cristian.everysale.Layouts.SlidingTabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="3dp"
-            android:background="@color/ColorPrimary"/>
+    </android.support.v4.view.ViewPager>
 
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            >
-
-        </android.support.v4.view.ViewPager>
-
-    </LinearLayout>
-
-</android.support.v4.widget.DrawerLayout>
+</LinearLayout>
