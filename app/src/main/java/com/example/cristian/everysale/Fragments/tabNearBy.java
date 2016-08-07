@@ -14,6 +14,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cristian.everysale.BaseClasses.CustomAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.Activity.InsertionActivity;
@@ -77,7 +78,7 @@ public class tabNearBy extends ListFragment implements OnRefreshListener, OnScro
             rating.add(preview.getRate());
             insertionsId.add(preview.getInsertionId());
         }
-        //CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId);
+        //CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId, this);
         //itemsListView.setAdapter(adapter);
     }
 

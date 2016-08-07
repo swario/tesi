@@ -9,6 +9,8 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
@@ -24,7 +26,7 @@ import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
 
-public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab{
+public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab, OnGlobalLayoutListener{
 
     private boolean thereIsMore = true;
 
@@ -101,12 +103,7 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
             thereIsMore = false;
         }
         setListView();
-        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
-            long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
-            new asincGetRecent(this).execute(upperLimit);
-        }
         if(oldItemCount != 0){
-            itemsListView.smoothScrollToPosition(oldItemCount - 1);
         }
     }
 
@@ -147,4 +144,11 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         startActivity(intent);
     }
 
+    @Override
+    public void onGlobalLayout() {
+        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
+            long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
+            new asincGetRecent(this).execute(upperLimit);
+        }
+    }
 }

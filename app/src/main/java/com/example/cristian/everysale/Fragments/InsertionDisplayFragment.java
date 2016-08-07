@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,7 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     private Menu menu;
 
     private InsertionActivity activity;
+    private ScrollView scrollView;
 
     private RelativeLayout feedbackBox;
     private RatingBar feedbackRatingBar;
@@ -78,6 +81,7 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
 
         View view = inflater.inflate(R.layout.fragment_insertion_display, container, false);
 
+        scrollView = (ScrollView) view.findViewById(R.id.insertion_scroll_view);
 
         feedbackBox = (RelativeLayout) view.findViewById(R.id.feedback_box);
         feedbackRatingBar = (RatingBar) view.findViewById(R.id.feedbackRatingBar);
@@ -162,6 +166,13 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         insertionistButton.setOnClickListener(this);
         sendFeebackButton.setOnClickListener(this);
         FeedBackSetUp();
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Ready, move up
+                scrollView.smoothScrollTo(0, 0);
+            }
+        });
     }
 
     private void FeedBackSetUp(){
