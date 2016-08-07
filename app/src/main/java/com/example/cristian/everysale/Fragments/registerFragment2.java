@@ -17,9 +17,15 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.view.View.OnClickListener;
 
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
+import com.example.cristian.everysale.BaseClasses.Region;
+import com.example.cristian.everysale.Interfaces.SpinnerSetup;
 import com.example.cristian.everysale.R;
 
-public class registerFragment2 extends Fragment implements OnClickListener, OnItemSelectedListener {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class registerFragment2 extends Fragment implements OnClickListener, OnItemSelectedListener, SpinnerSetup {
 
     private SharedPreferences savedValues;
 
@@ -49,6 +55,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         mobileEditText = (EditText) view.findViewById(R.id.cellulareEditText);
 
         regionSpinner.setOnItemSelectedListener(this);
+        citySpinner.setOnItemSelectedListener(this);
         view.findViewById(R.id.forwardButton).setOnClickListener(this);
         view.findViewById(R.id.backButton).setOnClickListener(this);
 
@@ -73,12 +80,8 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         super.onResume();
 
         //per prima cosa, setto l'adapter per lo spinner delle regioni
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.fregister2_regions_spinner, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        regionSpinner.setAdapter(adapter);
-        regionSpinner.setOnItemSelectedListener(this);
-        setCitySpinner();
+        new asincDownloadRegions(getContext(), this).execute();
+        //setCitySpinner();
         //poi, prelevo i dati per riempire eventuali campi già compilati
         nameEditText.setText(savedValues.getString("name", ""));
         surnameEditText.setText(savedValues.getString("surname", ""));
@@ -126,6 +129,26 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void setupRegions(ArrayList<Region> result){
+        Iterator<Region> reg = result.iterator();
+        ArrayList<String> regions = new ArrayList<>();
+        while(reg.hasNext()){
+            regions.add(reg.next().getRegionName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, regions);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regionSpinner.setAdapter(adapter);
+        regionSpinner.setOnItemSelectedListener(this);
+    }
+
+    public void setupProvincies(){
+
+    }
+
+    public void setupMunicipalities(){
 
     }
 
