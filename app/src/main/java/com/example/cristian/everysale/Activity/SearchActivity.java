@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
 import com.example.cristian.everysale.R;
@@ -21,9 +20,9 @@ public class SearchActivity extends navigationDrawerActivity {
         SearchView searchView = (SearchView) findViewById(R.id.searchView);
 
         //setto focus e apro tastiera
-        searchView.requestFocus();
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) this.getSystemService(this.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT);
+        searchView.setIconifiedByDefault(true);
+        searchView.setFocusable(true);
+        searchView.setIconified(false);
+        searchView.requestFocusFromTouch();
     }
 }
