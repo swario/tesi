@@ -15,5 +15,7 @@ public class SearchActivity extends navigationDrawerActivity {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_search, null, false);
         drawerLayout.addView(contentView,0);
+
+
     }
 }

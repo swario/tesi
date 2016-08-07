@@ -2,11 +2,9 @@ package com.example.cristian.everysale.Fragments;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -72,7 +70,6 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     private Button sendFeebackButton;
 
     private final String imageAddress = "http://webdev.dibris.unige.it/~S3928202/Progetto/itemPics/";
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
