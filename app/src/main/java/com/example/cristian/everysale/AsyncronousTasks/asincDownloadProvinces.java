@@ -25,7 +25,7 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by Cristian on 07/08/2016.
  */
 public class asincDownloadProvinces extends AsyncTask<Void, Void, ArrayList<Province>> {
-    private String fileName = "provincies.xml";
+    private String fileName = "provinces.xml";
     private Context context;
     private SpinnerSetup spinnerSetup;
     private int regionCode;

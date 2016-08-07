@@ -127,7 +127,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("EverySale", String.valueOf(view.getId() + " " + id + " " + R.id.regioneTextView + " " + parent.getId() + " " + parent));
+        Log.d("EverySale", String.valueOf(view.getId() + " " + id + " " + regionsCode.get(position) + " " + parent));
         if(String.valueOf(parent).contains("regioneSpinner")){
             Log.d("EverySale", "Regione selezionata");
             new asincDownloadProvinces(getContext(), this, regionsCode.get(position)).execute();
@@ -163,11 +163,14 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
     public void setupProvinces(ArrayList<Province> result){
         Log.d("EverySale", "Inserimento province in corso...");
         Iterator<Province> prov = result.iterator();
-        ArrayList<String> provinces = new ArrayList<>();
+        ArrayList<String> provincesName = new ArrayList<>();
+        provincesCode.clear();
         while(prov.hasNext()){
-            provinces.add(prov.next().getProvinceName());
+            Province temp = prov.next();
+            provincesName.add(temp.getProvinceName());
+            provincesCode.add(temp.getProvinceCode());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, provinces);
+        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, provincesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(adapter);
         citySpinner.setOnItemSelectedListener(this);
