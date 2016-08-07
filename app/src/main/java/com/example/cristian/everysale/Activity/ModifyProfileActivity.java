@@ -1,8 +1,9 @@
 package com.example.cristian.everysale.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -16,7 +17,7 @@ import android.widget.Spinner;
 
 import com.example.cristian.everysale.R;
 
-public class ModifyProfileActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
+public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener {
 
     private EditText emailEditText;
     private EditText usernameEditText;
@@ -38,7 +39,9 @@ public class ModifyProfileActivity extends AppCompatActivity implements OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.modify_profile_layout);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.modify_profile_layout, null, false);
+        drawerLayout.addView(contentView, 0);
 
         emailEditText = (EditText) findViewById(R.id.modifyEmailEditText);
         usernameEditText = (EditText) findViewById(R.id.modifyUsernameEditText);
