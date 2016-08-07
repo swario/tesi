@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.example.cristian.everysale.Activity.Main2Activity;
 import com.example.cristian.everysale.Activity.ModifyProfileActivity;
+import com.example.cristian.everysale.Activity.MyInsertionActivity;
+import com.example.cristian.everysale.Activity.NewInsertionActivity;
 import com.example.cristian.everysale.Activity.SearchActivity;
 import com.example.cristian.everysale.Activity.StartActivity;
 import com.example.cristian.everysale.R;
@@ -83,6 +85,30 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                     break;
                 }else{
                     intent = new Intent(this.activity, ModifyProfileActivity.class);
+                    activity.startActivity(intent);
+                    this.activity.finish();
+                    break;
+                }
+
+            case R.id.nav_my_insertions:
+                if(activity instanceof MyInsertionActivity){
+                    Log.e("Debug", "my insertion!");
+                    drawerLayout.closeDrawers();
+                    break;
+                }else{
+                    intent = new Intent(this.activity, MyInsertionActivity.class);
+                    activity.startActivity(intent);
+                    this.activity.finish();
+                    break;
+                }
+
+            case R.id.nav_new_insertion:
+                if(activity instanceof NewInsertionActivity){
+                    Log.e("Debug", "new insertion!");
+                    drawerLayout.closeDrawers();
+                    break;
+                }else{
+                    intent = new Intent(this.activity, NewInsertionActivity.class);
                     activity.startActivity(intent);
                     this.activity.finish();
                     break;

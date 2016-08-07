@@ -44,8 +44,22 @@
             android:name=".BaseClasses.imagePicker.ImagePickerActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.SearchActivity" />
-        <activity android:name=".Activity.navigationDrawerActivity"></activity>
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.navigationDrawerActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MyInsertionActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.NewInsertionActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

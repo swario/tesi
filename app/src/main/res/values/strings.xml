@@ -284,5 +284,9 @@
     <string name="feedback">Lascia un commento di feedback ed una valutazione da 1 a 5</string>
     <string name="feedback_rating">3</string>
     <string name="feedback_button">Invia</string>
+    <string name="title_activity_new_insertion">newInsertionActivity</string>
+    <string name="title_activity_my_insertion">MyInsertion</string>
+    <string name="title_activity_mmy_insertion">mmyInsertionActivity</string>
+    <string name="title_activity_new_insertion_activityy">NewInsertionActivityy</string>
 
 </resources>
