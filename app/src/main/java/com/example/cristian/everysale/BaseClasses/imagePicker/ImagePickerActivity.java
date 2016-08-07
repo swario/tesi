@@ -3,6 +3,7 @@ package com.example.cristian.everysale.BaseClasses.imagePicker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -58,29 +59,32 @@ public class ImagePickerActivity extends AppCompatActivity {
     private void selectImage() {
         final CharSequence[] items = { "Scatta foto", "Scegli dalla Galleria",
                 "Annulla" };
-
+        DialogFragment newFragment = new DialogFragment();
+        newFragment.setCancelable(false);
         AlertDialog.Builder builder = new AlertDialog.Builder(ImagePickerActivity.this);
-        builder.setTitle("Aggiungi foto!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                boolean result = imageUtility.checkPermission(ImagePickerActivity.this);
+        builder.setTitle("Aggiungi foto!")
+                .setCancelable(false)
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        boolean result = imageUtility.checkPermission(ImagePickerActivity.this);
 
-                if (items[item].equals("Scatta foto")) {
-                    userChoosenTask = "Scatta foto";
-                    if (result)
-                        cameraIntent();
+                        if (items[item].equals("Scatta foto")) {
+                            userChoosenTask = "Scatta foto";
+                            if (result)
+                                cameraIntent();
 
-                } else if (items[item].equals("Scegli dalla Galleria")) {
-                    userChoosenTask = "Scegli dalla Galleria";
-                    if (result)
-                        galleryIntent();
+                        } else if (items[item].equals("Scegli dalla Galleria")) {
+                            userChoosenTask = "Scegli dalla Galleria";
+                            if (result)
+                                galleryIntent();
 
-                } else if (items[item].equals("Annulla")) {
-                    dialog.dismiss();
-                }
-            }
-        });
+                        } else if (items[item].equals("Annulla")) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
         builder.show();
     }
 
