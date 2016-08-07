@@ -8,14 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
 
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
 import com.example.cristian.everysale.BaseClasses.Province;
@@ -145,7 +145,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         regionSpinner.setOnItemSelectedListener(this);
     }
 
-    public void setupProvinces(ArrayList<Province> result){
+    public void setupProvincies(ArrayList<Province> result){
         Iterator<Province> reg = result.iterator();
         ArrayList<String> regions = new ArrayList<>();
         while(reg.hasNext()){

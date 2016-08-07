@@ -37,7 +37,7 @@ public class asincDownloadRegions extends AsyncTask<Void, Void, ArrayList<Region
     }
 
     protected ArrayList<Region> doInBackground(Void... params) {
-        Log.e("Debug", "Lanciato");
+        Log.e("Regions", "Lanciato");
 
         try {
 
@@ -55,7 +55,7 @@ public class asincDownloadRegions extends AsyncTask<Void, Void, ArrayList<Region
                 outputStream.write(buffer, 0, bytesRead);
                 bytesRead = inputStream.read(buffer);
             }
-            Log.e("Debug", "File Letto");
+            Log.e("Regions", "File Letto");
             outputStream.close();
             inputStream.close();
 
@@ -73,7 +73,7 @@ public class asincDownloadRegions extends AsyncTask<Void, Void, ArrayList<Region
             return regionsParser.getRegions();
         }
         catch (Exception e){
-            Log.e("Debug", "Eccezione: " + e.getMessage());
+            Log.e("Regions", "Eccezione: " + e.getMessage());
             return null;
         }
     }
@@ -81,7 +81,7 @@ public class asincDownloadRegions extends AsyncTask<Void, Void, ArrayList<Region
     @Override
     protected void onPostExecute(ArrayList<Region> result){
         if(result!= null){
-            Log.e("Debug", String.valueOf(result.size()));
+            Log.e("Regions", String.valueOf(result.size()));
             spinnerSetup.setupRegions(result);
         }
     }

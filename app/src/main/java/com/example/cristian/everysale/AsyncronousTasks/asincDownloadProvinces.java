@@ -37,7 +37,7 @@ public class asincDownloadProvinces extends AsyncTask<Void, Void, ArrayList<Prov
     }
 
     protected ArrayList<Province> doInBackground(Void... params) {
-        Log.e("Debug", "Lanciato");
+        Log.e("Provinces", "Lanciato");
 
         try {
 
@@ -55,7 +55,7 @@ public class asincDownloadProvinces extends AsyncTask<Void, Void, ArrayList<Prov
                 outputStream.write(buffer, 0, bytesRead);
                 bytesRead = inputStream.read(buffer);
             }
-            Log.e("Debug", "File Letto");
+            Log.e("Provinces", "File Letto");
             outputStream.close();
             inputStream.close();
 
@@ -73,7 +73,7 @@ public class asincDownloadProvinces extends AsyncTask<Void, Void, ArrayList<Prov
             return provincesParser.getProvinces();
         }
         catch (Exception e){
-            Log.e("Debug", "Eccezione: " + e.getMessage());
+            Log.e("Provinces", "Eccezione: " + e.getMessage());
             return null;
         }
     }
@@ -81,7 +81,7 @@ public class asincDownloadProvinces extends AsyncTask<Void, Void, ArrayList<Prov
     @Override
     protected void onPostExecute(ArrayList<Province> result){
         if(result!= null){
-            Log.e("Debug", String.valueOf(result.size()));
+            Log.e("Provinces", String.valueOf(result.size()));
             spinnerSetup.setupProvinces(result);
         }
     }
