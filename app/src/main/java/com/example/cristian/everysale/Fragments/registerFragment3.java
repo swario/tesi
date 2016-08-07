@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.cristian.everysale.AsyncronousTasks.asincRegister;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
-import com.example.cristian.everysale.BaseClasses.imagePicker.Utility;
+import com.example.cristian.everysale.BaseClasses.imagePicker.imageUtility;
 import com.example.cristian.everysale.R;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
@@ -37,7 +37,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
     private String imgPath=null;
     //image picker
 
-    private Utility bitmapConverter=null;
+    private imageUtility bitmapConverter=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +61,6 @@ public class registerFragment3 extends Fragment implements OnClickListener {
         view.findViewById(R.id.backButton).setOnClickListener(this);
         view.findViewById(R.id.registerSubmitButton).setOnClickListener(this);
 
-
-
         return view;
     }
 
@@ -76,8 +74,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
             dataAllowCheckbox.setChecked(true);
         }
         imgPath=savedValues.getString("imgPath",null);
-        Utility utility=new Utility();
-        ivImage.setImageBitmap(utility.getBitmap(imgPath));
+        imageUtility imageUtility =new imageUtility();
+        ivImage.setImageBitmap(imageUtility.getBitmap(imgPath));
         //Toast.makeText(getContext(),"onresume  "+ savedValues.getString("imgPath", "") , Toast.LENGTH_LONG).show();
         //a noi piace
     }
@@ -106,7 +104,7 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
                 startActivity(intent);
                 //Toast.makeText(getContext(),"ongallery  " + imgPath , Toast.LENGTH_LONG).show();
-                bitmapConverter=new Utility();
+                bitmapConverter=new imageUtility();
                 imgPath=savedValues.getString("imgPath",null);
                 ivImage.setImageBitmap(bitmapConverter.getBitmap(imgPath));
                 break;
@@ -185,7 +183,8 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                     return;
                 }
 
-                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region, city, mobilePhone, dataAllow);
+                new asincRegister(getContext(), getActivity()).execute(email, username, password, name, surname, region,
+                        city, mobilePhone, dataAllow, imgPath);
                 break;
         }
     }

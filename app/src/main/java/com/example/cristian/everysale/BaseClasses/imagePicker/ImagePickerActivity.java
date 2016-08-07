@@ -42,7 +42,7 @@ public class ImagePickerActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
-            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+            case imageUtility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if(userChoosenTask.equals("Take Photo"))
                         cameraIntent();
@@ -64,7 +64,7 @@ public class ImagePickerActivity extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(ImagePickerActivity.this);
+                boolean result = imageUtility.checkPermission(ImagePickerActivity.this);
 
                 if (items[item].equals("Scatta foto")) {
                     userChoosenTask = "Scatta foto";
