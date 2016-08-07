@@ -7,6 +7,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class RegionsParser extends DefaultHandler {
 
+    private boolean isRegion;
     private boolean isRegionCode;
     private boolean isRegionName;
 
