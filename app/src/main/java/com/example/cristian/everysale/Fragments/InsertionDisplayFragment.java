@@ -10,12 +10,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +37,7 @@ import com.example.cristian.everysale.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class InsertionDisplayFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class InsertionDisplayFragment extends Fragment implements OnClickListener, OnItemClickListener, OnRatingBarChangeListener {
 
     private Insertion insertion;
     private long insertionId;
@@ -47,6 +51,9 @@ public class InsertionDisplayFragment extends Fragment implements View.OnClickLi
 
     private TextView titleTextView;
     private ImageView imageView;
+    private RelativeLayout feedbackBox;
+    private RatingBar feedbackRatingBar;
+    private TextView feedbackTextView;
     private TextView priceTextView;
     private TextView cityTextView;
     private TextView addressTextView;
@@ -71,6 +78,9 @@ public class InsertionDisplayFragment extends Fragment implements View.OnClickLi
 
         titleTextView = (TextView) view.findViewById(R.id.insertion_title);
         imageView = (ImageView) view.findViewById(R.id.insertion_image);
+        feedbackBox = (RelativeLayout) view.findViewById(R.id.feedback_box);
+        feedbackRatingBar = (RatingBar) view.findViewById(R.id.feedbackRatingBar);
+        feedbackTextView = (TextView) view.findViewById(R.id.feedbackRateTextView);
         priceTextView = (TextView) view.findViewById(R.id.insertion_price_value);
         cityTextView = (TextView) view.findViewById(R.id.insertion_city_value);
         addressTextView = (TextView) view.findViewById(R.id.insertion_address_value);
@@ -81,6 +91,10 @@ public class InsertionDisplayFragment extends Fragment implements View.OnClickLi
         expirationDate = (TextView) view.findViewById(R.id.item_date2_value);
         description = (TextView) view.findViewById(R.id.item_description_value);
         listView = (ListView) view.findViewById(R.id.listView);
+
+        feedbackRatingBar.setOnRatingBarChangeListener(this);
+
+        feedbackBox.setVisibility(View.GONE);
 
         activity = (InsertionActivity) getActivity();
         this.menu = activity.menu;
@@ -177,5 +191,17 @@ public class InsertionDisplayFragment extends Fragment implements View.OnClickLi
 
         long userId = insertion.getFeedbacks().get(position).getUserId();
         Toast.makeText(getContext(), "Utente: " + String.valueOf(userId), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
+        if(fromUser){
+            if(rating<1){
+                feedbackTextView.setText("1");
+            }
+            else{
+                feedbackTextView.setText("" + rating);
+            }
+        }
     }
 }
