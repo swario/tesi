@@ -6,6 +6,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.view.View.OnClickListener;
 
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
@@ -35,6 +37,9 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
     private Spinner regionSpinner;
     private Spinner citySpinner;
     private EditText mobileEditText;
+
+    private ArrayList<Integer> regionsCode = new ArrayList<>();
+    private ArrayList<Integer> provincesCode = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,22 +91,20 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         //poi, prelevo i dati per riempire eventuali campi già compilati
         nameEditText.setText(savedValues.getString("name", ""));
         surnameEditText.setText(savedValues.getString("surname", ""));
-        regionSpinner.setSelection(savedValues.getInt("regionPosition", 0));
+        //regionSpinner.setSelection(savedValues.getInt("regionPosition", 0));
 
         mobileEditText.setText(savedValues.getString("mobilePhone", ""));
 
         String message = savedValues.getString("message", "");
         if(message.contains("email")) {
             nameEditText.requestFocus();
-            InputMethodManager inputMethodManager =
-                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
             inputMethodManager.showSoftInput(nameEditText, InputMethodManager.SHOW_IMPLICIT);
             return;
         }
         if(message.contains("username")) {
             surnameEditText.requestFocus();
-            InputMethodManager inputMethodManager =
-                    (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
             inputMethodManager.showSoftInput(surnameEditText, InputMethodManager.SHOW_IMPLICIT);
             return;
         }
@@ -125,7 +128,12 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        setCitySpinner();
+        switch (view.getId()){
+            case R.id.regioneSpinner:
+                Log.d("EverySale", "Regione selezionata");
+                new asincDownloadProvinces(getContext(), this, regionsCode.get(position)).execute();
+                break;
+        }
     }
 
     @Override
@@ -135,11 +143,14 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
 
     public void setupRegions(ArrayList<Region> result){
         Iterator<Region> reg = result.iterator();
-        ArrayList<String> regions = new ArrayList<>();
+        ArrayList<String> regionsName = new ArrayList<>();
+        regionsCode.clear();
         while(reg.hasNext()){
-            regions.add(reg.next().getRegionName());
+            Region temp = reg.next();
+            regionsName.add(temp.getRegionName());
+            regionsCode.add(temp.getRegionCode());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, regions);
+        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, regionsName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
@@ -153,8 +164,8 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         }
         ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, provinces);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        regionSpinner.setAdapter(adapter);
-        regionSpinner.setOnItemSelectedListener(this);
+        citySpinner.setAdapter(adapter);
+        citySpinner.setOnItemSelectedListener(this);
     }
 
     public void setupMunicipalities(){
