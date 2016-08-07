@@ -145,7 +145,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         regionSpinner.setOnItemSelectedListener(this);
     }
 
-    public void setupProvincies(ArrayList<Province> result){
+    public void setupProvinces(ArrayList<Province> result){
         Iterator<Province> reg = result.iterator();
         ArrayList<String> regions = new ArrayList<>();
         while(reg.hasNext()){
