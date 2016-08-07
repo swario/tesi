@@ -146,12 +146,12 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
     }
 
     public void setupProvinces(ArrayList<Province> result){
-        Iterator<Province> reg = result.iterator();
-        ArrayList<String> regions = new ArrayList<>();
-        while(reg.hasNext()){
-            regions.add(reg.next().getProvinceName());
+        Iterator<Province> prov = result.iterator();
+        ArrayList<String> provinces = new ArrayList<>();
+        while(prov.hasNext()){
+            provinces.add(prov.next().getProvinceName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, regions);
+        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, provinces);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
