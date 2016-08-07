@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Debug;
+import android.util.Log;
 
 import com.example.cristian.everysale.Activity.Main2Activity;
 
@@ -70,66 +72,100 @@ public class asincRegister extends AsyncTask<String, Void, String> {
         int maxBufferSize = 1*1024*1024;
 
         try{
-            FileInputStream fileInputStream = new FileInputStream(new File(filePath) );
+            if(filePath != null){
+                FileInputStream fileInputStream = new FileInputStream(new File(filePath) );
 
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("email", email));
-            parameters.add(new BasicNameValuePair("password", password));
-            parameters.add(new BasicNameValuePair("username", username));
-            parameters.add(new BasicNameValuePair("nome", name));
-            parameters.add(new BasicNameValuePair("cognome", surname));
-            parameters.add(new BasicNameValuePair("regione", region));
-            parameters.add(new BasicNameValuePair("citta", city));
-            parameters.add(new BasicNameValuePair("mobile_phone", mobile));
-            parameters.add(new BasicNameValuePair("dataAllow", dataAllow));
-            URL url = new URL(URL + getQuery(parameters));
-            connection = (HttpURLConnection) url.openConnection();
+                List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+                parameters.add(new BasicNameValuePair("email", email));
+                parameters.add(new BasicNameValuePair("password", password));
+                parameters.add(new BasicNameValuePair("username", username));
+                parameters.add(new BasicNameValuePair("nome", name));
+                parameters.add(new BasicNameValuePair("cognome", surname));
+                parameters.add(new BasicNameValuePair("regione", region));
+                parameters.add(new BasicNameValuePair("citta", city));
+                parameters.add(new BasicNameValuePair("mobile_phone", mobile));
+                parameters.add(new BasicNameValuePair("dataAllow", dataAllow));
+                URL url = new URL(URL + getQuery(parameters));
+                connection = (HttpURLConnection) url.openConnection();
 
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setUseCaches(false);
-            connection.setRequestMethod("POST");
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setUseCaches(false);
+                connection.setRequestMethod("POST");
 
-            connection.setRequestProperty("Connection", "Keep-Alive");
-            connection.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+                connection.setRequestProperty("Connection", "Keep-Alive");
+                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
 
-            outputStream = new DataOutputStream( connection.getOutputStream() );
-            outputStream.writeBytes(twoHyphens + boundary + lineEnd);
-            outputStream.writeBytes("Content-Disposition: form-data; name=\"uploadedfile\";filename=\"" + filePath +"\"" + lineEnd);
-            outputStream.writeBytes(lineEnd);
+                outputStream = new DataOutputStream( connection.getOutputStream() );
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"uploadedfile\";filename=\"" + filePath +"\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
 
-            bytesAvailable = fileInputStream.available();
-            bufferSize = Math.min(bytesAvailable, maxBufferSize);
-            buffer = new byte[bufferSize];
-
-            // Read file
-            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-            while (bytesRead > 0)
-            {
-                outputStream.write(buffer, 0, bufferSize);
                 bytesAvailable = fileInputStream.available();
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
+
+                // Read file
                 bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                while (bytesRead > 0)
+                {
+                    outputStream.write(buffer, 0, bufferSize);
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                }
+
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                fileInputStream.close();
+                outputStream.flush();
+                outputStream.close();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+                StringBuilder stringBuilder = new StringBuilder("");
+                String response = null;
+
+                while((response = reader.readLine()) != null){
+                    stringBuilder.append(response);
+                    break;
+                }
+                return stringBuilder.toString();
             }
+            else{
+                URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/registerMobile.php");
 
-            outputStream.writeBytes(lineEnd);
-            outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+                String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+                data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                data += "&" + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+                data += "&" + URLEncoder.encode("cognome", "UTF-8") + "=" + URLEncoder.encode(surname, "UTF-8");
+                data += "&" + URLEncoder.encode("regione", "UTF-8") + "=" + URLEncoder.encode(region, "UTF-8");
+                data += "&" + URLEncoder.encode("citta", "UTF-8") + "=" + URLEncoder.encode(city, "UTF-8");
+                data += "&" + URLEncoder.encode("mobile_phone", "UTF-8") + "=" + URLEncoder.encode(mobile, "UTF-8");
+                data += "&" + URLEncoder.encode("dataAllow", "UTF-8") + "=" + URLEncoder.encode(dataAllow, "UTF-8");
 
-            fileInputStream.close();
-            outputStream.flush();
-            outputStream.close();
+                URLConnection connection_2 = url.openConnection();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                connection_2.setDoOutput(true);
+                OutputStreamWriter streamWriter = new OutputStreamWriter(connection_2.getOutputStream());
 
-            StringBuilder stringBuilder = new StringBuilder("");
-            String response = null;
+                streamWriter.write(data);
+                streamWriter.flush();
 
-            while((response = reader.readLine()) != null){
-                stringBuilder.append(response);
-                break;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection_2.getInputStream()));
+
+                StringBuilder stringBuilder = new StringBuilder("");
+                String response = null;
+
+                while((response = reader.readLine()) != null){
+                    stringBuilder.append(response);
+                    break;
+                }
+                return stringBuilder.toString();
             }
-            return stringBuilder.toString();
 
         }
         catch (Exception e){
@@ -140,6 +176,7 @@ public class asincRegister extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result){
 
+        Log.e("Debug", result);
         if(result.contains("success")){
 
             SharedPreferences.Editor editor = savedValues.edit();
