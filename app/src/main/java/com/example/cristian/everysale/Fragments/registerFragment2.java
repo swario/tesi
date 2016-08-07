@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.view.View.OnClickListener;
 
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
+import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.Interfaces.SpinnerSetup;
 import com.example.cristian.everysale.R;
@@ -144,8 +145,16 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         regionSpinner.setOnItemSelectedListener(this);
     }
 
-    public void setupProvincies(){
-
+    public void setupProvincies(ArrayList<Province> result){
+        Iterator<Province> reg = result.iterator();
+        ArrayList<String> regions = new ArrayList<>();
+        while(reg.hasNext()){
+            regions.add(reg.next().getProvinceName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, regions);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regionSpinner.setAdapter(adapter);
+        regionSpinner.setOnItemSelectedListener(this);
     }
 
     public void setupMunicipalities(){

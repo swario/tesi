@@ -1,5 +1,6 @@
 package com.example.cristian.everysale.Interfaces;
 
+import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 
 import java.util.ArrayList;
@@ -10,6 +11,6 @@ import java.util.ArrayList;
 public interface SpinnerSetup {
 
     public void setupRegions(ArrayList<Region> result);
-    public void setupProvincies();
+    public void setupProvinces(ArrayList<Province> result);
     public void setupMunicipalities();
 }

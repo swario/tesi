@@ -22,6 +22,7 @@ public class RegionsParser extends DefaultHandler {
     public ArrayList<Region> getRegions(){
         return regions;
     }
+
     public void startDocument(){
         region = new Region();
         regions = new ArrayList<>();

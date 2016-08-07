@@ -1,10 +1,13 @@
 package com.example.cristian.everysale.AsyncronousTasks;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.Interfaces.SpinnerSetup;
+import com.example.cristian.everysale.Parsers.ProvincesParser;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -21,13 +24,13 @@ import javax.xml.parsers.SAXParserFactory;
 /**
  * Created by Cristian on 07/08/2016.
  */
-public class asincDownloadProvincies extends AsyncTask<Void, Void, ArrayList<Province>>{
+public class asincDownloadProvinces extends AsyncTask<Void, Void, ArrayList<Province>> {
     private String fileName = "provincies.xml";
     private Context context;
     private SpinnerSetup spinnerSetup;
     private int regionCode;
 
-    public asincDownloadProvincies(Context cont, SpinnerSetup spinner, int regCode){
+    public asincDownloadProvinces(Context cont, SpinnerSetup spinner, int regCode){
         context = cont;
         spinnerSetup = spinner;
         regionCode = regCode;
@@ -61,13 +64,13 @@ public class asincDownloadProvincies extends AsyncTask<Void, Void, ArrayList<Pro
             SAXParser parser = parserFactory.newSAXParser();
             XMLReader reader = parser.getXMLReader();
 
-            ProvinciesParser provinciesParser = new ProvinciesParser();
-            reader.setContentHandler(provinciesParser);
+            ProvincesParser provincesParser = new ProvincesParser();
+            reader.setContentHandler(provincesParser);
 
             FileInputStream fileInputStream = context.openFileInput(fileName);
             InputSource inputSource = new InputSource(fileInputStream);
             reader.parse(inputSource);
-            return provinciesParser.getRegions();
+            return provincesParser.getProvinces();
         }
         catch (Exception e){
             Log.e("Debug", "Eccezione: " + e.getMessage());
@@ -79,7 +82,7 @@ public class asincDownloadProvincies extends AsyncTask<Void, Void, ArrayList<Pro
     protected void onPostExecute(ArrayList<Province> result){
         if(result!= null){
             Log.e("Debug", String.valueOf(result.size()));
-            spinnerSetup.setupProvincies(result);
+            spinnerSetup.setupProvinces(result);
         }
     }
 }
