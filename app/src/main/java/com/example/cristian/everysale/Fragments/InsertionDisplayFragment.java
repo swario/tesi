@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -23,13 +24,11 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
-import com.example.cristian.everysale.AsyncronousTasks.asincAddFavorite;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadInsertion;
+import com.example.cristian.everysale.AsyncronousTasks.asincEvaluation;
 import com.example.cristian.everysale.AsyncronousTasks.asincImageDownload;
-import com.example.cristian.everysale.AsyncronousTasks.asincRemoveFavorite;
 import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.R;
@@ -49,11 +48,13 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
 
     private InsertionActivity activity;
 
-    private TextView titleTextView;
-    private ImageView imageView;
     private RelativeLayout feedbackBox;
     private RatingBar feedbackRatingBar;
-    private TextView feedbackTextView;
+    private EditText feedbackEditText;
+    private TextView feedbackRateTextView;
+
+    private TextView titleTextView;
+    private ImageView imageView;
     private TextView priceTextView;
     private TextView cityTextView;
     private TextView addressTextView;
@@ -65,6 +66,7 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     private TextView description;
 
     private ListView listView;
+    private Button sendFeebackButton;
 
     private final String imageAddress = "http://webdev.dibris.unige.it/~S3928202/Progetto/itemPics/";
 
@@ -76,11 +78,15 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
 
         View view = inflater.inflate(R.layout.fragment_insertion_display, container, false);
 
-        titleTextView = (TextView) view.findViewById(R.id.insertion_title);
-        imageView = (ImageView) view.findViewById(R.id.insertion_image);
+
         feedbackBox = (RelativeLayout) view.findViewById(R.id.feedback_box);
         feedbackRatingBar = (RatingBar) view.findViewById(R.id.feedbackRatingBar);
-        feedbackTextView = (TextView) view.findViewById(R.id.feedbackRateTextView);
+        feedbackEditText = (EditText) view.findViewById(R.id.feedbackEditText);
+        feedbackRateTextView = (TextView) view.findViewById(R.id.feedbackRateTextView);
+
+
+        titleTextView = (TextView) view.findViewById(R.id.insertion_title);
+        imageView = (ImageView) view.findViewById(R.id.insertion_image);
         priceTextView = (TextView) view.findViewById(R.id.insertion_price_value);
         cityTextView = (TextView) view.findViewById(R.id.insertion_city_value);
         addressTextView = (TextView) view.findViewById(R.id.insertion_address_value);
@@ -91,6 +97,7 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         expirationDate = (TextView) view.findViewById(R.id.item_date2_value);
         description = (TextView) view.findViewById(R.id.item_description_value);
         listView = (ListView) view.findViewById(R.id.listView);
+        sendFeebackButton = (Button) view.findViewById(R.id.feedbackSubmitButton);
 
         feedbackRatingBar.setOnRatingBarChangeListener(this);
 
@@ -153,6 +160,7 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         description.setText(insertion.getDescription());
 
         insertionistButton.setOnClickListener(this);
+        sendFeebackButton.setOnClickListener(this);
         FeedBackSetUp();
     }
 
@@ -183,7 +191,16 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(activity, "Utente n° " + String.valueOf(insertion.getInsertionist_id()), Toast.LENGTH_LONG).show();
+        switch (v.getId()){
+
+            case R.id.feedbackSubmitButton:
+                sendFeedback();
+                break;
+
+            case R.id.item_insertionist_value:
+                Toast.makeText(activity, "Utente n° " + String.valueOf(insertion.getInsertionist_id()), Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 
     @Override
@@ -197,11 +214,35 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
         if(fromUser){
             if(rating<1){
-                feedbackTextView.setText("1");
+                feedbackRateTextView.setText("1");
+                ratingBar.setRating(1);
             }
             else{
-                feedbackTextView.setText("" + rating);
+                feedbackRateTextView.setText("" + rating);
             }
         }
+    }
+
+    public void OnFeebackResponse(String response){
+
+        if(response == null){
+            Toast.makeText(getContext(), "Connessione Internet Assente", Toast.LENGTH_LONG).show();
+        }
+        else if(response.contains("good")){
+            feedbackBox.setVisibility(View.GONE);
+            activity.finish();
+            activity.startActivity(activity.getIntent());
+        }
+        else if (response.contains("No address associated with hostname")){
+            Toast.makeText(getContext(), "Connessione Internet Assente", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void sendFeedback(){
+        String feedbackText = feedbackEditText.getText().toString();
+        float rate = Float.parseFloat(feedbackRateTextView.getText().toString());
+        Long userId = savedValues.getLong("userId", 1);
+
+        new asincEvaluation(this).execute(this.insertionId, userId, Float.valueOf(rate), feedbackText);
     }
 }
