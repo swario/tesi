@@ -27,6 +27,8 @@ public class navigationDrawerActivity extends AppCompatActivity {
     protected ActionBarDrawerToggle mDrawerToggle;
     protected String mActivityTitle;
 
+    private Integer EasterEgg=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,14 +79,17 @@ public class navigationDrawerActivity extends AppCompatActivity {
 
                 TextView name = (TextView) findViewById(R.id.nav_header_username);
                 String sname = savedValues.getString("username", "ulisse rimane comunque il piu bello");
-                Toast.makeText(getApplication(), sname , Toast.LENGTH_LONG).show();
                 name.setText(sname);
+
+                EasterEgg++;
+                if(EasterEgg>7)Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
 
             }
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                if(EasterEgg>7)Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
             }
 
 

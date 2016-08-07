@@ -10,9 +10,9 @@
     tools:context="com.example.cristian.everysale.Activity.SearchActivity">
 
     <SearchView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchView2"
+        android:id="@+id/searchView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

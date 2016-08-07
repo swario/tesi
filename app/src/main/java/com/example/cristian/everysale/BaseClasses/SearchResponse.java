@@ -22,6 +22,7 @@ public class SearchResponse {
 
         insertions.add(insertion);
     }
+    public ArrayList<InsertionPreview> getInsertions(){ return this.insertions;}
 
     public void merge(SearchResponse toBeMerged){
 
