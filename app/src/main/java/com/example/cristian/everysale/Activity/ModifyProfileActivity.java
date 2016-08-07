@@ -82,13 +82,14 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
                 break;
             case R.id.modifyImageButton:
 
+                break;
         }
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        setCitySpinner();
+        //setCitySpinner();
     }
 
     @Override
@@ -96,7 +97,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
     }
 
-    private void setCitySpinner(){
+    /*private void setCitySpinner(){
         ArrayAdapter<CharSequence> adapter=null;
         int region=regionSpinner.getSelectedItemPosition();
         if(region==0) {
@@ -161,5 +162,5 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(adapter);
-    }
+    }*/
 }

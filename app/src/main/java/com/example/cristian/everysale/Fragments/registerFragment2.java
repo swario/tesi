@@ -49,8 +49,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_register_2, container, false);
 
@@ -128,11 +127,14 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (view.getId()){
-            case R.id.regioneSpinner:
-                Log.d("EverySale", "Regione selezionata");
-                new asincDownloadProvinces(getContext(), this, regionsCode.get(position)).execute();
-                break;
+        Log.d("EverySale", String.valueOf(view.getId() + " " + id + " " + R.id.regioneTextView + " " + parent.getId() + " " + parent));
+        if(String.valueOf(parent).contains("regioneSpinner")){
+            Log.d("EverySale", "Regione selezionata");
+            new asincDownloadProvinces(getContext(), this, regionsCode.get(position)).execute();
+        }
+        else if(String.valueOf(parent).contains("cittaSpinner")){
+            Log.d("EverySale", "Provincia selezionata");
+            //new asincDownloadProvinces(getContext(), this, provincesCode.get(position)).execute();
         }
     }
 
@@ -142,6 +144,7 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
     }
 
     public void setupRegions(ArrayList<Region> result){
+        Log.d("EverySale", "Inserimento regioni in corso...");
         Iterator<Region> reg = result.iterator();
         ArrayList<String> regionsName = new ArrayList<>();
         regionsCode.clear();
@@ -154,9 +157,11 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
+        Log.d("EverySale", "Regioni inserite");
     }
 
     public void setupProvinces(ArrayList<Province> result){
+        Log.d("EverySale", "Inserimento province in corso...");
         Iterator<Province> prov = result.iterator();
         ArrayList<String> provinces = new ArrayList<>();
         while(prov.hasNext()){
@@ -166,13 +171,14 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(adapter);
         citySpinner.setOnItemSelectedListener(this);
+        Log.d("EverySale", "Province inserite");
     }
 
     public void setupMunicipalities(){
 
     }
 
-    private void setCitySpinner(){
+    /*private void setCitySpinner(){
         ArrayAdapter<CharSequence> adapter=null;
         int region=regionSpinner.getSelectedItemPosition();
         if(region==0) {
@@ -237,5 +243,5 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
         }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(adapter);
-    }
+    }*/
 }

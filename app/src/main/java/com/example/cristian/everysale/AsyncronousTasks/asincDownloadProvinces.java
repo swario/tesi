@@ -41,7 +41,7 @@ public class asincDownloadProvinces extends AsyncTask<Void, Void, ArrayList<Prov
 
         try {
 
-            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getRegions.php?regioCode=" + regionCode);
+            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getProvinces.php?regionCode=" + regionCode);
 
             InputStream inputStream = url.openStream();
 
