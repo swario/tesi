@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,14 @@ import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
+import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
 import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.AsyncronousTasks.asincGetRecent;
 import com.example.cristian.everysale.BaseClasses.CustomAdapter;
@@ -26,17 +31,21 @@ import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
 
-public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab, OnGlobalLayoutListener{
+public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab{
 
+    private boolean loading = false;
     private boolean thereIsMore = true;
     private int oldItemsCount = 0;
 
     private int previousFirstVisibleItem;
-    
-    private SearchResponse searchResponse;
-    private SwipeRefreshLayout refreshLayout;
 
+    private ArrayList<InsertionPreview> previewArrayList;
+    private SearchResponse searchResponse;
+    private InsertionArrayAdapter adapter;
+
+    private SwipeRefreshLayout refreshLayout;
     private ListView itemsListView;
+
     private View view;
 
     @Override
@@ -47,13 +56,16 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
         itemsListView.setOnScrollListener(this);
-
+        //itemsListView.getViewTreeObserver().addOnGlobalLayoutListener(this);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
 
         previousFirstVisibleItem = 0;
+        previewArrayList = new ArrayList<>();
 
         searchResponse = null;
+        adapter = new InsertionArrayAdapter(getContext(), getActivity());
+        itemsListView.setAdapter(adapter);
         new asincGetRecent(this).execute();
         return view;
     }
@@ -65,7 +77,7 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
 
     private void setListView(){
 
-        ArrayList<String> images = new ArrayList<>();
+        /*ArrayList<String> images = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
         ArrayList<String> prices = new ArrayList<>();
         ArrayList<String> cities = new ArrayList<>();
@@ -83,8 +95,8 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
             rating.add(preview.getRate());
             insertionsId.add(preview.getInsertionId());
         }
-        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId, this);
-        itemsListView.setAdapter(adapter);
+        CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating,
+            insertionsId, this);*/
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
@@ -93,24 +105,32 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
             Toast.makeText(getContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
             return;
         }
-
         refreshLayout.setRefreshing(false);
-        if(this.searchResponse == null){
+        adapter.addAll(searchResponse.getInsertions());
+        /*if(this.searchResponse == null){
             this.searchResponse = searchResponse;
-            oldItemsCount = this.searchResponse.getInsertionCount();
+            adapter = new InsertionArrayAdapter(getContext(), getActivity());
+            adapter.addAll(searchResponse.getInsertions());
+            itemsListView.setAdapter(adapter);
+            //adapter.addAll(this.searchResponse.getInsertions());
         } else {
             oldItemsCount = this.searchResponse.getInsertionCount();
-            this.searchResponse.merge(searchResponse);
+            for(int i = 0; i < searchResponse.getInsertionCount(); i++) {
+                adapter.add(searchResponse.getInsertion(i));
+            }
         }
         if(oldItemsCount == this.searchResponse.getInsertionCount()){
             thereIsMore = false;
         }
-        setListView();
+        oldItemsCount = this.searchResponse.getInsertionCount();
+        loaded = true;*/
+        Log.e("Debug", "Adapter: " + String.valueOf(adapter.getCount()));
+        loading = false;
     }
 
     @Override
     public void onRefresh() {
-        searchResponse = null;
+        adapter.clear();
         this.thereIsMore = true;
         new asincGetRecent(this).execute();
     }
@@ -125,9 +145,10 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
 
         if(firstVisibleItem > previousFirstVisibleItem){//sto scrollando verso il basso
 
-            if((firstVisibleItem + visibleItemCount) >= totalItemCount){// sono  giunto alla fine della lista
+            if((firstVisibleItem + visibleItemCount) >= totalItemCount && !loading){// sono  giunto alla fine della lista
 
-                long upperLimit = searchResponse.getInsertion(searchResponse.getInsertionCount() -1).getInsertionId();
+                loading = true;
+                long upperLimit = adapter.getItem(adapter.getCount() -1).getInsertionId();
                 new asincGetRecent(this).execute(upperLimit);
             }
         }
@@ -145,15 +166,17 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         startActivity(intent);
     }
 
-    @Override
+    /*@Override
     public void onGlobalLayout() {
-        if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
-            long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
-            new asincGetRecent(this).execute(upperLimit);
+        if(loaded){
+            if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
+                long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
+                new asincGetRecent(this).execute(upperLimit);
+            }
+            if(oldItemsCount < this.searchResponse.getInsertionCount()){
+                Log.e("Debug", "Quanti:" + String.valueOf(this.oldItemsCount));
+                itemsListView.smoothScrollToPosition(oldItemsCount);
+            }
         }
-        if(oldItemsCount < this.searchResponse.getInsertionCount()){
-            itemsListView.smoothScrollToPosition(oldItemsCount);
-        }
-
-    }
+    }*/
 }
