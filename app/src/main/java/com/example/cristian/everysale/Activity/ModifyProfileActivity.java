@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
+import com.example.cristian.everysale.BaseClasses.imagePicker.imageUtility;
 import com.example.cristian.everysale.R;
 
 public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener {
@@ -29,10 +31,12 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     private Spinner citySpinner;
     private EditText mobileEditText;
     private CheckBox dataAllowCheckbox;
-    private ImageView insertionImageView;
+    private ImageView profileImageView;
     private Button imageButton;
     private Button cancelButton;
     private Button updateButton;
+
+    private String imgPath=null;
 
     private final String imageAddress = "http://webdev.dibris.unige.it/~S3928202/Progetto/profilePics/";
 
@@ -53,8 +57,8 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         regionSpinner = (Spinner) findViewById(R.id.modifyRegionSpinner);
         mobileEditText = (EditText) findViewById(R.id.modifyMobileEditText);
         dataAllowCheckbox = (CheckBox) findViewById(R.id.modifyDataAllowCheckBox);
-        insertionImageView = (ImageView) findViewById(R.id.modifyInsertionImageView);
-        imageButton = (Button) findViewById(R.id.imageButton);
+        profileImageView = (ImageView) findViewById(R.id.modifyInsertionImageView);
+        imageButton = (Button) findViewById(R.id.modifyImageButton);
         cancelButton = (Button) findViewById(R.id.modifyCancelButton);
         updateButton = (Button) findViewById(R.id.modifyUpdateButton);
 
@@ -81,6 +85,15 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
                 //getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                 break;
             case R.id.modifyImageButton:
+                Intent intent = new Intent(this, ImagePickerActivity.class);
+                startActivity(intent);
+                imageUtility bitmapConverter=null;
+                bitmapConverter=new imageUtility();
+                imgPath=savedValues.getString("imgPath",null);
+                profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
+                break;
+
+
 
         }
 

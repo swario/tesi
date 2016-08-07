@@ -15,5 +15,7 @@ public class MyInsertionActivity extends navigationDrawerActivity {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_my_insertion, null, false);
         drawerLayout.addView(contentView, 0);
+
+
     }
 }
