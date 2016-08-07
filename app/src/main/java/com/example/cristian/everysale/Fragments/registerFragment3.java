@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.cristian.everysale.AsyncronousTasks.asincRegister;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
 import com.example.cristian.everysale.BaseClasses.imagePicker.imageUtility;
+import com.example.cristian.everysale.Interfaces.LoginPerformer;
 import com.example.cristian.everysale.R;
 
 public class registerFragment3 extends Fragment implements OnClickListener {
@@ -236,5 +237,4 @@ public class registerFragment3 extends Fragment implements OnClickListener {
                 return R.array.fregister2_region0_spinner;
         }
     }
-
 }

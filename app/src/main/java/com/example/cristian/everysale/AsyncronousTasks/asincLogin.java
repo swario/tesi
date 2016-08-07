@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.Main2Activity;
 import com.example.cristian.everysale.Activity.MainActivity;
+import com.example.cristian.everysale.Interfaces.LoginPerformer;
 import com.example.cristian.everysale.R;
 
 import java.io.BufferedReader;
@@ -26,29 +27,18 @@ import java.net.URLEncoder;
 
 public class asincLogin extends AsyncTask<String, Void, String> {
 
-    SharedPreferences savedValues;
-
-    private Context context;
     private Activity activity;
+    private Context context;
+    private LoginPerformer performer;
     private ProgressBar loadingBar;
 
     private String username;
     private String password;
 
-    public asincLogin( Activity activity){
-
-        loadingBar = null;
-        savedValues = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        this.context = activity.getApplicationContext();
+    public asincLogin( Activity activity, LoginPerformer loginPerformer){
         this.activity = activity;
-    }
-
-    public asincLogin( Activity activity, ProgressBar progressBar){
-
-        this.loadingBar = progressBar;
-        savedValues = activity.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        this.context = activity.getApplicationContext();
-        this.activity = activity;
+        this.performer = loginPerformer;
+        this.context = this.activity.getBaseContext();
     }
 
     @Override
@@ -90,51 +80,22 @@ public class asincLogin extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result){
 
-        if(loadingBar != null){
-            loadingBar.setVisibility(View.GONE);
-        }
         if (result == null){
 
-            if(loadingBar != null) {
-                ((TextView) activity.findViewById(R.id.loading_text_view)).setText("Connessione Internet Assente");
-            }
-            else{
-                Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
-            }
+            this.performer.OnConnectionAbsent();
         }
         else if(result.contains("No address associated with hostname")) {
-            if(loadingBar != null) {
-                ((TextView) activity.findViewById(R.id.loading_text_view)).setText("Connessione Internet Assente");
-                ((Button) activity.findViewById(R.id.retry_button)).setVisibility(View.VISIBLE);
-            }
-            else {
-                Toast.makeText(context, "Connessione Internet assente", Toast.LENGTH_LONG).show();
-            }
+            this.performer.OnConnectionAbsent();
         }
         else if(result.contains("success")){
-            Editor editor = savedValues.edit();
 
-            editor.putString("username", this.username);
-            editor.putString("password", this.password);
             String[] array = result.split("-");
             long id = Long.parseLong(array[1]);
-            editor.putLong("userId", id);
-
-            editor.commit();
-
-            Intent openPage1 = new Intent(activity , Main2Activity.class);
-            activity.startActivity(openPage1);
-            activity.finish();
-
+            performer.OnLoginSuccess(this.username, this.password, id);
         }
         else if(result.contains("wrong input")){
 
-            if(loadingBar != null){
-                Intent intent = new Intent(activity, MainActivity.class);
-                intent.putExtra("goToLogin", true);
-                activity.startActivity(intent);
-                activity.finish();
-            }
+            performer.OnLoginFailed();
         }
     }
 }
