@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab, OnGlobalLayoutListener{
 
     private boolean thereIsMore = true;
+    private int oldItemsCount = 0;
 
     private int previousFirstVisibleItem;
     
@@ -87,24 +88,24 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
     }
 
     public void setSearchResponse(SearchResponse searchResponse){
+
         if(searchResponse == null){
             Toast.makeText(getContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
             return;
         }
-        int oldItemCount = 0;
+
         refreshLayout.setRefreshing(false);
         if(this.searchResponse == null){
             this.searchResponse = searchResponse;
+            oldItemsCount = this.searchResponse.getInsertionCount();
         } else {
-            oldItemCount = this.searchResponse.getInsertionCount();
+            oldItemsCount = this.searchResponse.getInsertionCount();
             this.searchResponse.merge(searchResponse);
         }
-        if(oldItemCount == this.searchResponse.getInsertionCount()){
+        if(oldItemsCount == this.searchResponse.getInsertionCount()){
             thereIsMore = false;
         }
         setListView();
-        if(oldItemCount != 0){
-        }
     }
 
     @Override
@@ -150,5 +151,9 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
             long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
             new asincGetRecent(this).execute(upperLimit);
         }
+        if(oldItemsCount < this.searchResponse.getInsertionCount()){
+            itemsListView.smoothScrollToPosition(oldItemsCount);
+        }
+
     }
 }
