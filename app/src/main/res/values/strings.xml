@@ -86,7 +86,7 @@
     <string name="new_insertion_shop">Negozio</string>
     <string name="new_insertion_city">Città</string>
     <string name="new_insertion_address">Indirizzo</string>
-    <string name="new_insertion_expiration_date">Data scadenza</string>
+    <string name="new_insertion_expiration_date">Data scadenza (facoltativa)</string>
     <string name="new_insertion_description">Descrizione</string>
     <string name="new_insertion_submit_button">Crea</string>
 

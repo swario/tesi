@@ -3,27 +3,42 @@ package com.example.cristian.everysale.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadMunicipalities;
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
+import com.example.cristian.everysale.BaseClasses.Province;
+import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
 import com.example.cristian.everysale.BaseClasses.imagePicker.imageUtility;
+import com.example.cristian.everysale.Interfaces.SpinnerSetup;
 import com.example.cristian.everysale.R;
 
-public class aNewInsertionActivity extends navigationDrawerActivity implements OnClickListener,OnItemSelectedListener {
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+
+public class aNewInsertionActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup {
 
     private EditText titleEditText;
     private EditText priceEditText;
     private EditText shopEditText;
-    private EditText cityEditText;
+    private Spinner regionSpinner;
+    private Spinner provinceSpinner;
+    private Spinner municipalitySpinner;
     private EditText addressEditText;
     private CheckBox expirationDateCheckBox;
     private DatePicker expirationDatePicker;
@@ -33,10 +48,10 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
     private ImageView insertionImageView;
 
     private String imgPath;
-
     //gestore immagini
     private imageUtility bitmapConverter=null;
-
+    private ArrayList<Integer> regionsCode = new ArrayList<>();
+    private ArrayList<Integer> provincesCode = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +60,14 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         View contentView = inflater.inflate(R.layout.new_insertion_layout , null, false);
         drawerLayout.addView(contentView, 0);
 
-        titleEditText= (EditText) findViewById(R.id.titleEditText);
-        priceEditText= (EditText) findViewById(R.id.priceEditText);
-        shopEditText= (EditText) findViewById(R.id.shopEditText);
-        cityEditText= (EditText) findViewById(R.id.cityEditText);
-        addressEditText= (EditText) findViewById(R.id.addressEditText);
-        expirationDatePicker= (DatePicker) findViewById(R.id.expirationDatePicker);
+        titleEditText = (EditText) findViewById(R.id.titleEditText);
+        priceEditText = (EditText) findViewById(R.id.priceEditText);
+        shopEditText = (EditText) findViewById(R.id.shopEditText);
+        regionSpinner = (Spinner) findViewById(R.id.insertionRegionSpinner);
+        provinceSpinner = (Spinner) findViewById(R.id.insertionProvinceSpinner);
+        municipalitySpinner = (Spinner) findViewById(R.id.insertionMunicipalitySpinner);
+        addressEditText = (EditText) findViewById(R.id.addressEditText);
+        expirationDatePicker = (DatePicker) findViewById(R.id.expirationDatePicker);
         insertionImageView = (ImageView) findViewById(R.id.itemImageView);
         imageButton = (Button) findViewById(R.id.newImageButton);
         cancelButton = (Button) findViewById(R.id.newCancelButton);
@@ -62,10 +79,13 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         cancelButton.setOnClickListener(this);
         submitButton.setOnClickListener(this);
 
+        Calendar cal = null;
+        expirationDatePicker.setMinDate(cal.get(Calendar.DAY_OF_MONTH));
+        expirationDatePicker.setMaxDate(cal.get(Calendar.DAY_OF_YEAR) + Calendar.MONTH);
+
         //inizializzo gestore immagini
         bitmapConverter=new imageUtility();
         savedValues.edit().putString("imgPath", null).commit();
-
     }
 
     public void onClick(View v) {
@@ -103,11 +123,60 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //setCitySpinner();
+        if(String.valueOf(parent).contains("RegionSpinner")){
+            Log.d("EverySale", "Regione selezionata");
+            new asincDownloadProvinces(this, this, regionsCode.get(position)).execute();
+        }
+        else if(String.valueOf(parent).contains("Province Spinner")){
+            Log.d("EverySale", "Provincia selezionata");
+            new asincDownloadMunicipalities(this, this, provincesCode.get(position)).execute();
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void setupRegions(ArrayList<Region> result){
+        Log.d("EverySale", "Inserimento regioni in corso...");
+        Iterator<Region> reg = result.iterator();
+        ArrayList<String> regionsName = new ArrayList<>();
+        regionsCode.clear();
+        while(reg.hasNext()){
+            Region temp = reg.next();
+            regionsName.add(temp.getRegionName());
+            regionsCode.add(temp.getRegionCode());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, regionsName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regionSpinner.setAdapter(adapter);
+        regionSpinner.setOnItemSelectedListener(this);
+        Log.d("EverySale", "Regioni inserite");
+    }
+
+    public void setupProvinces(ArrayList<Province> result){
+        Log.d("EverySale", "Inserimento province in corso...");
+        Iterator<Province> prov = result.iterator();
+        ArrayList<String> provincesName = new ArrayList<>();
+        provincesCode.clear();
+        while(prov.hasNext()){
+            Province temp = prov.next();
+            provincesName.add(temp.getProvinceName());
+            provincesCode.add(temp.getProvinceCode());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, provincesName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provinceSpinner.setAdapter(adapter);
+        provinceSpinner.setOnItemSelectedListener(this);
+        Log.d("EverySale", "Province inserite");
+    }
+
+    public void setupMunicipalities(ArrayList<String> result){
+        Log.d("EverySale", "Inserimento comuni in corso...");
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, result);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        municipalitySpinner.setAdapter(adapter);
+        Log.d("EverySale", "Comuni inseriti");
     }
 }
