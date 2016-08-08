@@ -9,6 +9,8 @@ public class Insertion {
     private String name;
     private boolean evaluated;
     private float price;
+    private String region;
+    private String province;
     private String city;
     private String address;
     private String shop_name;
@@ -53,6 +55,8 @@ public class Insertion {
     public void setName(String name) { this.name = name;}
     public void setEvaluated(boolean evaluated){ this.evaluated = evaluated;}
     public void setPrice(float price) { this.price = price;}
+    public void setRegion(String region){ this.region = region;}
+    public void setProvince(String province){ this.province = province;}
     public void setCity(String city) { this.city = city; }
     public void setAddress(String address) { this.address = address; }
     public void setShopName(String shopName){ this.shop_name = shopName; }
@@ -69,6 +73,8 @@ public class Insertion {
     public String getName() { return  name; }
     public boolean isEvaluated(){return evaluated;}
     public float getPrice(){ return  price; }
+    public String getRegion(){ return region;}
+    public String getProvince(){ return province;}
     public String getCity(){ return city; }
     public String getAddress() { return address; }
     public String getShopName(){ return shop_name; }

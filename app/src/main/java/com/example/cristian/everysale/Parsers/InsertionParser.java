@@ -21,7 +21,9 @@ public class InsertionParser extends DefaultHandler {
     private boolean isName = false;
     private boolean isEvaluated = false;
     private boolean isPrice = false;
-    private boolean isCity = false;
+    private boolean isRegion = false;
+    private boolean isProvince = false;
+    private boolean isMunicipality = false;
     private boolean isAddress = false;
     private boolean isShopName = false;
     private boolean isInsertionistId = false;
@@ -69,8 +71,16 @@ public class InsertionParser extends DefaultHandler {
             isPrice = true;
             return;
         }
-        if(qName.equals("city")){
-            isCity = true;
+        if(qName.equals("region")){
+            isRegion = true;
+            return;
+        }
+        if(qName.equals("province")){
+            isProvince = true;
+            return;
+        }
+        if(qName.equals("municipality")){
+            isMunicipality= true;
             return;
         }
         if(qName.equals("address")) {
@@ -165,8 +175,16 @@ public class InsertionParser extends DefaultHandler {
             isPrice = false;
             insertion.setPrice(Float.parseFloat(s));
         }
-        if(isCity){
-            isCity = false;
+        if(isRegion){
+            isRegion = false;
+            insertion.setRegion(s);
+        }
+        if(isProvince){
+            isProvince = true;
+            insertion.setProvince(s);
+        }
+        if(isMunicipality){
+            isMunicipality = false;
             insertion.setCity(s);
         }
         if(isAddress){

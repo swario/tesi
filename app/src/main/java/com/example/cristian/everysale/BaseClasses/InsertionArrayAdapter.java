@@ -2,6 +2,7 @@ package com.example.cristian.everysale.BaseClasses;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cristian.everysale.Activity.InsertionActivity;
 import com.example.cristian.everysale.AsyncronousTasks.asincImageDownload;
 import com.example.cristian.everysale.R;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  */
 public class InsertionArrayAdapter extends ArrayAdapter<InsertionPreview> {
 
-    private Activity activity;
+    private static Activity activity;
 
     public InsertionArrayAdapter(Context context, Activity activity) {
         super(context,0);
@@ -65,6 +67,9 @@ public class InsertionArrayAdapter extends ArrayAdapter<InsertionPreview> {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), String.valueOf(preview.getInsertionId()), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(activity, InsertionActivity.class);
+                intent.putExtra("insertionId", preview.getInsertionId());
+                activity.startActivity(intent);
             }
         });
 

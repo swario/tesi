@@ -56,7 +56,7 @@ public class SearchResponseParser extends DefaultHandler {
             isPrice = true;
             return;
         }
-        if(qName.equals("city")){
+        if(qName.equals("municipality")){
             isCity = true;
             return;
         }
