@@ -123,6 +123,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("EverySale", (String.valueOf(parent)));
         if(String.valueOf(parent).contains("RegionSpinner")){
             Log.d("EverySale", "Regione selezionata");
             new asincDownloadProvinces(this, this, regionsCode.get(position)).execute();
