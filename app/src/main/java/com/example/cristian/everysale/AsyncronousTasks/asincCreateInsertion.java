@@ -164,7 +164,6 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
                 }
                 return builder.toString();
             }
-
         }catch (Exception e){
             return e.getMessage() + "eccezione di qualche tipo";
         }
