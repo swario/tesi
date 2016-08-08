@@ -122,11 +122,11 @@
             android:singleLine="false" />
 
         <TextView
+            android:id="@+id/insertion_price_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_price"
             android:ems="5"
-            android:id="@+id/insertion_price_value"
             android:textSize="@dimen/text_size"
             android:layout_alignTop="@+id/insertion_price"
             android:layout_alignParentRight="true"
@@ -137,22 +137,48 @@
             android:gravity="end"/>
 
         <TextView
+            android:id="@+id/insertion_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_city"
-            android:id="@+id/insertion_city"
-            android:layout_below="@+id/insertion_price_value"
+            android:layout_below="@+id/insertion_province_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="@dimen/text_size"
             android:singleLine="false" />
 
         <TextView
+            android:id="@+id/insertion_city_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_city"
             android:ems="8"
-            android:id="@+id/insertion_city_value"
+            android:layout_below="@+id/insertion_province_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end" />
+
+        <TextView
+            android:id="@+id/insertion_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_region"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:layout_below="@+id/insertion_price_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/insertion_region_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_region"
+            android:ems="8"
             android:layout_below="@+id/insertion_price_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -163,10 +189,36 @@
             android:gravity="end" />
 
         <TextView
+            android:id="@+id/insertion_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_province"
+            android:layout_below="@+id/insertion_region_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"/>
+
+        <TextView
+            android:id="@+id/insertion_province_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_province"
+            android:ems="8"
+            android:layout_below="@+id/insertion_region_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+        <TextView
+            android:id="@+id/insertion_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_address"
-            android:id="@+id/insertion_address"
             android:layout_below="@+id/insertion_city_value"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -174,11 +226,11 @@
             android:singleLine="false" />
 
         <TextView
+            android:id="@+id/insertion_address_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_address"
             android:ems="8"
-            android:id="@+id/insertion_address_value"
             android:layout_below="@+id/insertion_city_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
