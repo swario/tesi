@@ -62,7 +62,9 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
                 else if(activity instanceof Main2Activity){
                     intent = new Intent(this.activity, SearchActivity.class);
+                    drawerLayout.closeDrawers();
                     activity.startActivity(intent);
+                    break;
                 }
                 else{
                     intent = new Intent(this.activity, SearchActivity.class);
@@ -92,7 +94,9 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
                 else if(activity instanceof Main2Activity){
                     intent = new Intent(this.activity, ModifyProfileActivity.class);
+                    drawerLayout.closeDrawers();
                     activity.startActivity(intent);
+                    break;
                 }
                 else{
                     intent = new Intent(this.activity, ModifyProfileActivity.class);
@@ -109,7 +113,9 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
                 else if(activity instanceof Main2Activity){
                     intent = new Intent(this.activity, MyInsertionActivity.class);
+                    drawerLayout.closeDrawers();
                     activity.startActivity(intent);
+                    break;
                 }
                 else{
                     intent = new Intent(this.activity, MyInsertionActivity.class);
@@ -126,7 +132,9 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
                 else if(activity instanceof Main2Activity){
                     intent = new Intent(this.activity, aNewInsertionActivity.class);
+                    drawerLayout.closeDrawers();
                     activity.startActivity(intent);
+                    break;
                 }
                 else{
                     intent = new Intent(this.activity, aNewInsertionActivity.class);
