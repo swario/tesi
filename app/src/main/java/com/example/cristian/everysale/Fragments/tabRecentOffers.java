@@ -150,6 +150,7 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
                 loading = true;
                 long upperLimit = adapter.getItem(adapter.getCount() -1).getInsertionId();
                 new asincGetRecent(this).execute(upperLimit);
+                refreshLayout.setRefreshing(true);
             }
         }
         else if(previousFirstVisibleItem > firstVisibleItem){//sto scrollando verso l'alto
