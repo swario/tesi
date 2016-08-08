@@ -16,5 +16,7 @@ public class ShowProfileActivity extends navigationDrawerActivity {
         View contentView = inflater.inflate(R.layout.activity_show_profile , null, false);
         drawerLayout.addView(contentView, 0);
 
+
+        setContentView(R.layout.activity_show_profile);
     }
 }
