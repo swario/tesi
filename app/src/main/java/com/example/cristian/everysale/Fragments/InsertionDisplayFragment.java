@@ -57,6 +57,8 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     private TextView titleTextView;
     private ImageView imageView;
     private TextView priceTextView;
+    private TextView regionTextView;
+    private TextView provinceTextView;
     private TextView cityTextView;
     private TextView addressTextView;
     private TextView shopTextView;
@@ -89,6 +91,8 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         titleTextView = (TextView) view.findViewById(R.id.insertion_title);
         imageView = (ImageView) view.findViewById(R.id.insertion_image);
         priceTextView = (TextView) view.findViewById(R.id.insertion_price_value);
+        regionTextView = (TextView) view.findViewById(R.id.insertion_region_value);
+        provinceTextView = (TextView) view.findViewById(R.id.insertion_province_value);
         cityTextView = (TextView) view.findViewById(R.id.insertion_city_value);
         addressTextView = (TextView) view.findViewById(R.id.insertion_address_value);
         shopTextView = (TextView) view.findViewById(R.id.insertion_shop_value);
@@ -151,6 +155,8 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         new asincImageDownload(getContext(), getActivity()).execute(imageAddress + insertion.getPhoto_url(), imageView);
         titleTextView.setText(insertion.getName());
         priceTextView.setText(String.valueOf(insertion.getPrice()) + "€");
+        regionTextView.setText(insertion.getRegion());
+        provinceTextView.setText(insertion.getProvince());
         cityTextView.setText(insertion.getCity());
         addressTextView.setText(insertion.getAddress());
         shopTextView.setText(insertion.getShopName());
