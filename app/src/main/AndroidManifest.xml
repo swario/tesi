@@ -57,7 +57,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.NewInsertionActivity"
+            android:name=".Activity.aNewInsertionActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
     </application>

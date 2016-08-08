@@ -15,6 +15,7 @@ import com.example.cristian.everysale.Activity.ModifyProfileActivity;
 import com.example.cristian.everysale.Activity.MyInsertionActivity;
 import com.example.cristian.everysale.Activity.SearchActivity;
 import com.example.cristian.everysale.Activity.StartActivity;
+import com.example.cristian.everysale.Activity.aNewInsertionActivity;
 import com.example.cristian.everysale.R;
 
 public class MenuListener implements DrawerListener, OnNavigationItemSelectedListener {
@@ -102,12 +103,12 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
 
             case R.id.nav_new_insertion:
-                if(activity instanceof NewInsertionActivity){
+                if(activity instanceof aNewInsertionActivity){
                     Log.e("Debug", "new insertion!");
                     drawerLayout.closeDrawers();
                     break;
                 }else{
-                    intent = new Intent(this.activity, NewInsertionActivity.class);
+                    intent = new Intent(this.activity, aNewInsertionActivity.class);
                     activity.startActivity(intent);
                     this.activity.finish();
                     break;
