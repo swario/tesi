@@ -59,7 +59,12 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 if(activity instanceof SearchActivity){
                     Log.e("Debug", "Casa!");
                     drawerLayout.closeDrawers();
-                }else{
+                }
+                else if(activity instanceof Main2Activity){
+                    intent = new Intent(this.activity, SearchActivity.class);
+                    activity.startActivity(intent);
+                }
+                else{
                     intent = new Intent(this.activity, SearchActivity.class);
                     activity.startActivity(intent);
                     this.activity.finish();
@@ -84,7 +89,12 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                     Log.e("Debug", "modify profile!");
                     drawerLayout.closeDrawers();
                     break;
-                }else{
+                }
+                else if(activity instanceof Main2Activity){
+                    intent = new Intent(this.activity, ModifyProfileActivity.class);
+                    activity.startActivity(intent);
+                }
+                else{
                     intent = new Intent(this.activity, ModifyProfileActivity.class);
                     activity.startActivity(intent);
                     this.activity.finish();
@@ -96,7 +106,12 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                     Log.e("Debug", "my insertion!");
                     drawerLayout.closeDrawers();
                     break;
-                }else{
+                }
+                else if(activity instanceof Main2Activity){
+                    intent = new Intent(this.activity, MyInsertionActivity.class);
+                    activity.startActivity(intent);
+                }
+                else{
                     intent = new Intent(this.activity, MyInsertionActivity.class);
                     activity.startActivity(intent);
                     this.activity.finish();
@@ -108,7 +123,12 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                     Log.e("Debug", "new insertion!");
                     drawerLayout.closeDrawers();
                     break;
-                }else{
+                }
+                else if(activity instanceof Main2Activity){
+                    intent = new Intent(this.activity, aNewInsertionActivity.class);
+                    activity.startActivity(intent);
+                }
+                else{
                     intent = new Intent(this.activity, aNewInsertionActivity.class);
                     activity.startActivity(intent);
                     this.activity.finish();
@@ -118,6 +138,7 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
             case R.id.nav_disconnect:
                 activity.getSharedPreferences("SavedValues", activity.MODE_PRIVATE).edit().clear().commit();
                 intent = new Intent(this.activity, StartActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 activity.startActivity(intent);
                 this.activity.finish();
                 break;

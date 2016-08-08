@@ -29,6 +29,7 @@ import com.example.cristian.everysale.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 public class aNewInsertionActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup {
@@ -79,10 +80,6 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         cancelButton.setOnClickListener(this);
         submitButton.setOnClickListener(this);
 
-        Calendar cal = null;
-        expirationDatePicker.setMinDate(cal.get(Calendar.DAY_OF_MONTH));
-        expirationDatePicker.setMaxDate(cal.get(Calendar.DAY_OF_YEAR) + Calendar.MONTH);
-
         //inizializzo gestore immagini
         bitmapConverter=new imageUtility();
         savedValues.edit().putString("imgPath", null).commit();
@@ -119,6 +116,10 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         imgPath=savedValues.getString("imgPath", null);
         insertionImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
 
+        /*Calendar cal = new GregorianCalendar();
+        expirationDatePicker.setMinDate(cal.getTimeInMillis());
+        expirationDatePicker.setMaxDate(cal.getTimeInMillis() + 31 * 24 * 60 * 60 * 1000);
+        Log.e("EverySale", String.valueOf(cal));*/
     }
 
     @Override
