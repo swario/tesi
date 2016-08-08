@@ -10,14 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
 import com.example.cristian.everysale.AsyncronousTasks.asincImageDownload;
 import com.example.cristian.everysale.R;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 /**
  * Created by Giorgiboy on 07/08/2016.
@@ -66,7 +64,7 @@ public class InsertionArrayAdapter extends ArrayAdapter<InsertionPreview> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), String.valueOf(preview.getInsertionId()), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), String.valueOf(preview.getInsertionId()), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(activity, InsertionActivity.class);
                 intent.putExtra("insertionId", preview.getInsertionId());
                 activity.startActivity(intent);

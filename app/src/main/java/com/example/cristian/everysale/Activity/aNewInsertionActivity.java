@@ -9,6 +9,9 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
@@ -17,7 +20,13 @@ import com.example.cristian.everysale.R;
 
 public class aNewInsertionActivity extends navigationDrawerActivity implements OnClickListener,OnItemSelectedListener {
 
-
+    private EditText titleEditText;
+    private EditText priceEditText;
+    private EditText shopEditText;
+    private EditText cityEditText;
+    private EditText addressEditText;
+    private CheckBox expirationDateCheckBox;
+    private DatePicker expirationDatePicker;
     private Button imageButton;
     private Button cancelButton;
     private Button submitButton;
@@ -36,11 +45,19 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         View contentView = inflater.inflate(R.layout.new_insertion_layout , null, false);
         drawerLayout.addView(contentView, 0);
 
+        titleEditText= (EditText) findViewById(R.id.titleEditText);
+        priceEditText= (EditText) findViewById(R.id.priceEditText);
+        shopEditText= (EditText) findViewById(R.id.shopEditText);
+        cityEditText= (EditText) findViewById(R.id.cityEditText);
+        addressEditText= (EditText) findViewById(R.id.addressEditText);
+        expirationDatePicker= (DatePicker) findViewById(R.id.expirationDatePicker);
         insertionImageView = (ImageView) findViewById(R.id.itemImageView);
         imageButton = (Button) findViewById(R.id.newImageButton);
         cancelButton = (Button) findViewById(R.id.newCancelButton);
         submitButton = (Button) findViewById(R.id.newSubmitButton);
 
+
+        //expirationDateCheckBox.setOnc
         imageButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
         submitButton.setOnClickListener(this);

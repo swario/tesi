@@ -81,6 +81,7 @@ public class ImagePickerActivity extends AppCompatActivity {
 
                         } else if (items[item].equals("Annulla")) {
                             dialog.dismiss();
+                            comeBack();
                         }
                     }
                 });
@@ -162,6 +163,10 @@ public class ImagePickerActivity extends AppCompatActivity {
         //Toast.makeText(this, "ongallery  " + imgPath, Toast.LENGTH_LONG).show();
         this.finish();
 
+    }
+
+    private void comeBack(){
+        this.finish();
     }
 
 }
