@@ -182,7 +182,8 @@
             android:layout_below="@+id/descriptionEditText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="42dp"
-            android:background="#7d2e2e" />
+            android:background="#7d2e2e"
+            android:contentDescription="item image" />
 
         <Button
             android:layout_width="wrap_content"
@@ -200,7 +201,7 @@
             android:layout_height="wrap_content"
             android:text="@string/profile_layout_cancelButton"
             android:id="@+id/newCancelButton"
-            android:layout_below="@+id/imageButton"
+            android:layout_below="@+id/newImageButton"
             android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -212,7 +213,7 @@
             android:layout_height="wrap_content"
             android:text="@string/new_insertion_submit_button"
             android:id="@+id/newSubmitButton"
-            android:layout_below="@+id/imageButton"
+            android:layout_below="@+id/newImageButton"
             android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
