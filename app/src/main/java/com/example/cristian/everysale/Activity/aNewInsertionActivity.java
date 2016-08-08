@@ -19,6 +19,7 @@ import android.widget.Spinner;
 
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadMunicipalities;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
@@ -113,6 +114,7 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
+        new asincDownloadRegions(this.getApplicationContext(), this).execute();
         imgPath=savedValues.getString("imgPath", null);
         insertionImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
 
@@ -126,11 +128,11 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(String.valueOf(parent).contains("RegionSpinner")){
             Log.d("EverySale", "Regione selezionata");
-            new asincDownloadProvinces(this, this, regionsCode.get(position)).execute();
+            new asincDownloadProvinces(this.getApplicationContext(), this, regionsCode.get(position)).execute();
         }
-        else if(String.valueOf(parent).contains("Province Spinner")){
+        else if(String.valueOf(parent).contains("ProvinceSpinner")){
             Log.d("EverySale", "Provincia selezionata");
-            new asincDownloadMunicipalities(this, this, provincesCode.get(position)).execute();
+            new asincDownloadMunicipalities(this.getApplicationContext(), this, provincesCode.get(position)).execute();
         }
     }
 

@@ -18,6 +18,7 @@ import android.widget.Spinner;
 
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadMunicipalities;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
@@ -116,6 +117,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
+        new asincDownloadRegions(this.getApplicationContext(), this).execute();
         imgPath=savedValues.getString("imgPath", null);
         profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
 
@@ -126,11 +128,11 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         Log.d("EverySale", (String.valueOf(parent)));
         if(String.valueOf(parent).contains("RegionSpinner")){
             Log.d("EverySale", "Regione selezionata");
-            new asincDownloadProvinces(this, this, regionsCode.get(position)).execute();
+            new asincDownloadProvinces(this.getApplicationContext(), this, regionsCode.get(position)).execute();
         }
         else if(String.valueOf(parent).contains("ProvinceSpinner")){
             Log.d("EverySale", "Provincia selezionata");
-            new asincDownloadMunicipalities(this, this, provincesCode.get(position)).execute();
+            new asincDownloadMunicipalities(this.getApplicationContext(), this, provincesCode.get(position)).execute();
         }
     }
 

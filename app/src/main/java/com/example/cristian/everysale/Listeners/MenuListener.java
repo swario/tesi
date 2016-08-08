@@ -81,6 +81,7 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
                 else{
                     intent = new Intent(this.activity, Main2Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     activity.startActivity(intent);
                     this.activity.finish();
                     break;
