@@ -144,29 +144,21 @@
             android:textColor="@color/colorText"
             android:inputType="textPersonName" />
 
-        <CheckBox
+        <DatePicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_insertion_expiration_date"
-            android:id="@+id/expirationDateCheckBox"
+            android:id="@+id/expirationDatePicker"
             android:layout_below="@+id/addressEditText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp"
-            android:checked="false"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/colorText"/>
-
-        <!-- se il checkBox è vero settare:
-            android:layout_height="Wrap_content"
-            android:visibility="visible"            -->
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_insertion_description"
             android:id="@+id/descriptionTextView"
-            android:layout_below="@+id/expirationDateCheckBox"
+            android:layout_below="@+id/expirationDatePicker"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
@@ -196,7 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fregister3_imgButton"
-            android:id="@+id/imageButton"
+            android:id="@+id/newImageButton"
             android:layout_below="@+id/itemImageView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
@@ -207,7 +199,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_layout_cancelButton"
-            android:id="@+id/cancelButton"
+            android:id="@+id/newCancelButton"
             android:layout_below="@+id/imageButton"
             android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
@@ -219,13 +211,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_insertion_submit_button"
-            android:id="@+id/submitButton"
+            android:id="@+id/newSubmitButton"
             android:layout_below="@+id/imageButton"
             android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             style="@style/Button" />
+
+
 
 
     </RelativeLayout>
