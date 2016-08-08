@@ -22,9 +22,9 @@ public class User {
 
     public User(){
 
-        name = "not available";
-        surname = "not available";
-        mobile = "not available";
+        name = null;
+        surname = null;
+        mobile = null;
     }
 
     public void setUser_id(long id){this.user_id=id;}
