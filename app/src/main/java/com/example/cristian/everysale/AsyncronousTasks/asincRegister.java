@@ -62,7 +62,6 @@ public class asincRegister extends AsyncTask<String, Void, String> {
 
         HttpURLConnection connection = null;
         DataOutputStream outputStream = null;
-        DataInputStream inputStream = null;
         String lineEnd = "\r\n";
         String twoHyphens = "--";
         String boundary =  "*****";
