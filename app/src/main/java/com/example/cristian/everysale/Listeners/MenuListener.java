@@ -18,6 +18,7 @@ import com.example.cristian.everysale.Activity.StartActivity;
 import com.example.cristian.everysale.Activity.aNewInsertionActivity;
 import com.example.cristian.everysale.R;
 
+
 public class MenuListener implements DrawerListener, OnNavigationItemSelectedListener {
 
     private Activity activity;
