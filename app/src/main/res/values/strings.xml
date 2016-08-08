@@ -97,5 +97,7 @@
     <string name="title_activity_my_insertion">MyInsertion</string>
     <string name="title_activity_mmy_insertion">mmyInsertionActivity</string>
     <string name="title_activity_new_insertion_activityy">NewInsertionActivityy</string>
+    <string name="item_province">Provincia</string>
+    <string name="item_region">Regione</string>
 
 </resources>

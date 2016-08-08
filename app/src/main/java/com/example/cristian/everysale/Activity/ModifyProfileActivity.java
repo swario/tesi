@@ -3,22 +3,32 @@ package com.example.cristian.everysale.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadMunicipalities;
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
+import com.example.cristian.everysale.BaseClasses.Province;
+import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
 import com.example.cristian.everysale.BaseClasses.imagePicker.imageUtility;
+import com.example.cristian.everysale.Interfaces.SpinnerSetup;
 import com.example.cristian.everysale.R;
 
-public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup {
 
     private EditText emailEditText;
     private EditText usernameEditText;
@@ -27,7 +37,8 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     private EditText nameEditText;
     private EditText surnameEditText;
     private Spinner regionSpinner;
-    private Spinner citySpinner;
+    private Spinner provinceSpinner;
+    private Spinner municipalitySpinner;
     private EditText mobileEditText;
     private CheckBox dataAllowCheckbox;
     private ImageView profileImageView;
@@ -37,6 +48,8 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
     private String imgPath=null;
     private imageUtility bitmapConverter=null;
+    private ArrayList<Integer> regionsCode = new ArrayList<>();
+    private ArrayList<Integer> provincesCode = new ArrayList<>();
 
     private final String imageAddress = "http://webdev.dibris.unige.it/~S3928202/Progetto/profilePics/";
 
@@ -53,8 +66,9 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         confirmPasswordEditText = (EditText) findViewById(R.id.modifyConfirmPasswordEditText);
         nameEditText = (EditText) findViewById(R.id.modifyNameEditText);
         surnameEditText = (EditText) findViewById(R.id.modifySurnameEditText);
-        citySpinner = (Spinner) findViewById(R.id.modifyCitySpinner);
         regionSpinner = (Spinner) findViewById(R.id.modifyRegionSpinner);
+        provinceSpinner = (Spinner) findViewById(R.id.modifyProvinceSpinner);
+        municipalitySpinner = (Spinner) findViewById(R.id.modifyMunicipalitySpinner);
         mobileEditText = (EditText) findViewById(R.id.modifyMobileEditText);
         dataAllowCheckbox = (CheckBox) findViewById(R.id.modifyDataAllowCheckBox);
         profileImageView = (ImageView) findViewById(R.id.modifyInsertionImageView);
@@ -64,7 +78,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
         //setto listener
         regionSpinner.setOnItemSelectedListener(this);
-        citySpinner.setOnItemSelectedListener(this);
+        provinceSpinner.setOnItemSelectedListener(this);
         findViewById(R.id.modifyImageButton).setOnClickListener(this);
         findViewById(R.id.modifyCancelButton).setOnClickListener(this);
         findViewById(R.id.modifyUpdateButton).setOnClickListener(this);
@@ -109,7 +123,14 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //setCitySpinner();
+        if(String.valueOf(parent).contains("RegionSpinner")){
+            Log.d("EverySale", "Regione selezionata");
+            new asincDownloadProvinces(this, this, regionsCode.get(position)).execute();
+        }
+        else if(String.valueOf(parent).contains("ProvinceSpinner")){
+            Log.d("EverySale", "Provincia selezionata");
+            new asincDownloadMunicipalities(this, this, provincesCode.get(position)).execute();
+        }
     }
 
     @Override
@@ -117,70 +138,45 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
     }
 
-    /*private void setCitySpinner(){
-        ArrayAdapter<CharSequence> adapter=null;
-        int region=regionSpinner.getSelectedItemPosition();
-        if(region==0) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region0_spinner, android.R.layout.simple_spinner_item);
+    public void setupRegions(ArrayList<Region> result){
+        Log.d("EverySale", "Inserimento regioni in corso...");
+        Iterator<Region> reg = result.iterator();
+        ArrayList<String> regionsName = new ArrayList<>();
+        regionsCode.clear();
+        while(reg.hasNext()){
+            Region temp = reg.next();
+            regionsName.add(temp.getRegionName());
+            regionsCode.add(temp.getRegionCode());
         }
-        else if(region==1) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region1_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==2) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region2_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==3) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region3_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==4) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region4_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==5) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region5_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==6) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region6_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==7) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region7_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==8) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region8_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==9) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region9_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==10) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region10_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==11) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region11_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==12) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region12_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==13) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region13_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==14) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region14_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==15) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region15_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==16) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region16_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==17) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region17_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==18) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region18_spinner, android.R.layout.simple_spinner_item);
-        }
-        else if(region==19) {
-            adapter = ArrayAdapter.createFromResource(this, R.array.fregister2_region19_spinner, android.R.layout.simple_spinner_item);
-        }
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, regionsName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(adapter);
-    }*/
+        regionSpinner.setAdapter(adapter);
+        regionSpinner.setOnItemSelectedListener(this);
+        Log.d("EverySale", "Regioni inserite");
+    }
+
+    public void setupProvinces(ArrayList<Province> result){
+        Log.d("EverySale", "Inserimento province in corso...");
+        Iterator<Province> prov = result.iterator();
+        ArrayList<String> provincesName = new ArrayList<>();
+        provincesCode.clear();
+        while(prov.hasNext()){
+            Province temp = prov.next();
+            provincesName.add(temp.getProvinceName());
+            provincesCode.add(temp.getProvinceCode());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, provincesName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provinceSpinner.setAdapter(adapter);
+        provinceSpinner.setOnItemSelectedListener(this);
+        Log.d("EverySale", "Province inserite");
+    }
+
+    public void setupMunicipalities(ArrayList<String> result){
+        Log.d("EverySale", "Inserimento comuni in corso...");
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, result);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        municipalitySpinner.setAdapter(adapter);
+        Log.d("EverySale", "Comuni inseriti");
+    }
 }

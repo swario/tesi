@@ -130,7 +130,6 @@ public class registerFragment2 extends Fragment implements OnClickListener, OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("EverySale", String.valueOf(view.getId() + " " + id + " " + regionsCode.get(position) + " " + parent));
         if(String.valueOf(parent).contains("regioneSpinner")){
             Log.d("EverySale", "Regione selezionata");
             new asincDownloadProvinces(getContext(), this, regionsCode.get(position)).execute();
