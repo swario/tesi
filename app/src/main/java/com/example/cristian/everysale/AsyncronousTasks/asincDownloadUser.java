@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.example.cristian.everysale.BaseClasses.User;
 import com.example.cristian.everysale.Interfaces.UserDownloader;
-import com.example.cristian.everysale.Parsers.SearchResponseParser;
 import com.example.cristian.everysale.Parsers.UserParser;
 
 import org.xml.sax.InputSource;
@@ -26,30 +25,32 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class asincDownloadUser extends AsyncTask<Long, Void, User> {
 
+    private String URL = "http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/";
     private User user;
     private String fileName = "user.xml";
     private Context context;
     private UserDownloader downloader;
 
-    public asincDownloadUser(Context context, UserDownloader downloader){
+    public asincDownloadUser(Context context, UserDownloader downloader, boolean isSelf){
 
         user = null;
         this.context = context;
         this.downloader = downloader;
+        if(isSelf){
+            URL +="";
+        }
+        else {
+            URL +="";
+        }
     }
 
     @Override
     protected User doInBackground(Long... params) {
-        Long upperLimit = Long.MAX_VALUE;
-        if(params.length > 0){
-            upperLimit = params[0];
-        }
         SharedPreferences savedValues = this.context.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
         long userId = savedValues.getLong("userId", 1);
 
         try{
-            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getFavorites.php?userId=" +
-                    String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
+            URL url = new URL(this.URL + "?userId=" + String.valueOf(userId));
 
             InputStream inputStream = url.openStream();
 

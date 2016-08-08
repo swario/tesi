@@ -2,6 +2,7 @@ package com.example.cristian.everysale.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,17 +20,21 @@ import android.widget.Spinner;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadMunicipalities;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
 import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
+import com.example.cristian.everysale.AsyncronousTasks.asincDownloadUser;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
+import com.example.cristian.everysale.BaseClasses.SearchResponse;
+import com.example.cristian.everysale.BaseClasses.User;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
 import com.example.cristian.everysale.BaseClasses.imagePicker.imageUtility;
 import com.example.cristian.everysale.Interfaces.SpinnerSetup;
+import com.example.cristian.everysale.Interfaces.UserDownloader;
 import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup {
+public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup, UserDownloader {
 
     private EditText emailEditText;
     private EditText usernameEditText;
@@ -52,12 +57,18 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     private ArrayList<Integer> regionsCode = new ArrayList<>();
     private ArrayList<Integer> provincesCode = new ArrayList<>();
 
+    private SharedPreferences savedValues;
+    private User user;
+
     private final String imageAddress = "http://webdev.dibris.unige.it/~S3928202/Progetto/profilePics/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+        new asincDownloadUser(this, this, true).execute(savedValues.getLong("userId", 1));
         View contentView = inflater.inflate(R.layout.modify_profile_layout, null, false);
         drawerLayout.addView(contentView, 0);
 
@@ -87,7 +98,6 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         //inizializzo gestore immagine
         bitmapConverter=new imageUtility();
         savedValues.edit().putString("imgPath", null).commit();
-
     }
 
     @Override
@@ -111,16 +121,13 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
             default:
                 break;
         }
-
     }
 
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
-        new asincDownloadRegions(this.getApplicationContext(), this).execute();
         imgPath=savedValues.getString("imgPath", null);
         profileImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
-
     }
 
     @Override
@@ -145,6 +152,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         Log.d("EverySale", "Inserimento regioni in corso...");
         Iterator<Region> reg = result.iterator();
         ArrayList<String> regionsName = new ArrayList<>();
+        int position = regionsName.indexOf(user.getRegion());
         regionsCode.clear();
         while(reg.hasNext()){
             Region temp = reg.next();
@@ -155,13 +163,16 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
+        regionSpinner.setSelection(position);
         Log.d("EverySale", "Regioni inserite");
+        new asincDownloadProvinces(this.getApplicationContext(), this, regionsCode.get(position)).execute();
     }
 
     public void setupProvinces(ArrayList<Province> result){
         Log.d("EverySale", "Inserimento province in corso...");
         Iterator<Province> prov = result.iterator();
         ArrayList<String> provincesName = new ArrayList<>();
+        int position = provincesName.indexOf(user.getProvince());
         provincesCode.clear();
         while(prov.hasNext()){
             Province temp = prov.next();
@@ -172,14 +183,35 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provinceSpinner.setAdapter(adapter);
         provinceSpinner.setOnItemSelectedListener(this);
+        provinceSpinner.setSelection(position);
         Log.d("EverySale", "Province inserite");
+        new asincDownloadMunicipalities(this.getApplicationContext(), this, provincesCode.get(position)).execute();
     }
 
     public void setupMunicipalities(ArrayList<String> result){
         Log.d("EverySale", "Inserimento comuni in corso...");
+        int position = result.indexOf(user.getMunicipality());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, result);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         municipalitySpinner.setAdapter(adapter);
+        municipalitySpinner.setSelection(position);
         Log.d("EverySale", "Comuni inseriti");
+    }
+
+    @Override
+    public void setUser(User user) {
+        this.user = user;
+        new asincDownloadRegions(this.getApplicationContext(), this).execute();
+        SetUpLayout();
+    }
+
+    private void SetUpLayout(){
+
+        emailEditText.setText(user.getEmail());
+        usernameEditText.setText(user.getUserName());
+        nameEditText.setText(user.getName());
+        surnameEditText.setText(user.getSurname());
+        mobileEditText.setText(user.getMobile());
+        dataAllowCheckbox.setChecked(user.getDataAllow());
     }
 }

@@ -18,7 +18,8 @@ public class UserParser extends DefaultHandler {
     private boolean isPhoto = false;
     private boolean isRating = false;
     private boolean isRegion = false;
-    private boolean isCity = false;
+    private boolean isProvince = false;
+    private boolean isMunicipality = false;
     private boolean isMobile = false;
     private boolean isEmailSend = false;
     private boolean isThreshold = false;
@@ -49,8 +50,12 @@ public class UserParser extends DefaultHandler {
             isRegion = true;
             return;
         }
-        if(qName.equals("city")){
-            isCity = true;
+        if(qName.equals("province")){
+            isProvince = true;
+            return;
+        }
+        if(qName.equals("municipality")){
+            isMunicipality = true;
             return;
         }
         if(qName.equals("rating")){
@@ -108,9 +113,13 @@ public class UserParser extends DefaultHandler {
             isRegion = false;
             user.setRegion(s);
         }
-        if(isCity){
-            isCity = false;
-            user.setCity(s);
+        if(isProvince){
+            isProvince = false;
+            user.setProvince(s);
+        }
+        if(isMunicipality){
+            isMunicipality = false;
+            user.setMunicipality(s);
         }
         if(isRating){
             isRating = false;
@@ -154,6 +163,4 @@ public class UserParser extends DefaultHandler {
     public User getUser(){
         return this.user;
     }
-
-
 }
