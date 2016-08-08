@@ -31,7 +31,7 @@
             android:layout_below="@+id/usernameTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
-            android:background="#d42626" />
+            android:background="#d42656" />
 
         <RatingBar
             android:layout_width="wrap_content"
