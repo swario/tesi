@@ -11,6 +11,10 @@
             android:icon="@drawable/ic_home_24dp"
             android:title="@string/menu_home" />
         <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/ic_forum_24dp"
+            android:title="@string/menu_message" />
+        <item
             android:id="@+id/nav_my_account"
             android:icon="@drawable/ic_timer_auto_24dp"
             android:title="@string/menu_my_account" />
