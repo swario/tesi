@@ -171,6 +171,8 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
 
             editor.putString("username", this.username);
             editor.putString("password", this.password);
+
+            editor.commit();
         }
     }
 
@@ -179,8 +181,7 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
-        for (NameValuePair pair : params)
-        {
+        for (NameValuePair pair : params) {
             if (first){
                 first = false;
             }
