@@ -73,6 +73,7 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
                 FileInputStream inputStream = new FileInputStream(new File(photo));
 
                 List<NameValuePair> pairList = new ArrayList<>();
+                pairList.add(new BasicNameValuePair("userId", String.valueOf(userId)));
                 pairList.add(new BasicNameValuePair("name", name));
                 pairList.add(new BasicNameValuePair("region", region));
                 pairList.add(new BasicNameValuePair("province", province));
