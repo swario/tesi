@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
-import com.example.cristian.everysale.Fragments.InsertionDisplayFragment;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

@@ -1,7 +1,8 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.Other;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
+import com.example.cristian.everysale.Activity.ShowProfileActivity;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadInsertion;
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincEvaluation;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincImageDownload;
@@ -213,6 +215,9 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
 
             case R.id.item_insertionist_value:
                 Toast.makeText(activity, "Utente n° " + String.valueOf(insertion.getInsertionist_id()), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), ShowProfileActivity.class);
+                intent.putExtra("userId", insertion.getInsertionist_id());
+                getActivity().startActivity(intent);
                 break;
         }
     }
@@ -221,7 +226,9 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         long userId = insertion.getFeedbacks().get(position).getUserId();
-        Toast.makeText(getContext(), "Utente: " + String.valueOf(userId), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getActivity(), ShowProfileActivity.class);
+        intent.putExtra("userId", insertion.getInsertionist_id());
+        getActivity().startActivity(intent);
     }
 
     @Override

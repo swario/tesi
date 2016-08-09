@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.cristian.everysale.BaseClasses.Insertion;
-import com.example.cristian.everysale.Fragments.InsertionDisplayFragment;
+import com.example.cristian.everysale.Fragments.Other.InsertionDisplayFragment;
 import com.example.cristian.everysale.Fragments.HomeActivity.tabFavorite;
 import com.example.cristian.everysale.Parsers.InsertionParser;
 

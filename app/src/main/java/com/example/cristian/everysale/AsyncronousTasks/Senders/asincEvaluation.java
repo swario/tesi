@@ -3,9 +3,7 @@ package com.example.cristian.everysale.AsyncronousTasks.Senders;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.cristian.everysale.Activity.InsertionActivity;
-import com.example.cristian.everysale.BaseClasses.Insertion;
-import com.example.cristian.everysale.Fragments.InsertionDisplayFragment;
+import com.example.cristian.everysale.Fragments.Other.InsertionDisplayFragment;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,7 +11,6 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.Objects;
 
 /**
  * Created by Giorgiboy on 07/08/2016.

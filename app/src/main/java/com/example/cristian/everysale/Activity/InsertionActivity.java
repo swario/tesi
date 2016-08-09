@@ -14,11 +14,11 @@ import android.widget.Toolbar;
 
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincAddFavorite;
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincRemoveFavorite;
-import com.example.cristian.everysale.Fragments.InsertionDisplayFragment;
+import com.example.cristian.everysale.Fragments.Other.InsertionDisplayFragment;
 import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.R;
 
-public class InsertionActivity extends AppCompatActivity  {
+public class InsertionActivity extends AppCompatActivity {
 
     private long insertionId;
 

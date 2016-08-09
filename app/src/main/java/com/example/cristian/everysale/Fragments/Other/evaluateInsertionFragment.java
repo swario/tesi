@@ -1,7 +1,5 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.Other;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
