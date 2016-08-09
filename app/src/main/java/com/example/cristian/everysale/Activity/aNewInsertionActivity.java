@@ -84,6 +84,14 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         //inizializzo gestore immagini
         bitmapConverter=new imageUtility();
         savedValues.edit().putString("imgPath", null).commit();
+
+        Calendar cal = new GregorianCalendar();
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        expirationDatePicker.setMinDate(cal.getTimeInMillis());
+        cal.add(Calendar.MONTH, 1);
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        expirationDatePicker.setMaxDate(cal.getTimeInMillis());
+        Log.e("EverySale", String.valueOf(cal));
     }
 
     public void onClick(View v) {
@@ -117,11 +125,6 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         new asincDownloadRegions(this.getApplicationContext(), this).execute();
         imgPath=savedValues.getString("imgPath", null);
         insertionImageView.setImageBitmap(bitmapConverter.getBitmap(imgPath));
-
-        /*Calendar cal = new GregorianCalendar();
-        expirationDatePicker.setMinDate(cal.getTimeInMillis());
-        expirationDatePicker.setMaxDate(cal.getTimeInMillis() + 31 * 24 * 60 * 60 * 1000);
-        Log.e("EverySale", String.valueOf(cal));*/
     }
 
     @Override
