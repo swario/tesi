@@ -30,7 +30,7 @@
             android:maxHeight="300dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/item_image"
-            android:id="@+id/profileImage_mageView"
+            android:id="@+id/profileImageView"
             android:layout_below="@+id/usernameTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp" />
