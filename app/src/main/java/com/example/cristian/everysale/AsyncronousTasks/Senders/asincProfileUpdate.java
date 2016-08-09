@@ -192,7 +192,6 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
             result.append("=");
             result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
         }
-
         return result.toString();
     }
 }

@@ -110,7 +110,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
                 break;
 
             case R.id.modifyUpdateButton:
-                //getFragmentManager().beginTransaction().remove(this).add(R.id.frame_container, new registerFragment1(), "registerFragment1").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                updateProfile();
                 break;
             case R.id.modifyImageButton:
                 Intent intent = new Intent(this, ImagePickerActivity.class);
@@ -210,7 +210,21 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         usernameEditText.setText(user.getUserName());
         nameEditText.setText(user.getName());
         surnameEditText.setText(user.getSurname());
-        mobileEditText.setText(user.getMobile());
+        if(user.getMobile().equals("no mobile")){
+            mobileEditText.setText("Cellulare non disponibile");
+        }
+        else {
+            mobileEditText.setText(user.getMobile());
+        }
         dataAllowCheckbox.setChecked(user.getDataAllow());
+    }
+
+    private void updateProfile(){
+
+        String email = emailEditText.getText().toString();
+        String username = emailEditText.getText().toString();
+        String name = nameEditText.getText().toString();
+        String surname = surnameEditText.getText().toString();
+        String mobile = mobileEditText.getText().toString();
     }
 }
