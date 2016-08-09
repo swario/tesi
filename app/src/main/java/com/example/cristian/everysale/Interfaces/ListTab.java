@@ -6,5 +6,6 @@ import com.example.cristian.everysale.BaseClasses.SearchResponse;
 public interface ListTab {
 
     public void goToInsertion(long pos);
+    public void SetResponse(SearchResponse response);
 
 }
