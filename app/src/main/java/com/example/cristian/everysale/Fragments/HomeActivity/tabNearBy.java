@@ -47,7 +47,6 @@ public class tabNearBy extends ListFragment implements OnRefreshListener, OnScro
 
         previousFirstVisibleItem = 0;
 
-
         searchResponse = null;
         //new asincGetRecent(this).execute();
         return view;
@@ -58,46 +57,10 @@ public class tabNearBy extends ListFragment implements OnRefreshListener, OnScro
         super.onResume();
     }
 
-    private void setListView(){
-
-        ArrayList<String> images = new ArrayList<>();
-        ArrayList<String> titles = new ArrayList<>();
-        ArrayList<String> prices = new ArrayList<>();
-        ArrayList<String> cities = new ArrayList<>();
-        ArrayList<Float> rating = new ArrayList<>();
-        ArrayList<Long> insertionsId = new ArrayList<>();
-
-        for(int i=0; i<searchResponse.getInsertionCount(); i++){
-
-            InsertionPreview preview = searchResponse.getInsertion(i);
-
-            images.add("http://webdev.dibris.unige.it/~S3928202/Progetto/itemPics/" + preview.getImage());
-            titles.add(preview.getName());
-            prices.add(String.valueOf(preview.getPrice()));
-            cities.add(preview.getCity());
-            rating.add(preview.getRate());
-            insertionsId.add(preview.getInsertionId());
-        }
-        //CustomAdapter adapter= new CustomAdapter(getContext(), getActivity(), images, titles, prices, cities, rating, insertionsId, this);
-        //itemsListView.setAdapter(adapter);
-    }
-
-    public void setSearchResponse(SearchResponse searchResponse){
-        refreshLayout.setRefreshing(false);
-        if(this.searchResponse == null){
-            this.searchResponse = searchResponse;
-        } else {
-            this.searchResponse.merge(searchResponse);
-        }
-        Toast.makeText(getContext(), "Totale inserzioni: " + String.valueOf(this.searchResponse.getInsertionCount()),
-                Toast.LENGTH_LONG).show();
-        setListView();
-    }
-
     @Override
     public void onRefresh() {
         searchResponse = null;
-        //new asincGetRecent(this).execute();
+        refreshLayout.setRefreshing(false);
     }
 
     @Override

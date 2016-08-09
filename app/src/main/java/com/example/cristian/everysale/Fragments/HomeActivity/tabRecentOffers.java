@@ -34,8 +34,6 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
 
     private int previousFirstVisibleItem;
 
-    private ArrayList<InsertionPreview> previewArrayList;
-    private SearchResponse searchResponse;
     private InsertionArrayAdapter adapter;
 
     private SwipeRefreshLayout refreshLayout;
@@ -56,13 +54,9 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         refreshLayout.setRefreshing(true);
 
         previousFirstVisibleItem = 0;
-        previewArrayList = new ArrayList<>();
-
-        searchResponse = null;
         adapter = new InsertionArrayAdapter(getContext(), getActivity());
         itemsListView.setAdapter(adapter);
         new asincDownloadInsertions(getActivity(), this, DownloadType.Recent).execute();
-        Log.e("Debug", "lanciato");
         return view;
     }
 
@@ -90,7 +84,6 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         if(firstVisibleItem > previousFirstVisibleItem){//sto scrollando verso il basso
 
             if((firstVisibleItem + visibleItemCount) >= totalItemCount && !loading){// sono  giunto alla fine della lista
-
                 loading = true;
                 long upperLimit = adapter.getItem(adapter.getCount() -1).getInsertionId();
                 Log.e("Debug", String.valueOf(upperLimit));
