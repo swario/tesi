@@ -10,6 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class UserParser extends DefaultHandler {
 
+    private boolean isEmail = false;
     private boolean isUser = false;
     private boolean isUserId = false;
     private boolean isUserName = false;
@@ -34,6 +35,10 @@ public class UserParser extends DefaultHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes att){
 
+        if(qName.equals("email")){
+            isEmail = true;
+            return;
+        }
         if(qName.equals("")){
             isUser = true;
             return;
@@ -100,6 +105,10 @@ public class UserParser extends DefaultHandler {
             if(s.equals("no such user")){
                 user = null;
             }
+        }
+        if(isEmail) {
+            isEmail = false;
+            user.setEmail(s);
         }
         if(isUserId){
             isUserId = false;
