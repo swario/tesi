@@ -226,7 +226,9 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         long userId = insertion.getFeedbacks().get(position).getUserId();
-        Toast.makeText(getContext(), "Utente: " + String.valueOf(userId), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getActivity(), ShowProfileActivity.class);
+        intent.putExtra("userId", insertion.getInsertionist_id());
+        getActivity().startActivity(intent);
     }
 
     @Override
