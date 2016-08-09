@@ -28,6 +28,8 @@ import com.example.cristian.everysale.Interfaces.SpinnerSetup;
 import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 public class aNewInsertionActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup {
@@ -88,7 +90,6 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         cal.add(Calendar.MONTH, 1);
         cal.add(Calendar.DAY_OF_MONTH, -1);
         expirationDatePicker.setMaxDate(cal.getTimeInMillis());
-        Log.e("EverySale", String.valueOf(cal));
     }
 
     public void onClick(View v) {
