@@ -27,13 +27,9 @@ import java.util.ArrayList;
 public class MyInsertionsActivity extends navigationDrawerActivity implements OnRefreshListener, OnScrollListener, ListTab {
 
     private boolean loading = false;
-    private boolean thereIsMore = true;
-    private int oldItemsCount = 0;
 
     private int previousFirstVisibleItem;
 
-    private ArrayList<InsertionPreview> previewArrayList;
-    private SearchResponse searchResponse;
     private InsertionArrayAdapter adapter;
 
     private SwipeRefreshLayout refreshLayout;
@@ -54,10 +50,7 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
         refreshLayout.setRefreshing(true);
 
         previousFirstVisibleItem = 0;
-        previewArrayList = new ArrayList<>();
-
-        searchResponse = null;
-        adapter = new InsertionArrayAdapter(this.getApplicationContext(), this);
+        adapter = new InsertionArrayAdapter(this, this);
         itemsListView.setAdapter(adapter);
 
         new asincDownloadInsertions(this, this, DownloadType.MyInsertions).execute();
@@ -71,7 +64,6 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
     @Override
     public void onRefresh() {
         adapter.clear();
-        this.thereIsMore = true;
         new asincDownloadInsertions(this, this, DownloadType.MyInsertions).execute();
     }
 
@@ -115,8 +107,6 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
         }
         refreshLayout.setRefreshing(false);
         adapter.addAll(response.getInsertions());
-
-        Log.e("Debug", "Adapter: " + String.valueOf(adapter.getCount()));
         loading = false;
     }
 }

@@ -75,7 +75,7 @@ public class asincDownloadInsertions  extends AsyncTask<Long, Void, SearchRespon
             String finalUrl = this.URL +"?userId=" +
                     String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit) + addition;
 
-            Log.e("Debug", finalUrl);
+            //Log.e("Debug", finalUrl);
             java.net.URL url = new URL(this.URL +"?userId=" +
                     String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit) + addition);
 

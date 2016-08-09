@@ -1,10 +1,9 @@
 package com.example.cristian.everysale.AsyncronousTasks.Senders;
 
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
+import com.example.cristian.everysale.Interfaces.Deleter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,14 +13,18 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 /**
- * Created by Giorgiboy on 04/08/2016.
+ * Created by Giorgiboy on 09/08/2016.
  */
-public class asincAddFavorite extends AsyncTask<Long, Void, String> {
+public class asincDeleteInsertion extends AsyncTask<Long, Void, String>{
 
     private InsertionActivity activity;
+    private Deleter deleter;
 
-    public asincAddFavorite(InsertionActivity activity){
-        this.activity=activity;
+    private String URL = "http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/deleteInsertion.php";
+
+    public asincDeleteInsertion(InsertionActivity activity, Deleter deleter){
+        this.activity = activity;
+        this.deleter = deleter;
     }
 
     @Override
@@ -31,7 +34,8 @@ public class asincAddFavorite extends AsyncTask<Long, Void, String> {
         long insertionId = params[1];
 
         try{
-            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/addFavorite.php");
+            URL url = new URL(this.URL);
+
             String data = URLEncoder.encode("userId", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(userId), "UTF-8");
             data += "&" + URLEncoder.encode("insertionId", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(insertionId), "UTF-8");
 
@@ -59,17 +63,8 @@ public class asincAddFavorite extends AsyncTask<Long, Void, String> {
         }
     }
 
-    @Override
     protected void onPostExecute(String result){
-        Log.e("Debug", "add" + result);
-        if(result.contains("success")){
-            activity.setFavorite(true);
-        }
-        else if(result.contains("fail")){
 
-        }
-        else if(result == null || result.contains("No address associated with hostname")){
-            Toast.makeText(this.activity, "Connessione Internet assente", Toast.LENGTH_LONG).show();
-        }
+        activity.OnDeletion(result);
     }
 }
