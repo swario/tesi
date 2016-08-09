@@ -46,11 +46,15 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
         drawerLayout.addView(contentView, 0);
 
         usernameText = (TextView) findViewById(R.id.usernameTextView);
-        profilePic = (ImageView) findViewById(R.id.profileImage_mageView);
-        //ratingBar = (RatingBar) findViewById(R.id);
+        profilePic = (ImageView) findViewById(R.id.profileImageView);
+        ratingBar = (RatingBar) findViewById(R.id.userRatingBar);
         regionText = (TextView) findViewById(R.id.showRegionTextView);
         provinceText = (TextView) findViewById(R.id.showProvinceTextView);
-
+        municipalityText = (TextView) findViewById(R.id.showMunicipalityTextView);
+        relativeLayout = (RelativeLayout) findViewById(R.id.dataAgreeBox);
+        nameText = (TextView) findViewById(R.id.showNameTextView);
+        surnameText = (TextView) findViewById(R.id.showSurnameTextView);
+        mobileText = (TextView) findViewById(R.id.showPhonenumberTextView);
 
         setContentView(R.layout.activity_show_profile);
     }
@@ -65,13 +69,13 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
     private void SetUpLayout(){
         //inserisco i dati
         if(user.getDataAllow()){
-            //mostro i dati e li riempo
+            relativeLayout.setVisibility(View.VISIBLE);
             if(user.getMobile() == null){
-                //nascondo il cellulare
+                mobileText.setText("Cellulare non disponibile");
             }
         }
         else{
-            //nascondo i dati
+            relativeLayout.setVisibility(View.GONE);
         }
     }
 }
