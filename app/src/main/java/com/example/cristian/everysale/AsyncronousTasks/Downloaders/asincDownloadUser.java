@@ -37,10 +37,10 @@ public class asincDownloadUser extends AsyncTask<Long, Void, User> {
         this.context = context;
         this.downloader = downloader;
         if(isSelf){
-            URL +="";
+            URL +="getMyAccount.php";
         }
         else {
-            URL +="";
+            URL +="getUser.php";
         }
     }
 
