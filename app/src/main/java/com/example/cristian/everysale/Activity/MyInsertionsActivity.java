@@ -14,6 +14,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincGetMyInsertions;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincGetRecent;
 import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
@@ -47,6 +48,7 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
 
         itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
+        new asincGetMyInsertions(this).execute();
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
         itemsListView.setOnScrollListener(this);
         //itemsListView.getViewTreeObserver().addOnGlobalLayoutListener(this);
