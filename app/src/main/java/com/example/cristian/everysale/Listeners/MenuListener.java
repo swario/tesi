@@ -96,6 +96,7 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
                 else if(activity instanceof Main2Activity){
                     intent = new Intent(this.activity, ChatActivity.class);
+                    drawerLayout.closeDrawers();
                     activity.startActivity(intent);
                     break;
                 }

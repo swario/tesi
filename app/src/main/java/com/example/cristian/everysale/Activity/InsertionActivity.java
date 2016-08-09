@@ -109,6 +109,9 @@ public class InsertionActivity extends AppCompatActivity {
             menu.getItem(1).setIcon(R.drawable.ic_star_outline_24dp);
             EasterEgg++;
         }
-        if(EasterEgg>7)Toast.makeText(getApplication(), "Stai calmo!!!" , Toast.LENGTH_LONG).show();
+        if(EasterEgg==7){
+            Toast.makeText(getApplication(), "Stai calmo!!!" , Toast.LENGTH_LONG).show();
+            EasterEgg=0;
+        }
     }
 }

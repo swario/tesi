@@ -108,4 +108,7 @@
     <string name="modify_profile_password">Nuova Password</string>
     <string name="modify_profile_confirm_password">Conferma Nuova Password</string>
 
+    <string name="chat_send">Invia</string>
+    <string name="chat_write">Scrivi un messaggio</string>
+
 </resources>

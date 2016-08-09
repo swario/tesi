@@ -18,17 +18,18 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/chatSendButton"
             android:autoText="true"
-            android:hint="type message" />
+            android:hint="@string/chat_write"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/chatSendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/chat_send"
+            style="@style/Button"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:background="@color/background_floating_material_dark"
-            android:text="Send MSG"
-            android:textColor="@color/background_material_light"/>
+            android:layout_alignRight="@+id/messagesContainer"
+            android:layout_alignEnd="@+id/messagesContainer" />
 
         <ListView
             android:id="@+id/messagesContainer"

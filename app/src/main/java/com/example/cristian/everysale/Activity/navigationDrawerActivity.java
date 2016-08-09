@@ -82,7 +82,10 @@ public class navigationDrawerActivity extends AppCompatActivity {
                 setNavigationViewPreferences();
 
                 EasterEgg++;
-                if(EasterEgg>7)Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
+                if(EasterEgg==7){
+                    Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
+                    EasterEgg=0;
+                }
 
             }
 
@@ -91,7 +94,10 @@ public class navigationDrawerActivity extends AppCompatActivity {
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 
                 EasterEgg++;
-                if(EasterEgg>20)Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
+                if(EasterEgg==7){
+                    Toast.makeText(getApplication(), "Carino vero?!?!?!?" , Toast.LENGTH_LONG).show();
+                    EasterEgg=0;
+                }
             }
 
 
