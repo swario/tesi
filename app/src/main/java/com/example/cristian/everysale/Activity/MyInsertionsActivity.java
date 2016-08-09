@@ -52,7 +52,6 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
         itemsListView.setOnScrollListener(this);
-        //itemsListView.getViewTreeObserver().addOnGlobalLayoutListener(this);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
 

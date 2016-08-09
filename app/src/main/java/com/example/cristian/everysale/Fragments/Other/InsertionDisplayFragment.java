@@ -35,6 +35,7 @@ import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -156,7 +157,8 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         ratingBar.setStepSize((float) 0.1);
         new asincImageDownload(getContext(), getActivity()).execute(imageAddress + insertion.getPhoto_url(), imageView);
         titleTextView.setText(insertion.getName());
-        priceTextView.setText(String.valueOf(insertion.getPrice()) + "€");
+        String number = new DecimalFormat("0.00").format(Double.parseDouble(String.valueOf(insertion.getPrice())));
+        priceTextView.setText(number + "€");
         regionTextView.setText(insertion.getRegion());
         provinceTextView.setText(insertion.getProvince());
         cityTextView.setText(insertion.getCity());

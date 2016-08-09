@@ -55,7 +55,7 @@ public class InsertionArrayAdapter extends ArrayAdapter<InsertionPreview> {
         holder.title.setText(preview.getName());
         String number = new DecimalFormat("0.00").format(Double.parseDouble(String.valueOf(preview.getPrice())));
         holder.price.setText(number + " €");
-        new asincImageDownload(this.activity, this.activity).execute("http://webdev.dibris.unige.it/~S3928202/Progetto/itemPics/" +preview.getImage(), holder.img);
+        new asincImageDownload(this.activity, this.activity).execute("http://webdev.dibris.unige.it/~S3928202/Progetto/itemPics/" + preview.getImage(), holder.img);
         holder.city.setText(preview.getCity());
         holder.rating.setNumStars(5);
         holder.rating.setMax(5);
