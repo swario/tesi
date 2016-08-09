@@ -396,6 +396,7 @@
         <com.example.cristian.everysale.BaseClasses.NestedListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:id="@+id/listView"
             android:layout_below="@+id/item_feedback"
             android:layout_alignParentLeft="true"
