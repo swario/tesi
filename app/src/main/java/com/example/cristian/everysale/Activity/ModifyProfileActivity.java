@@ -151,13 +151,13 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         Log.d("EverySale", "Inserimento regioni in corso...");
         Iterator<Region> reg = result.iterator();
         ArrayList<String> regionsName = new ArrayList<>();
-        int position = regionsName.indexOf(user.getRegion());
         regionsCode.clear();
         while(reg.hasNext()){
             Region temp = reg.next();
             regionsName.add(temp.getRegionName());
             regionsCode.add(temp.getRegionCode());
         }
+        int position = regionsName.indexOf(user.getRegion());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, regionsName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
@@ -171,13 +171,13 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         Log.d("EverySale", "Inserimento province in corso...");
         Iterator<Province> prov = result.iterator();
         ArrayList<String> provincesName = new ArrayList<>();
-        int position = provincesName.indexOf(user.getProvince());
         provincesCode.clear();
         while(prov.hasNext()){
             Province temp = prov.next();
             provincesName.add(temp.getProvinceName());
             provincesCode.add(temp.getProvinceCode());
         }
+        int position = provincesName.indexOf(user.getProvince());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, provincesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provinceSpinner.setAdapter(adapter);

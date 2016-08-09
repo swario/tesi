@@ -93,11 +93,17 @@
     <string name="feedback">Lascia un commento di feedback ed una valutazione da 1 a 5</string>
     <string name="feedback_rating">3</string>
     <string name="feedback_button">Invia</string>
+
     <string name="title_activity_new_insertion">newInsertionActivity</string>
     <string name="title_activity_my_insertion">MyInsertion</string>
-    <string name="title_activity_mmy_insertion">mmyInsertionActivity</string>
-    <string name="title_activity_new_insertion_activityy">NewInsertionActivityy</string>
-    <string name="item_province">Provincia</string>
+    <string name="title_activity_mmy_insertion">myInsertionActivity</string>
+    <string name="title_activity_new_insertion_activityy">NewInsertionActivity</string>
+
     <string name="item_region">Regione</string>
+    <string name="item_province">Provincia</string>
+    <string name="item_municipality">Comune</string>
+
+    <string name="modify_profile_password">Nuova Password</string>
+    <string name="modify_profile_confirm_password">Conferma Nuova Password</string>
 
 </resources>

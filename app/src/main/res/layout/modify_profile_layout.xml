@@ -66,7 +66,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fregister1_item3"
+            android:text="@string/modify_profile_password"
             android:id="@+id/modifyPasswordTextView"
             android:layout_below="@+id/modifyUsernameEditText"
             android:layout_alignParentLeft="true"
@@ -90,7 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fregister1_item4"
+            android:text="@string/modify_profile_confirm_password"
             android:id="@+id/modifyConfirmPasswordTextView"
             android:layout_below="@+id/modifyPasswordEditText"
             android:layout_alignParentLeft="true"
