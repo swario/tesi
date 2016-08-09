@@ -16,11 +16,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadMunicipalities;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadProvinces;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadRegions;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadUser;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincProfileUpdate;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.BaseClasses.User;
@@ -110,7 +112,13 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
                 break;
 
             case R.id.modifyUpdateButton:
-                updateProfile();
+                String password = passwordEditText.getText().toString();
+                String confirmPassword = confirmPasswordEditText.toString();
+                if(password.equals(confirmPassword)){
+                    updateProfile();
+                }else{
+                    Toast.makeText(this, "Le due password non coincidono", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.modifyImageButton:
                 Intent intent = new Intent(this, ImagePickerActivity.class);
@@ -223,8 +231,22 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
         String email = emailEditText.getText().toString();
         String username = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
         String name = nameEditText.getText().toString();
         String surname = surnameEditText.getText().toString();
         String mobile = mobileEditText.getText().toString();
+        String region = regionSpinner.getSelectedItem().toString();
+        String province = provinceSpinner.getSelectedItem().toString();
+        String municipality = municipalitySpinner.getSelectedItem().toString();
+        String dataAllow="";
+
+        if(dataAllowCheckbox.isChecked()){
+            dataAllow += "1";
+        }
+        else{
+            dataAllow += "0";
+        }
+        new asincProfileUpdate(this).execute(email, username, password, region, province, municipality, name, surname,
+                mobile, dataAllow, imgPath);
     }
 }
