@@ -1,36 +1,5 @@
 package com.example.cristian.everysale.Activity;
 
-import android.Manifest;
-import android.accounts.AccountManager;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
-import com.example.cristian.everysale.AsyncronousTasks.Senders.asincAddFavorite;
-import com.example.cristian.everysale.AsyncronousTasks.Senders.asincDeleteInsertion;
-import com.example.cristian.everysale.AsyncronousTasks.Senders.asincRemoveFavorite;
-import com.example.cristian.everysale.AsyncronousTasks.asincGoogleCalendar;
-import com.example.cristian.everysale.Fragments.Other.InsertionDisplayFragment;
-import com.example.cristian.everysale.Interfaces.Deleter;
-import com.example.cristian.everysale.Listeners.MenuListener;
-import com.example.cristian.everysale.R;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -48,28 +17,36 @@ import com.google.api.client.util.DateTime;
 
 import com.google.api.services.calendar.model.*;
 
+import android.Manifest;
+import android.accounts.AccountManager;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class InsertionActivity extends AppCompatActivity implements Deleter, EasyPermissions.PermissionCallbacks {
-
-    private long insertionId;
-
-    private Toolbar toolbar;
-    public Menu menu;
-    private SharedPreferences savedValues;
-    private Boolean isFavorite = false;
-
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private Bundle bundle;
-
-    private Integer EasterEgg=0;
-
+public class CalendarTryActivity extends Activity implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
     private Button mCallApiButton;
@@ -84,98 +61,59 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
 
+    /**
+     * Create the main activity.
+     * @param savedInstanceState previously saved instance data.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bundle = savedInstanceState;
-        setContentView(R.layout.activity_insertion);
-        Intent intent = getIntent();
-        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
-        if(intent != null){
-            this.insertionId = intent.getLongExtra("insertionId", 0);
-        }
+        LinearLayout activityLayout = new LinearLayout(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        activityLayout.setLayoutParams(lp);
+        activityLayout.setOrientation(LinearLayout.VERTICAL);
+        activityLayout.setPadding(16, 16, 16, 16);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        MenuListener menuListener = new MenuListener(this, navigationView, drawerLayout);
-        drawerLayout.addDrawerListener(menuListener);
-        navigationView.setNavigationItemSelectedListener(menuListener);
-    }
+        ViewGroup.LayoutParams tlp = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
 
-    public long getInsertionId(){
-        return this.insertionId;
-    }
+        mCallApiButton = new Button(this);
+        mCallApiButton.setText(BUTTON_TEXT);
+        mCallApiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallApiButton.setEnabled(false);
+                mOutputText.setText("");
+                getResultsFromApi();
+                mCallApiButton.setEnabled(true);
+            }
+        });
+        activityLayout.addView(mCallApiButton);
 
-    //Favorite
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
-        getMenuInflater().inflate(R.menu.insertion_menu_action_bar, menu);
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_container, new InsertionDisplayFragment(), "displayFragment")
-                .commit();
-        return true;
-    }
+        mOutputText = new TextView(this);
+        mOutputText.setLayoutParams(tlp);
+        mOutputText.setPadding(16, 16, 16, 16);
+        mOutputText.setVerticalScrollBarEnabled(true);
+        mOutputText.setMovementMethod(new ScrollingMovementMethod());
+        mOutputText.setText(
+                "Click the \'" + BUTTON_TEXT +"\' button to test the API.");
+        activityLayout.addView(mOutputText);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        long userId = savedValues.getLong("userId", 1);
-        switch(id){
-            case R.id.add_to_favorite_button:
-                if(this.isFavorite){
-                    new asincRemoveFavorite(this).execute(userId, this.insertionId);
-                    break;
-                }
-                else{
-                    new asincAddFavorite(this).execute(userId ,this.insertionId);
-                }
-                break;
-            case R.id.rate_insertion_button:
-                if(item.getItemId() == R.drawable.ic_delete_24dp){
-                    new asincDeleteInsertion(this, this).execute(userId, this.getInsertionId());
-                }
-                else{
-                    View box=getSupportFragmentManager().findFragmentByTag("displayFragment").getView().findViewById(R.id.feedback_box);
-                    if(box.getVisibility()==View.GONE){
-                        box.setVisibility(View.VISIBLE);
-                    }
-                    else if(box.getVisibility()==View.VISIBLE){
-                        box.setVisibility(View.GONE);
-                    }
-                }
-                break;
+        mProgress = new ProgressDialog(this);
+        mProgress.setMessage("Calling Google Calendar API ...");
 
-            default:
-                break;
-        }
+        setContentView(activityLayout);
 
-        return super.onOptionsItemSelected(item);
+        // Initialize credentials and service object.
+        mCredential = GoogleAccountCredential.usingOAuth2(
+                getApplicationContext(), Arrays.asList(SCOPES))
+                .setBackOff(new ExponentialBackOff());
     }
 
 
-    public void setFavorite(boolean isFavorite){
-        this.isFavorite = isFavorite;
-        if(isFavorite){
-            menu.getItem(1).setTitle("Remove Favorite");
-            menu.getItem(1).setIcon(R.drawable.ic_star_24dp);
-            EasterEgg++;
-        }
-        else{
-            menu.getItem(1).setTitle("Add to Favorite");
-            menu.getItem(1).setIcon(R.drawable.ic_star_outline_24dp);
-            EasterEgg++;
-        }
-        if(EasterEgg==7){
-            Toast.makeText(getApplication(), "Stai calmo!!!" , Toast.LENGTH_LONG).show();
-            EasterEgg=0;
-        }
-    }
-
-    public void OnDeletion(String message){
-        if(message.contains("good")){
-            this.finish();
-        }
-    }
 
     /**
      * Attempt to call the API, after verifying that all the preconditions are
@@ -192,7 +130,7 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
         } else if (! isDeviceOnline()) {
             mOutputText.setText("No network connection available.");
         } else {
-            new asincGoogleCalendar(mCredential).execute();
+            new MakeRequestTask(mCredential).execute();
         }
     }
 
@@ -288,9 +226,12 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
      *     which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        EasyPermissions.onRequestPermissionsResult(
+                requestCode, permissions, grantResults, this);
     }
 
     /**
@@ -376,4 +317,101 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
      * An asynchronous task that handles the Google Calendar API call.
      * Placing the API calls in their own task ensures the UI stays responsive.
      */
+    private class MakeRequestTask extends AsyncTask<Void, Void, List<String>> {
+        private com.google.api.services.calendar.Calendar mService = null;
+        private Exception mLastError = null;
+
+        public MakeRequestTask(GoogleAccountCredential credential) {
+            HttpTransport transport = AndroidHttp.newCompatibleTransport();
+            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+            mService = new com.google.api.services.calendar.Calendar.Builder(
+                    transport, jsonFactory, credential)
+                    .setApplicationName("Google Calendar API Android Quickstart")
+                    .build();
+        }
+
+        /**
+         * Background task to call Google Calendar API.
+         * @param params no parameters needed for this task.
+         */
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            try {
+                return getDataFromApi();
+            } catch (Exception e) {
+                mLastError = e;
+                cancel(true);
+                return null;
+            }
+        }
+
+        /**
+         * Fetch a list of the next 10 events from the primary calendar.
+         * @return List of Strings describing returned events.
+         * @throws IOException
+         */
+        private List<String> getDataFromApi() throws IOException {
+            // List the next 10 events from the primary calendar.
+            DateTime now = new DateTime(System.currentTimeMillis());
+            List<String> eventStrings = new ArrayList<String>();
+            Events events = mService.events().list("primary")
+                    .setMaxResults(10)
+                    .setTimeMin(now)
+                    .setOrderBy("startTime")
+                    .setSingleEvents(true)
+                    .execute();
+            List<Event> items = events.getItems();
+
+            for (Event event : items) {
+                DateTime start = event.getStart().getDateTime();
+                if (start == null) {
+                    // All-day events don't have start times, so just use
+                    // the start date.
+                    start = event.getStart().getDate();
+                }
+                eventStrings.add(
+                        String.format("%s (%s)", event.getSummary(), start));
+            }
+            return eventStrings;
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            mOutputText.setText("");
+            mProgress.show();
+        }
+
+        @Override
+        protected void onPostExecute(List<String> output) {
+            mProgress.hide();
+            if (output == null || output.size() == 0) {
+                mOutputText.setText("No results returned.");
+            } else {
+                output.add(0, "Data retrieved using the Google Calendar API:");
+                mOutputText.setText(TextUtils.join("\n", output));
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mProgress.hide();
+            if (mLastError != null) {
+                if (mLastError instanceof GooglePlayServicesAvailabilityIOException) {
+                    showGooglePlayServicesAvailabilityErrorDialog(
+                            ((GooglePlayServicesAvailabilityIOException) mLastError)
+                                    .getConnectionStatusCode());
+                } else if (mLastError instanceof UserRecoverableAuthIOException) {
+                    startActivityForResult(
+                            ((UserRecoverableAuthIOException) mLastError).getIntent(),
+                            CalendarTryActivity.REQUEST_AUTHORIZATION);
+                } else {
+                    mOutputText.setText("The following error occurred:\n"
+                            + mLastError.getMessage());
+                }
+            } else {
+                mOutputText.setText("Request cancelled.");
+            }
+        }
+    }
 }

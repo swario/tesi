@@ -65,8 +65,6 @@ public class ChatActivity extends AppCompatActivity {
                 displayMessage(chatMessage);
             }
         });
-
-
     }
 
     public void displayMessage(ChatMessage message) {
