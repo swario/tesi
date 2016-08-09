@@ -210,7 +210,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         usernameEditText.setText(user.getUserName());
         nameEditText.setText(user.getName());
         surnameEditText.setText(user.getSurname());
-        if(user.getMobile().equals("no mobile")){
+        if(user.getMobile().equals("no mobile") || user.getMobile() == null){
             mobileEditText.setText("Cellulare non disponibile");
         }
         else {
