@@ -12,7 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
-import com.example.cristian.everysale.AsyncronousTasks.asincImageDownload;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincImageDownload;
 import com.example.cristian.everysale.R;
 
 import java.text.DecimalFormat;

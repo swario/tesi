@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.cristian.everysale.Fragments.viewPagerAdapter;
+import com.example.cristian.everysale.Fragments.HomeActivity.viewPagerAdapter;
 import com.example.cristian.everysale.Layouts.SlidingTabLayout;
 import com.example.cristian.everysale.R;
 

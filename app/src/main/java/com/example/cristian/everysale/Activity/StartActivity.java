@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.cristian.everysale.Interfaces.LoginPerformer;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.AsyncronousTasks.asincLogin;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincLogin;
 
 public class StartActivity extends AppCompatActivity implements OnClickListener, LoginPerformer {
 

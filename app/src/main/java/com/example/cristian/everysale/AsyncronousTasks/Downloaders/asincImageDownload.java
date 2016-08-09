@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.AsyncronousTasks;
+package com.example.cristian.everysale.AsyncronousTasks.Downloaders;
 
 import android.app.Activity;
 import android.content.Context;

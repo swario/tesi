@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.HomeActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
 import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
 import com.example.cristian.everysale.Interfaces.ListTab;
-import com.example.cristian.everysale.AsyncronousTasks.asincGetRecent;
-import com.example.cristian.everysale.BaseClasses.CustomAdapter;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincGetRecent;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.R;

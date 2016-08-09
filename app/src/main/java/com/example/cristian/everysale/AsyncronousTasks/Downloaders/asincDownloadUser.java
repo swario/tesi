@@ -1,14 +1,13 @@
-package com.example.cristian.everysale.AsyncronousTasks;
-
+package com.example.cristian.everysale.AsyncronousTasks.Downloaders;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.cristian.everysale.BaseClasses.SearchResponse;
-import com.example.cristian.everysale.Fragments.tabFavorite;
-import com.example.cristian.everysale.Parsers.SearchResponseParser;
+import com.example.cristian.everysale.BaseClasses.User;
+import com.example.cristian.everysale.Interfaces.UserDownloader;
+import com.example.cristian.everysale.Parsers.UserParser;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -21,33 +20,37 @@ import java.net.URL;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public class asincGetFavorites extends AsyncTask<Long, Void, Void> {
+/**
+ * Created by Giorgiboy on 06/08/2016.
+ */
+public class asincDownloadUser extends AsyncTask<Long, Void, User> {
 
-    private tabFavorite favorites;
-    private SearchResponse searchResponse;
-    private final String fileName = "recentXML.xml";
+    private String URL = "http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/";
+    private User user;
+    private String fileName = "user.xml";
     private Context context;
+    private UserDownloader downloader;
 
-    public asincGetFavorites(tabFavorite tabFavorites){
-        this.favorites = tabFavorites;
-        searchResponse = null;
-        context = tabFavorites.getContext();
+    public asincDownloadUser(Context context, UserDownloader downloader, boolean isSelf){
+
+        user = null;
+        this.context = context;
+        this.downloader = downloader;
+        if(isSelf){
+            URL +="";
+        }
+        else {
+            URL +="";
+        }
     }
 
-
     @Override
-    protected Void doInBackground(Long... params) {
-
-        Long upperLimit = Long.MAX_VALUE;
-        if(params.length > 0){
-            upperLimit = params[0];
-        }
+    protected User doInBackground(Long... params) {
         SharedPreferences savedValues = this.context.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
         long userId = savedValues.getLong("userId", 1);
 
         try{
-            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getFavorites.php?userId=" +
-                    String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
+            URL url = new URL(this.URL + "?userId=" + String.valueOf(userId));
 
             InputStream inputStream = url.openStream();
 
@@ -68,13 +71,13 @@ public class asincGetFavorites extends AsyncTask<Long, Void, Void> {
             SAXParser parser = parserFactory.newSAXParser();
             XMLReader reader = parser.getXMLReader();
 
-            SearchResponseParser responseParser = new SearchResponseParser();
-            reader.setContentHandler(responseParser);
+            UserParser userParser = new UserParser();
+            reader.setContentHandler(userParser);
 
             FileInputStream fileInputStream = this.context.openFileInput(fileName);
             InputSource inputSource = new InputSource(fileInputStream);
             reader.parse(inputSource);
-            searchResponse = responseParser.getSearchResponse();
+            return userParser.getUser();
         }
         catch(Exception e){
 
@@ -83,8 +86,8 @@ public class asincGetFavorites extends AsyncTask<Long, Void, Void> {
         return null;
     }
 
-    protected void onPostExecute(Void result){
+    protected void onPostExecute(User result){
 
-        favorites.setSearchResponse(this.searchResponse);
+        downloader.setUser(result);
     }
 }

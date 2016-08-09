@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.AsyncronousTasks;
+package com.example.cristian.everysale.AsyncronousTasks.Senders;
 
 import android.app.Activity;
 import android.content.Context;

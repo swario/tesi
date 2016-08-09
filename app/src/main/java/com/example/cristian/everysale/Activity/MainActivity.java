@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.Fragments.loginFragment;
-import com.example.cristian.everysale.Fragments.mainFragment.OnFragmentInteractionListener;
-import com.example.cristian.everysale.Fragments.mainFragment;
+import com.example.cristian.everysale.Fragments.MainActivity.loginFragment;
+import com.example.cristian.everysale.Fragments.MainActivity.mainFragment.OnFragmentInteractionListener;
+import com.example.cristian.everysale.Fragments.MainActivity.mainFragment;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener{
 
