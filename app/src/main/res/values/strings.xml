@@ -110,5 +110,8 @@
 
     <string name="chat_send">Invia</string>
     <string name="chat_write">Scrivi un messaggio</string>
+    <string name="insertion_delete_warning">Sei sicuro di voler rimuovere quest\'inserzione?</string>
+    <string name="confim">Sì</string>
+    <string name="deny">No</string>
 
 </resources>

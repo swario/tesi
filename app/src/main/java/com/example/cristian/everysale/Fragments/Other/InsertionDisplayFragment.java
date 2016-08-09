@@ -1,13 +1,17 @@
 package com.example.cristian.everysale.Fragments.Other;
 
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -130,18 +134,19 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
             if (this.insertion.isFavorite()){
                 this.isFavorite = true;
                 this.activity.setFavorite(true);
-                menu.getItem(1).setTitle("Remove Favorite");
-                menu.getItem(1).setIcon(R.drawable.ic_star_24dp);
+                MenuItem item = menu.findItem(R.id.add_to_favorite_button);
+                item.setTitle("Remove Favorite");
+                item.setIcon(R.drawable.ic_star_24dp);
             }
             long id = savedValues.getLong("userId", 1);
 
-            if(this.insertion.getInsertionist_id() == id) {
-                menu.getItem(0).setTitle("Cancella");
-                menu.getItem(0).setIcon(R.drawable.ic_delete_24dp);
+            if(this.insertion.getInsertionist_id() != id) {
+                Log.e("Debug", "Robe");
+                menu.removeItem(R.id.remove_item_button);
             }
-            else if (this.insertion.isEvaluated()){
+            else if (this.insertion.isEvaluated() || this.insertion.getInsertionist_id() == id){
                 this.isEvaluated = true;
-                menu.getItem(0).setVisible(false);
+                menu.findItem(R.id.rate_insertion_button).setVisible(false);
             }
             setUpLayout();
         }
