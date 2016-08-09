@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            tools:context="com.example.cristian.everysale.Fragments.evaluateInsertionFragment"
+            tools:context=".Fragments.Other.evaluateInsertionFragment"
             android:id="@+id/feedback_box"
             android:layout_below="@+id/insertion_image">
 
