@@ -1,9 +1,8 @@
-package com.example.cristian.everysale.Fragments.HomeActivity;
+package com.example.cristian.everysale.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
@@ -15,17 +14,16 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.cristian.everysale.Activity.InsertionActivity;
-import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
-import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincGetRecent;
+import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
+import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
 
-public class tabRecentOffers extends ListFragment implements OnRefreshListener, OnScrollListener, ListTab{
+public class MyInsertionsActivity extends navigationDrawerActivity implements OnRefreshListener, OnScrollListener, ListTab {
 
     private boolean loading = false;
     private boolean thereIsMore = true;
@@ -40,11 +38,12 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
     private SwipeRefreshLayout refreshLayout;
     private ListView itemsListView;
 
-    private View view;
-
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.recent_listview,container,false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.activity_my_insertions, null, false);
+        drawerLayout.addView(view, 0);
 
         itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
@@ -58,10 +57,9 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
         previewArrayList = new ArrayList<>();
 
         searchResponse = null;
-        adapter = new InsertionArrayAdapter(getContext(), getActivity());
+        adapter = new InsertionArrayAdapter(this.getApplicationContext(), this);
         itemsListView.setAdapter(adapter);
-        new asincGetRecent(this).execute();
-        return view;
+        //aggiungere asinctask
     }
 
     @Override
@@ -72,28 +70,11 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
     public void setSearchResponse(SearchResponse searchResponse){
 
         if(searchResponse == null){
-            Toast.makeText(getContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
             return;
         }
         refreshLayout.setRefreshing(false);
         adapter.addAll(searchResponse.getInsertions());
-        /*if(this.searchResponse == null){
-            this.searchResponse = searchResponse;
-            adapter = new InsertionArrayAdapter(getContext(), getActivity());
-            adapter.addAll(searchResponse.getInsertions());
-            itemsListView.setAdapter(adapter);
-            //adapter.addAll(this.searchResponse.getInsertions());
-        } else {
-            oldItemsCount = this.searchResponse.getInsertionCount();
-            for(int i = 0; i < searchResponse.getInsertionCount(); i++) {
-                adapter.add(searchResponse.getInsertion(i));
-            }
-        }
-        if(oldItemsCount == this.searchResponse.getInsertionCount()){
-            thereIsMore = false;
-        }
-        oldItemsCount = this.searchResponse.getInsertionCount();
-        loaded = true;*/
         Log.e("Debug", "Adapter: " + String.valueOf(adapter.getCount()));
         loading = false;
     }
@@ -102,7 +83,7 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
     public void onRefresh() {
         adapter.clear();
         this.thereIsMore = true;
-        new asincGetRecent(this).execute();
+        // aggiungere asinctask
     }
 
     @Override
@@ -119,7 +100,7 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
 
                 loading = true;
                 long upperLimit = adapter.getItem(adapter.getCount() -1).getInsertionId();
-                new asincGetRecent(this).execute(upperLimit);
+                // new asincGetRecent(this).execute(upperLimit);
                 refreshLayout.setRefreshing(true);
             }
         }
@@ -131,23 +112,8 @@ public class tabRecentOffers extends ListFragment implements OnRefreshListener, 
 
     @Override
     public void goToInsertion(long pos){
-
-        Intent intent = new Intent(getActivity(), InsertionActivity.class);
+        Intent intent = new Intent(this, InsertionActivity.class);
         intent.putExtra("insertionId", pos);
         startActivity(intent);
     }
-
-    /*@Override
-    public void onGlobalLayout() {
-        if(loaded){
-            if((itemsListView.getLastVisiblePosition() >= (itemsListView.getChildCount() - 1)) && thereIsMore){
-                long upperLimit = this.searchResponse.getInsertion(this.searchResponse.getInsertionCount() -1).getInsertionId();
-                new asincGetRecent(this).execute(upperLimit);
-            }
-            if(oldItemsCount < this.searchResponse.getInsertionCount()){
-                Log.e("Debug", "Quanti:" + String.valueOf(this.oldItemsCount));
-                itemsListView.smoothScrollToPosition(oldItemsCount);
-            }
-        }
-    }*/
 }

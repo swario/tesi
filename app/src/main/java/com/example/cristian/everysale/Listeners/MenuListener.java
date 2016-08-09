@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.example.cristian.everysale.Activity.Main2Activity;
 import com.example.cristian.everysale.Activity.ModifyProfileActivity;
-import com.example.cristian.everysale.Activity.MyInsertionActivity;
+import com.example.cristian.everysale.Activity.MyInsertionsActivity;
 import com.example.cristian.everysale.Activity.SearchActivity;
 import com.example.cristian.everysale.Activity.StartActivity;
 import com.example.cristian.everysale.Activity.aNewInsertionActivity;
@@ -107,19 +107,19 @@ public class MenuListener implements DrawerListener, OnNavigationItemSelectedLis
                 }
 
             case R.id.nav_my_insertions:
-                if(activity instanceof MyInsertionActivity){
+                if(activity instanceof MyInsertionsActivity){
                     Log.e("Debug", "my insertion!");
                     drawerLayout.closeDrawers();
                     break;
                 }
                 else if(activity instanceof Main2Activity){
-                    intent = new Intent(this.activity, MyInsertionActivity.class);
+                    intent = new Intent(this.activity, MyInsertionsActivity.class);
                     drawerLayout.closeDrawers();
                     activity.startActivity(intent);
                     break;
                 }
                 else{
-                    intent = new Intent(this.activity, MyInsertionActivity.class);
+                    intent = new Intent(this.activity, MyInsertionsActivity.class);
                     activity.startActivity(intent);
                     this.activity.finish();
                     break;
