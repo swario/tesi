@@ -13,12 +13,14 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincAddFavorite;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincDeleteInsertion;
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincRemoveFavorite;
 import com.example.cristian.everysale.Fragments.Other.InsertionDisplayFragment;
+import com.example.cristian.everysale.Interfaces.Deleter;
 import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.R;
 
-public class InsertionActivity extends AppCompatActivity {
+public class InsertionActivity extends AppCompatActivity implements Deleter {
 
     private long insertionId;
 
@@ -68,9 +70,9 @@ public class InsertionActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        long userId = savedValues.getLong("userId", 1);
         switch(id){
             case R.id.add_to_favorite_button:
-                long userId = savedValues.getLong("userId", 1);
                 if(this.isFavorite){
                     new asincRemoveFavorite(this).execute(userId, this.insertionId);
                     break;
@@ -80,12 +82,17 @@ public class InsertionActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.rate_insertion_button:
-                View box=getSupportFragmentManager().findFragmentByTag("displayFragment").getView().findViewById(R.id.feedback_box);
-                if(box.getVisibility()==View.GONE){
-                    box.setVisibility(View.VISIBLE);
+                if(item.getIcon() == getDrawable(R.drawable.ic_delete_24dp)){
+                    new asincDeleteInsertion(this, this).execute(userId, this.getInsertionId());
                 }
-                else if(box.getVisibility()==View.VISIBLE){
-                    box.setVisibility(View.GONE);
+                else{
+                    View box=getSupportFragmentManager().findFragmentByTag("displayFragment").getView().findViewById(R.id.feedback_box);
+                    if(box.getVisibility()==View.GONE){
+                        box.setVisibility(View.VISIBLE);
+                    }
+                    else if(box.getVisibility()==View.VISIBLE){
+                        box.setVisibility(View.GONE);
+                    }
                 }
                 break;
 
@@ -110,5 +117,11 @@ public class InsertionActivity extends AppCompatActivity {
             EasterEgg++;
         }
         if(EasterEgg>7)Toast.makeText(getApplication(), "Stai calmo!!!" , Toast.LENGTH_LONG).show();
+    }
+
+    public void OnDeletion(String message){
+        if(message.contains("good")){
+            this.finish();
+        }
     }
 }

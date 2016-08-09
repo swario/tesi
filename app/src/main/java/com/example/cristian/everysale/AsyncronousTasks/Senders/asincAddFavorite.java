@@ -26,6 +26,7 @@ public class asincAddFavorite extends AsyncTask<Long, Void, String> {
 
     @Override
     protected String doInBackground(Long... params) {
+
         long userId = params[0];
         long insertionId = params[1];
 
