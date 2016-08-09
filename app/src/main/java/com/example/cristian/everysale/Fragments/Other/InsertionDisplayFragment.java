@@ -158,7 +158,7 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         new asincImageDownload(getContext(), getActivity()).execute(imageAddress + insertion.getPhoto_url(), imageView);
         titleTextView.setText(insertion.getName());
         String number = new DecimalFormat("0.00").format(Double.parseDouble(String.valueOf(insertion.getPrice())));
-        priceTextView.setText(number + "€");
+        priceTextView.setText(number + " €");
         regionTextView.setText(insertion.getRegion());
         provinceTextView.setText(insertion.getProvince());
         cityTextView.setText(insertion.getCity());
