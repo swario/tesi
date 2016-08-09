@@ -2,9 +2,11 @@ package com.example.cristian.everysale.Activity;
 
 import android.Manifest;
 import android.accounts.AccountManager;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -14,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,9 +58,10 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class InsertionActivity extends AppCompatActivity implements Deleter, EasyPermissions.PermissionCallbacks {
+public class InsertionActivity extends AppCompatActivity implements Deleter, DialogInterface.OnClickListener, EasyPermissions.PermissionCallbacks {
 
     private long insertionId;
+    private long userId;
 
     private Toolbar toolbar;
     public Menu menu;
@@ -91,6 +95,7 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
         setContentView(R.layout.activity_insertion);
         Intent intent = getIntent();
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+        this.userId = savedValues.getLong("userId", 1);
         if(intent != null){
             this.insertionId = intent.getLongExtra("insertionId", 0);
         }
@@ -119,7 +124,7 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        long userId = savedValues.getLong("userId", 1);
+        //long userId = savedValues.getLong("userId", 1);
         switch(id){
             case R.id.add_to_favorite_button:
                 if(this.isFavorite){
@@ -131,18 +136,23 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
                 }
                 break;
             case R.id.rate_insertion_button:
-                if(item.getItemId() == R.drawable.ic_delete_24dp){
-                    new asincDeleteInsertion(this, this).execute(userId, this.getInsertionId());
+
+
+                View box=getSupportFragmentManager().findFragmentByTag("displayFragment").getView().findViewById(R.id.feedback_box);
+                if(box.getVisibility()==View.GONE){
+                    box.setVisibility(View.VISIBLE);
                 }
-                else{
-                    View box=getSupportFragmentManager().findFragmentByTag("displayFragment").getView().findViewById(R.id.feedback_box);
-                    if(box.getVisibility()==View.GONE){
-                        box.setVisibility(View.VISIBLE);
-                    }
-                    else if(box.getVisibility()==View.VISIBLE){
-                        box.setVisibility(View.GONE);
-                    }
+                else if(box.getVisibility()==View.VISIBLE){
+                    box.setVisibility(View.GONE);
                 }
+                break;
+
+            case R.id.remove_item_button:
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.insertion_delete_warning)
+                        .setPositiveButton(R.string.confim, this)
+                        .setNegativeButton(R.string.deny, this)
+                        .show();
                 break;
 
             default:
@@ -174,6 +184,16 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Eas
     public void OnDeletion(String message){
         if(message.contains("good")){
             this.finish();
+        }
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        if(which==DialogInterface.BUTTON_POSITIVE){
+            new asincDeleteInsertion(this, this).execute(this.userId, this.insertionId);
+        }
+        else if(which==DialogInterface.BUTTON_NEGATIVE){
+            dialog.cancel();
         }
     }
 

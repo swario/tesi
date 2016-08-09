@@ -1,6 +1,7 @@
 package com.example.cristian.everysale.AsyncronousTasks.Senders;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
 import com.example.cristian.everysale.Interfaces.Deleter;
@@ -64,7 +65,7 @@ public class asincDeleteInsertion extends AsyncTask<Long, Void, String>{
     }
 
     protected void onPostExecute(String result){
-
+        Log.e("Debug", "messaggio:" + result);
         activity.OnDeletion(result);
     }
 }
