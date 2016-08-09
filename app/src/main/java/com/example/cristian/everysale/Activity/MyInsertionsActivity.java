@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincGetRecent;
+import com.example.cristian.everysale.BaseClasses.DownloadType;
 import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
@@ -47,7 +48,9 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
 
         itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.myinsertions_refresh_layout);
+        DownloadType downloadType = DownloadType.Favorite;
+
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
         itemsListView.setOnScrollListener(this);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);

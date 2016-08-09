@@ -82,5 +82,6 @@ public class asincGetMyInsertions extends AsyncTask<Long, Void, SearchResponse> 
     @Override
     protected void onPostExecute(SearchResponse result){
 
+        this.activity.setSearchResponse(result);
     }
 }

@@ -180,7 +180,7 @@ public class InsertionParser extends DefaultHandler {
             insertion.setRegion(s);
         }
         if(isProvince){
-            isProvince = true;
+            isProvince = false;
             insertion.setProvince(s);
         }
         if(isMunicipality){
