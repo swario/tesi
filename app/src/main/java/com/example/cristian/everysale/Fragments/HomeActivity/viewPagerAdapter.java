@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.HomeActivity;
 
 /**
  * Created by ulisse on 31/07/2016.

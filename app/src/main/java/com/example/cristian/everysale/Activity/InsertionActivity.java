@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-import com.example.cristian.everysale.AsyncronousTasks.asincAddFavorite;
-import com.example.cristian.everysale.AsyncronousTasks.asincRemoveFavorite;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincAddFavorite;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincRemoveFavorite;
 import com.example.cristian.everysale.Fragments.InsertionDisplayFragment;
 import com.example.cristian.everysale.Listeners.MenuListener;
 import com.example.cristian.everysale.R;

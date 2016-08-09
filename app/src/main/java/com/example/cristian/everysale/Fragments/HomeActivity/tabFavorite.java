@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.HomeActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +22,7 @@ import com.example.cristian.everysale.BaseClasses.SearchResponse;
 import com.example.cristian.everysale.Activity.InsertionActivity;
 import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.AsyncronousTasks.asincGetFavorites;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincGetFavorites;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.MainActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,9 +18,9 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.view.View.OnClickListener;
 
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadMunicipalities;
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadMunicipalities;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadProvinces;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadRegions;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.Interfaces.SpinnerSetup;

@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.HomeActivity;
 
 import android.content.Intent;
 import android.os.Bundle;

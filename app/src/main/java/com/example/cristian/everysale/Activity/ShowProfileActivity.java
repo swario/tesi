@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadUser;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadUser;
 import com.example.cristian.everysale.BaseClasses.User;
 import com.example.cristian.everysale.Interfaces.UserDownloader;
 import com.example.cristian.everysale.R;

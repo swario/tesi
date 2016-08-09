@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.AsyncronousTasks;
+package com.example.cristian.everysale.AsyncronousTasks.Downloaders;
 
 
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
-import com.example.cristian.everysale.Fragments.tabRecentOffers;
+import com.example.cristian.everysale.Fragments.HomeActivity.tabFavorite;
 import com.example.cristian.everysale.Parsers.SearchResponseParser;
 
 import org.xml.sax.InputSource;
@@ -21,15 +21,17 @@ import java.net.URL;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public class asincGetRecent extends AsyncTask<Long, Void, Void> {
+public class asincGetFavorites extends AsyncTask<Long, Void, Void> {
 
-    private tabRecentOffers tabRecentOffers;
+    private tabFavorite favorites;
     private SearchResponse searchResponse;
     private final String fileName = "recentXML.xml";
+    private Context context;
 
-    public asincGetRecent(tabRecentOffers tabRecentOffers){
-        this.tabRecentOffers = tabRecentOffers;
+    public asincGetFavorites(tabFavorite tabFavorites){
+        this.favorites = tabFavorites;
         searchResponse = null;
+        context = tabFavorites.getContext();
     }
 
 
@@ -40,16 +42,16 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
         if(params.length > 0){
             upperLimit = params[0];
         }
-        SharedPreferences savedValues = tabRecentOffers.getContext().getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        long userId = savedValues.getLong("userId", 0);
+        SharedPreferences savedValues = this.context.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
+        long userId = savedValues.getLong("userId", 1);
 
         try{
-            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/recentInsertion.php?userId=" +
-            String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
+            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getFavorites.php?userId=" +
+                    String.valueOf(userId) + "&upperLimit=" + String.valueOf(upperLimit));
 
-               InputStream inputStream = url.openStream();
+            InputStream inputStream = url.openStream();
 
-            FileOutputStream outputStream = tabRecentOffers.getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+            FileOutputStream outputStream = this.context.openFileOutput(fileName, Context.MODE_PRIVATE);
 
             byte[] buffer = new byte[1024];
             int bytesRead = inputStream.read(buffer);
@@ -69,12 +71,13 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
             SearchResponseParser responseParser = new SearchResponseParser();
             reader.setContentHandler(responseParser);
 
-            FileInputStream fileInputStream = tabRecentOffers.getContext().openFileInput(fileName);
+            FileInputStream fileInputStream = this.context.openFileInput(fileName);
             InputSource inputSource = new InputSource(fileInputStream);
             reader.parse(inputSource);
             searchResponse = responseParser.getSearchResponse();
         }
         catch(Exception e){
+
             Log.e("Debug", "Response: " + e.getMessage());
         }
         return null;
@@ -82,7 +85,6 @@ public class asincGetRecent extends AsyncTask<Long, Void, Void> {
 
     protected void onPostExecute(Void result){
 
-        //Log.e("Debug", String.valueOf(this.searchResponse.getInsertionCount()));
-        tabRecentOffers.setSearchResponse(searchResponse);
+        favorites.setSearchResponse(this.searchResponse);
     }
 }

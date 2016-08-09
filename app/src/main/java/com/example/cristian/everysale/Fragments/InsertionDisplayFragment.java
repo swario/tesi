@@ -26,9 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.Activity.InsertionActivity;
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadInsertion;
-import com.example.cristian.everysale.AsyncronousTasks.asincEvaluation;
-import com.example.cristian.everysale.AsyncronousTasks.asincImageDownload;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadInsertion;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincEvaluation;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincImageDownload;
 import com.example.cristian.everysale.BaseClasses.Feedback;
 import com.example.cristian.everysale.BaseClasses.Insertion;
 import com.example.cristian.everysale.R;

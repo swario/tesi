@@ -17,9 +17,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadMunicipalities;
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadProvinces;
-import com.example.cristian.everysale.AsyncronousTasks.asincDownloadRegions;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadMunicipalities;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadProvinces;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadRegions;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
@@ -28,9 +28,6 @@ import com.example.cristian.everysale.Interfaces.SpinnerSetup;
 import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 public class aNewInsertionActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup {

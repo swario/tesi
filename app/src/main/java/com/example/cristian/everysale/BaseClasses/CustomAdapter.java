@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.AsyncronousTasks.asincImageDownload;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincImageDownload;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

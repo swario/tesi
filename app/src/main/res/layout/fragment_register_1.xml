@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    tools:context=".Fragments.registerFragment1">
+    tools:context=".Fragments.MainActivity.registerFragment1">
 
     <RelativeLayout
         android:layout_width="match_parent"

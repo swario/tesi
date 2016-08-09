@@ -1,12 +1,14 @@
-package com.example.cristian.everysale.AsyncronousTasks;
+package com.example.cristian.everysale.AsyncronousTasks.Downloaders;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import com.example.cristian.everysale.BaseClasses.Insertion;
+import com.example.cristian.everysale.BaseClasses.Region;
 import com.example.cristian.everysale.Interfaces.SpinnerSetup;
-import com.example.cristian.everysale.Parsers.MunicipalitiesParser;
-import com.example.cristian.everysale.Parsers.ProvincesParser;
+import com.example.cristian.everysale.Parsers.RegionsParser;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -23,24 +25,23 @@ import javax.xml.parsers.SAXParserFactory;
 /**
  * Created by Cristian on 07/08/2016.
  */
-public class asincDownloadMunicipalities extends AsyncTask<Void, Void, ArrayList<String>> {
+public class asincDownloadRegions extends AsyncTask<Void, Void, ArrayList<Region>> {
 
-    private String fileName = "municipalities.xml";
+    private String fileName = "regions.xml";
     private Context context;
     private SpinnerSetup spinnerSetup;
-    private int provinceCode;
 
-    public asincDownloadMunicipalities(Context cont, SpinnerSetup spinner, int provCode){
+    public asincDownloadRegions(Context cont, SpinnerSetup spinner){
         context = cont;
         spinnerSetup = spinner;
-        provinceCode = provCode;
     }
 
-    protected ArrayList<String> doInBackground(Void... params) {
-        Log.e("Municipalities", "Lanciato");
+    protected ArrayList<Region> doInBackground(Void... params) {
+        Log.e("Regions", "Lanciato");
 
         try {
-            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getMunicipalities.php?provinceCode=" + provinceCode);
+
+            URL url = new URL("http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/getRegions.php");
 
             InputStream inputStream = url.openStream();
 
@@ -53,7 +54,7 @@ public class asincDownloadMunicipalities extends AsyncTask<Void, Void, ArrayList
                 outputStream.write(buffer, 0, bytesRead);
                 bytesRead = inputStream.read(buffer);
             }
-            Log.e("Municipalities", "File Letto");
+            Log.e("Regions", "File Letto");
             outputStream.close();
             inputStream.close();
 
@@ -62,25 +63,25 @@ public class asincDownloadMunicipalities extends AsyncTask<Void, Void, ArrayList
             SAXParser parser = parserFactory.newSAXParser();
             XMLReader reader = parser.getXMLReader();
 
-            MunicipalitiesParser municipalitiesParser = new MunicipalitiesParser();
-            reader.setContentHandler(municipalitiesParser);
+            RegionsParser regionsParser = new RegionsParser();
+            reader.setContentHandler(regionsParser);
 
             FileInputStream fileInputStream = context.openFileInput(fileName);
             InputSource inputSource = new InputSource(fileInputStream);
             reader.parse(inputSource);
-            return municipalitiesParser.getMunicipalities();
+            return regionsParser.getRegions();
         }
         catch (Exception e){
-                Log.e("Municipalities", "Eccezione: " + e.getMessage());
-                return null;
-            }
+            Log.e("Regions", "Eccezione: " + e.getMessage());
+            return null;
         }
+    }
 
     @Override
-    protected void onPostExecute(ArrayList<String> result){
+    protected void onPostExecute(ArrayList<Region> result){
         if(result!= null){
-            Log.e("Municipalities", String.valueOf(result.size()));
-            spinnerSetup.setupMunicipalities(result);
+            Log.e("Regions", String.valueOf(result.size()));
+            spinnerSetup.setupRegions(result);
         }
     }
 }

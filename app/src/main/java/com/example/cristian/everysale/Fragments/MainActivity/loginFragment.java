@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.MainActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.cristian.everysale.Activity.Main2Activity;
 import com.example.cristian.everysale.Interfaces.LoginPerformer;
 import com.example.cristian.everysale.R;
-import com.example.cristian.everysale.AsyncronousTasks.asincLogin;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincLogin;
 
 public class loginFragment extends Fragment implements OnEditorActionListener, OnClickListener, LoginPerformer {
 

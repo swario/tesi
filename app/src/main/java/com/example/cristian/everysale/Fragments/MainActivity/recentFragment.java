@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.MainActivity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

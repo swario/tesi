@@ -1,4 +1,4 @@
-package com.example.cristian.everysale.Fragments;
+package com.example.cristian.everysale.Fragments.MainActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.cristian.everysale.AsyncronousTasks.asincRegister;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincRegister;
 import com.example.cristian.everysale.BaseClasses.imagePicker.ImagePickerActivity;
 import com.example.cristian.everysale.BaseClasses.imagePicker.imageUtility;
 import com.example.cristian.everysale.R;
