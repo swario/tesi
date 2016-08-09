@@ -129,4 +129,9 @@ public class tabNearBy extends ListFragment implements OnRefreshListener, OnScro
         intent.putExtra("insertionId", pos);
         startActivity(intent);
     }
+
+    @Override
+    public void SetResponse(SearchResponse response) {
+
+    }
 }

@@ -14,7 +14,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincGetRecent;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadInsertions;
 import com.example.cristian.everysale.BaseClasses.DownloadType;
 import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
@@ -48,9 +48,7 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
 
         itemsListView = (ListView) ((ViewGroup) view).getChildAt(1);
 
-        DownloadType downloadType = DownloadType.Favorite;
-
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.recent_refresh_layout);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.myinsertions_refresh_layout);
         itemsListView.setOnScrollListener(this);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
@@ -61,7 +59,8 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
         searchResponse = null;
         adapter = new InsertionArrayAdapter(this.getApplicationContext(), this);
         itemsListView.setAdapter(adapter);
-        //aggiungere asinctask
+
+        new asincDownloadInsertions(this, this, DownloadType.MyInsertions).execute();
     }
 
     @Override
@@ -69,23 +68,11 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
         super.onResume();
     }
 
-    public void setSearchResponse(SearchResponse searchResponse){
-
-        if(searchResponse == null){
-            Toast.makeText(this.getApplicationContext(), "Connessione internet assente", Toast.LENGTH_LONG).show();
-            return;
-        }
-        refreshLayout.setRefreshing(false);
-        adapter.addAll(searchResponse.getInsertions());
-        Log.e("Debug", "Adapter: " + String.valueOf(adapter.getCount()));
-        loading = false;
-    }
-
     @Override
     public void onRefresh() {
         adapter.clear();
         this.thereIsMore = true;
-        // aggiungere asinctask
+        new asincDownloadInsertions(this, this, DownloadType.MyInsertions).execute();
     }
 
     @Override
@@ -102,7 +89,7 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
 
                 loading = true;
                 long upperLimit = adapter.getItem(adapter.getCount() -1).getInsertionId();
-                // new asincGetRecent(this).execute(upperLimit);
+                new asincDownloadInsertions(this, this, DownloadType.MyInsertions).execute(upperLimit);
                 refreshLayout.setRefreshing(true);
             }
         }
@@ -117,5 +104,19 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
         Intent intent = new Intent(this, InsertionActivity.class);
         intent.putExtra("insertionId", pos);
         startActivity(intent);
+    }
+
+    @Override
+    public void SetResponse(SearchResponse response) {
+
+        if(response == null){
+            Toast.makeText(this, "Connessione internet assente", Toast.LENGTH_LONG).show();
+            return;
+        }
+        refreshLayout.setRefreshing(false);
+        adapter.addAll(response.getInsertions());
+
+        Log.e("Debug", "Adapter: " + String.valueOf(adapter.getCount()));
+        loading = false;
     }
 }
