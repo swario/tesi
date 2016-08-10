@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:fillViewport="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/first"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_page_name"
+            android:id="@+id/pageTextView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/colorText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_title"
+            android:id="@+id/titleTextView"
+            android:layout_below="@+id/pageTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/titleEditText"
+            android:layout_below="@+id/titleTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item3"
+            android:id="@+id/insertionRegionTextView"
+            android:layout_below="@+id/titleEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/insertionRegionSpinner"
+            android:spinnerMode="dialog"
+            android:ems="10"
+            android:layout_below="@+id/insertionRegionTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/spinner_text_size"
+            android:textColor="@color/colorText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item4"
+            android:id="@+id/insertionProvinceTextView"
+            android:layout_below="@+id/insertionRegionSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/insertionProvinceSpinner"
+            android:spinnerMode="dialog"
+            android:ems="10"
+            android:layout_below="@+id/insertionProvinceTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/spinner_text_size"
+            android:textColor="@color/colorText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister2_item5"
+            android:id="@+id/insertionMunicipalityTextView"
+            android:layout_below="@+id/insertionProvinceSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/insertionMunicipalitySpinner"
+            android:spinnerMode="dialog"
+            android:ems="10"
+            android:layout_below="@+id/insertionMunicipalityTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/spinner_text_size"
+            android:textColor="@color/colorText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_address"
+            android:id="@+id/addressTextView"
+            android:layout_below="@+id/insertionMunicipalitySpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addressEditText"
+            android:ems="10"
+            android:layout_below="@+id/addressTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_price"
+            android:id="@+id/priceTextView"
+            android:layout_below="@+id/addressEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/priceEditText"
+            android:layout_below="@+id/priceTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:inputType="numberDecimal"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_shop"
+            android:id="@+id/shopTextView"
+            android:layout_below="@+id/priceEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/shopEditText"
+            android:layout_below="@+id/shopTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:singleLine="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_expiration_date"
+            android:id="@+id/datePickerTextView"
+            android:layout_below="@+id/shopEditText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expirationDatePicker"
+            android:layout_below="@+id/datePickerTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:spinnersShown="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_description"
+            android:id="@+id/descriptionTextView"
+            android:layout_below="@+id/expirationDatePicker"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionEditText"
+            android:layout_below="@+id/descriptionTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:singleLine="false" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/itemImageView"
+            android:layout_below="@+id/descriptionEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="42dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fregister3_imgButton"
+            android:id="@+id/newImageButton"
+            android:layout_below="@+id/itemImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            style="@style/Button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_layout_cancelButton"
+            android:id="@+id/newCancelButton"
+            android:layout_below="@+id/newImageButton"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            style="@style/Button"  />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_insertion_submit_button"
+            android:id="@+id/newSubmitButton"
+            android:layout_below="@+id/newImageButton"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="@style/Button" />
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,408 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/insertion_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:nestedScrollingEnabled="true"
+    android:fillViewport="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        tools:context=".Activity.InsertionActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_title"
+            android:id="@+id/insertion_title"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/insertion_title"
+            android:singleLine="false" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/item_image"
+            android:id="@+id/insertion_image"
+            android:layout_below="@+id/insertion_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"/>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            tools:context=".Fragments.Other.evaluateInsertionFragment"
+            android:id="@+id/feedback_box"
+            android:layout_below="@+id/insertion_image">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feedback"
+                android:id="@+id/feedbackTextView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp" />
+
+            <EditText
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/feedbackEditText"
+                android:layout_below="@+id/feedbackTextView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:textSize="20sp" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/feedbackRatingBar"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:max="5"
+                android:progress="3"
+                android:progressTint="@color/ratingBarColor"
+                android:layout_below="@+id/feedbackEditText"
+                android:layout_alignRight="@+id/feedbackTextView"
+                android:layout_alignEnd="@+id/feedbackTextView"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feedback_rating"
+                android:id="@+id/feedbackRateTextView"
+                android:layout_alignTop="@+id/feedbackRatingBar"
+                android:layout_alignLeft="@+id/feedbackTextView"
+                android:layout_alignStart="@+id/feedbackTextView"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="20sp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feedback_button"
+                android:id="@+id/feedbackSubmitButton"
+                android:layout_below="@+id/feedbackRateTextView"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                style="@style/Button"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_price"
+            android:id="@+id/insertion_price"
+            android:layout_below="@+id/feedback_box"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false" />
+
+        <TextView
+            android:id="@+id/insertion_price_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_price"
+            android:ems="5"
+            android:textSize="@dimen/text_size"
+            android:layout_alignTop="@+id/insertion_price"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+        <TextView
+            android:id="@+id/insertion_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_region"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:layout_below="@+id/insertion_price_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/insertion_region_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_region"
+            android:ems="8"
+            android:layout_below="@+id/insertion_price_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end" />
+
+        <TextView
+            android:id="@+id/insertion_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_province"
+            android:layout_below="@+id/insertion_region_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"/>
+
+        <TextView
+            android:id="@+id/insertion_province_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_province"
+            android:ems="8"
+            android:layout_below="@+id/insertion_region_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+        <TextView
+            android:id="@+id/insertion_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_municipality"
+            android:layout_below="@+id/insertion_province_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false" />
+
+        <TextView
+            android:id="@+id/insertion_city_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_municipality"
+            android:ems="8"
+            android:layout_below="@+id/insertion_province_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end" />
+
+        <TextView
+            android:id="@+id/insertion_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_address"
+            android:layout_below="@+id/insertion_city_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false" />
+
+        <TextView
+            android:id="@+id/insertion_address_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_address"
+            android:ems="8"
+            android:layout_below="@+id/insertion_city_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_shop"
+            android:id="@+id/insertion_shop"
+            android:layout_below="@+id/insertion_address_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_shop"
+            android:ems="8"
+            android:id="@+id/insertion_shop_value"
+            android:layout_below="@+id/insertion_address_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_insertionist"
+            android:id="@+id/item_insertionist"
+            android:layout_below="@+id/insertion_shop_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_insertionist"
+            android:ems="8"
+            android:id="@+id/item_insertionist_value"
+            style="@style/Button"
+            android:layout_below="@+id/insertion_shop_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:numStars="5"
+            android:stepSize="0.1"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_below="@+id/item_insertionist_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:clickable="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_date1"
+            android:id="@+id/item_date1"
+            android:layout_below="@+id/ratingBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_date1"
+            android:ems="6"
+            android:id="@+id/item_date1_value"
+            android:layout_below="@+id/ratingBar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_date2"
+            android:id="@+id/item_date2"
+            android:layout_below="@+id/item_date1_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_date2"
+            android:ems="6"
+            android:id="@+id/item_date2_value"
+            android:layout_below="@+id/item_date1_value"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_description"
+            android:id="@+id/item_description"
+            android:layout_below="@+id/item_date2_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="@dimen/insertion_margin_bottom"
+            android:textSize="@dimen/insertion_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_description"
+            android:id="@+id/item_description_value"
+            android:layout_below="@+id/item_description"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/text_size"
+            android:singleLine="false"
+            android:textAlignment="center"
+            android:gravity="end" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_feedback"
+            android:id="@+id/item_feedback"
+            android:layout_below="@+id/item_description_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="@dimen/insertion_title" />
+
+        <com.example.cristian.everysale.BaseClasses.NestedListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:id="@+id/listView"
+            android:layout_below="@+id/item_feedback"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="10dp"
+            tools:listitem="@layout/feedback_list_item" />
+
+    </RelativeLayout>
+
+</ScrollView>

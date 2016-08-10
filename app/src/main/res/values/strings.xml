@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">EverySale</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="registrati">Registrati</string>
+    <string name="login">Accedi</string>
+
+    <!--menu laterale-->
+    <string name="menu_search">Search</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_message">Messaggi</string>
+    <string name="menu_my_account">Il mio account</string>
+    <string name="menu_my_insertions">Le mie inserzioni</string>
+    <string name="menu_new_insertion">Nuova inserzione</string>
+    <string name="menu_disconnect">Disconnettiti</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- Stringhe fragment di login -->
+    <string name="flogin_item1">Username/email</string>
+    <string name="flogin_item2">Password</string>
+    <string name="flogin_button">Accedi</string>
+
+    <!-- Stringhe fragment di registrazione -->
+    <string name="fregister1_item1">Email</string>
+    <string name="fregister1_item2">Username</string>
+    <string name="fregister1_item3">Password</string>
+    <string name="fregister1_item4">Conferma Password</string>
+
+    <string name="fregister2_item1">Nome</string>
+    <string name="fregister2_item2">Cognome</string>
+    <string name="fregister2_item3">Regione</string>
+    <string name="fregister2_item4">Città</string>
+    <string name="fregister2_item5">Comune</string>
+    <string name="fregister2_item6">Cellulare</string>
+
+    <string name="fregister3_imgButton">Carica immagine</string>
+    <string name="fregister3_registerSubmitButton">Registrati!</string>
+    <string name="fregister3_dataAllowCheckBox">Vuoi che i tuoi dati siano visibili?</string>
+
+    <string name="fregister_backButton">&lt;</string>
+    <string name="fregister_forwardButton">&gt;</string>
+
+    <!-- stringhe three tabs layout e sottocomponenti-->
+
+    <string name="body1">one</string>
+    <string name="body2">two</string>
+    <string name="body3">three</string>
+    <string name="label1">Vicini</string>
+    <string name="label2">Offerte Recenti</string>
+    <string name="label3">Preferiti</string>
+
+    <!-- stringhe listview item -->
+    <string name="item_image">Immagine</string>
+    <string name="item_title">Titolo</string>
+    <string name="item_price">Prezzo</string>
+    <string name="item_city">Città</string>
+    <string name="item_rating">Rating</string>
+
+    <!-- stringhe aggiuntive per l'inserzione generica -->
+    <string name="item_address">Indirizzo</string>
+    <string name="item_shop">Negozio</string>
+    <string name="item_insertionist">Inserzionista</string>
+    <string name="item_date1">Data inserimento</string>
+    <string name="item_date2">Data scadenza</string>
+    <string name="item_description">Descrizione</string>
+    <string name="item_feedback">Feedback</string>
+
+    <string name="start_activity">Login in corso</string>
+
+    <string name="favorite_menu">add to favorite</string>
+    <string name="defavorite_menu">remove from favorite</string>
+
+    <!-- Stringhe layout modifica profilo -->
+    <string name="profile_layout_cancelButton">Annulla</string>
+    <string name="profile_layout_submitButton">Aggiorna</string>
+
+    <!-- Stringhe layout crea inserzione  -->
+    <string name="new_insertion_page_name">Nuova inserzione</string>
+    <string name="new_insertion_title">Titolo</string>
+    <string name="new_insertion_price">Prezzo</string>
+    <string name="new_insertion_shop">Negozio</string>
+    <string name="new_insertion_city">Città</string>
+    <string name="new_insertion_address">Indirizzo</string>
+    <string name="new_insertion_expiration_date">Data scadenza (facoltativa)</string>
+    <string name="new_insertion_description">Descrizione</string>
+    <string name="new_insertion_submit_button">Crea</string>
+
+    <string name="feedback">Lascia un commento di feedback ed una valutazione da 1 a 5</string>
+    <string name="feedback_rating">3</string>
+    <string name="feedback_button">Invia</string>
+
+    <string name="title_activity_new_insertion">newInsertionActivity</string>
+    <string name="title_activity_my_insertion">MyInsertion</string>
+    <string name="title_activity_mmy_insertion">myInsertionActivity</string>
+    <string name="title_activity_new_insertion_activityy">NewInsertionActivity</string>
+
+    <string name="item_region">Regione</string>
+    <string name="item_province">Provincia</string>
+    <string name="item_municipality">Comune</string>
+
+    <string name="modify_profile_password">Nuova Password</string>
+    <string name="modify_profile_confirm_password">Conferma Nuova Password</string>
+
+    <string name="chat_send">Invia</string>
+    <string name="chat_write">Scrivi un messaggio</string>
+    <string name="insertion_delete_warning">Sei sicuro di voler rimuovere quest\'inserzione?</string>
+    <string name="confim">Sì</string>
+    <string name="deny">No</string>
+    <string name="image_url">http://webdev.dibris.unige.it/~S3928202/Progetto/profilePics/</string>
+
+</resources>
