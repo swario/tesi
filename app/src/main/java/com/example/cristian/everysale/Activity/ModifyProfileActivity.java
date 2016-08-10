@@ -22,6 +22,7 @@ import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownload
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadProvinces;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadRegions;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadUser;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincImageDownload;
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincProfileUpdate;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
@@ -209,17 +210,14 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
     public void setupMunicipalities(ArrayList<String> result){
         Log.d("EverySale", "Inserimento comuni in corso...");
-        int position = 0;
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, result);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         municipalitySpinner.setAdapter(adapter);
         municipalitySpinner.setOnItemSelectedListener(this);
         if(firstAccess){
-            position = result.indexOf(user.getMunicipality());
-            Log.e("Debug", result.get(position) + String.valueOf(position));
+            int position = result.indexOf(user.getMunicipality());
+            Log.e("Debug", result.get(position) + " " + String.valueOf(position));
             firstAccess = false;
-            municipalitySpinner.setSelection(position);
-        }else{
             municipalitySpinner.setSelection(position);
         }
         Log.d("EverySale", "Comuni inseriti");
@@ -233,7 +231,8 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     }
 
     private void SetUpLayout(){
-
+        new asincImageDownload(this, this).execute(getResources().getString(R.string.image_url) + user.getPhoto(), profileImageView);
+        profileImageView.setVisibility(View.VISIBLE);
         emailEditText.setText(user.getEmail());
         usernameEditText.setText(user.getUserName());
         nameEditText.setText(user.getName());
@@ -268,5 +267,13 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         }
         new asincProfileUpdate(this).execute(email, username, password, region, province, municipality, name, surname,
                 mobile, dataAllow, imgPath);
+    }
+
+    public void OnResponse(String response){
+
+        if(response.contains("success")){
+            Toast.makeText(this, "Dati aggiornati", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
     }
 }

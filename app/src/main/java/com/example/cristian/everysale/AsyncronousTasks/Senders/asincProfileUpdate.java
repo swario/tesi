@@ -133,7 +133,7 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
                 return stringBuilder.toString();
             }
             else {
-                Log.e("Debug", this.URL + "?" + getQuery(pairList));
+                //Log.e("Debug", this.URL + "?" + getQuery(pairList));
                 URL url = new URL(URL);
                 URLConnection connection = url.openConnection();
 
@@ -164,16 +164,17 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
 
     protected void onPostExecute(String result){
 
-        Log.e("Debug", result);
         if(result.contains("success")){
 
             Editor editor = savedValues.edit();
 
             editor.putString("username", this.username);
-            editor.putString("password", this.password);
-
+            if(!password.isEmpty()){
+                editor.putString("password", this.password);
+            }
             editor.commit();
         }
+        this.activity.OnResponse(result);
     }
 
     private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException
