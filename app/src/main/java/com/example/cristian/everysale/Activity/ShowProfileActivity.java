@@ -32,11 +32,14 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
     private TextView surnameText;
     private TextView mobileText;
 
+    private String imageUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user= null;
+        this.imageUrl = getResources().getString(R.string.image_url);
         Intent intent = getIntent();
         if(intent != null){
             long userId = intent.getLongExtra("otherUser", 0);
@@ -49,6 +52,8 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
         View contentView = inflater.inflate(R.layout.activity_show_profile , null, false);
         drawerLayout.addView(contentView, 0);
 
+        setContentView(R.layout.activity_show_profile);
+
         usernameText = (TextView) findViewById(R.id.usernameTextView);
         profilePic = (ImageView) findViewById(R.id.profileImageView);
         ratingBar = (RatingBar) findViewById(R.id.userRatingBar);
@@ -59,13 +64,12 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
         nameText = (TextView) findViewById(R.id.showNameTextView);
         surnameText = (TextView) findViewById(R.id.showSurnameTextView);
         mobileText = (TextView) findViewById(R.id.showPhonenumberTextView);
-
-        setContentView(R.layout.activity_show_profile);
     }
 
     @Override
     public void setUser(User user) {
         if(user == null){
+            Log.e("Debug", "Pinoli");
             return;
         }
         this.user = user;
@@ -74,7 +78,8 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
 
     private void SetUpLayout(){
         usernameText.setText(user.getUserName());
-        new asincImageDownload(this, this).execute(user.getPhoto(), profilePic);
+        Log.e("Debug", user.getUserName());
+        new asincImageDownload(this, this).execute(this.imageUrl + user.getPhoto(), profilePic);
         ratingBar.setNumStars(5);
         ratingBar.setMax(5);
         ratingBar.setStepSize((float) 0.1);

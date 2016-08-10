@@ -138,9 +138,14 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
             if(this.insertion.getInsertionist_id() != id) {
                 menu.removeItem(R.id.remove_item_button);
             }
-            else if (this.insertion.isEvaluated() || this.insertion.getInsertionist_id() == id){
+            else if (this.insertion.getInsertionist_id() == id){
+                menu.findItem(R.id.rate_insertion_button).setVisible(false);
+                menu.findItem(R.id.add_to_favorite_button).setVisible(false);
+            }
+            if (this.insertion.isEvaluated()){
                 this.isEvaluated = true;
                 menu.findItem(R.id.rate_insertion_button).setVisible(false);
+                menu.removeItem(R.id.remove_item_button);
             }
             setUpLayout();
         }
