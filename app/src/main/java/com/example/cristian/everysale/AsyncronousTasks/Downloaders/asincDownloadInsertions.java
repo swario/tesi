@@ -62,6 +62,14 @@ public class asincDownloadInsertions  extends AsyncTask<Long, Void, SearchRespon
         addition += "&region=" + region + "&province=" + province +"&municipality=" + municipality;
     }
 
+    public asincDownloadInsertions(Activity activity, ListTab tab, String searchKey){
+        this.tab = tab;
+        this.activity = activity;
+        this.context = this.activity.getBaseContext();
+        this.URL += "searchMobile.php";
+        addition += "&searchKey=" + searchKey;
+    }
+
     @Override
     protected SearchResponse doInBackground(Long... params) {
         long upperLimit = Long.MAX_VALUE;
