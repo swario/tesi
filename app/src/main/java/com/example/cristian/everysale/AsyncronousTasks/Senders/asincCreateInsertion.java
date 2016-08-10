@@ -80,12 +80,10 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
 
         try{
             if(photo!=null){
-                Log.e("Debug", "la foto c'è");
                 HttpURLConnection connection = null;
                 FileInputStream inputStream = new FileInputStream(new File(photo));
 
                 String finalURL = this.URL + "?" + getQuery(pairList);
-                Log.e("Debug", finalURL);
                 URL url = new URL(finalURL);
                 connection = (HttpURLConnection) url.openConnection();
 
@@ -140,7 +138,6 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
 
                 String data = getQuery(pairList);
                 URLConnection connection = url.openConnection();
-                Log.e("Debug", data);
                 connection.setDoOutput(true);
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
 
@@ -165,7 +162,6 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result){
-        Log.e("Debug", result);
         this.activity.OnServerResponse(result);
     }
 

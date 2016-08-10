@@ -217,7 +217,6 @@ public class aNewInsertionActivity extends navigationDrawerActivity implements O
         int year = expirationDatePicker.getYear();
 
         String expirationDate = Integer.toString(year) + "-" + Integer.toString(month + 1) + "-" + Integer.toString(day);
-        Log.e("Debug", expirationDate);
         new asincCreateInsertion(this).execute(name, region, province, municipality, address, shopName, expirationDate,
                 price, description, this.imgPath);
     }
