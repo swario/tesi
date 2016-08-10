@@ -33,7 +33,6 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 public class aNewInsertionActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup {
-    // Commento
 
     private EditText titleEditText;
     private EditText priceEditText;

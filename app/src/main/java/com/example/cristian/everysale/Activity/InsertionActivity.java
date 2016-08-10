@@ -4,14 +4,17 @@ import android.Manifest;
 import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -20,15 +23,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincAddFavorite;
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincDeleteInsertion;
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincRemoveFavorite;
-import com.example.cristian.everysale.AsyncronousTasks.asincGoogleCalendar;
+import com.example.cristian.everysale.AsyncronousTasks.asincGoogleCalendarInsert;
 import com.example.cristian.everysale.Fragments.Other.InsertionDisplayFragment;
 import com.example.cristian.everysale.Interfaces.Deleter;
 import com.example.cristian.everysale.Listeners.MenuListener;
@@ -36,23 +37,13 @@ import com.example.cristian.everysale.R;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
-import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
-
 import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.client.util.DateTime;
 
-import com.google.api.services.calendar.model.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -75,18 +66,14 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
     private Integer EasterEgg=0;
 
     GoogleAccountCredential mCredential;
-    private TextView mOutputText;
-    private Button mCallApiButton;
-    ProgressDialog mProgress;
 
     static final int REQUEST_ACCOUNT_PICKER = 1000;
     static final int REQUEST_AUTHORIZATION = 1001;
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
     static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
 
-    private static final String BUTTON_TEXT = "Call Google Calendar API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
+    private static final String[] SCOPES = { CalendarScopes.CALENDAR };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +91,8 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
         MenuListener menuListener = new MenuListener(this, navigationView, drawerLayout);
         drawerLayout.addDrawerListener(menuListener);
         navigationView.setNavigationItemSelectedListener(menuListener);
+        // Initialize credentials and service object.
+        mCredential = GoogleAccountCredential.usingOAuth2(getApplicationContext(), Arrays.asList(SCOPES)).setBackOff(new ExponentialBackOff());
     }
 
     public long getInsertionId(){
@@ -128,15 +117,16 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
             case R.id.add_to_favorite_button:
                 if(this.isFavorite){
                     new asincRemoveFavorite(this).execute(userId, this.insertionId);
+                    deleteEvent();
                     break;
                 }
                 else{
-                    new asincAddFavorite(this).execute(userId ,this.insertionId);
+                    new asincAddFavorite(this).execute(userId, this.insertionId);
+                    //insertEvent();
                 }
                 break;
+
             case R.id.rate_insertion_button:
-
-
                 View box=getSupportFragmentManager().findFragmentByTag("displayFragment").getView().findViewById(R.id.feedback_box);
                 if(box.getVisibility()==View.GONE){
                     box.setVisibility(View.VISIBLE);
@@ -157,7 +147,6 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
             default:
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -196,6 +185,35 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
         }
     }
 
+    public void insertEvent(){
+        Log.e("EverySale", "Inserimento in corso...");
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2016, 8, 19, 0, 00);
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true)
+                .putExtra(Events._ID, 208)
+                .putExtra(Events.TITLE, "Yoga")
+                .putExtra(Events.DESCRIPTION, "Group class")
+                .putExtra(Events.EVENT_LOCATION, "The gym")
+                .putExtra(Events.EVENT_COLOR, "red")
+                .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);
+        startActivity(intent);
+        Log.e("EverySale", "Inserito");
+    }
+
+    // Non è realizzabile
+    public void deleteEvent(){
+        long eventID = 208;
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2016, 6, 19, 0, 00);
+        Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+        Intent intent = new Intent(Intent.ACTION_EDIT)
+                .setData(uri)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
+        startActivity(intent);
+    }
     /**
      * Attempt to call the API, after verifying that all the preconditions are
      * satisfied. The preconditions are: Google Play Services installed, an
@@ -209,9 +227,9 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
         } else if (mCredential.getSelectedAccountName() == null) {
             chooseAccount();
         } else if (! isDeviceOnline()) {
-            mOutputText.setText("No network connection available.");
+            //mOutputText.setText("No network connection available.");
         } else {
-            new asincGoogleCalendar(mCredential).execute();
+            new asincGoogleCalendarInsert(mCredential, this).execute(String.valueOf(this.insertionId), "Titolo", "2016-08-12", "Piazza Della Vittoria, Genova");
         }
     }
 
@@ -267,9 +285,7 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
         switch(requestCode) {
             case REQUEST_GOOGLE_PLAY_SERVICES:
                 if (resultCode != RESULT_OK) {
-                    mOutputText.setText(
-                            "This app requires Google Play Services. Please install " +
-                                    "Google Play Services on your device and relaunch this app.");
+                    //mOutputText.setText("This app requires Google Play Services. Please install " + "Google Play Services on your device and relaunch this app.");
                 } else {
                     getResultsFromApi();
                 }
@@ -341,8 +357,7 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
      * @return true if the device has a network connection, false otherwise.
      */
     private boolean isDeviceOnline() {
-        ConnectivityManager connMgr =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
     }
@@ -384,15 +399,7 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
     void showGooglePlayServicesAvailabilityErrorDialog(
             final int connectionStatusCode) {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        Dialog dialog = apiAvailability.getErrorDialog(
-                this,
-                connectionStatusCode,
-                REQUEST_GOOGLE_PLAY_SERVICES);
+        Dialog dialog = apiAvailability.getErrorDialog(this, connectionStatusCode, REQUEST_GOOGLE_PLAY_SERVICES);
         dialog.show();
     }
-
-    /**
-     * An asynchronous task that handles the Google Calendar API call.
-     * Placing the API calls in their own task ensures the UI stays responsive.
-     */
 }
