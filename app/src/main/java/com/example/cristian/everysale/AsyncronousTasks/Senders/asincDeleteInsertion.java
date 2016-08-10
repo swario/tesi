@@ -1,5 +1,6 @@
 package com.example.cristian.everysale.AsyncronousTasks.Senders;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -18,12 +19,12 @@ import java.net.URLEncoder;
  */
 public class asincDeleteInsertion extends AsyncTask<Long, Void, String>{
 
-    private InsertionActivity activity;
+    private Activity activity;
     private Deleter deleter;
 
     private String URL = "http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/deleteInsertion.php";
 
-    public asincDeleteInsertion(InsertionActivity activity, Deleter deleter){
+    public asincDeleteInsertion(Activity activity, Deleter deleter){
         this.activity = activity;
         this.deleter = deleter;
     }
@@ -66,6 +67,6 @@ public class asincDeleteInsertion extends AsyncTask<Long, Void, String>{
 
     protected void onPostExecute(String result){
         Log.e("Debug", "messaggio:" + result);
-        activity.OnDeletion(result);
+        deleter.OnDeletion(result);
     }
 }
