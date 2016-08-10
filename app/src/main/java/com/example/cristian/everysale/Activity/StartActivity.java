@@ -58,6 +58,8 @@ public class StartActivity extends AppCompatActivity implements OnClickListener,
     @Override
     public void onClick(View v) {
         retryButton.setVisibility(View.GONE);
+        loadingBar.setVisibility(View.VISIBLE);
+        messageText.setText("Accesso in corso");
         new asincLogin(this, this).execute(this.username, this.password);
     }
 

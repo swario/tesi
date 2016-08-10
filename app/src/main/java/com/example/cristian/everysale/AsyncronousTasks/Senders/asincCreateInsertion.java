@@ -25,9 +25,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Giorgiboy on 08/08/2016.
- */
 public class asincCreateInsertion extends AsyncTask<String, Void, String> {
 
     private aNewInsertionActivity activity;
@@ -182,7 +179,6 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
             result.append("=");
             result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
         }
-
         return result.toString();
     }
 }

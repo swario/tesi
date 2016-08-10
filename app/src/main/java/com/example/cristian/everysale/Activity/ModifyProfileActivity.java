@@ -37,6 +37,8 @@ import java.util.Iterator;
 
 public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup, UserDownloader {
 
+    private boolean firstAccess= true;
+
     private EditText emailEditText;
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -113,11 +115,15 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
             case R.id.modifyUpdateButton:
                 String password = passwordEditText.getText().toString();
-                String confirmPassword = confirmPasswordEditText.toString();
-                if(password.equals(confirmPassword)){
+                String confirmPassword = confirmPasswordEditText.getText().toString();
+                if(password.isEmpty()){
                     updateProfile();
                 }else{
-                    Toast.makeText(this, "Le due password non coincidono", Toast.LENGTH_SHORT).show();
+                    if(password.equals(confirmPassword)){
+                        updateProfile();
+                    }else{
+                        Toast.makeText(this, "Le due password non coincidono", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             case R.id.modifyImageButton:
@@ -156,6 +162,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     }
 
     public void setupRegions(ArrayList<Region> result){
+        int position = 0;
         Log.d("EverySale", "Inserimento regioni in corso...");
         Iterator<Region> reg = result.iterator();
         ArrayList<String> regionsName = new ArrayList<>();
@@ -165,17 +172,20 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
             regionsName.add(temp.getRegionName());
             regionsCode.add(temp.getRegionCode());
         }
-        int position = regionsName.indexOf(user.getRegion());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, regionsName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
-        regionSpinner.setSelection(position);
+        if(firstAccess){
+            position = regionsName.indexOf(user.getRegion());
+            regionSpinner.setSelection(position);
+        }
         Log.d("EverySale", "Regioni inserite");
         new asincDownloadProvinces(this.getApplicationContext(), this, regionsCode.get(position)).execute();
     }
 
     public void setupProvinces(ArrayList<Province> result){
+        int position=0;
         Log.d("EverySale", "Inserimento province in corso...");
         Iterator<Province> prov = result.iterator();
         ArrayList<String> provincesName = new ArrayList<>();
@@ -185,23 +195,33 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
             provincesName.add(temp.getProvinceName());
             provincesCode.add(temp.getProvinceCode());
         }
-        int position = provincesName.indexOf(user.getProvince());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, provincesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provinceSpinner.setAdapter(adapter);
         provinceSpinner.setOnItemSelectedListener(this);
-        provinceSpinner.setSelection(position);
         Log.d("EverySale", "Province inserite");
+        if(firstAccess){
+            position = provincesName.indexOf(user.getProvince());
+        }
+        provinceSpinner.setSelection(position);
         new asincDownloadMunicipalities(this.getApplicationContext(), this, provincesCode.get(position)).execute();
     }
 
     public void setupMunicipalities(ArrayList<String> result){
         Log.d("EverySale", "Inserimento comuni in corso...");
-        int position = result.indexOf(user.getMunicipality());
+        int position = 0;
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, result);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         municipalitySpinner.setAdapter(adapter);
-        municipalitySpinner.setSelection(position);
+        municipalitySpinner.setOnItemSelectedListener(this);
+        if(firstAccess){
+            position = result.indexOf(user.getMunicipality());
+            Log.e("Debug", result.get(position) + String.valueOf(position));
+            firstAccess = false;
+            municipalitySpinner.setSelection(position);
+        }else{
+            municipalitySpinner.setSelection(position);
+        }
         Log.d("EverySale", "Comuni inseriti");
     }
 
@@ -230,7 +250,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     private void updateProfile(){
 
         String email = emailEditText.getText().toString();
-        String username = emailEditText.getText().toString();
+        String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String name = nameEditText.getText().toString();
         String surname = surnameEditText.getText().toString();
