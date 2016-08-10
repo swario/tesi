@@ -3,6 +3,7 @@ package com.example.cristian.everysale.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadUser;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincImageDownload;
 import com.example.cristian.everysale.BaseClasses.User;
 import com.example.cristian.everysale.Interfaces.UserDownloader;
 import com.example.cristian.everysale.R;
@@ -34,12 +36,14 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user= null;
         Intent intent = getIntent();
         if(intent != null){
-            long userId = intent.getLongExtra("userId", 1);
+            long userId = intent.getLongExtra("otherUser", 0);
+            Log.e("Debug", "Ricevuto:" + String.valueOf(userId));
             new asincDownloadUser(this, this, false).execute(userId);
         }else  {
-            //cose da fare
+            Log.e("Debug", "C'è un errore");
         }
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_show_profile , null, false);
@@ -61,17 +65,33 @@ public class ShowProfileActivity extends navigationDrawerActivity implements Use
 
     @Override
     public void setUser(User user) {
+        if(user == null){
+            return;
+        }
         this.user = user;
-
         SetUpLayout();
     }
 
     private void SetUpLayout(){
-        //inserisco i dati
+        usernameText.setText(user.getUserName());
+        new asincImageDownload(this, this).execute(user.getPhoto(), profilePic);
+        ratingBar.setNumStars(5);
+        ratingBar.setMax(5);
+        ratingBar.setStepSize((float) 0.1);
+        ratingBar.setRating(user.getRating());
+        regionText.setText(user.getRegion());
+        provinceText.setText(user.getProvince());
+        municipalityText.setText(user.getMunicipality());
         if(user.getDataAllow()){
+            nameText.setText(user.getName());
+            surnameText.setText(user.getSurname());
             relativeLayout.setVisibility(View.VISIBLE);
+            Log.e("Debug", "boh");
             if(user.getMobile() == null){
                 mobileText.setText("Cellulare non disponibile");
+            }
+            else{
+                mobileText.setText(user.getMobile());
             }
         }
         else{

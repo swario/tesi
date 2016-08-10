@@ -83,7 +83,6 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_insertion_display, container, false);
 
@@ -93,7 +92,6 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
         feedbackRatingBar = (RatingBar) view.findViewById(R.id.feedbackRatingBar);
         feedbackEditText = (EditText) view.findViewById(R.id.feedbackEditText);
         feedbackRateTextView = (TextView) view.findViewById(R.id.feedbackRateTextView);
-
 
         titleTextView = (TextView) view.findViewById(R.id.insertion_title);
         imageView = (ImageView) view.findViewById(R.id.insertion_image);
@@ -117,15 +115,12 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
 
         activity = (InsertionActivity) getActivity();
         this.menu = activity.menu;
-        //toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        //setActionBar(toolbar);
         this.insertionId = activity.getInsertionId();
 
         new asincDownloadInsertion(this).execute(this.insertionId);
         savedValues = getActivity().getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
         return view;
     }
-
 
     public void setUpInsertion(Insertion insertion){
 
@@ -141,7 +136,6 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
             long id = savedValues.getLong("userId", 1);
 
             if(this.insertion.getInsertionist_id() != id) {
-                Log.e("Debug", "Robe");
                 menu.removeItem(R.id.remove_item_button);
             }
             else if (this.insertion.isEvaluated() || this.insertion.getInsertionist_id() == id){
@@ -221,21 +215,21 @@ public class InsertionDisplayFragment extends Fragment implements OnClickListene
                 break;
 
             case R.id.item_insertionist_value:
-                Toast.makeText(activity, "Utente n° " + String.valueOf(insertion.getInsertionist_id()), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), ShowProfileActivity.class);
-                intent.putExtra("userId", insertion.getInsertionist_id());
-                getActivity().startActivity(intent);
+                Intent intent = new Intent(activity, ShowProfileActivity.class);
+                Log.e("Debug", "Mandato:" + String.valueOf(insertion.getInsertionist_id()));
+                intent.putExtra("otherUser", insertion.getInsertionist_id());
+                activity.startActivity(intent);
                 break;
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         long userId = insertion.getFeedbacks().get(position).getUserId();
-        Intent intent = new Intent(getActivity(), ShowProfileActivity.class);
-        intent.putExtra("userId", insertion.getInsertionist_id());
-        getActivity().startActivity(intent);
+        Intent intent = new Intent(activity, ShowProfileActivity.class);
+        intent.putExtra("otherUser", userId);
+        Log.e("Debug", "Mandato:" + String.valueOf(userId));
+        activity.startActivity(intent);
     }
 
     @Override

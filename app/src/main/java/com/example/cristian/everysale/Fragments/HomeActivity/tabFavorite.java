@@ -115,8 +115,6 @@ public class tabFavorite extends ListFragment implements OnRefreshListener, OnSc
         }
         refreshLayout.setRefreshing(false);
         adapter.addAll(response.getInsertions());
-
-        Log.e("Debug", "Adapter: " + String.valueOf(adapter.getCount()));
         loading = false;
     }
 }

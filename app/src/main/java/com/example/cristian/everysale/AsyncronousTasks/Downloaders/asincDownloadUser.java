@@ -32,7 +32,6 @@ public class asincDownloadUser extends AsyncTask<Long, Void, User> {
     private UserDownloader downloader;
 
     public asincDownloadUser(Context context, UserDownloader downloader, boolean isSelf){
-
         user = null;
         this.context = context;
         this.downloader = downloader;
@@ -46,11 +45,10 @@ public class asincDownloadUser extends AsyncTask<Long, Void, User> {
 
     @Override
     protected User doInBackground(Long... params) {
-        SharedPreferences savedValues = this.context.getSharedPreferences("SavedValues", Context.MODE_PRIVATE);
-        long userId = savedValues.getLong("userId", 1);
-
+        long userId = params[0];
         try{
-            URL url = new URL(this.URL + "?userId=" + String.valueOf(userId));
+            String finalURL = this.URL + "?userId=" + String.valueOf(userId);
+            URL url = new URL(finalURL);
 
             InputStream inputStream = url.openStream();
 
@@ -87,7 +85,6 @@ public class asincDownloadUser extends AsyncTask<Long, Void, User> {
     }
 
     protected void onPostExecute(User result){
-
         downloader.setUser(result);
     }
 }

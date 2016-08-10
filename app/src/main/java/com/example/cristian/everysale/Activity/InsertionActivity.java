@@ -99,7 +99,6 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
         if(intent != null){
             this.insertionId = intent.getLongExtra("insertionId", 0);
         }
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         MenuListener menuListener = new MenuListener(this, navigationView, drawerLayout);
