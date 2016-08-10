@@ -14,7 +14,7 @@ public class Insertion {
     private String city;
     private String address;
     private String shop_name;
-    private int insertionist_id;
+    private long insertionist_id;
     private String insertionist_name;
     private float insertionist_rate;
     private String insertion_date;
@@ -60,7 +60,7 @@ public class Insertion {
     public void setCity(String city) { this.city = city; }
     public void setAddress(String address) { this.address = address; }
     public void setShopName(String shopName){ this.shop_name = shopName; }
-    public void setInsertionist_id(int insertionist_id) { this.insertionist_id = insertionist_id; }
+    public void setInsertionist_id(long insertionist_id) { this.insertionist_id = insertionist_id; }
     public void setInsertionist_name(String insertionist_name) { this.insertionist_name = insertionist_name; }
     public void setInsertionist_rate(float insertionist_rate) { this.insertionist_rate = insertionist_rate; }
     public void setInsertion_date(String insertion_date) { this.insertion_date = insertion_date; }
@@ -78,7 +78,7 @@ public class Insertion {
     public String getCity(){ return city; }
     public String getAddress() { return address; }
     public String getShopName(){ return shop_name; }
-    public int getInsertionist_id() { return insertionist_id; }
+    public long getInsertionist_id() { return insertionist_id; }
     public String getInsertionist_name() { return  insertionist_name; }
     public float getInsertionist_rate() { return  insertionist_rate; }
     public String getInsertion_date() { return  insertion_date; }

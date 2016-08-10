@@ -77,10 +77,9 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
         pairList.add(new BasicNameValuePair("surname", surname));
         pairList.add(new BasicNameValuePair("mobile", mobile));
         pairList.add(new BasicNameValuePair("dataAllow", dataAllow));
-
         try{
             if(fileName != null){
-
+                //Log.e("Debug", this.URL + "?" + getQuery(pairList));
                 HttpURLConnection connection = null;
                 FileInputStream inputStream = new FileInputStream(new File(fileName));
 
@@ -134,6 +133,7 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
                 return stringBuilder.toString();
             }
             else {
+                //Log.e("Debug", this.URL + "?" + getQuery(pairList));
                 URL url = new URL(URL);
                 URLConnection connection = url.openConnection();
 
@@ -164,16 +164,17 @@ public class asincProfileUpdate extends AsyncTask<String, Void, String>{
 
     protected void onPostExecute(String result){
 
-        Log.e("Debug", result);
         if(result.contains("success")){
 
             Editor editor = savedValues.edit();
 
             editor.putString("username", this.username);
-            editor.putString("password", this.password);
-
+            if(!password.isEmpty()){
+                editor.putString("password", this.password);
+            }
             editor.commit();
         }
+        this.activity.OnResponse(result);
     }
 
     private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException

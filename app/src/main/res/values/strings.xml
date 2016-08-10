@@ -113,5 +113,6 @@
     <string name="insertion_delete_warning">Sei sicuro di voler rimuovere quest\'inserzione?</string>
     <string name="confim">Sì</string>
     <string name="deny">No</string>
+    <string name="image_url">http://webdev.dibris.unige.it/~S3928202/Progetto/profilePics/</string>
 
 </resources>

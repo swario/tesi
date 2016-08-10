@@ -22,6 +22,7 @@ import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownload
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadProvinces;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadRegions;
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadUser;
+import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincImageDownload;
 import com.example.cristian.everysale.AsyncronousTasks.Senders.asincProfileUpdate;
 import com.example.cristian.everysale.BaseClasses.Province;
 import com.example.cristian.everysale.BaseClasses.Region;
@@ -36,6 +37,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ModifyProfileActivity extends navigationDrawerActivity implements OnClickListener, OnItemSelectedListener, SpinnerSetup, UserDownloader {
+
+    private boolean firstAccess= true;
 
     private EditText emailEditText;
     private EditText usernameEditText;
@@ -113,11 +116,15 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
 
             case R.id.modifyUpdateButton:
                 String password = passwordEditText.getText().toString();
-                String confirmPassword = confirmPasswordEditText.toString();
-                if(password.equals(confirmPassword)){
+                String confirmPassword = confirmPasswordEditText.getText().toString();
+                if(password.isEmpty()){
                     updateProfile();
                 }else{
-                    Toast.makeText(this, "Le due password non coincidono", Toast.LENGTH_SHORT).show();
+                    if(password.equals(confirmPassword)){
+                        updateProfile();
+                    }else{
+                        Toast.makeText(this, "Le due password non coincidono", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             case R.id.modifyImageButton:
@@ -156,6 +163,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     }
 
     public void setupRegions(ArrayList<Region> result){
+        int position = 0;
         Log.d("EverySale", "Inserimento regioni in corso...");
         Iterator<Region> reg = result.iterator();
         ArrayList<String> regionsName = new ArrayList<>();
@@ -165,17 +173,20 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
             regionsName.add(temp.getRegionName());
             regionsCode.add(temp.getRegionCode());
         }
-        int position = regionsName.indexOf(user.getRegion());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, regionsName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
         regionSpinner.setOnItemSelectedListener(this);
-        regionSpinner.setSelection(position);
+        if(firstAccess){
+            position = regionsName.indexOf(user.getRegion());
+            regionSpinner.setSelection(position);
+        }
         Log.d("EverySale", "Regioni inserite");
         new asincDownloadProvinces(this.getApplicationContext(), this, regionsCode.get(position)).execute();
     }
 
     public void setupProvinces(ArrayList<Province> result){
+        int position=0;
         Log.d("EverySale", "Inserimento province in corso...");
         Iterator<Province> prov = result.iterator();
         ArrayList<String> provincesName = new ArrayList<>();
@@ -185,23 +196,30 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
             provincesName.add(temp.getProvinceName());
             provincesCode.add(temp.getProvinceCode());
         }
-        int position = provincesName.indexOf(user.getProvince());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, provincesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provinceSpinner.setAdapter(adapter);
         provinceSpinner.setOnItemSelectedListener(this);
-        provinceSpinner.setSelection(position);
         Log.d("EverySale", "Province inserite");
+        if(firstAccess){
+            position = provincesName.indexOf(user.getProvince());
+        }
+        provinceSpinner.setSelection(position);
         new asincDownloadMunicipalities(this.getApplicationContext(), this, provincesCode.get(position)).execute();
     }
 
     public void setupMunicipalities(ArrayList<String> result){
         Log.d("EverySale", "Inserimento comuni in corso...");
-        int position = result.indexOf(user.getMunicipality());
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, result);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         municipalitySpinner.setAdapter(adapter);
-        municipalitySpinner.setSelection(position);
+        municipalitySpinner.setOnItemSelectedListener(this);
+        if(firstAccess){
+            int position = result.indexOf(user.getMunicipality());
+            Log.e("Debug", result.get(position) + " " + String.valueOf(position));
+            firstAccess = false;
+            municipalitySpinner.setSelection(position);
+        }
         Log.d("EverySale", "Comuni inseriti");
     }
 
@@ -213,7 +231,8 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     }
 
     private void SetUpLayout(){
-
+        new asincImageDownload(this, this).execute(getResources().getString(R.string.image_url) + user.getPhoto(), profileImageView);
+        profileImageView.setVisibility(View.VISIBLE);
         emailEditText.setText(user.getEmail());
         usernameEditText.setText(user.getUserName());
         nameEditText.setText(user.getName());
@@ -230,7 +249,7 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
     private void updateProfile(){
 
         String email = emailEditText.getText().toString();
-        String username = emailEditText.getText().toString();
+        String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String name = nameEditText.getText().toString();
         String surname = surnameEditText.getText().toString();
@@ -248,5 +267,13 @@ public class ModifyProfileActivity extends navigationDrawerActivity implements O
         }
         new asincProfileUpdate(this).execute(email, username, password, region, province, municipality, name, surname,
                 mobile, dataAllow, imgPath);
+    }
+
+    public void OnResponse(String response){
+
+        if(response.contains("success")){
+            Toast.makeText(this, "Dati aggiornati", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
     }
 }

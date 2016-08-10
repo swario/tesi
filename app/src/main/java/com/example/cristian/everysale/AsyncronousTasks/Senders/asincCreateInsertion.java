@@ -25,15 +25,12 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Giorgiboy on 08/08/2016.
- */
 public class asincCreateInsertion extends AsyncTask<String, Void, String> {
 
     private aNewInsertionActivity activity;
     private SharedPreferences savedValues;
 
-    private String URL = "http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/newInsertionMobile.php";
+    private String URL = "http://webdev.dibris.unige.it/~S3928202/Progetto/phpMobile/createNewInsertion.php";
 
     public asincCreateInsertion(aNewInsertionActivity aNewInsertionActivity){
 
@@ -53,9 +50,9 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
         String address = params[4];
         String shop_name = params[5];
         String expiration_date = params[6];
-        String photo = params[7];
-        String price = params[8];
-        String description = params[9];
+        String price = params[7];
+        String description = params[8];
+        String photo = params[9];
 
         DataOutputStream outputStream = null;
         String lineEnd = "\r\n";
@@ -66,25 +63,25 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
         byte[] buffer;
         int maxBufferSize = 1*1024*1024;
 
+        List<NameValuePair> pairList = new ArrayList<>();
+        pairList.add(new BasicNameValuePair("userId", String.valueOf(userId)));
+        pairList.add(new BasicNameValuePair("name", name));
+        pairList.add(new BasicNameValuePair("region", region));
+        pairList.add(new BasicNameValuePair("province", province));
+        pairList.add(new BasicNameValuePair("municipality", municipality));
+        pairList.add(new BasicNameValuePair("address", address));
+        pairList.add(new BasicNameValuePair("shopName", shop_name));
+        pairList.add(new BasicNameValuePair("expirationDate", expiration_date));
+        pairList.add(new BasicNameValuePair("price", price));
+        pairList.add(new BasicNameValuePair("description", description));
+
         try{
             if(photo!=null){
-
                 HttpURLConnection connection = null;
                 FileInputStream inputStream = new FileInputStream(new File(photo));
 
-                List<NameValuePair> pairList = new ArrayList<>();
-                pairList.add(new BasicNameValuePair("userId", String.valueOf(userId)));
-                pairList.add(new BasicNameValuePair("name", name));
-                pairList.add(new BasicNameValuePair("region", region));
-                pairList.add(new BasicNameValuePair("province", province));
-                pairList.add(new BasicNameValuePair("municipality", municipality));
-                pairList.add(new BasicNameValuePair("address", address));
-                pairList.add(new BasicNameValuePair("shopName", shop_name));
-                pairList.add(new BasicNameValuePair("expirationDate", expiration_date));
-                pairList.add(new BasicNameValuePair("price", price));
-                pairList.add(new BasicNameValuePair("description", description));
-
-                URL url = new URL(this.URL + getQuery(pairList));
+                String finalURL = this.URL + "?" + getQuery(pairList);
+                URL url = new URL(finalURL);
                 connection = (HttpURLConnection) url.openConnection();
 
                 connection.setDoInput(true);
@@ -136,18 +133,8 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
             }else {
                 URL url = new URL(URL);
 
-                String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
-                data += "&" + URLEncoder.encode("region", "UTF-8") + "=" + URLEncoder.encode(region, "UTF-8");
-                data += "&" + URLEncoder.encode("province", "UTF-8") + "=" + URLEncoder.encode(province, "UTF-8");
-                data += "&" + URLEncoder.encode("municipality", "UTF-8") + "=" + URLEncoder.encode(municipality, "UTF-8");
-                data += "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8");
-                data += "&" + URLEncoder.encode("shopName", "UTF-8") + "=" + URLEncoder.encode(shop_name, "UTF-8");
-                data += "&" + URLEncoder.encode("expirationDate", "UTF-8") + "=" + URLEncoder.encode(expiration_date, "UTF-8");
-                data += "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8");
-                data += "&" + URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(description, "UTF-8");
-
+                String data = getQuery(pairList);
                 URLConnection connection = url.openConnection();
-
                 connection.setDoOutput(true);
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
 
@@ -172,7 +159,7 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result){
-        Log.e("Debug", result);
+        this.activity.OnServerResponse(result);
     }
 
     private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException
@@ -184,7 +171,6 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
         {
             if (first){
                 first = false;
-                result.append("?");
             }
             else {
                 result.append("&");
@@ -193,7 +179,6 @@ public class asincCreateInsertion extends AsyncTask<String, Void, String> {
             result.append("=");
             result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
         }
-
         return result.toString();
     }
 }

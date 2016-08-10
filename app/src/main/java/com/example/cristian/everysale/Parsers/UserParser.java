@@ -39,7 +39,7 @@ public class UserParser extends DefaultHandler {
             isEmail = true;
             return;
         }
-        if(qName.equals("")){
+        if(qName.equals("user")){
             isUser = true;
             return;
         }
