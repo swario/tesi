@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'EverySaleKey'
             keyPassword 'ottootti'
-            storeFile file('C:/Users/Giorgiboy/Documents/EverySale/keystore/everysale.jks')
+            storeFile file('../../keystore/everysale.jks')
             storePassword 'ottootti'
         }
     }
