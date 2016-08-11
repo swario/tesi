@@ -123,8 +123,8 @@ public class InsertionActivity extends AppCompatActivity implements Deleter, Dia
                 else{
                     new asincAddFavorite(this).execute(userId, this.insertionId);
                     //insertEvent();
-                    
-                    // Codice da provare
+
+                    // Codice da provare prova
                     /*long calID = 3;
                     long startMillis = 0;
                     long endMillis = 0;
