@@ -35,7 +35,7 @@ public class asincImageDownload extends AsyncTask<Object, Void, Bitmap> {
         this.holder = (ImageView) params[1];
 
         Bitmap bitmap = null;
-        Log.e("Debug", this.image);
+        //Log.e("Debug", this.image);
 
         try {
             bitmap = BitmapFactory.decodeStream((InputStream)new URL(image).getContent());

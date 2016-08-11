@@ -1,7 +1,11 @@
 package com.example.cristian.everysale.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -11,26 +15,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.cristian.everysale.AsyncronousTasks.Downloaders.asincDownloadInsertions;
+import com.example.cristian.everysale.AsyncronousTasks.Senders.asincDeleteInsertion;
 import com.example.cristian.everysale.BaseClasses.DownloadType;
 import com.example.cristian.everysale.BaseClasses.InsertionArrayAdapter;
 import com.example.cristian.everysale.BaseClasses.InsertionPreview;
 import com.example.cristian.everysale.BaseClasses.SearchResponse;
+import com.example.cristian.everysale.Interfaces.Deleter;
 import com.example.cristian.everysale.Interfaces.ListTab;
 import com.example.cristian.everysale.R;
 
 import java.util.ArrayList;
 
-public class MyInsertionsActivity extends navigationDrawerActivity implements OnRefreshListener, OnScrollListener, ListTab {
+public class MyInsertionsActivity extends navigationDrawerActivity implements OnRefreshListener, OnScrollListener, ListTab,Deleter{
 
     private boolean loading = false;
+    private long userId;
+    private long insertionId;
 
     private int previousFirstVisibleItem;
 
     private InsertionArrayAdapter adapter;
+    private SharedPreferences savedValues;
 
     private SwipeRefreshLayout refreshLayout;
     private ListView itemsListView;
@@ -48,6 +59,8 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
         itemsListView.setOnScrollListener(this);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+        userId = savedValues.getLong("userId", 0);
 
         previousFirstVisibleItem = 0;
         adapter = new InsertionArrayAdapter(this, this);
@@ -108,5 +121,12 @@ public class MyInsertionsActivity extends navigationDrawerActivity implements On
         refreshLayout.setRefreshing(false);
         adapter.addAll(response.getInsertions());
         loading = false;
+    }
+
+
+    @Override
+    public void OnDeletion(String message) {
+        if(message.contains("good")){
+        }
     }
 }

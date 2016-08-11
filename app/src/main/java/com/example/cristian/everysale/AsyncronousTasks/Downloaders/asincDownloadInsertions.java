@@ -58,6 +58,7 @@ public class asincDownloadInsertions  extends AsyncTask<Long, Void, SearchRespon
         this.tab = tab;
         this.activity = activity;
         this.context = this.activity.getBaseContext();
+        this.fileName = "nearby.xml";
         URL += "getNearby.php";
         addition += "&region=" + region + "&province=" + province +"&municipality=" + municipality;
     }
@@ -66,6 +67,7 @@ public class asincDownloadInsertions  extends AsyncTask<Long, Void, SearchRespon
         this.tab = tab;
         this.activity = activity;
         this.context = this.activity.getBaseContext();
+        this.fileName = "search.xml";
         this.URL += "searchMobile.php";
         addition += "&searchKey=" + searchKey;
     }
